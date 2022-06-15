@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Database\" />
+	  <Folder Include="Extensions\" />
+	  <Folder Include="Repositories\Administration\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
+	  <ProjectReference Include="..\AMP.Processors\AMP.Processors.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\AMP.Shared.Domain\AMP.Shared.Domain.projitems" Label="Shared" />
+
+	<Import Project="..\AMP.Shared.Persistence\AMP.Shared.Persistence.projitems" Label="Shared" />
+
+</Project>
