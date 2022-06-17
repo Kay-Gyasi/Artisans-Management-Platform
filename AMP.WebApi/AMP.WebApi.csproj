@@ -15,6 +15,7 @@
 		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
 		<PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" />
 		<PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+		<PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 	</ItemGroup>
 
@@ -23,12 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\v1\" />
+	<Folder Include="Controllers\v1\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AMP.Application\AMP.Application.csproj" />
-    <ProjectReference Include="..\AMP.Persistence\AMP.Persistence.csproj" />
+	<ProjectReference Include="..\AMP.Application\AMP.Application.csproj" />
+	<ProjectReference Include="..\AMP.Persistence\AMP.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

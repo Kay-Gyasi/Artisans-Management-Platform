@@ -24,10 +24,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
 	  <ProjectReference Include="..\AMP.Processors\AMP.Processors.csproj" />
+	  <ProjectReference Include="..\AMP.Shared.Domain\AMP.Shared.Domain.csproj" />
+	  <ProjectReference Include="..\AMP.Shared.Persistence\AMP.Shared.Persistence.csproj" />
 	</ItemGroup>
-
-	<Import Project="..\AMP.Shared.Domain\AMP.Shared.Domain.projitems" Label="Shared" />
-
-	<Import Project="..\AMP.Shared.Persistence\AMP.Shared.Persistence.projitems" Label="Shared" />
 
 </Project>

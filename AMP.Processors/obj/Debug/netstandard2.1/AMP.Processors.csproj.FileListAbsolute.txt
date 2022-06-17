@@ -1,10 +1,15 @@
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Processors.deps.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Processors.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Processors.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Shared.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Domain.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\bin\Debug\netstandard2.1\AMP.Shared.Domain.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.csproj.AssemblyReference.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.AssemblyInfoInputs.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.AssemblyInfo.cs
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.csproj.CopyComplete
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Processors\obj\Debug\netstandard2.1\AMP.Processors.pdb

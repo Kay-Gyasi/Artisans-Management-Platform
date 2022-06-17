@@ -4,6 +4,60 @@
     "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\AMP.Processors.csproj": {}
   },
   "projects": {
+    "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj",
+        "projectName": "AMP.Domain",
+        "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\AMP.Processors.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -12,6 +66,81 @@
         "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\AMP.Processors.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
+                "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj"
+              },
+              "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj": {
+                "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj",
+        "projectName": "AMP.Shared.Domain",
+        "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,13 +169,13 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "dependencies": {
-            "AutoMapper": {
+            "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
-              "version": "[11.0.1, )"
+              "version": "[5.0.17, )"
             },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[11.0.0, )"
+              "version": "[13.0.1, )"
             }
           },
           "imports": [

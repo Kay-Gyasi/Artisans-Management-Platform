@@ -28,5 +28,11 @@ namespace AMP.Processors
             services.AddAutoMapper(assemblies);
             return services;
         }
+
+        public static IServiceCollection AddCaching(this IServiceCollection services)
+        {
+            services.AddMemoryCache();
+            return services;
+        }
     }
 }

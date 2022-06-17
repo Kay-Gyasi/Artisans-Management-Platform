@@ -1,8 +1,12 @@
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Application.deps.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Application.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Application.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Domain.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Processors.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Shared.Domain.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Processors.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Domain.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\bin\Debug\netstandard2.1\AMP.Shared.Domain.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\obj\Debug\netstandard2.1\AMP.Application.csproj.AssemblyReference.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\obj\Debug\netstandard2.1\AMP.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.Application\obj\Debug\netstandard2.1\AMP.Application.AssemblyInfoInputs.cache

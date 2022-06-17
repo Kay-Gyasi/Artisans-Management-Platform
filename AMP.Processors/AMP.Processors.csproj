@@ -7,12 +7,18 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
 	</ItemGroup>
 
   <ItemGroup>
 	<Folder Include="Mapping\" />
 	<Folder Include="PageDtos\" />
 	<Folder Include="Processors\Administration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
+    <ProjectReference Include="..\AMP.Shared.Domain\AMP.Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>

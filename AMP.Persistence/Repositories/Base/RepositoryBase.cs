@@ -6,7 +6,6 @@ using AMP.Processors.Repositories.Base;
 using AMP.Shared.Domain.Models;
 using AMP.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -47,14 +46,21 @@ namespace AMP.Persistence.Repositories.Base
 
         public virtual IQueryable<T> GetBaseQuery()
         {
-            return Entities;
+            return Entities.Where(x => x.EntityStatus == EntityStatus.Normal);
+        }
+        public virtual IQueryable<T> GetDeletedBaseQuery()
+        {
+            return Entities.Where(x => x.EntityStatus == EntityStatus.Deleted);
+        }
+        public virtual IQueryable<T> GetArchivedBaseQuery()
+        {
+            return Entities.Where(x => x.EntityStatus == EntityStatus.Archived);
         }
 
         public async Task<List<T>> GetAllAsync()
         {
             return await GetBaseQuery().ToListAsync();
         }
-
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
         {
             return await GetBaseQuery().Where(predicate).ToListAsync();
@@ -64,15 +70,32 @@ namespace AMP.Persistence.Repositories.Base
         {
             return await GetBaseQuery().Where(predicate).ToListAsync(cancellationToken);
         }
+        public async Task<List<T>> GetAllDeletedAsync()
+        {
+            return await GetDeletedBaseQuery().ToListAsync();
+        }
+        public async Task<List<T>> GetAllArchivedAsync()
+        {
+            return await GetArchivedBaseQuery().ToListAsync();
+        }
 
-        // TODO:: Incorporate offset pagination
         public async Task<PaginatedList<T>> GetPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(paginated.Search)) return await KeySetPaginate(paginated, null, cancellationToken);
-            var predicate = GetSearchCondition(paginated.Search.ToLower());
 
-            return await KeySetPaginate(paginated, predicate, cancellationToken);
 
+            var whereQueryable = GetBaseQuery()
+                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
+
+            var pagedModel = await whereQueryable.PageBy(x => paginated.Take, paginated)
+                .ToListAsync(cancellationToken);
+
+            var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);
+
+
+            return new PaginatedList<T>(data: pagedModel,
+                totalCount: totalRecords,
+                currentPage: paginated.PageNumber,
+                pageSize: paginated.PageSize);
         }
 
         public async Task InsertAsync(T entity, bool autoCommit = true)
@@ -89,7 +112,7 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Error occurred at InsertAsync for {nameof(T)}: " + ex.Message);
                 throw;
             }
         }
@@ -108,7 +131,7 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Error occurred at InsertAsync for IEnumerable<{nameof(T)}>: " + ex.Message);
                 throw;
             }
         }
@@ -125,7 +148,7 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Error occurred at InsertAsync for IEnumerable<{nameof(T)}>: " + ex.Message);
                 throw;
             }
         }
@@ -143,7 +166,7 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Error occurred at UpdateAsync for {nameof(T)}: " + ex.Message);
                 throw;
             }
         }
@@ -161,7 +184,7 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Error occurred at DeleteAsync for {nameof(T)}: " + ex.Message);
                 throw;
             }
         }
@@ -185,15 +208,28 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError("Error occurred at DeleteAsync with id: " + ex.Message);
                 throw;
             }
         }
 
-        //public Task SoftDeleteAsync(T entity, bool autoCommit = true)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task SoftDeleteAsync(T entity, bool autoCommit = true)
+        {
+            try
+            {
+                if (entity == null)
+                    throw new InvalidEntityException($"{nameof(entity)} cannot be null");
+
+                Entities.Remove(entity);
+                if (autoCommit)
+                    await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occurred at SoftDeleteAsync for {nameof(T)}: " + ex.Message);
+                throw;
+            }
+        }
 
         public async Task DeleteAsync(IEnumerable<T> entities, CancellationToken cancellationToken, bool autoCommit = true)
         {
@@ -209,7 +245,7 @@ namespace AMP.Persistence.Repositories.Base
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Error occurred at DeleteAsync for IEnumerable<{nameof(T)}>: " + ex.Message);
                 throw;
             }
         }
@@ -241,72 +277,6 @@ namespace AMP.Persistence.Repositories.Base
         protected virtual Expression<Func<T, bool>> GetSearchCondition(string search)
         {
             return x => x.DateCreated.ToString(CultureInfo.InvariantCulture).Contains(search);
-        }
-
-
-        // Write extension methods for these
-        private async Task<PaginatedList<T>> KeySetPaginate(PaginatedCommand command, Expression<Func<T, bool>> predicate, CancellationToken token)
-        {
-            var keyProperty = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
-            predicate = BuildPredicate(command, predicate, keyProperty);
-
-            try
-            {
-                var query = GetBaseQuery();
-                var totalCount = await query.CountAsync(token);
-                var items = OrderQuery(command, query, predicate, keyProperty);
-                var remaining = totalCount - await items.CountAsync(token);
-                var data = items.Take(command.PageSize).ToList();
-                if (command.Direction is Direction.Backward) data.Reverse();
-                return new PaginatedList<T>(data, totalCount, remaining, command.PageSize);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Builds the predicate based on the last entity id and the page navigation direction.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="predicate"></param>
-        /// <param name="keyProperty"></param>
-        /// <returns>A predicate which specifies in which direction data will be queried</returns>
-        private static Expression<Func<T, bool>> BuildPredicate(PaginatedCommand command, Expression<Func<T, bool>> predicate, IProperty keyProperty)
-        {
-            predicate ??= e => true; // PredicateBuilder.True<T>();
-
-            if (command.Direction == Direction.Backward)
-                predicate = predicate.And(e =>
-                    EF.Property<int>(e, keyProperty.Name) < command.LastEntityId);
-            else
-                predicate = predicate.And(e =>
-                    EF.Property<int>(e, keyProperty.Name) > command.LastEntityId);
-
-            return predicate;
-        }
-
-        // TODO:: Work on ordering by different criteria
-        /// <summary>
-        /// Orders the query based on the page navigation direction.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="query"></param>
-        /// <param name="predicate"></param>
-        /// <param name="keyProperty"></param>
-        /// <returns>An ordered query result</returns>
-        private static IQueryable<T> OrderQuery(PaginatedCommand command, IQueryable<T> query, Expression<Func<T, bool>> predicate, IProperty keyProperty)
-        {
-            if (command.Direction == Direction.Backward)
-                return query.Where(predicate)
-                    .OrderByDescending(e => EF.Property<int>(e, keyProperty.Name));
-            //.ThenBy(x => EF.Property<int>(x, "DateCreated"));
-            else
-                return query.Where(predicate)
-                    .OrderBy(e => EF.Property<int>(e, keyProperty.Name));
-            //.ThenBy(x => EF.Property<int>(x, "DateCreated"));
         }
 
     }
