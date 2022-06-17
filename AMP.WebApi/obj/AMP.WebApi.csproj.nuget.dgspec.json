@@ -477,9 +477,17 @@
               "target": "Package",
               "version": "[6.0.5, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.15.1, )"
+            },
             "RestClient": {
               "target": "Package",
               "version": "[3.860.28084, )"
+            },
+            "Seq.Extensions.Logging": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
