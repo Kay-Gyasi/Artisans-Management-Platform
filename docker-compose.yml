@@ -1,0 +1,42 @@
+version: '3.7'
+
+networks:
+  ampDev:
+    name: ampDev
+
+services:  
+  main-api: 
+    #build: AMP.WebApi/
+    image: ampwebapi
+    restart: unless-stopped
+    ports:
+      - "7000:90" 
+    depends_on:
+      - amp-db  
+    networks:
+      - ampDev
+
+  amp-db: 
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: amp-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Exdoegh715@sat
+      - MSSQL_TCP_PORT=1433 
+    ports:
+      - "1400:1433" 
+    networks:
+      - ampDev
+    restart: always
+    
+  seq:
+    image: datalust/seq
+    container_name: seqAmp
+    restart: unless-stopped
+    ports:
+      - "5341:80"
+    networks:
+      - ampDev
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_URL=http://localhost:5341    

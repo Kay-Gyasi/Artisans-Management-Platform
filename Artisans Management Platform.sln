@@ -41,9 +41,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{C6ECE6F4-E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amp.Integration.Tests", "Amp.Integration.Tests\Amp.Integration.Tests.csproj", "{B6B74EE4-2744-44B4-B2A2-D5AA0E9E37DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMP.Shared.Domain", "AMP.Shared.Domain\AMP.Shared.Domain.csproj", "{C9F18442-DA17-4D8A-9F98-B0EB9ECB67F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AMP.Shared.Domain", "AMP.Shared.Domain\AMP.Shared.Domain.csproj", "{C9F18442-DA17-4D8A-9F98-B0EB9ECB67F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMP.Shared.Persistence", "AMP.Shared.Persistence\AMP.Shared.Persistence.csproj", "{92553CB5-1387-40C7-B023-75D28A43A276}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AMP.Shared.Persistence", "AMP.Shared.Persistence\AMP.Shared.Persistence.csproj", "{92553CB5-1387-40C7-B023-75D28A43A276}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3F5AB0BE-CA1C-429B-AE89-6994AFFBEBC8}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
