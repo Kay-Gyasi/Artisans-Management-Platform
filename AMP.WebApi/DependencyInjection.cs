@@ -55,6 +55,13 @@ public static class DependencyInjection
             app.UseSwaggerUI();
         }
 
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "AMP API V1");
+            c.RoutePrefix = string.Empty;
+        });
+
         app.UseHttpsRedirection();
 
         app.UseSerilogRequestLogging();
