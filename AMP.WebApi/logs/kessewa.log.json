@@ -55,3 +55,5 @@
 {"Timestamp":"2022-06-18T00:23:11.9550947+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":25572,"ThreadId":1}}
 {"Timestamp":"2022-06-18T00:23:13.0899385+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":25572,"ThreadId":1}}
 >>>>>>> feature/add_docker
+{"Timestamp":"2022-06-18T00:41:34.6247700+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":27556,"ThreadId":1}}
+{"Timestamp":"2022-06-18T00:41:37.4474856+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":27556,"ThreadId":1}}

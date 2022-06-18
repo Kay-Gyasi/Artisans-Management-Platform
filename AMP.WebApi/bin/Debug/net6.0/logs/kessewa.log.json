@@ -45,9 +45,13 @@
 {"Timestamp":"2022-06-17T13:32:42.4732954+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":30640,"ThreadId":1}}
 {"Timestamp":"2022-06-17T13:32:43.5496369+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":30640,"ThreadId":1}}
 <<<<<<< HEAD
+{"Timestamp":"2022-06-18T00:35:38.1940654+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":15388,"ThreadId":1}}
+{"Timestamp":"2022-06-18T00:35:40.8797643+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":15388,"ThreadId":1}}
 =======
 {"Timestamp":"2022-06-17T14:05:58.1808907+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":9712,"ThreadId":1}}
 {"Timestamp":"2022-06-17T14:06:01.1119499+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":9712,"ThreadId":1}}
 {"Timestamp":"2022-06-18T00:22:05.8723708+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":29880,"ThreadId":1}}
 {"Timestamp":"2022-06-18T00:22:08.0323915+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":29880,"ThreadId":1}}
+{"Timestamp":"2022-06-18T00:23:11.9550947+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":25572,"ThreadId":1}}
+{"Timestamp":"2022-06-18T00:23:13.0899385+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":25572,"ThreadId":1}}
 >>>>>>> feature/add_docker
