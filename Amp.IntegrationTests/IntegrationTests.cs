@@ -17,7 +17,7 @@ public class IntegrationTests : IDisposable
     private readonly HttpClient _testClient;
     private readonly IConfiguration _configuration;
     private readonly AmpDbContext _dbContext;
-    private readonly IServiceScope _scope;
+    private readonly IServiceScopeFactory _scopeFactory;
     protected IntegrationTests()
     {
         // Read on WebApplicationFactory
@@ -47,10 +47,12 @@ public class IntegrationTests : IDisposable
             });
 
         _testClient = _factory.CreateClient();
-        _scope = _factory.Services.CreateScope();
+        _scopeFactory = _factory.Services.GetService<IServiceScopeFactory>();
         _dbContext = GetService<AmpDbContext>();
     }
 
+    // Ensure database is created and seeded
+    // Write Generic http methods to be used in tests
     public T GetItem<T>() where T : class
     {
         return _dbContext.Set<T>().FirstOrDefault();
@@ -61,8 +63,6 @@ public class IntegrationTests : IDisposable
         _testClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
             await GetToken());
     }
-
-    // Write Generic http methods to be used in tests
 
 
     private async Task<string> GetToken()
@@ -75,12 +75,12 @@ public class IntegrationTests : IDisposable
 
     private T GetService<T>()
     {
-        return _scope.ServiceProvider.GetRequiredService<T>();
+        using var scope = _scopeFactory.CreateScope();
+        return scope.ServiceProvider.GetRequiredService<T>();
     }
 
     public void Dispose()
     {
-        _scope.Dispose();
         _testClient.Dispose();
         _dbContext.Dispose();
     }
