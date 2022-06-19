@@ -8,7 +8,7 @@ var logger = new LoggerConfiguration()
 try
 {
     logger.Information("App starting up...");
-    builder.Services.AddAmp(builder.Configuration);
+    builder.Services.AddAmp(builder.Configuration, logger);
     app = builder.AddApplicationBuilder(logger);
     logger.Information("App started");
 }
@@ -23,3 +23,5 @@ finally
 }
 
 app.ConfigurePipeline();
+
+public partial class Program { }

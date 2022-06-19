@@ -1,15 +1,16 @@
 ﻿using Microsoft.OpenApi.Models;
-using Serilog.Core;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using ILogger = Serilog.ILogger;
 
 namespace AMP.WebApi;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddAmp(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddAmp(this IServiceCollection services, IConfiguration configuration,
+        ILogger logger)
     {
         services.AddPersistence(configuration)
-            .AddRepositories()
+            .AddRepositories(logger)
             .AddProcessors()
             .RegisterAutoMapper()
             .AddMediatr()
@@ -27,8 +28,7 @@ public static class DependencyInjection
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(opt =>
         {
-            opt.SwaggerDoc("v1", new OpenApiInfo {Title = "AMP API", Version = "v1"});
-            //opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "AMP.WebApi.xml"));
+            opt.SwaggerDoc("v1", new OpenApiInfo { Title = "AMP API", Version = "v1" });
             opt.CustomOperationIds(apiDescription => apiDescription.TryGetMethodInfo(out var methodInfo)
                 ? methodInfo.Name
                 : apiDescription.RelativePath);
@@ -37,7 +37,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static WebApplication AddApplicationBuilder(this WebApplicationBuilder builder, Logger logger)
+    public static WebApplication AddApplicationBuilder(this WebApplicationBuilder builder, ILogger logger)
     {
         builder.Host.UseSerilog(logger);
         builder.Logging.ClearProviders();
