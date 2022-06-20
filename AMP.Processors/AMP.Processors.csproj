@@ -14,6 +14,7 @@
 	<Folder Include="Mapping\" />
 	<Folder Include="PageDtos\" />
 	<Folder Include="Processors\Administration\" />
+	<Folder Include="Repositories\UoW\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -98,7 +98,7 @@ namespace AMP.Persistence.Repositories.Base
                 pageSize: paginated.PageSize);
         }
 
-        public async Task InsertAsync(T entity, bool autoCommit = true)
+        public async Task InsertAsync(T entity)
         {
             try
             {
@@ -106,8 +106,8 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
                 await Entities.AddAsync(entity);
-                if (autoCommit)
-                    await _context.SaveChangesAsync();
+                //if (autoCommit)
+                    //await _context.SaveChangesAsync();
 
             }
             catch (Exception ex)
@@ -117,7 +117,7 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task InsertAsync(IEnumerable<T> entities, bool autoCommit = true)
+        public async Task InsertAsync(IEnumerable<T> entities)
         {
             try
             {
@@ -126,8 +126,8 @@ namespace AMP.Persistence.Repositories.Base
 
                 foreach (var entity in entities)
                     await Entities.AddAsync(entity);
-                if (autoCommit)
-                    await _context.SaveChangesAsync();
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -135,7 +135,7 @@ namespace AMP.Persistence.Repositories.Base
                 throw;
             }
         }
-        public async Task InsertAsync(IEnumerable<T> entities, CancellationToken cancellationToken, bool autoCommit = true)
+        public async Task InsertAsync(IEnumerable<T> entities, CancellationToken cancellationToken)
         {
             try
             {
@@ -143,8 +143,8 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entities)} cannot be null");
 
                 await Entities.AddRangeAsync(entities, cancellationToken);
-                if (autoCommit)
-                    await _context.SaveChangesAsync(cancellationToken);
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
@@ -153,7 +153,7 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task UpdateAsync(T entity, bool autoCommit = true)
+        public async Task UpdateAsync(T entity)
         {
             try
             {
@@ -161,8 +161,9 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
                 Entities.Update(entity);
-                if (autoCommit)
-                    await _context.SaveChangesAsync();
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync();
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -171,7 +172,7 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task DeleteAsync(T entity, CancellationToken cancellationToken, bool autoCommit = true)
+        public async Task DeleteAsync(T entity, CancellationToken cancellationToken)
         {
             try
             {
@@ -179,8 +180,9 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
                 Entities.Remove(entity);
-                if (autoCommit)
-                    await _context.SaveChangesAsync(cancellationToken);
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync(cancellationToken);
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -189,7 +191,7 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task DeleteAsync(int id, CancellationToken cancellationToken, bool autoCommit = true)
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
             try
             {
@@ -203,8 +205,9 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
                 Entities.Remove(entity);
-                if (autoCommit)
-                    await _context.SaveChangesAsync(cancellationToken);
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync(cancellationToken);
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -213,25 +216,7 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task SoftDeleteAsync(T entity, bool autoCommit = true)
-        {
-            try
-            {
-                if (entity == null)
-                    throw new InvalidEntityException($"{nameof(entity)} cannot be null");
-
-                Entities.Remove(entity);
-                if (autoCommit)
-                    await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error occurred at SoftDeleteAsync for {nameof(T)}: " + ex.Message);
-                throw;
-            }
-        }
-
-        public async Task DeleteAsync(IEnumerable<T> entities, CancellationToken cancellationToken, bool autoCommit = true)
+        public async Task DeleteAsync(IEnumerable<T> entities, CancellationToken cancellationToken)
         {
             try
             {
@@ -239,9 +224,9 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entities)} cannot be null");
 
                 Entities.RemoveRange(entities);
-                if (autoCommit)
-
-                    await _context.SaveChangesAsync(cancellationToken);
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync(cancellationToken);
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -250,15 +235,34 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task CommitAsync()
+        public async Task SoftDeleteAsync(T entity)
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                if (entity == null)
+                    throw new InvalidEntityException($"{nameof(entity)} cannot be null");
+
+                Entities.Remove(entity);
+                //if (autoCommit)
+                //    await _context.SaveChangesAsync();
+                await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occurred at SoftDeleteAsync for {nameof(T)}: " + ex.Message);
+                throw;
+            }
         }
 
-        public async Task CommitAsync(CancellationToken cancellationToken)
-        {
-            await _context.SaveChangesAsync(cancellationToken);
-        }
+        //public async Task CommitAsync()
+        //{
+        //    await _context.SaveChangesAsync();
+        //}
+
+        //public async Task CommitAsync(CancellationToken cancellationToken)
+        //{
+        //    await _context.SaveChangesAsync(cancellationToken);
+        //}
 
         public async Task<int> CountAsync()
         {

@@ -3,8 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AMP.Persistence.Database;
+using AMP.Persistence.Repositories.UoW;
 using AMP.Processors;
 using AMP.Processors.ExceptionHandlers;
+using AMP.Processors.Repositories.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,14 +37,15 @@ namespace AMP.Persistence
             var repositories = definedTypes
                 .Where(t => t.IsClass && t.GetCustomAttribute<RepositoryAttribute>() != null);
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             try
             {
                 Parallel.ForEach(repositories, repository =>
                 {
-                    var irepository = repository.GetInterfaces().FirstOrDefault(i => i.Name == $"I{repository.Name}") ??
+                    var iRepository = repository.GetInterfaces().FirstOrDefault(i => i.Name == $"I{repository.Name}") ??
                                       throw new RepositoryNotFoundException(
                                           $"{repository.Name} has no interface with name I{repository.Name}");
-                    services.AddScoped(irepository, repository);
+                    services.AddScoped(iRepository, repository);
                 });
             }
             catch (Exception ex)

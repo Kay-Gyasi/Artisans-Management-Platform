@@ -20,6 +20,7 @@
 	  <Folder Include="Database\" />
 	  <Folder Include="Extensions\" />
 	  <Folder Include="Repositories\Administration\" />
+	  <Folder Include="Repositories\UoW\" />
 	</ItemGroup>
 
 	<ItemGroup>
