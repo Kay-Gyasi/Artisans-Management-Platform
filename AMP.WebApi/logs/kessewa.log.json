@@ -64,3 +64,5 @@
 {"Timestamp":"2022-06-19T04:07:11.8874196+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":17032,"ThreadId":1}}
 {"Timestamp":"2022-06-20T18:26:43.7863036+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":22536,"ThreadId":1}}
 {"Timestamp":"2022-06-20T18:28:24.0388605+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":22536,"ThreadId":1}}
+{"Timestamp":"2022-06-27T02:10:02.2336734+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":1816,"ThreadId":1}}
+{"Timestamp":"2022-06-27T02:10:04.7261674+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":1816,"ThreadId":1}}
