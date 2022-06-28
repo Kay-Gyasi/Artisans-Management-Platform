@@ -1,4 +1,5 @@
-﻿using AMP.Domain.Entities.Base;
+﻿using System;
+using AMP.Domain.Entities.Base;
 using System.Collections.Generic;
 
 namespace AMP.Domain.Entities
@@ -36,6 +37,12 @@ namespace AMP.Domain.Entities
         public Services WithDescription(string description)
         {
             Description = description;
+            return this;
+        }
+
+        public Services CreatedOn(DateTime date)
+        {
+            DateCreated = date;
             return this;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
@@ -10,7 +11,6 @@ namespace AMP.Domain.Entities
         public string Description { get; private set; }
         public bool IsVerified { get; private set; }
         public bool IsApproved { get; private set; }
-        public bool IsSuspended { get; private set; }
         public Users User { get; set; }
 
         private readonly List<Services> _services = new List<Services>();
@@ -73,9 +73,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Artisans IsSuspendedd(bool isSuspended)
+        public Artisans CreatedOn(DateTime date)
         {
-            IsSuspended = isSuspended;
+            DateCreated = date;
+            return this;
+        }
+
+        public Artisans AddServices(List<Services> services)
+        {
+            _services.AddRange(services);
             return this;
         }
     }

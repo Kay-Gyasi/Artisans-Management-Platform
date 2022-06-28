@@ -1,4 +1,7 @@
 ﻿using System;
+using AMP.Domain.Entities;
+using AMP.Domain.Enums;
+using AMP.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace AMP.Persistence.Database
@@ -14,18 +17,30 @@ namespace AMP.Persistence.Database
         {
         }
 
+        public DbSet<Artisans> Artisans { get; set; }
+        public DbSet<Customers> Customers { get; set; }
+        public DbSet<Disputes> Disputes { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Payments> Payments { get; set; }
+        public DbSet<Proposals> Proposals { get; set; }
+        public DbSet<Ratings> Ratings { get; set; }
+        public DbSet<Schedules> Schedules { get; set; }
+        public DbSet<Services> Services { get; set; }
+        public DbSet<Users> Users { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // connection string here
+                optionsBuilder.UseSqlServer("Server=.;Database=AmpDevDb;Trusted_Connection=True;");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            throw new NotImplementedException();
+            var assembly = typeof(ArtisansConfiguration).Assembly;
+            modelBuilder.ApplyConfigurationsFromAssembly(assembly);
             base.OnModelCreating(modelBuilder);
         }
     }

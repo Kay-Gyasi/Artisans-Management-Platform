@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
@@ -18,6 +19,11 @@ namespace AMP.Domain.Entities
         {
             CustomerId = customerId;
             ArtisanId = artisanId;
+        }
+
+        public Ratings Create(int customerId, int artisanId)
+        {
+            return new Ratings(customerId, artisanId);
         }
 
         public Ratings ForCustomerWithId(int customerId)
@@ -65,6 +71,12 @@ namespace AMP.Domain.Entities
         public Ratings ForCustomer(Customers customer)
         {
             Customer = customer;
+            return this;
+        }
+
+        public Ratings CreatedOn(DateTime date)
+        {
+            DateCreated = date;
             return this;
         }
     }

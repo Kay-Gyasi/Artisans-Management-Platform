@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.UoW;
-using AMP.Processors;
 using AMP.Processors.ExceptionHandlers;
 using AMP.Processors.Repositories.UoW;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +19,10 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DevDb"));
+                options.UseSqlServer(configuration.GetConnectionString("DevDb"), opt =>
+                {
+                    opt.EnableRetryOnFailure();
+                });
             });
             return services;
         }

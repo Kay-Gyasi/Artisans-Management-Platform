@@ -11,6 +11,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+	<Folder Include="Commands\" />
 	<Folder Include="Mapping\" />
 	<Folder Include="PageDtos\" />
 	<Folder Include="Processors\Administration\" />

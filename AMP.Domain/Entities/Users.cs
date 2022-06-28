@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AMP.Domain.Entities.Base;
 using AMP.Domain.Enums;
@@ -18,11 +19,15 @@ namespace AMP.Domain.Entities
         public string DisplayName { get; private set; }  
         public string ImageUrl { get; private set; }
         public string MomoNumber { get; private set; }
+        public bool IsSuspended { get; private set; }
+        public bool IsRemoved { get; private set; }
         public UserType Type { get; private set; }
         public LevelOfEducation LevelOfEducation { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
-        public List<string> Languages { get; private set; } // picked from lookup
+
+        private readonly List<string> _languages = new List<string>();
+        public IEnumerable<string> Languages => _languages.AsReadOnly();
 
         private readonly List<Artisans> _artisans = new List<Artisans>();
         public IEnumerable<Artisans> Artisans => _artisans.AsReadOnly();
@@ -104,7 +109,31 @@ namespace AMP.Domain.Entities
 
         public Users Speaks(List<string> languages)
         {
-            Languages = languages;
+            _languages.AddRange(languages);
+            return this;
+        }
+
+        public Users WithMomoNumber(string number)
+        {
+            MomoNumber = number;
+            return this;
+        }
+
+        public Users IsSuspendedd(bool isSuspended)
+        {
+            IsSuspended = isSuspended;
+            return this;
+        }
+
+        public Users IsRemovedd(bool isRemoved)
+        {
+            IsRemoved = isRemoved;
+            return this;
+        }
+
+        public Users CreatedOn(DateTime date)
+        {
+            DateCreated = date;
             return this;
         }
     }

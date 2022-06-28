@@ -1,4 +1,5 @@
-﻿using AMP.Domain.Entities.Base;
+﻿using System;
+using AMP.Domain.Entities.Base;
 using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities
@@ -6,7 +7,7 @@ namespace AMP.Domain.Entities
     public class Payments : EntityBase
     {
         public int CustomerId { get; private set; }
-        public int OrderId { get; private set; } // should get the artisan through this
+        public int OrderId { get; private set; }
         public decimal AmountPaid { get; private set; }
         public PaymentStatus Status { get; private set; }
         public Customers Customer { get; private set; }
@@ -58,6 +59,12 @@ namespace AMP.Domain.Entities
         public Payments OnOrder(Orders order)
         {
             Order = order;
+            return this;
+        }
+
+        public Payments CreatedOn(DateTime date)
+        {
+            DateCreated = date;
             return this;
         }
     }

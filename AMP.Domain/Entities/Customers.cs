@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
@@ -41,6 +42,12 @@ namespace AMP.Domain.Entities
         public Customers ForUser(Users user)
         {
             User = user;
+            return this;
+        }
+
+        public Customers CreatedOn(DateTime date)
+        {
+            DateCreated = date;
             return this;
         }
     }

@@ -1,4 +1,5 @@
-﻿using AMP.Domain.Entities.Base;
+﻿using System;
+using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
@@ -50,6 +51,12 @@ namespace AMP.Domain.Entities
         public Proposals ByArtisan(Artisans artisan)
         {
             Artisan = artisan;
+            return this;
+        }
+
+        public Proposals CreatedOn(DateTime date)
+        {
+            DateCreated = date;
             return this;
         }
     }

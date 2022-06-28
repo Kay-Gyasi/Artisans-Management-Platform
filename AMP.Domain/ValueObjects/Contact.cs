@@ -23,17 +23,16 @@ namespace AMP.Domain.ValueObjects
         [DataType(DataType.PhoneNumber)]
         public string PrimaryContact3 { get; private set; }
 
-        private Contact(string emailAddress, string primaryPhone)
+        private Contact(string primaryPhone)
         {
-            EmailAddress = emailAddress;
             PrimaryContact = primaryPhone;
         }
 
         private Contact(){}
 
-        public Contact Create(string emailAddress, string primaryPhone)
+        public Contact Create(string primaryPhone)
         {
-            return new Contact(emailAddress, primaryPhone);
+            return new Contact(primaryPhone);
         }
 
         public Contact WithEmailAddress(string emailAddress)

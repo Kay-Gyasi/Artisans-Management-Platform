@@ -1,4 +1,5 @@
 ﻿using AMP.Domain.Entities.Base;
+using AMP.Domain.Enums;
 using AMP.Domain.ViewModels;
 using AMP.Persistence.Database;
 using AMP.Processors.ExceptionHandlers;
@@ -242,10 +243,11 @@ namespace AMP.Persistence.Repositories.Base
                 if (entity == null)
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
-                Entities.Remove(entity);
+                entity.EntityStatus = EntityStatus.Deleted;
+                await UpdateAsync(entity);
                 //if (autoCommit)
                 //    await _context.SaveChangesAsync();
-                await Task.CompletedTask;
+                //await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -269,7 +271,6 @@ namespace AMP.Persistence.Repositories.Base
             return await _context.Set<T>().CountAsync();
         }
 
-        // TODO:: Work on lookup tables
         public virtual async Task<List<Lookup>> GetLookupAsync()
         {
             return new List<Lookup>();

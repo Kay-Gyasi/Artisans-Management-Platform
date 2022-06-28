@@ -67,5 +67,11 @@ namespace AMP.Domain.Entities
             Artisan = artisan;
             return this;
         }
+
+        public Schedules CreatedOn(DateTime date)
+        {
+            DateCreated = date;
+            return this;
+        }
     }
 }

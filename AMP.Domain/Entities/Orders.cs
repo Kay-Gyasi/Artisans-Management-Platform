@@ -109,5 +109,11 @@ namespace AMP.Domain.Entities
             Payment = payment;
             return this;
         }
+
+        public Orders CreatedOn(DateTime date)
+        {
+            DateCreated = date;
+            return this;
+        }
     }
 }
