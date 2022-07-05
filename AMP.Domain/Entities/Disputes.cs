@@ -6,12 +6,12 @@ namespace AMP.Domain.Entities
 {
     public class Disputes : EntityBase
     {
-            public int CustomerId { get; private set; }
-            public int ArtisanId { get; private set; }
-            public string Details { get; private set; }
-            public DisputeStatus Status { get; private set; }
-            public Customers Customer { get; private set; }
-            public Artisans Artisan { get; private set; }
+        public int CustomerId { get; private set; }
+        public int ArtisanId { get; private set; }
+        public string Details { get; private set; }
+        public DisputeStatus Status { get; private set; }
+        public Customers Customer { get; private set; }
+        public Artisans Artisan { get; private set; }
 
         private Disputes(){}
 
