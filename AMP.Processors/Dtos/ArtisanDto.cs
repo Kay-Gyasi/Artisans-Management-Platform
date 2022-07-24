@@ -4,6 +4,7 @@ namespace AMP.Processors.Dtos
 {
     public class ArtisanDto
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public string BusinessName { get; set; }
         public string Description { get; set; }
@@ -12,7 +13,6 @@ namespace AMP.Processors.Dtos
         public UserDto User { get; set; }
         public List<ServiceDto> Services { get; set; }
         public List<RatingDto> Ratings { get; set; }
-        public List<ProposalDto> Proposals { get; set; }
         public List<DisputeDto> Disputes { get; set; }
     }
 }

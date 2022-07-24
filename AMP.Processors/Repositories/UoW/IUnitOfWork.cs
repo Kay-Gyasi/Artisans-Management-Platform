@@ -5,7 +5,15 @@ namespace AMP.Processors.Repositories.UoW
 {
     public interface IUnitOfWork
     {
-        public IInitializeDbRepository InitializeDbRepository { get; }
+        public IInitializeDbRepository InitializeDb { get; }
+        public IArtisanRepository Artisans { get; }
+        public ICustomerRepository Customers { get; }
+        public IDisputeRepository Disputes { get; }
+        public IOrderRepository Orders { get; }
+        public IPaymentRepository Payments { get; }
+        public IRatingRepository Ratings { get; }
+        public IServiceRepository Services { get; }
+        public IUserRepository Users { get; }
 
         Task<bool> SaveChangesAsync();
     }

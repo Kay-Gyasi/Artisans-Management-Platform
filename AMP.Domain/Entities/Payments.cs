@@ -21,7 +21,7 @@ namespace AMP.Domain.Entities
             OrderId = orderId;
         }
 
-        public Payments Create(int customerId, int orderId)
+        public static Payments Create(int customerId, int orderId)
         {
             return new Payments(customerId, orderId);
         }

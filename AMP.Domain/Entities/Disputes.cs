@@ -21,7 +21,7 @@ namespace AMP.Domain.Entities
             ArtisanId = artisanId;
         }
 
-        public Disputes Create(int customerId, int artisanId)
+        public static Disputes Create(int customerId, int artisanId)
         {
             return new Disputes(customerId, artisanId);
         }
@@ -65,6 +65,12 @@ namespace AMP.Domain.Entities
         public Disputes CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Disputes WithId(int id)
+        {
+            Id = id;
             return this;
         }
     }

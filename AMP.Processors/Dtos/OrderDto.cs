@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
 
@@ -7,6 +6,7 @@ namespace AMP.Processors.Dtos
 {
     public class OrderDto
     {
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public int ServiceId { get; set; }
         public int PaymentId { get; set; }
@@ -19,6 +19,5 @@ namespace AMP.Processors.Dtos
         public CustomerDto Customer { get; set; }
         public ServiceDto Service { get; set; }
         public PaymentDto Payment { get; set; }
-        public List<ProposalDto> Proposals { get; set; }
     }
 }

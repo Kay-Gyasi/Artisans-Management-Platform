@@ -22,9 +22,7 @@ namespace AMP.Persistence.Database
         public DbSet<Disputes> Disputes { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Payments> Payments { get; set; }
-        public DbSet<Proposals> Proposals { get; set; }
         public DbSet<Ratings> Ratings { get; set; }
-        public DbSet<Schedules> Schedules { get; set; }
         public DbSet<Services> Services { get; set; }
         public DbSet<Users> Users { get; set; }
 
@@ -32,7 +30,7 @@ namespace AMP.Persistence.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=AmpDevDb;Trusted_Connection=True;");
+                optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }

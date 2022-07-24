@@ -19,7 +19,7 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DevDb"), opt =>
+                options.UseNpgsql(configuration.GetConnectionString("DevDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                 });

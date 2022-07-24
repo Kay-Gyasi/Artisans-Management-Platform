@@ -6,6 +6,7 @@ namespace AMP.Processors.Dtos
 {
     public class UserDto
     {
+        public int Id { get; set; }
         public string UserNo { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }

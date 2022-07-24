@@ -4,6 +4,7 @@ namespace AMP.Processors.PageDtos
 {
     public class DisputePageDto
     {
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public int ArtisanId { get; set; }
         public string Details { get; set; }

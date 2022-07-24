@@ -6,6 +6,11 @@ namespace AMP.Processors.Commands
 {
     public class UserCommand
     {
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Id of user in identity server database
+        /// </summary>
         public string UserNo { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
@@ -13,9 +18,12 @@ namespace AMP.Processors.Commands
         public string DisplayName { get; set; }
         public string ImageUrl { get; set; }
         public string MomoNumber { get; set; }
+        public bool IsSuspended { get; set; }
+        public bool IsRemoved { get; set; }
+        public UserType Type { get; set; }
         public LevelOfEducation LevelOfEducation { get; set; }
         public Contact Contact { get; set; }
         public Address Address { get; set; }
-        public List<int> Languages { get; set; } // get values from immutable array
+        public List<string> Languages { get; set; } 
     }
 }

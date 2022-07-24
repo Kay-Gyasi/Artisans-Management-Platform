@@ -100,3 +100,5 @@
 {"Timestamp":"2022-06-27T22:42:11.6279579+00:00","Level":"Fatal","MessageTemplate":"Exception of type 'Microsoft.Extensions.Hosting.HostFactoryResolver+HostingListener+StopTheHostException' was thrown.","Properties":{"MachineName":"YOGA-X1","ProcessId":3088,"ThreadId":4}}
 {"Timestamp":"2022-06-28T01:10:05.3382272+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":21584,"ThreadId":1}}
 {"Timestamp":"2022-06-28T01:10:08.6479078+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":21584,"ThreadId":1}}
+{"Timestamp":"2022-07-24T17:37:15.8031138+00:00","Level":"Information","MessageTemplate":"App starting up...","Properties":{"MachineName":"YOGA-X1","ProcessId":17552,"ThreadId":1}}
+{"Timestamp":"2022-07-24T17:37:18.4284374+00:00","Level":"Information","MessageTemplate":"App started","Properties":{"MachineName":"YOGA-X1","ProcessId":17552,"ThreadId":1}}

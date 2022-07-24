@@ -16,7 +16,7 @@ namespace AMP.Processors.Processors.Administration
         
         public async Task InitializeDatabase()
         {
-            await _uow.InitializeDbRepository.InitializeDatabase();
+            await _uow.InitializeDb.InitializeDatabase();
             await _uow.SaveChangesAsync();
         }
     }

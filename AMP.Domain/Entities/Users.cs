@@ -42,7 +42,7 @@ namespace AMP.Domain.Entities
             UserNo = userNo;
         }
 
-        public Users Create(string userNo)
+        public static Users Create(string userNo)
         {
             return new Users(userNo);
         }
