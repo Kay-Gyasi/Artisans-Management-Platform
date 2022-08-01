@@ -26,9 +26,9 @@ namespace AMP.Domain.Entities
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
 
-        private readonly List<string> _languages = new List<string>();
-        public IEnumerable<string> Languages => _languages.AsReadOnly();
-
+        private readonly List<Languages> _languages = new List<Languages>();
+        public IEnumerable<Languages> Languages => _languages.AsReadOnly();
+        
         private readonly List<Artisans> _artisans = new List<Artisans>();
         public IEnumerable<Artisans> Artisans => _artisans.AsReadOnly();
 
@@ -73,7 +73,7 @@ namespace AMP.Domain.Entities
 
         public Users SetDisplayName()
         {
-            DisplayName = FirstName.Trim().Concat($" {FamilyName.Trim()}").ToString();
+            DisplayName = FirstName.Trim() + " " + FamilyName.Trim();
             return this;
         }
 
@@ -107,8 +107,9 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users Speaks(List<string> languages)
+        public Users Speaks(List<Languages> languages)
         {
+            _languages.Clear();
             _languages.AddRange(languages);
             return this;
         }

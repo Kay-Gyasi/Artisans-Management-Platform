@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
@@ -9,13 +11,14 @@ using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class ArtisanProcessor : ProcessorBase
     {
-        public ArtisanProcessor(IUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public ArtisanProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
@@ -28,14 +31,14 @@ namespace AMP.Processors.Processors
             {
                 artisan = Artisans.Create(command.UserId)
                     .CreatedOn(DateTime.UtcNow);
-                AssignFields(artisan, command, true);
+                await AssignFields(artisan, command, true);
                 await _uow.Artisans.InsertAsync(artisan);
                 await _uow.SaveChangesAsync();
                 return artisan.Id;
             }
 
             artisan = await _uow.Artisans.GetAsync(command.Id);
-            AssignFields(artisan, command);
+            await AssignFields(artisan, command);
             await _uow.Artisans.UpdateAsync(artisan);
             await _uow.SaveChangesAsync();
             return artisan.Id;
@@ -44,12 +47,36 @@ namespace AMP.Processors.Processors
         public async Task<PaginatedList<ArtisanPageDto>> GetPage(PaginatedCommand command)
         {
             var page = await _uow.Artisans.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<ArtisanPageDto>>(page);
+            var paginated = _mapper.Map<PaginatedList<ArtisanPageDto>>(page);
+            var data = paginated.Data.Select(x => new ArtisanPageDto()
+            {
+                Id = x.Id,
+                UserId = x.UserId,
+                BusinessName = x.BusinessName,
+                Description = x.Description,
+                IsVerified = x.IsVerified,
+                IsApproved = x.IsApproved,
+                Rating = _uow.Ratings.GetRating(x.Id),
+                User = x.User
+            }).ToList();
+            return new PaginatedList<ArtisanPageDto>(data, paginated.TotalCount, paginated.CurrentPage,
+                paginated.PageSize);
         }
 
         public async Task<ArtisanDto> Get(int id)
         {
-            return _mapper.Map<ArtisanDto>(await _uow.Artisans.GetAsync(id));
+            var artisan = _mapper.Map<ArtisanDto>(await _uow.Artisans.GetAsync(id));
+            artisan.NoOfOrders = _uow.Orders.GetCount(artisan.Id);
+            artisan.NoOfReviews = _uow.Ratings.GetCount(artisan.Id);
+            return artisan;
+        }
+
+        public async Task<ArtisanDto> GetByUserId(int userId)
+        {
+            var artisan = _mapper.Map<ArtisanDto>(await _uow.Artisans.GetArtisanByUserId(userId));
+            artisan.NoOfOrders = _uow.Orders.GetCount(artisan.Id);
+            artisan.NoOfReviews = _uow.Ratings.GetCount(artisan.Id);
+            return artisan;
         }
 
         public async Task Delete(int id)
@@ -59,12 +86,20 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
 
-        private void AssignFields(Artisans artisan, ArtisanCommand command, bool isNew = false)
+        private async Task AssignFields(Artisans artisan, ArtisanCommand command, bool isNew = false)
         {
+            var names = new List<string>();
+            foreach (var service in command.Services)
+            {
+                names.Add(service.Name);
+            }
+
+            var services = await _uow.Services.BuildServices(names);
             artisan.WithBusinessName(command.BusinessName)
                 .WithDescription(command.Description)
                 .IsVerifiedd(command.IsVerified)
-                .IsApprovedd(command.IsApproved);
+                .IsApprovedd(command.IsApproved)
+                .Offers(services);
             if (!isNew) artisan.ForUserId(command.UserId);
         }
     }

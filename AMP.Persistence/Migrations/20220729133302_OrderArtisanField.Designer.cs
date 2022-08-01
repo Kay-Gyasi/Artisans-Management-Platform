@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AMP.Persistence.Migrations
 {
     [DbContext(typeof(AmpDbContext))]
-    [Migration("20220724173238_PersistenceSwitch")]
-    partial class PersistenceSwitch
+    [Migration("20220729133302_OrderArtisanField")]
+    partial class OrderArtisanField
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,16 +36,17 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 570, DateTimeKind.Utc).AddTicks(7607));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<bool>("IsApproved")
                         .ValueGeneratedOnAdd()
@@ -78,12 +79,13 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 577, DateTimeKind.Utc).AddTicks(5417));
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -112,16 +114,17 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 578, DateTimeKind.Utc).AddTicks(4995));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Details")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -138,6 +141,34 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Disputes");
                 });
 
+            modelBuilder.Entity("AMP.Domain.Entities.Languages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
             modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
                 {
                     b.Property<int>("Id")
@@ -145,7 +176,7 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ArtisanId")
+                    b.Property<int?>("ArtisanId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Cost")
@@ -158,25 +189,34 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 582, DateTimeKind.Utc).AddTicks(5683));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<bool>("IsComplete")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
-                    b.Property<int>("PaymentId")
+                    b.Property<int?>("PaymentId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("PreferredDate")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Scope")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Maintenance");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("integer");
@@ -223,12 +263,13 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 642, DateTimeKind.Utc).AddTicks(3844));
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("integer");
@@ -266,15 +307,16 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 644, DateTimeKind.Utc).AddTicks(6630));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<int>("Votes")
                         .ValueGeneratedOnAdd()
@@ -301,15 +343,16 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 645, DateTimeKind.Utc).AddTicks(3357));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -331,15 +374,16 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 7, 24, 17, 32, 37, 647, DateTimeKind.Utc).AddTicks(1417));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("text");
 
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("integer");
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Normal");
 
                     b.Property<string>("FamilyName")
                         .IsRequired()
@@ -402,6 +446,21 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("ArtisansServices");
                 });
 
+            modelBuilder.Entity("LanguagesUsers", b =>
+                {
+                    b.Property<int>("LanguagesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("LanguagesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("LanguagesUsers");
+                });
+
             modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
                 {
                     b.HasOne("AMP.Domain.Entities.Users", "User")
@@ -447,9 +506,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.HasOne("AMP.Domain.Entities.Artisans", "Artisan")
                         .WithMany("Orders")
-                        .HasForeignKey("ArtisanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArtisanId");
 
                     b.HasOne("AMP.Domain.Entities.Customers", "Customer")
                         .WithMany("Orders")
@@ -474,6 +531,7 @@ namespace AMP.Persistence.Migrations
                                 .HasColumnType("text");
 
                             b1.Property<string>("Country")
+                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasDefaultValue("Ghana");
 
@@ -554,8 +612,8 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("City")
                                 .HasColumnType("text");
 
-                            b1.Property<string>("Country")
-                                .HasColumnType("text");
+                            b1.Property<int>("Country")
+                                .HasColumnType("integer");
 
                             b1.Property<string>("StreetAddress")
                                 .IsRequired()
@@ -619,6 +677,21 @@ namespace AMP.Persistence.Migrations
                     b.HasOne("AMP.Domain.Entities.Services", null)
                         .WithMany()
                         .HasForeignKey("ServicesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LanguagesUsers", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.Languages", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

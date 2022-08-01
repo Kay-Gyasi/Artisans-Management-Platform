@@ -1,0 +1,47 @@
+﻿@baseUrl=https://localhost:7149/api/v1/user
+
+GET {{baseUrl}}/get/7
+
+###
+POST {{baseUrl}}/save
+Content-Type: application/json
+
+{
+    "id": 7,
+    "userNo": "frmIdentityServer",
+    "firstName": "Kofi",
+    "familyName": "Addae",
+    "otherName": null,
+    "displayName": "Kofi Addae",
+    "imageUrl": "",
+    "momoNumber": "0206744299",
+    "isSuspended": false,
+    "isRemoved": false,
+    "type": 0,
+    "levelOfEducation": 2,
+    "contact": {
+    "emailAddress": "addaengoah@gmail.com",
+    "primaryContact": "0206744299",
+    "primaryContact2": "",
+    "primaryContact3": ""
+    },
+    "address": {
+    "country": 1,
+    "city": "Obuasi",
+    "town": null,
+    "streetAddress": "Tech Junction",
+    "streetAddress2": null
+    },
+    "languages": [
+    {
+        "id": 3,
+        "name": "Fante"
+    },
+    {
+        "id": 4,
+        "name": "English"
+    }
+    ],
+    "artisans": [],
+    "customers": []
+}

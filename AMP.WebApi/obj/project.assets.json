@@ -27,6 +27,15 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "FluentValidation/11.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/FluentValidation.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1072,6 +1081,7 @@
           "AMP.Processors": "1.0.0",
           "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "FluentValidation": "11.1.0",
           "MediatR": "10.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1"
         },
@@ -1191,6 +1201,27 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "FluentValidation/11.1.0": {
+      "sha512": "Ld7w+2jOmnhQqFkngEGuEWTRa5j6u4Xzli7jKxRtbA5PtuHHcpin01qxvxYL0LomeJuzRMGAOURu2rKONdjKQA==",
+      "type": "package",
+      "path": "fluentvalidation/11.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.11.1.0.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net5.0/FluentValidation.dll",
+        "lib/net5.0/FluentValidation.xml",
+        "lib/net6.0/FluentValidation.dll",
+        "lib/net6.0/FluentValidation.xml",
+        "lib/netstandard2.0/FluentValidation.dll",
+        "lib/netstandard2.0/FluentValidation.xml",
+        "lib/netstandard2.1/FluentValidation.dll",
+        "lib/netstandard2.1/FluentValidation.xml"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -3800,6 +3831,8 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.17",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.17",
+      "Microsoft.Extensions.Caching.Abstractions >= 6.0.0",
+      "Microsoft.Extensions.Caching.Memory >= 6.0.1",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.15.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10",
       "RestClient >= 3.860.28084",
@@ -3881,6 +3914,14 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[5.0.17, )"
+          },
+          "Microsoft.Extensions.Caching.Abstractions": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
+          "Microsoft.Extensions.Caching.Memory": {
+            "target": "Package",
+            "version": "[6.0.1, )"
           },
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
             "target": "Package",

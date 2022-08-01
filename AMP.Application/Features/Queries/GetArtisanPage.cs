@@ -4,10 +4,11 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Processors.Processors;
+using FluentValidation;
 
 namespace AMP.Application.Features.Queries
 {
-    public class ArtisanData
+    public class GetArtisanPage
     {
         public class Query : IRequest<PaginatedList<ArtisanPageDto>>
         {
@@ -33,6 +34,16 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        // implement validation class
+        //public sealed class PaginatedCommandValidator : AbstractValidator<PaginatedCommand>
+        //{
+        //    public PaginatedCommandValidator()
+        //    {
+        //        RuleFor(x => x.PageNumber).NotEmpty();
+
+        //        RuleFor(x => x.FirstName).NotEmpty().MaximumLength(100);
+
+        //        RuleFor(x => x.LastName).NotEmpty().MaximumLength(100);
+        //    }
+        //}
     }
 }

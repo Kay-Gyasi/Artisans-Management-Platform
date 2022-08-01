@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "X1tMypzHJzbvX3O65s2cT0Lc+yr4DUshMXq8R7jKrOpAAP2Rr+MpCnPxF+R/xG+e4lcTQqOXYIuCT1TVwZCQpQ==",
+  "dgSpecHash": "tRiAxzUWmPwHjRWaywrthHTIdnPDlkUmzbXO0JGJFRd8oqb85W3Kmo/2X1QervnGQs2plBqll+H5VygHelF/mg==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi\\AMP.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\fluentvalidation\\11.1.0\\fluentvalidation.11.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",

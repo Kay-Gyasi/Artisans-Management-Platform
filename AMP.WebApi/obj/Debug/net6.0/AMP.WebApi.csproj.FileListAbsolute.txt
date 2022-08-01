@@ -8,6 +8,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AMP.WebApi.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Humanizer.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.Contracts.dll
@@ -23,6 +24,8 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Npgsql.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\RestClient.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Seq.Extensions.Logging.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Serilog.dll
@@ -70,5 +73,3 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.genruntimeconfig.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\ref\AMP.WebApi.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Npgsql.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

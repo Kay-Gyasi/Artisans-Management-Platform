@@ -23,7 +23,7 @@ namespace AMP.Domain.Entities
             Description = description;
         }
 
-        public static Services Create(string name, string description)
+        public static Services Create(string name, string description = "")
         {
             return new Services(name, description);
         }

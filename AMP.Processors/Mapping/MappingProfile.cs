@@ -1,4 +1,5 @@
 ﻿using AMP.Domain.Entities;
+using AMP.Domain.ValueObjects;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -43,6 +44,14 @@ namespace AMP.Processors.Mapping
             CreateMap<Users, UserPageDto>().ReverseMap();
             CreateMap<PaginatedList<Users>, PaginatedList<UserPageDto>>().ReverseMap();
             CreateMap<Users, UserCommand>().ReverseMap();
+            CreateMap<Languages, LanguagesDto>().ReverseMap();
+            CreateMap<Languages, LanguagesPageDto>().ReverseMap();
+            CreateMap<Address, AddressCommand>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<Address, AddressPageDto>().ReverseMap();
+            CreateMap<Contact, ContactCommand>().ReverseMap();
+            CreateMap<Contact, ContactDto>().ReverseMap();
+            CreateMap<Contact, ContactPageDto>().ReverseMap();
 
         }
     }

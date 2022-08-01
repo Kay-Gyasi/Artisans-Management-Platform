@@ -9,13 +9,14 @@ using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class DisputeProcessor : ProcessorBase
     {
-        public DisputeProcessor(IUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public DisputeProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
@@ -26,7 +27,7 @@ namespace AMP.Processors.Processors
             Disputes dispute;
             if (isNew)
             {
-                dispute = Disputes.Create(command.CustomerId, command.ArtisanId)
+                dispute = Disputes.Create(command.CustomerId, command.OrderId)
                     .CreatedOn(DateTime.UtcNow);
                 AssignFields(dispute, command, true);
                 await _uow.Disputes.InsertAsync(dispute);
@@ -65,7 +66,7 @@ namespace AMP.Processors.Processors
 
             if (!isNew)
                 dispute.ByCustomerWithId(command.CustomerId)
-                    .AgainstArtisanWithId(command.ArtisanId);
+                    .AgainstOrderWithId(command.OrderId);
         }
     }
 }

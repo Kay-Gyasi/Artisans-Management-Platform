@@ -3,6 +3,7 @@ using AMP.Domain.Entities;
 using AMP.Domain.Enums;
 using AMP.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Languages = AMP.Domain.Entities.Languages;
 
 namespace AMP.Persistence.Database
 {
@@ -25,12 +26,13 @@ namespace AMP.Persistence.Database
         public DbSet<Ratings> Ratings { get; set; }
         public DbSet<Services> Services { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Languages> Languages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;");
+                optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;Include Error Detail=true");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }

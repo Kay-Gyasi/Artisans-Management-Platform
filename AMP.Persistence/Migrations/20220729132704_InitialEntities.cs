@@ -4,10 +4,26 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AMP.Persistence.Migrations
 {
-    public partial class PersistenceSwitch : Migration
+    public partial class InitialEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
@@ -17,8 +33,8 @@ namespace AMP.Persistence.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 645, DateTimeKind.Utc).AddTicks(3357)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -46,14 +62,14 @@ namespace AMP.Persistence.Migrations
                     Contact_PrimaryContact = table.Column<string>(type: "text", nullable: true),
                     Contact_PrimaryContact2 = table.Column<string>(type: "text", nullable: true),
                     Contact_PrimaryContact3 = table.Column<string>(type: "text", nullable: true),
-                    Address_Country = table.Column<string>(type: "text", nullable: true),
+                    Address_Country = table.Column<int>(type: "integer", nullable: true),
                     Address_City = table.Column<string>(type: "text", nullable: true),
                     Address_Town = table.Column<string>(type: "text", nullable: true),
                     Address_StreetAddress = table.Column<string>(type: "text", nullable: true),
                     Address_StreetAddress2 = table.Column<string>(type: "text", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 647, DateTimeKind.Utc).AddTicks(1417)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -72,8 +88,8 @@ namespace AMP.Persistence.Migrations
                     IsVerified = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     IsApproved = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 570, DateTimeKind.Utc).AddTicks(7607)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -94,8 +110,8 @@ namespace AMP.Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 577, DateTimeKind.Utc).AddTicks(5417)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -103,6 +119,30 @@ namespace AMP.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Customers_Users_UserId",
                         column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LanguagesUsers",
+                columns: table => new
+                {
+                    LanguagesId = table.Column<int>(type: "integer", nullable: false),
+                    UsersId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LanguagesUsers", x => new { x.LanguagesId, x.UsersId });
+                    table.ForeignKey(
+                        name: "FK_LanguagesUsers_Languages_LanguagesId",
+                        column: x => x.LanguagesId,
+                        principalTable: "Languages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LanguagesUsers_Users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -143,8 +183,8 @@ namespace AMP.Persistence.Migrations
                     Details = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false, defaultValue: "Open"),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 578, DateTimeKind.Utc).AddTicks(4995)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -171,12 +211,13 @@ namespace AMP.Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     ArtisanId = table.Column<int>(type: "integer", nullable: false),
-                    IsComplete = table.Column<bool>(type: "boolean", nullable: false),
+                    IsComplete = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     ServiceId = table.Column<int>(type: "integer", nullable: false),
                     PaymentId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Cost = table.Column<decimal>(type: "numeric", nullable: false),
                     Urgency = table.Column<string>(type: "text", nullable: false, defaultValue: "Medium"),
+                    Scope = table.Column<string>(type: "text", nullable: false, defaultValue: "Maintenance"),
                     Status = table.Column<string>(type: "text", nullable: false, defaultValue: "Placed"),
                     PreferredDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     WorkAddress_Country = table.Column<string>(type: "text", nullable: true, defaultValue: "Ghana"),
@@ -185,8 +226,8 @@ namespace AMP.Persistence.Migrations
                     WorkAddress_StreetAddress = table.Column<string>(type: "text", nullable: true),
                     WorkAddress_StreetAddress2 = table.Column<string>(type: "text", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 582, DateTimeKind.Utc).AddTicks(5683)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -222,8 +263,8 @@ namespace AMP.Persistence.Migrations
                     Votes = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 644, DateTimeKind.Utc).AddTicks(6630)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -253,8 +294,8 @@ namespace AMP.Persistence.Migrations
                     AmountPaid = table.Column<decimal>(type: "numeric", nullable: false, defaultValue: 0m),
                     Status = table.Column<string>(type: "text", nullable: false, defaultValue: "NotSent"),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 7, 24, 17, 32, 37, 642, DateTimeKind.Utc).AddTicks(3844)),
-                    EntityStatus = table.Column<int>(type: "integer", nullable: false)
+                    DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EntityStatus = table.Column<string>(type: "text", nullable: false, defaultValue: "Normal")
                 },
                 constraints: table =>
                 {
@@ -297,6 +338,11 @@ namespace AMP.Persistence.Migrations
                 name: "IX_Disputes_CustomerId",
                 table: "Disputes",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LanguagesUsers_UsersId",
+                table: "LanguagesUsers",
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_ArtisanId",
@@ -344,10 +390,16 @@ namespace AMP.Persistence.Migrations
                 name: "Disputes");
 
             migrationBuilder.DropTable(
+                name: "LanguagesUsers");
+
+            migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "Ratings");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
 
             migrationBuilder.DropTable(
                 name: "Orders");

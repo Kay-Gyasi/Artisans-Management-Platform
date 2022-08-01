@@ -9,13 +9,14 @@ using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class ServiceProcessor : ProcessorBase
     {
-        public ServiceProcessor(IUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public ServiceProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 

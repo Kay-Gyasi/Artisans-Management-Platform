@@ -17,16 +17,23 @@ namespace AMP.Persistence.Configurations
                 .IsRequired();
             builder.Property(a => a.Description)
                 .IsRequired();
+            builder.Property(a => a.IsComplete)
+                .HasDefaultValue(false);
             builder.Property(a => a.Urgency)
                 .HasDefaultValue(Urgency.Medium)
                 .HasConversion(new EnumToStringConverter<Urgency>());
             builder.Property(a => a.Status)
                 .HasDefaultValue(OrderStatus.Placed)
                 .HasConversion(new EnumToStringConverter<OrderStatus>());
+            builder.Property(a => a.Scope)
+                .HasDefaultValue(ScopeOfWork.Maintenance)
+                .HasConversion(new EnumToStringConverter<ScopeOfWork>());
             builder.OwnsOne(x => x.WorkAddress, a =>
             {
                 a.Property(x => x.StreetAddress).IsRequired();
-                a.Property(x => x.Country).HasDefaultValue("Ghana");
+                a.Property(x => x.Country)
+                    .HasDefaultValue(Countries.Ghana)
+                    .HasConversion(new EnumToStringConverter<Countries>());
             });
             builder.HasOne(a => a.Payment)
                 .WithOne(a => a.Order)

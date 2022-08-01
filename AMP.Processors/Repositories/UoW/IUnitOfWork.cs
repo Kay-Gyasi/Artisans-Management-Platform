@@ -14,6 +14,7 @@ namespace AMP.Processors.Repositories.UoW
         public IRatingRepository Ratings { get; }
         public IServiceRepository Services { get; }
         public IUserRepository Users { get; }
+        public ILanguageRepository Languages { get; }
 
         Task<bool> SaveChangesAsync();
     }

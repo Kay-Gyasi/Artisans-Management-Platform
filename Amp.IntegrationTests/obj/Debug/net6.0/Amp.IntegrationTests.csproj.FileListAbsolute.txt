@@ -307,6 +307,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bi
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\FluentAssertions.dll
+C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\MediatR.Contracts.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
@@ -333,6 +334,8 @@ C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bi
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.Common.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Npgsql.dll
+C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\NuGet.Frameworks.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\RestClient.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Seq.Extensions.Logging.dll
@@ -452,5 +455,3 @@ C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\ob
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\obj\Debug\net6.0\Amp.IntegrationTests.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\obj\Debug\net6.0\Amp.IntegrationTests.genruntimeconfig.cache
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\obj\Debug\net6.0\ref\Amp.IntegrationTests.dll
-C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Npgsql.dll
-C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

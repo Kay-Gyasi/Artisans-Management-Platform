@@ -34,6 +34,8 @@ namespace AMP.Persistence.Configurations
             {
                 x.Property(a => a.StreetAddress).IsRequired();
             });
+            builder.HasQueryFilter(x => !x.IsRemoved);
+            builder.HasQueryFilter(x => !x.IsSuspended);
         }
     }
 }

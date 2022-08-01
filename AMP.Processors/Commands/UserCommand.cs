@@ -22,8 +22,8 @@ namespace AMP.Processors.Commands
         public bool IsRemoved { get; set; }
         public UserType Type { get; set; }
         public LevelOfEducation LevelOfEducation { get; set; }
-        public Contact Contact { get; set; }
-        public Address Address { get; set; }
-        public List<string> Languages { get; set; } 
+        public ContactCommand Contact { get; set; }
+        public AddressCommand Address { get; set; }
+        public List<LanguagesCommand> Languages { get; set; } 
     }
 }

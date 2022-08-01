@@ -9,13 +9,14 @@ using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class CustomerProcessor : ProcessorBase
     {
-        public CustomerProcessor(IUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public CustomerProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
@@ -49,6 +50,11 @@ namespace AMP.Processors.Processors
         public async Task<CustomerDto> Get(int id)
         {
             return _mapper.Map<CustomerDto>(await _uow.Customers.GetAsync(id));
+        }
+
+        public async Task<CustomerDto> GetByUserId(int userId)
+        {
+            return _mapper.Map<CustomerDto>(await _uow.Customers.GetByUserIdAsync(userId));
         }
 
         public async Task Delete(int id)

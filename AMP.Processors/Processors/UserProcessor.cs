@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.ValueObjects;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -9,13 +11,14 @@ using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class UserProcessor : ProcessorBase
     {
-        public UserProcessor(IUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
@@ -28,14 +31,14 @@ namespace AMP.Processors.Processors
             {
                 user = Users.Create(command.UserNo)
                     .CreatedOn(DateTime.UtcNow);
-                AssignFields(user, command, true);
+                await AssignFields(user, command, true);
                 await _uow.Users.InsertAsync(user);
                 await _uow.SaveChangesAsync();
                 return user.Id;
             }
 
             user = await _uow.Users.GetAsync(command.Id);
-            AssignFields(user, command);
+            await AssignFields(user, command);
             await _uow.Users.UpdateAsync(user);
             await _uow.SaveChangesAsync();
             return user.Id;
@@ -59,8 +62,14 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
 
-        private void AssignFields(Users user, UserCommand command, bool isNew = false)
+        private async Task AssignFields(Users user, UserCommand command, bool isNew = false)
         {
+            var lsit = new List<string>();
+            foreach (var lang in command.Languages)
+            {
+                lsit.Add(lang.Name);
+            }
+            var languages = await _uow.Languages.BuildLanguages(lsit);
             user.WithFirstName(command.FirstName)
                 .WithFamilyName(command.FamilyName)
                 .WithOtherName(command.OtherName)
@@ -68,9 +77,15 @@ namespace AMP.Processors.Processors
                 .WithImageUrl(command.ImageUrl)
                 .OfType(command.Type)
                 .HasLevelOfEducation(command.LevelOfEducation)
-                .WithContact(command.Contact)
-                .WithAddress(command.Address)
-                .Speaks(command.Languages)
+                .WithContact(Contact.Create(command.Contact.PrimaryContact ?? "")
+                    .WithPrimaryContact2(command.Contact.PrimaryContact2 ?? "")
+                    .WithPrimaryContact3(command.Contact.PrimaryContact3 ?? "")
+                    .WithEmailAddress(command.Contact.EmailAddress ?? ""))
+                .WithAddress(Address.Create(command.Address.City, command.Address.StreetAddress)
+                    .WithStreetAddress2(command.Address.StreetAddress2)
+                    .FromTown(command.Address.Town)
+                    .FromCountry(command.Address.Country))
+                .Speaks(languages)
                 .WithMomoNumber(command.MomoNumber)
                 .IsSuspendedd(command.IsSuspended)
                 .IsRemovedd(command.IsRemoved);

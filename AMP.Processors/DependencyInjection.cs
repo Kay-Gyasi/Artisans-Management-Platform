@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AMP.Processors
@@ -15,10 +13,10 @@ namespace AMP.Processors
             var definedTypes = assembly.DefinedTypes;
 
             var processors = definedTypes.Where(x => x.IsClass && x.GetCustomAttribute(attribute) != null);
-            Parallel.ForEach(processors, processor =>
+            foreach (var processor in processors)
             {
                 services.AddScoped(processor.AsType());
-            });
+            }
             return services;
         }
 

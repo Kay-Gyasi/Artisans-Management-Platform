@@ -3,6 +3,7 @@ using AMP.Domain.Entities.Base;
 using AMP.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence
 {
@@ -11,7 +12,9 @@ namespace AMP.Persistence
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.ToTable(typeof(T).Name);
-            builder.Property(a => a.DateModified).HasDefaultValue(DateTime.UtcNow);
+            //builder.Property(a => a.DateModified).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(a => a.EntityStatus).HasDefaultValue(EntityStatus.Normal)
+                .HasConversion(new EnumToStringConverter<EntityStatus>());
             builder.HasQueryFilter(a => a.EntityStatus == EntityStatus.Normal);
         }
     }

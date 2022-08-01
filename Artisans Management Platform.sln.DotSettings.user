@@ -2,7 +2,7 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\microsoft.testplatform.testhost\17.2.0\lib\netcoreapp2.1\testhost.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\admin\AppData\Local\Temp\JetBrains\ReSharperPlatformVs17\vAny_24fa3a37\CoverageData\_Artisans Management Platform.-1694627014\Snapshot\snapshot.utdcvr</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=158373a5_002D0c3e_002D46a5_002D8d49_002D0dd3782b8502/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::C0B557F1-6894-4301-85B3-4F3FCEAC7145::net6.0::Amp.IntegrationTests.UnitTest1.Test1&lt;/TestId&gt;&#xD;

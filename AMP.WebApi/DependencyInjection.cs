@@ -15,7 +15,8 @@ public static class DependencyInjection
             .RegisterAutoMapper()
             .AddMediatr()
             .AddCaching()
-            .AddDefaultConfig();
+            .AddDefaultConfig()
+            .AddMemoryCache();
         return services;
     }
 

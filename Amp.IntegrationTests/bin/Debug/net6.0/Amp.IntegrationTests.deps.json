@@ -385,6 +385,17 @@
           "lib/net6.0/FluentAssertions.dll": {}
         }
       },
+      "FluentValidation/11.1.0": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.1.0.0"
+          }
+        },
+        "compile": {
+          "lib/net6.0/FluentValidation.dll": {}
+        }
+      },
       "MediatR/10.0.1": {
         "dependencies": {
           "MediatR.Contracts": "1.0.1"
@@ -2226,6 +2237,7 @@
           "AMP.Processors": "1.0.0",
           "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "FluentValidation": "11.1.0",
           "MediatR": "10.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1"
         },
@@ -2312,6 +2324,8 @@
           "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.5",
+          "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Caching.Memory": "6.0.1",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.15.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10",
           "RestClient": "3.860.28084",
@@ -4093,6 +4107,13 @@
       "sha512": "sha512-PWbow/R3MnYDP8UW7zh/w80rGb+1NufGoNJeuzouTo2bqpvwNTFxbDwF6XWfFZ5IuquL2225Um+qSyZ8jVsT+w==",
       "path": "fluentassertions/6.7.0",
       "hashPath": "fluentassertions.6.7.0.nupkg.sha512"
+    },
+    "FluentValidation/11.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ld7w+2jOmnhQqFkngEGuEWTRa5j6u4Xzli7jKxRtbA5PtuHHcpin01qxvxYL0LomeJuzRMGAOURu2rKONdjKQA==",
+      "path": "fluentvalidation/11.1.0",
+      "hashPath": "fluentvalidation.11.1.0.nupkg.sha512"
     },
     "MediatR/10.0.1": {
       "type": "package",

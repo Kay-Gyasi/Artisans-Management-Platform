@@ -1,6 +1,5 @@
 ﻿namespace AMP.WebApi.Controllers.Base
 {
-    // TODO:: Implement versioning properly
     
     [Route("api/v1/[controller]/[action]")]
     [ApiController]
