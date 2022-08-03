@@ -9,10 +9,7 @@ namespace AMP.Domain.Entities
 {
     public class Users : EntityBase
     {
-        /// <summary>
-        /// Id of user in identity server database
-        /// </summary>
-        public string UserNo { get; private set; }
+        
         public string FirstName { get; private set; }
         public string FamilyName { get; private set; }
         public string OtherName { get; private set; }
@@ -23,6 +20,8 @@ namespace AMP.Domain.Entities
         public bool IsRemoved { get; private set; }
         public UserType Type { get; private set; }
         public LevelOfEducation LevelOfEducation { get; private set; }
+        public byte[] Password { get; private set; }
+        public byte[] PasswordKey { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
 
@@ -37,21 +36,11 @@ namespace AMP.Domain.Entities
 
         private Users() {}
 
-        private Users(string userNo)
+        public static Users Create()
         {
-            UserNo = userNo;
+            return new Users();
         }
 
-        public static Users Create(string userNo)
-        {
-            return new Users(userNo);
-        }
-
-        public Users ForUserWithNo(string userNo)
-        {
-            UserNo = userNo;
-            return this;
-        }
 
         public Users WithFirstName(string firstName)
         {
@@ -135,6 +124,18 @@ namespace AMP.Domain.Entities
         public Users CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Users HasPassword(byte[] hash)
+        {
+            Password = hash;
+            return this;
+        }
+
+        public Users HasPasswordKey(byte[] hash)
+        {
+            PasswordKey = hash;
             return this;
         }
     }

@@ -1,4 +1,9 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System.Security.Claims;
+using System.Text;
+using AMP.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using ILogger = Serilog.ILogger;
 
@@ -16,7 +21,9 @@ public static class DependencyInjection
             .AddMediatr()
             .AddCaching()
             .AddDefaultConfig()
-            .AddMemoryCache();
+            .AddMemoryCache()
+            .RegisterInfrastructure()
+            .AddAuthentication(configuration);
         return services;
     }
 
@@ -35,6 +42,31 @@ public static class DependencyInjection
                 : apiDescription.RelativePath);
         });
 
+        return services;
+    }
+
+    private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        var secretKey = configuration.GetSection("Jwt:Key").Value;
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opts =>
+            {
+                opts.MapInboundClaims = true;
+                opts.SaveToken = true;
+                opts.RequireHttpsMetadata = false;
+                opts.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"],
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    IssuerSigningKey = key,
+                    RoleClaimType = ClaimTypes.Role,
+                    NameClaimType = ClaimTypes.Name
+                };
+            });
         return services;
     }
 
@@ -66,6 +98,8 @@ public static class DependencyInjection
         app.UseHttpsRedirection();
 
         app.UseSerilogRequestLogging();
+
+        app.UseAuthentication();
 
         app.UseAuthorization();
 

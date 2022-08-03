@@ -414,15 +414,17 @@ namespace AMP.Persistence.Migrations
                     b.Property<string>("OtherName")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("Password")
+                        .HasColumnType("bytea");
+
+                    b.Property<byte[]>("PasswordKey")
+                        .HasColumnType("bytea");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text")
                         .HasDefaultValue("Customer");
-
-                    b.Property<string>("UserNo")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

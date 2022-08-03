@@ -7,20 +7,19 @@ POST {{baseUrl}}/save
 Content-Type: application/json
 
 {
-    "id": 7,
-    "userNo": "frmIdentityServer",
-    "firstName": "Kofi",
-    "familyName": "Addae",
+    "id": 0,
+    "firstName": "New",
+    "familyName": "Guy",
     "otherName": null,
-    "displayName": "Kofi Addae",
     "imageUrl": "",
     "momoNumber": "0206744299",
     "isSuspended": false,
     "isRemoved": false,
     "type": 0,
     "levelOfEducation": 2,
+    "password": "pass",
     "contact": {
-    "emailAddress": "addaengoah@gmail.com",
+    "emailAddress": "newguy@gmail.com",
     "primaryContact": "0206744299",
     "primaryContact2": "",
     "primaryContact3": ""
@@ -44,4 +43,13 @@ Content-Type: application/json
     ],
     "artisans": [],
     "customers": []
+}
+
+###
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "kofigyasidev@gmail.com",
+    "password": "pass"
 }

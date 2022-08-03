@@ -11,8 +11,6 @@ namespace AMP.Persistence.Configurations
         public override void Configure(EntityTypeBuilder<Users> builder)
         {
             base.Configure(builder);
-            builder.Property(a => a.UserNo)
-                .IsRequired();
             builder.Property(a => a.FirstName)
                 .IsRequired();
             builder.Property(a => a.FamilyName)

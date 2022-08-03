@@ -13,6 +13,7 @@
   <ItemGroup>
 	<Folder Include="Commands\" />
 	<Folder Include="Mapping\" />
+	<Folder Include="Authentication\" />
 	<Folder Include="PageDtos\" />
 	<Folder Include="Processors\Administration\" />
 	<Folder Include="Processors\Base\" />

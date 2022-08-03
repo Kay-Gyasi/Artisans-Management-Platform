@@ -93,10 +93,11 @@ namespace AMP.Processors.Processors.Administration
         {
             var count = await _uow.Users.CountAsync();
             if (count > 0) return;
+            var password = _uow.Users.Register("pass");
 
             var users = new List<Users>()
             {
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
@@ -114,8 +115,10 @@ namespace AMP.Processors.Processors.Administration
                         "Twi"
                     }))
                     .WithMomoNumber("0557833216")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
@@ -133,8 +136,10 @@ namespace AMP.Processors.Processors.Administration
                         "Twi"
                     }))
                     .WithMomoNumber("0557833216")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Woode")
                     .WithOtherName("Aquaman")
@@ -151,8 +156,10 @@ namespace AMP.Processors.Processors.Administration
                         "English",
                     }))
                     .WithMomoNumber("0556455344")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Awate")
                     .WithOtherName("Mumuni")
@@ -170,8 +177,10 @@ namespace AMP.Processors.Processors.Administration
                         "French",
                     }))
                     .WithMomoNumber("0557511677")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Gloria")
                     .WithFamilyName("Mensah")
                     .WithOtherName("Reddington")
@@ -188,8 +197,10 @@ namespace AMP.Processors.Processors.Administration
                         "English",
                     }))
                     .WithMomoNumber("0204377833")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Emmanuel")
                     .WithFamilyName("Abolo")
                     .WithOtherName("Financial Abolo")
@@ -206,8 +217,10 @@ namespace AMP.Processors.Processors.Administration
                         "English",
                     }))
                     .WithMomoNumber("0545366277")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Addae")
                     .SetDisplayName()
@@ -223,8 +236,10 @@ namespace AMP.Processors.Processors.Administration
                         "English",
                     }))
                     .WithMomoNumber("0206744299")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .SetDisplayName()
@@ -241,8 +256,10 @@ namespace AMP.Processors.Processors.Administration
                         "Twi"
                     }))
                     .WithMomoNumber("0557833216")
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
-                Users.Create("frmIdentityServer")
+                Users.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Suspended")
@@ -261,6 +278,8 @@ namespace AMP.Processors.Processors.Administration
                     }))
                     .WithMomoNumber("0557833216")
                     .IsSuspendedd(true)
+                    .HasPassword(password.Item1)
+                    .HasPasswordKey(password.Item2)
                     .CreatedOn(DateTime.UtcNow),
 
             };

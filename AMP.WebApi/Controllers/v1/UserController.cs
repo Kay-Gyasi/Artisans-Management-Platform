@@ -4,9 +4,11 @@ using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
 using AMP.Shared.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AMP.WebApi.Controllers.v1;
 
+[Authorize]
 public class UserController : BaseControllerv1
 {
 
@@ -36,4 +38,11 @@ public class UserController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task Delete(int id)
         => await Mediator.Send(new DeleteUser.Command(id));
+
+    [AllowAnonymous]
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<SigninResponse> Login(SigninCommand command)
+        => await Mediator.Send(new AuthenticateUser.Command(command));
 }

@@ -1,9 +1,11 @@
 ﻿using AMP.Application.Features.Queries;
 using AMP.Domain.ViewModels;
 using AMP.Processors.Processors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AMP.WebApi.Controllers.v1;
 
+[Authorize]
 public class LookupController : BaseControllerv1
 {
 

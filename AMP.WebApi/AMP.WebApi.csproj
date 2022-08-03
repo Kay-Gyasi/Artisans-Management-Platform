@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
@@ -40,6 +41,7 @@
   <ItemGroup>
 	<ProjectReference Include="..\AMP.Application\AMP.Application.csproj" />
 	<ProjectReference Include="..\AMP.Persistence\AMP.Persistence.csproj" />
+	<ProjectReference Include="..\AMP.Services\AMP.Services.csproj" />
   </ItemGroup>
 
 </Project>

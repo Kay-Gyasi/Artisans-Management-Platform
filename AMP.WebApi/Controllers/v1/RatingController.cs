@@ -4,9 +4,11 @@ using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
 using AMP.Shared.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AMP.WebApi.Controllers.v1;
 
+[Authorize]
 public class RatingController : BaseControllerv1
 {
     [HttpPost]

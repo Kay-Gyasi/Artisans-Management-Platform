@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Domain.ValueObjects;
+using AMP.Processors.Authentication;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -18,8 +19,18 @@ namespace AMP.Processors.Processors
     [Processor]
     public class UserProcessor : ProcessorBase
     {
-        public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
+        private readonly IAuthService _authService;
+
+        public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
+            IAuthService authService) : base(uow, mapper, cache)
         {
+            _authService = authService;
+        }
+
+        public async Task<SigninResponse> Login(SigninCommand command)
+        {
+            var user = await _uow.Users.Authenticate(command);
+            return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
         public async Task<int> Save(UserCommand command)
@@ -29,9 +40,12 @@ namespace AMP.Processors.Processors
             Users user;
             if (isNew)
             {
-                user = Users.Create(command.UserNo)
+                user = Users.Create()
                     .CreatedOn(DateTime.UtcNow);
-                await AssignFields(user, command, true);
+                var passes =  _uow.Users.Register(command);
+                await AssignFields(user, command);
+                user.HasPassword(passes.Item1)
+                    .HasPasswordKey(passes.Item2);
                 await _uow.Users.InsertAsync(user);
                 await _uow.SaveChangesAsync();
                 return user.Id;
@@ -62,7 +76,7 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
 
-        private async Task AssignFields(Users user, UserCommand command, bool isNew = false)
+        private async Task AssignFields(Users user, UserCommand command)
         {
             var lsit = new List<string>();
             foreach (var lang in command.Languages)
@@ -89,7 +103,6 @@ namespace AMP.Processors.Processors
                 .WithMomoNumber(command.MomoNumber)
                 .IsSuspendedd(command.IsSuspended)
                 .IsRemovedd(command.IsRemoved);
-            if (!isNew) user.ForUserWithNo(command.UserNo);
         }
     }
 }
