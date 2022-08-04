@@ -18,7 +18,9 @@ namespace AMP.Processors.Processors
     [Processor]
     public class ArtisanProcessor : ProcessorBase
     {
-        public ArtisanProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
+        public ArtisanProcessor(IUnitOfWork uow, 
+            IMapper mapper, 
+            IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 

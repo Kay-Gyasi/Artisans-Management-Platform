@@ -1,4 +1,5 @@
-﻿using AMP.Application.Features.Commands;
+﻿using System.Security.Claims;
+using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
@@ -11,35 +12,37 @@ namespace AMP.WebApi.Controllers.v1;
 [Authorize]
 public class OrderController : BaseControllerv1
 {
+    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<PaginatedList<OrderPageDto>> GetPage(PaginatedCommand command)
         => await Mediator.Send(new GetOrderPage.Query(command));
     
-    [HttpPost("{userId}")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<PaginatedList<OrderPageDto>> GetSchedulePage([FromBody] PaginatedCommand command, int userId)
-        => await Mediator.Send(new GetSchedule.Query(command, userId));
+    public async Task<PaginatedList<OrderPageDto>> GetSchedulePage([FromBody] PaginatedCommand command)
+        => await Mediator.Send(new GetSchedule.Query(command, Convert.ToInt32(UserId)));
     
-    [HttpPost("{userId}")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<PaginatedList<OrderPageDto>> GetHistoryPage([FromBody] PaginatedCommand command, int userId)
-        => await Mediator.Send(new GetWorkHistory.Query(command, userId));
+    public async Task<PaginatedList<OrderPageDto>> GetHistoryPage([FromBody] PaginatedCommand command)
+        => await Mediator.Send(new GetWorkHistory.Query(command, Convert.ToInt32(UserId)));
     
-    [HttpPost("{userId}")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<PaginatedList<OrderPageDto>> GetOrderHistoryPage([FromBody] PaginatedCommand command, int userId)
-        => await Mediator.Send(new GetOrderHistory.Query(command, userId));
+    public async Task<PaginatedList<OrderPageDto>> GetOrderHistoryPage([FromBody] PaginatedCommand command)
+        => await Mediator.Send(new GetOrderHistory.Query(command, Convert.ToInt32(UserId)));
     
-    [HttpPost("{userId}")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<PaginatedList<OrderPageDto>> GetCustomerOrderPage([FromBody] PaginatedCommand command, int userId)
-        => await Mediator.Send(new GetCustomerOrderPage.Query(command, userId));
+    public async Task<PaginatedList<OrderPageDto>> GetCustomerOrderPage([FromBody] PaginatedCommand command)
+        => await Mediator.Send(new GetCustomerOrderPage.Query(command, Convert.ToInt32(UserId)));
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

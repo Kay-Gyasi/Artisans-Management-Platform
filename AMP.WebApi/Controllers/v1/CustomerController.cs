@@ -1,4 +1,5 @@
-﻿using AMP.Application.Features.Commands;
+﻿using System.Security.Claims;
+using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
@@ -23,12 +24,15 @@ public class CustomerController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<CustomerDto> Get(int id)
         => await Mediator.Send(new GetCustomer.Query(id));
-    
-    [HttpGet("{userId}")]
+
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<CustomerDto> GetByUser(int userId)
-        => await Mediator.Send(new GetCustomerByUser.Query(userId));
+    public async Task<CustomerDto> GetByUser()
+    {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return await Mediator.Send(new GetCustomerByUser.Query(Convert.ToInt32(userId)));
+    }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]

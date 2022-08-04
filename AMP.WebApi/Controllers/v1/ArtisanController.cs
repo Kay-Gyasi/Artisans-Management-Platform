@@ -1,4 +1,5 @@
-﻿using AMP.Application.Features.Commands;
+﻿using System.Security.Claims;
+using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
@@ -23,12 +24,15 @@ public class ArtisanController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ArtisanDto> Get(int id)
         => await Mediator.Send(new GetArtisan.Query(id));
-    
-    [HttpGet("{userId}")]
+
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ArtisanDto> GetByUser(int userId)
-        => await Mediator.Send(new GetArtisanByUser.Query(userId));
+    public async Task<ArtisanDto> GetByUser()
+    {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return await Mediator.Send(new GetArtisanByUser.Query(Convert.ToInt32(userId)));
+    }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
