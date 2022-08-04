@@ -9,10 +9,7 @@ namespace AMP.Domain.Entities
 {
     public class Users : EntityBase
     {
-        /// <summary>
-        /// Id of user in identity server database
-        /// </summary>
-        public string UserNo { get; private set; }
+        
         public string FirstName { get; private set; }
         public string FamilyName { get; private set; }
         public string OtherName { get; private set; }
@@ -23,12 +20,14 @@ namespace AMP.Domain.Entities
         public bool IsRemoved { get; private set; }
         public UserType Type { get; private set; }
         public LevelOfEducation LevelOfEducation { get; private set; }
+        public byte[] Password { get; private set; }
+        public byte[] PasswordKey { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
 
-        private readonly List<string> _languages = new List<string>();
-        public IEnumerable<string> Languages => _languages.AsReadOnly();
-
+        private readonly List<Languages> _languages = new List<Languages>();
+        public IEnumerable<Languages> Languages => _languages.AsReadOnly();
+        
         private readonly List<Artisans> _artisans = new List<Artisans>();
         public IEnumerable<Artisans> Artisans => _artisans.AsReadOnly();
 
@@ -37,21 +36,11 @@ namespace AMP.Domain.Entities
 
         private Users() {}
 
-        private Users(string userNo)
+        public static Users Create()
         {
-            UserNo = userNo;
+            return new Users();
         }
 
-        public Users Create(string userNo)
-        {
-            return new Users(userNo);
-        }
-
-        public Users ForUserWithNo(string userNo)
-        {
-            UserNo = userNo;
-            return this;
-        }
 
         public Users WithFirstName(string firstName)
         {
@@ -73,7 +62,7 @@ namespace AMP.Domain.Entities
 
         public Users SetDisplayName()
         {
-            DisplayName = FirstName.Trim().Concat($" {FamilyName.Trim()}").ToString();
+            DisplayName = FirstName.Trim() + " " + FamilyName.Trim();
             return this;
         }
 
@@ -107,8 +96,9 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users Speaks(List<string> languages)
+        public Users Speaks(List<Languages> languages)
         {
+            _languages.Clear();
             _languages.AddRange(languages);
             return this;
         }
@@ -134,6 +124,18 @@ namespace AMP.Domain.Entities
         public Users CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Users HasPassword(byte[] hash)
+        {
+            Password = hash;
+            return this;
+        }
+
+        public Users HasPasswordKey(byte[] hash)
+        {
+            PasswordKey = hash;
             return this;
         }
     }

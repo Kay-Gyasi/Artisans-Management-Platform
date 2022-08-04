@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AMP.Domain.Entities;
 using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
 
@@ -6,6 +7,7 @@ namespace AMP.Processors.Dtos
 {
     public class UserDto
     {
+        public int Id { get; set; }
         public string UserNo { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
@@ -17,9 +19,9 @@ namespace AMP.Processors.Dtos
         public bool IsRemoved { get; set; }
         public UserType Type { get; set; }
         public LevelOfEducation LevelOfEducation { get; set; }
-        public Contact Contact { get; set; }
-        public Address Address { get; set; }
-        public List<string> Languages { get; set; }
+        public ContactDto Contact { get; set; }
+        public AddressDto Address { get; set; }
+        public List<LanguagesDto> Languages { get; set; }
         public List<ArtisanDto> Artisans { get; set; }
         public List<CustomerDto> Customers { get; set; }
     }

@@ -4,6 +4,7 @@ namespace AMP.Processors.Dtos
 {
     public class CustomerDto
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public UserDto User { get; set; }
         public List<RatingDto> Ratings { get; set; }

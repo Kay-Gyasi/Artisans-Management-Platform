@@ -21,7 +21,7 @@ namespace AMP.Domain.Entities
             ArtisanId = artisanId;
         }
 
-        public Ratings Create(int customerId, int artisanId)
+        public static Ratings Create(int customerId, int artisanId)
         {
             return new Ratings(customerId, artisanId);
         }

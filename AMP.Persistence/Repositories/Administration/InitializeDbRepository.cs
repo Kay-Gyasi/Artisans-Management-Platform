@@ -1,14 +1,24 @@
 ﻿using System.Threading.Tasks;
+using AMP.Persistence.Database;
 using AMP.Processors.Repositories.Administration;
+using Microsoft.EntityFrameworkCore;
 
 namespace AMP.Persistence.Repositories.Administration
 {
     [Repository]
     public class InitializeDbRepository : IInitializeDbRepository
     {
-        public Task InitializeDatabase()
+        private readonly AmpDbContext _context;
+
+        public InitializeDbRepository(AmpDbContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+
+        public async Task InitializeDatabase()
+        {
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.MigrateAsync();
         }
     }
 }

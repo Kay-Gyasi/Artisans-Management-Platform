@@ -9,21 +9,24 @@ namespace AMP.Domain.Entities
     public class Orders : EntityBase
     {
         public int CustomerId { get; private set; }
+        public int? ArtisanId { get; private set; }
+        public bool IsComplete { get; private set; }
         public int ServiceId { get; private set; }
-        public int PaymentId { get; private set; }
+        public int? PaymentId { get; private set; }
         public string Description { get; private set; }
         public decimal Cost { get; private set; } // To be set by approved artisan
         public Urgency Urgency { get; private set; }
+        public ScopeOfWork Scope { get; private set; }
         public OrderStatus Status { get; private set; }
         public DateTime PreferredDate { get; private set; }
+        public Artisans Artisan { get; private set; }
         public Address WorkAddress { get; private set; }
         public Customers Customer { get; private set; }
         public Services Service { get; private set; }
         public Payments Payment { get; private set; }
 
-        private readonly List<Proposals> _proposals = new List<Proposals>();
-        public IEnumerable<Proposals> Proposals => _proposals.AsReadOnly();
-
+        private readonly List<Disputes> _disputes = new List<Disputes>();
+        public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
 
         private Orders() {}
 
@@ -33,7 +36,7 @@ namespace AMP.Domain.Entities
             ServiceId = serviceId;
         }
 
-        public Orders Create(int customerId, int serviceId)
+        public static Orders Create(int customerId, int serviceId)
         {
             return new Orders(customerId, serviceId);
         }
@@ -50,7 +53,19 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Orders WithPaymentId(int paymentId)
+        public Orders ForArtisanWithId(int? artisanId)
+        {
+            ArtisanId = artisanId;
+            return this;
+        }
+
+        public Orders IsCompleted(bool isCompleted)
+        {
+            IsComplete = isCompleted;
+            return this;
+        }
+
+        public Orders WithPaymentId(int? paymentId)
         {
             PaymentId = paymentId;
             return this;
@@ -77,6 +92,12 @@ namespace AMP.Domain.Entities
         public Orders WithStatus(OrderStatus status)
         {
             Status = status;
+            return this;
+        }
+        
+        public Orders WithScope(ScopeOfWork scope)
+        {
+            Scope = scope;
             return this;
         }
 

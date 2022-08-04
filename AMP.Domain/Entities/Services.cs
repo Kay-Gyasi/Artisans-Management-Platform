@@ -23,7 +23,7 @@ namespace AMP.Domain.Entities
             Description = description;
         }
 
-        public Services Create(string name, string description)
+        public static Services Create(string name, string description = "")
         {
             return new Services(name, description);
         }
@@ -43,6 +43,12 @@ namespace AMP.Domain.Entities
         public Services CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Services WithId(int id)
+        {
+            Id = id;
             return this;
         }
     }

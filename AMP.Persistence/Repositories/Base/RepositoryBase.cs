@@ -21,7 +21,7 @@ namespace AMP.Persistence.Repositories.Base
     public class RepositoryBase<T> : IRepositoryBase<T> where T : EntityBase
     {
         private DbSet<T> _entities;
-        private readonly AmpDbContext _context;
+        protected readonly AmpDbContext _context;
         private readonly ILogger<T> _logger;
 
         protected RepositoryBase(AmpDbContext context, ILogger<T> logger)
@@ -80,7 +80,7 @@ namespace AMP.Persistence.Repositories.Base
             return await GetArchivedBaseQuery().ToListAsync();
         }
 
-        public async Task<PaginatedList<T>> GetPage(PaginatedCommand paginated, CancellationToken cancellationToken)
+        public virtual async Task<PaginatedList<T>> GetPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
 
 

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "CLC9co7D6ONNo+tQJe2KNhCobkD4c/aTS7B9ViIBU3u+PVjkkNFxLOvU3wnDKH/OsbMPGYaXxneEXmJmN5L/hQ==",
+  "dgSpecHash": "sSe2Q03AxN2j7IqKGG+bTNcv7Vx8rFWAWmwDZNI4we/CTpB61meHU2/yqcDbRVhTtoHkUaIZsvFfSX3sSg7VkQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Application\\AMP.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\fluentvalidation\\11.1.0\\fluentvalidation.11.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",

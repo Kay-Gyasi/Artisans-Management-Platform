@@ -7,20 +7,9 @@ namespace AMP.Domain.ValueObjects
 {
     public class Contact : ValueObject
     {
-        [DisplayName("EmailAddress")]
-        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; private set; }
-
-        [DisplayName("PrimaryContact")]
-        [DataType(DataType.PhoneNumber)]
         public string PrimaryContact { get; private set; }
-
-        [DisplayName("PrimaryContact2")]
-        [DataType(DataType.PhoneNumber)]
         public string PrimaryContact2 { get; private set; }
-
-        [DisplayName("PrimaryContact3")]
-        [DataType(DataType.PhoneNumber)]
         public string PrimaryContact3 { get; private set; }
 
         private Contact(string primaryPhone)
@@ -30,7 +19,7 @@ namespace AMP.Domain.ValueObjects
 
         private Contact(){}
 
-        public Contact Create(string primaryPhone)
+        public static Contact Create(string primaryPhone)
         {
             return new Contact(primaryPhone);
         }

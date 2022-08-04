@@ -13,17 +13,14 @@ namespace AMP.Domain.Entities
         public bool IsApproved { get; private set; }
         public Users User { get; set; }
 
+        private readonly List<Orders> _orders = new List<Orders>();
+        public IEnumerable<Orders> Orders => _orders.AsReadOnly();
+
         private readonly List<Services> _services = new List<Services>();
         public IEnumerable<Services> Services => _services.AsReadOnly();
 
         private readonly List<Ratings> _ratings = new List<Ratings>();
         public IEnumerable<Ratings> Ratings => _ratings.AsReadOnly();
-
-        private readonly List<Proposals> _proposals = new List<Proposals>();
-        public IEnumerable<Proposals> Proposals => _proposals.AsReadOnly();
-
-        private readonly List<Disputes> _disputes = new List<Disputes>();
-        public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
 
         private Artisans(){}
 
@@ -32,7 +29,7 @@ namespace AMP.Domain.Entities
             UserId = userId;
         }
 
-        public Artisans Create(int userId)
+        public static Artisans Create(int userId)
         {
             return new Artisans(userId);
         }
@@ -79,8 +76,9 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Artisans AddServices(List<Services> services)
+        public Artisans Offers(List<Services> services)
         {
+            _services.Clear();
             _services.AddRange(services);
             return this;
         }

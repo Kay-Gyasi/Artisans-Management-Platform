@@ -19,7 +19,7 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DevDb"), opt =>
+                options.UseNpgsql(configuration.GetConnectionString("DevDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                 });
@@ -42,13 +42,13 @@ namespace AMP.Persistence
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             try
             {
-                Parallel.ForEach(repositories, repository =>
+                foreach (var repository in repositories)
                 {
                     var iRepository = repository.GetInterfaces().FirstOrDefault(i => i.Name == $"I{repository.Name}") ??
                                       throw new RepositoryNotFoundException(
                                           $"{repository.Name} has no interface with name I{repository.Name}");
                     services.AddScoped(iRepository, repository);
-                });
+                }
             }
             catch (Exception ex)
             {

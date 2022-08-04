@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects.Base;
 
@@ -8,20 +7,11 @@ namespace AMP.Domain.ValueObjects
 {
     public class Address : ValueObject
     {
-        [DisplayName("Country")]
-        public string Country { get; private set; } =
-            CountryType.Countries.FirstOrDefault(x => x.Key == 1).Value;
-
-        [DisplayName("City")]
+        public Countries Country { get; private set; } =
+            Countries.Ghana;
         public string City { get; private set; }
-
-        [DisplayName("Town")]
         public string Town { get; private set; }
-
-        [DisplayName("StreetAddress")]
         public string StreetAddress { get; private set; }
-
-        [DisplayName("StreetAddress2")]
         public string StreetAddress2 { get; private set; }
 
         private Address(){}
@@ -32,12 +22,18 @@ namespace AMP.Domain.ValueObjects
             City = city;
         }
 
-        public Address Create(string city, string address)
+        /// <summary>
+        /// Address = StreetAddress
+        /// </summary>
+        /// <param name="city"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public static Address Create(string city, string address)
         {
             return new Address(city, address);
         }
 
-        public Address FromCountry(string country)
+        public Address FromCountry(Countries country)
         {
             Country = country;
             return this;

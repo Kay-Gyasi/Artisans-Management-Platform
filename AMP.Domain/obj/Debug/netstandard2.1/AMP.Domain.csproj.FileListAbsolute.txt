@@ -1,0 +1,10 @@
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\bin\Debug\netstandard2.1\AMP.Domain.deps.json
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\bin\Debug\netstandard2.1\AMP.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\bin\Debug\netstandard2.1\AMP.Domain.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.AssemblyInfoInputs.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.AssemblyInfo.cs
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Debug\netstandard2.1\AMP.Domain.pdb

@@ -1,0 +1,55 @@
+﻿@baseUrl=https://localhost:7149/api/v1/user
+
+GET {{baseUrl}}/get/7
+
+###
+POST {{baseUrl}}/save
+Content-Type: application/json
+
+{
+    "id": 0,
+    "firstName": "New",
+    "familyName": "Guy",
+    "otherName": null,
+    "imageUrl": "",
+    "momoNumber": "0206744299",
+    "isSuspended": false,
+    "isRemoved": false,
+    "type": 0,
+    "levelOfEducation": 2,
+    "password": "pass",
+    "contact": {
+    "emailAddress": "newguy@gmail.com",
+    "primaryContact": "0206744299",
+    "primaryContact2": "",
+    "primaryContact3": ""
+    },
+    "address": {
+    "country": 1,
+    "city": "Obuasi",
+    "town": null,
+    "streetAddress": "Tech Junction",
+    "streetAddress2": null
+    },
+    "languages": [
+    {
+        "id": 3,
+        "name": "Fante"
+    },
+    {
+        "id": 4,
+        "name": "English"
+    }
+    ],
+    "artisans": [],
+    "customers": []
+}
+
+###
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "kofigyasidev@gmail.com",
+    "password": "pass"
+}

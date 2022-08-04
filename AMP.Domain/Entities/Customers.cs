@@ -28,7 +28,7 @@ namespace AMP.Domain.Entities
             UserId = userId;
         }
 
-        public Customers Create(int userId)
+        public static Customers Create(int userId)
         {
             return new Customers(userId);
         }
@@ -48,6 +48,12 @@ namespace AMP.Domain.Entities
         public Customers CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Customers WithId(int id)
+        {
+            Id = id;
             return this;
         }
     }
