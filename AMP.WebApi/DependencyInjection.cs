@@ -88,7 +88,7 @@ public static class DependencyInjection
             app.UseSwaggerUI();
         }
 
-        app.UseDeveloperExceptionPage();
+        //app.UseDeveloperExceptionPage();
 
         app.UseSwagger();
         app.UseSwaggerUI(c =>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
@@ -78,11 +79,7 @@ namespace AMP.Processors.Processors
 
         private async Task AssignFields(Users user, UserCommand command)
         {
-            var lsit = new List<string>();
-            foreach (var lang in command.Languages)
-            {
-                lsit.Add(lang.Name);
-            }
+            var lsit = command.Languages.Select(lang => lang.Name).ToList();
             var languages = await _uow.Languages.BuildLanguages(lsit);
             user.WithFirstName(command.FirstName)
                 .WithFamilyName(command.FamilyName)

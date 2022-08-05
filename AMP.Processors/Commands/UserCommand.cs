@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
 
 namespace AMP.Processors.Commands
 {
