@@ -27,12 +27,15 @@ namespace AMP.Persistence.Database
         public DbSet<Services> Services { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Languages> Languages { get; set; }
+        public DbSet<Images> Images { get; set; }
+        public DbSet<Requests> Requests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;Include Error Detail=true");
+                //optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;Include Error Detail=true");
+                optionsBuilder.UseSqlServer("Server=YOGA-X1;Database=AmpDevDb;Trusted_Connection=True;");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }

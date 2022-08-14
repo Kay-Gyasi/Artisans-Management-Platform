@@ -10,5 +10,6 @@ namespace AMP.Processors.Repositories
         Task<Users> Authenticate(SigninCommand command);
         (byte[], byte[]) Register(UserCommand command);
         (byte[], byte[]) Register(string password);
+        Task<bool> Exists(string email);
     }
 }

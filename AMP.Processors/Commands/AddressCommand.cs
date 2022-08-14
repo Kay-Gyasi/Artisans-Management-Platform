@@ -1,4 +1,5 @@
 ﻿using AMP.Domain.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace AMP.Processors.Commands
 {
@@ -17,5 +18,14 @@ namespace AMP.Processors.Commands
         public string PrimaryContact { get; set; }
         public string PrimaryContact2 { get; set; }
         public string PrimaryContact3 { get; set; }
+    }
+
+    public class ImageCommand
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string PublicId { get; set; }
+        public string ImageUrl { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

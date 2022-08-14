@@ -32,6 +32,20 @@ namespace AMP.Persistence.Repositories
             await UpdateAsync(order);
         }
 
+        public async Task AcceptRequest(int orderId)
+        {
+            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
+            order.RequestAccepted(true);
+            await UpdateAsync(order);
+        }
+        
+        public async Task CancelRequest(int orderId)
+        {
+            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
+            order.RequestAccepted(false);
+            await UpdateAsync(order);
+        }
+
         public async Task UnassignArtisan(int orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
@@ -44,6 +58,8 @@ namespace AMP.Persistence.Repositories
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.ForArtisanWithId(artisanId);
             await UpdateAsync(order);
+
+            await _context.Requests.AddAsync(Requests.Create(order.CustomerId, artisanId, orderId));
         }
 
         public async Task<PaginatedList<Orders>> GetCustomerOrderPage(PaginatedCommand paginated,
@@ -64,15 +80,28 @@ namespace AMP.Persistence.Repositories
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
 
-        public async Task<PaginatedList<Orders>> GetSchedule(PaginatedCommand paginated, int userId
-            , CancellationToken cancellationToken)
+        public async Task<PaginatedList<Orders>> GetSchedule(PaginatedCommand paginated, int userId, 
+            CancellationToken cancellationToken)
         {
-            var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId && x.Status != OrderStatus.Completed)
+            var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId 
+                                                           && x.Status != OrderStatus.Completed
+                                                           && x.IsRequestAccepted)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
                 .OrderBy(x => x.PreferredDate);
 
             return await BuildPage(whereQueryable, paginated, cancellationToken);
+        }
+        
+        public async Task<PaginatedList<Orders>> GetRequests(PaginatedCommand paginated, int userId, 
+            CancellationToken cancellationToken)
+        {
+            var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId 
+                                                           && x.Status != OrderStatus.Completed
+                                                           && !x.IsRequestAccepted)
+                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
+                .OrderBy(x => x.PreferredDate);
 
+            return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
 
         public async Task<PaginatedList<Orders>> GetWorkHistory(PaginatedCommand paginated, int userId

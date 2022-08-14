@@ -29,6 +29,12 @@ public class OrderController : BaseControllerv1
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<PaginatedList<OrderPageDto>> GetRequestPage([FromBody] PaginatedCommand command)
+        => await Mediator.Send(new GetRequests.Query(command, Convert.ToInt32(UserId)));
+    
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<PaginatedList<OrderPageDto>> GetHistoryPage([FromBody] PaginatedCommand command)
         => await Mediator.Send(new GetWorkHistory.Query(command, Convert.ToInt32(UserId)));
     
@@ -76,6 +82,18 @@ public class OrderController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task Complete([FromBody] int id)
         => await Mediator.Send(new CompleteOrder.Command(id));
+    
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task Accept([FromBody] int id)
+        => await Mediator.Send(new AcceptOrder.Command(id));
+    
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task Cancel([FromBody] int id)
+        => await Mediator.Send(new CancelOrder.Command(id));
     
     [HttpPut("{artisanId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

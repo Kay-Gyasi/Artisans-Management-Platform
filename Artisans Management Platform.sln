@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1136ED80-6821-48FD-8D89-3DE3721E21BE}"
+	ProjectSection(SolutionItems) = preProject
+		AMP.Application\Features\Commands\SaveUser.cs = AMP.Application\Features\Commands\SaveUser.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8B0EF77A-BA58-413E-B28B-CCFB50D7F9F0}"
 EndProject
@@ -46,7 +49,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3F5AB0BE-CA1C-429B-AE89-6994AFFBEBC8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amp.IntegrationTests", "Amp.IntegrationTests\Amp.IntegrationTests.csproj", "{C0B557F1-6894-4301-85B3-4F3FCEAC7145}"

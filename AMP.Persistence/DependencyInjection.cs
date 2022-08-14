@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.UoW;
 using AMP.Processors.ExceptionHandlers;
@@ -19,7 +18,7 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DevDb"), opt =>
+                options.UseSqlServer(configuration.GetConnectionString("AmpDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                 });

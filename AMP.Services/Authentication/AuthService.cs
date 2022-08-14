@@ -28,11 +28,11 @@ namespace AMP.Services.Authentication
                 new Claim(ClaimTypes.Name, user.DisplayName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Surname, user.FamilyName),
-                new Claim("ImageUrl", user.ImageUrl),
-                new Claim(ClaimTypes.MobilePhone, user.Contact.PrimaryContact),
+                new Claim("ImageUrl", user.Image?.ImageUrl ?? ""),
+                new Claim(ClaimTypes.MobilePhone, user.Contact.PrimaryContact ?? ""),
                 new Claim(ClaimTypes.Role, user.Type.ToString()),
-                new Claim(ClaimTypes.Email, user.Contact.EmailAddress),
-                new Claim(ClaimTypes.StreetAddress, user.Address.StreetAddress),
+                new Claim(ClaimTypes.Email, user.Contact.EmailAddress ?? ""),
+                new Claim(ClaimTypes.StreetAddress, user.Address.StreetAddress ?? ""),
             };
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);

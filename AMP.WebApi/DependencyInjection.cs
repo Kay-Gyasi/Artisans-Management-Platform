@@ -2,6 +2,7 @@
 using System.Text;
 using AMP.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -22,7 +23,7 @@ public static class DependencyInjection
             .AddCaching()
             .AddDefaultConfig()
             .AddMemoryCache()
-            .RegisterInfrastructure()
+            .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration);
         return services;
     }
@@ -47,7 +48,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var secretKey = configuration.GetSection("Jwt:Key").Value;
+        var secretKey = configuration["Jwt:Key"];
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opts =>
@@ -100,6 +101,14 @@ public static class DependencyInjection
         app.UseHttpsRedirection();
 
         app.UseSerilogRequestLogging();
+
+        //app.UseStaticFiles();
+        //app.UseStaticFiles(new StaticFileOptions()
+        //{
+        //    FileProvider = new PhysicalFileProvider
+        //        (Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
+        //    RequestPath = new PathString("/Files")
+        //});
 
         app.UseAuthentication();
 

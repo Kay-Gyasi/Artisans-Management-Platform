@@ -24,11 +24,12 @@ namespace AMP.Processors.Processors.Administration
             await _uow.InitializeDb.InitializeDatabase();
             await InitializeServices();
             await InitializeLanguages();
-            await InitializeUsers();
-            await InitializeArtisans();
-            await InitializeCustomers();
-            await _uow.SaveChangesAsync();
-            await InitializeOrders();
+            //await InitializeUsers();
+            //await InitializeImages();
+            //await InitializeArtisans();
+            //await InitializeCustomers();
+            //await _uow.SaveChangesAsync();
+            //await InitializeOrders();
 
             await _uow.SaveChangesAsync();
         }
@@ -89,6 +90,27 @@ namespace AMP.Processors.Processors.Administration
             await _uow.SaveChangesAsync();
         }
 
+        //private async Task InitializeImages()
+        //{
+        //    var images = new List<Images>
+        //    {
+        //        Images.Create("https://avatars.githubusercontent.com/u/69327748?v=4",
+        //            "publicId")
+        //            .ForUserWithId(3),
+        //        Images.Create("https://avatars.githubusercontent.com/u/69327748?v=4",
+        //            "publicId")
+        //            .ForUserWithId(4),
+        //        Images.Create("https://avatars.githubusercontent.com/u/69327748?v=4",
+        //            "publicId")
+        //            .ForUserWithId(8),
+        //        Images.Create("https://avatars.githubusercontent.com/u/69327748?v=4",
+        //            "publicId")
+        //            .ForUserWithId(9),
+        //    };
+        //    await _uow.Images.InsertAsync(images);
+        //    await _uow.SaveChangesAsync();
+        //}
+
         private async Task InitializeUsers()
         {
             var count = await _uow.Users.CountAsync();
@@ -102,7 +124,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Administrator)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -123,7 +145,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -143,8 +165,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithFirstName("Samuel")
                     .WithFamilyName("Woode")
                     .WithOtherName("Aquaman")
+                    .WithImageId(null)
                     .SetDisplayName()
-                    .WithImageUrl("")
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.Masters)
                     .WithContact(Contact.Create("0557511677")
@@ -163,8 +185,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithFirstName("Samuel")
                     .WithFamilyName("Awate")
                     .WithOtherName("Mumuni")
+                    .WithImageId(null)
                     .SetDisplayName()
-                    .WithImageUrl("")
                     .OfType(UserType.Customer)
                     .HasLevelOfEducation(LevelOfEducation.Undergraduate)
                     .WithContact(Contact.Create("0556455344")
@@ -184,8 +206,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithFirstName("Gloria")
                     .WithFamilyName("Mensah")
                     .WithOtherName("Reddington")
+                    .WithImageId(null)
                     .SetDisplayName()
-                    .WithImageUrl("")
                     .OfType(UserType.Customer)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0204377833")
@@ -205,7 +227,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFamilyName("Abolo")
                     .WithOtherName("Financial Abolo")
                     .SetDisplayName()
-                    .WithImageUrl("")
+                    .WithImageId(null)
                     .OfType(UserType.Customer)
                     .HasLevelOfEducation(LevelOfEducation.Shs)
                     .WithContact(Contact.Create("0545366277")
@@ -224,7 +246,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFirstName("Kofi")
                     .WithFamilyName("Addae")
                     .SetDisplayName()
-                    .WithImageUrl("")
+                    .WithImageId(null)
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.Shs)
                     .WithContact(Contact.Create("0206744299")
@@ -243,7 +265,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Developer)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -264,7 +286,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Suspended")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -370,6 +392,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithScope(ScopeOfWork.New)
                     .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(7))
                     .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Kaspa Hostel"))
+                    .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
                 Orders.Create(2, 1)
                     .WithDescription("Painter needed for some maintenance work")
@@ -377,6 +400,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithScope(ScopeOfWork.Maintenance)
                     .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(7))
                     .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Hilda Hostel"))
+                    .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
                 Orders.Create(1, 9)
                     //.ForArtisanWithId(2)
@@ -385,6 +409,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithScope(ScopeOfWork.New)
                     .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(7))
                     .WithWorkAddress(Address.Create("Tarkwa", "UMaT"))
+                    .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
                 Orders.Create(1, 12)
                     //.ForArtisanWithId(2)
@@ -393,6 +418,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithScope(ScopeOfWork.Maintenance)
                     .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(4))
                     .WithWorkAddress(Address.Create("Takoradi", "Anaji-Estate"))
+                    .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
                 Orders.Create(1, 6)
                     .ForArtisanWithId(1)
@@ -400,6 +426,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithUrgency(Urgency.Medium)
                     .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(4))
                     .WithWorkAddress(Address.Create("Tarkwa", "Cyanide"))
+                    .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
                 Orders.Create(1, 1)
                     .ForArtisanWithId(2)
@@ -409,6 +436,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithPreferredDate(DateTime.Today)
                     .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Kaspa Hostel"))
                     .CreatedOn(DateTime.UtcNow)
+                    .RequestAccepted(true)
                     .IsCompleted(true)
                     .WithStatus(OrderStatus.Completed),
             };

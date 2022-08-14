@@ -1,10 +1,11 @@
+using Azure.Identity;
 var builder = WebApplication.CreateBuilder(args);
 WebApplication app;
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .CreateLogger();
-
+builder.Configuration.AddUserSecrets<Program>();
 try
 {
     logger.Information("App starting up...");

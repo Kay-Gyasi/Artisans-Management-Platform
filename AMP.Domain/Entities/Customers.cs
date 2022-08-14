@@ -21,6 +21,9 @@ namespace AMP.Domain.Entities
         private readonly List<Payments> _payments = new List<Payments>();
         public IEnumerable<Payments> Payments => _payments.AsReadOnly();
 
+        private readonly List<Requests> _requests = new List<Requests>();
+        public IEnumerable<Requests> Requests => _requests.AsReadOnly();
+
         private Customers(){}
 
         private Customers(int userId)

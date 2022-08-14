@@ -33,6 +33,18 @@ public class UserController : BaseControllerv1
         return CreatedAtAction(nameof(Get), new {id}, id);
     }
 
+    [AllowAnonymous]
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Post(UserCommand command) 
+    {
+        var id = await Mediator.Send(new PostUser.Command(command));
+
+        if (id == default) return Conflict();
+        return CreatedAtAction(nameof(Get), new {id}, id);
+    }
+
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

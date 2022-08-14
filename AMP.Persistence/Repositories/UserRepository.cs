@@ -19,10 +19,16 @@ namespace AMP.Persistence.Repositories
         {
         }
 
+        public async Task<bool> Exists(string email)
+        {
+            return GetBaseQuery().Any(x => x.Contact.EmailAddress == email);
+        }
+
         public override IQueryable<Users> GetBaseQuery()
         {
             return base.GetBaseQuery()
-                .Include(x => x.Languages);
+                .Include(x => x.Languages)
+                .Include(x => x.Image);
         }
 
         public async Task<Users> Authenticate(SigninCommand command)

@@ -22,6 +22,9 @@ namespace AMP.Domain.Entities
         private readonly List<Ratings> _ratings = new List<Ratings>();
         public IEnumerable<Ratings> Ratings => _ratings.AsReadOnly();
 
+        private readonly List<Requests> _requests = new List<Requests>();
+        public IEnumerable<Requests> Requests => _requests.AsReadOnly();
+
         private Artisans(){}
 
         private Artisans(int userId)

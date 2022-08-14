@@ -55,6 +55,18 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
         
+        public async Task AcceptRequest(int orderId)
+        {
+            await _uow.Orders.AcceptRequest(orderId);
+            await _uow.SaveChangesAsync();
+        }
+        
+        public async Task CancelRequest(int orderId)
+        {
+            await _uow.Orders.CancelRequest(orderId);
+            await _uow.SaveChangesAsync();
+        }
+        
         public async Task Complete(int orderId)
         {
             await _uow.Orders.Complete(orderId);
@@ -75,6 +87,12 @@ namespace AMP.Processors.Processors
         public async Task<PaginatedList<OrderPageDto>> GetSchedule(PaginatedCommand command, int userId)
         {
             var page = await _uow.Orders.GetSchedule(command, userId, new CancellationToken());
+            return _mapper.Map<PaginatedList<OrderPageDto>>(page);
+        }
+        
+        public async Task<PaginatedList<OrderPageDto>> GetRequests(PaginatedCommand command, int userId)
+        {
+            var page = await _uow.Orders.GetRequests(command, userId, new CancellationToken());
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
         

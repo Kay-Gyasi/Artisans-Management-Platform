@@ -32,6 +32,9 @@ namespace AMP.Persistence.Configurations
             {
                 x.Property(a => a.StreetAddress).IsRequired();
             });
+            builder.HasOne(a => a.Image)
+                .WithOne(a => a.User)
+                .HasForeignKey<Images>(a => a.UserId);
             builder.HasQueryFilter(x => !x.IsRemoved);
             builder.HasQueryFilter(x => !x.IsSuspended);
         }

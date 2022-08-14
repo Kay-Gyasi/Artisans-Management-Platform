@@ -11,6 +11,7 @@ namespace AMP.Domain.Entities
         public int CustomerId { get; private set; }
         public int? ArtisanId { get; private set; }
         public bool IsComplete { get; private set; }
+        public bool IsRequestAccepted { get; private set; }
         public int ServiceId { get; private set; }
         public int? PaymentId { get; private set; }
         public string Description { get; private set; }
@@ -27,6 +28,9 @@ namespace AMP.Domain.Entities
 
         private readonly List<Disputes> _disputes = new List<Disputes>();
         public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
+
+        private readonly List<Requests> _requests = new List<Requests>();
+        public IEnumerable<Requests> Requests => _requests.AsReadOnly();
 
         private Orders() {}
 
@@ -128,6 +132,12 @@ namespace AMP.Domain.Entities
         public Orders WithPayment(Payments payment)
         {
             Payment = payment;
+            return this;
+        }
+
+        public Orders RequestAccepted(bool isRequestAccepted)
+        {
+            IsRequestAccepted = isRequestAccepted;
             return this;
         }
 

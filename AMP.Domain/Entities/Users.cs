@@ -9,12 +9,11 @@ namespace AMP.Domain.Entities
 {
     public class Users : EntityBase
     {
-        
+        public int? ImageId { get; private set; }
         public string FirstName { get; private set; }
         public string FamilyName { get; private set; }
         public string OtherName { get; private set; }
         public string DisplayName { get; private set; }  
-        public string ImageUrl { get; private set; }
         public string MomoNumber { get; private set; }
         public bool IsSuspended { get; private set; }
         public bool IsRemoved { get; private set; }
@@ -24,6 +23,7 @@ namespace AMP.Domain.Entities
         public byte[] PasswordKey { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
+        public Images Image { get; set; }
 
         private readonly List<Languages> _languages = new List<Languages>();
         public IEnumerable<Languages> Languages => _languages.AsReadOnly();
@@ -66,9 +66,10 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users WithImageUrl(string imageUrl)
+        public Users WithImageId(int? id)
         {
-            ImageUrl = imageUrl;
+            if (id == 0) id = null;
+            ImageId = id;
             return this;
         }
 

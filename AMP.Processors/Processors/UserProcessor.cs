@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,24 +33,26 @@ namespace AMP.Processors.Processors
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
-        public async Task<int> Save(UserCommand command)
+        public async Task<int> Post(UserCommand command)
         {
-            var isNew = command.Id == 0;
+            var userExists = await _uow.Users.Exists(command.Contact.EmailAddress);
+            if (userExists) return default;
 
             Users user;
-            if (isNew)
-            {
-                user = Users.Create()
-                    .CreatedOn(DateTime.UtcNow);
-                var passes =  _uow.Users.Register(command);
-                await AssignFields(user, command);
-                user.HasPassword(passes.Item1)
-                    .HasPasswordKey(passes.Item2);
-                await _uow.Users.InsertAsync(user);
-                await _uow.SaveChangesAsync();
-                return user.Id;
-            }
+            user = Users.Create()
+                .CreatedOn(DateTime.UtcNow);
+            var passes = _uow.Users.Register(command);
+            await AssignFields(user, command);
+            user.HasPassword(passes.Item1)
+                .HasPasswordKey(passes.Item2);
+            await _uow.Users.InsertAsync(user);
+            await _uow.SaveChangesAsync();
+            return user.Id;
+        }
 
+        public async Task<int> Save(UserCommand command)
+        {
+            Users user;
             user = await _uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
             await _uow.Users.UpdateAsync(user);
@@ -85,7 +86,7 @@ namespace AMP.Processors.Processors
                 .WithFamilyName(command.FamilyName)
                 .WithOtherName(command.OtherName)
                 .SetDisplayName()
-                .WithImageUrl(command.ImageUrl)
+                .WithImageId(command.ImageId)
                 .OfType(command.Type)
                 .HasLevelOfEducation(command.LevelOfEducation)
                 .WithContact(Contact.Create(command.Contact.PrimaryContact ?? "")
