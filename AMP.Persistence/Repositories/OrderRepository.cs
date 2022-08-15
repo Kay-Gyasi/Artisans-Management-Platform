@@ -24,6 +24,16 @@ namespace AMP.Persistence.Repositories
         {
         }
 
+        public Task<List<Lookup>> GetOpenOrdersLookup(int userId)
+        {
+            return GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete).Select(x => new Lookup()
+                {
+                    Id = x.Id,
+                    Name = x.Description
+                }).OrderBy(x => x.Name)
+                .ToListAsync();
+        }
+
         public async Task Complete(int orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);

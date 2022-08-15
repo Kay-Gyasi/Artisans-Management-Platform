@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
 using AMP.Processors.Authentication;
 using AMP.Processors.Commands;
@@ -38,8 +39,7 @@ namespace AMP.Processors.Processors
             var userExists = await _uow.Users.Exists(command.Contact.EmailAddress);
             if (userExists) return default;
 
-            Users user;
-            user = Users.Create()
+            var user = Users.Create()
                 .CreatedOn(DateTime.UtcNow);
             var passes = _uow.Users.Register(command);
             await AssignFields(user, command);
@@ -47,13 +47,28 @@ namespace AMP.Processors.Processors
                 .HasPasswordKey(passes.Item2);
             await _uow.Users.InsertAsync(user);
             await _uow.SaveChangesAsync();
+
+            switch (user.Type)
+            {
+                case UserType.Artisan:
+                    await PostArtisan(user);
+                    break;
+                case UserType.Customer:
+                    await PostCustomer(user);
+                    break;
+                case UserType.Developer:
+                    break;
+                case UserType.Administrator:
+                    break;
+                default:
+                    break;
+            }
             return user.Id;
         }
 
         public async Task<int> Save(UserCommand command)
         {
-            Users user;
-            user = await _uow.Users.GetAsync(command.Id);
+            var user = await _uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
             await _uow.Users.UpdateAsync(user);
             await _uow.SaveChangesAsync();
@@ -76,6 +91,45 @@ namespace AMP.Processors.Processors
             var artisan = await _uow.Users.GetAsync(id);
             if (artisan != null) await _uow.Users.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
+        }
+
+        private async Task PostArtisan(Users user)
+        {
+            try
+            {
+                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var artisan = Artisans.Create(userId)
+                    .WithBusinessName(user.DisplayName)
+                    .CreatedOn(DateTime.UtcNow);
+                await _uow.Artisans.InsertAsync(artisan);
+                await _uow.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var deleted = await _uow.Users.GetAsync(userId);
+                await _uow.Users.DeleteAsync(deleted, new CancellationToken());
+            }
+            
+        }
+        
+        private async Task PostCustomer(Users user)
+        {
+            try
+            {
+                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var customer = Customers.Create(userId)
+                    .CreatedOn(DateTime.UtcNow);
+                await _uow.Customers.InsertAsync(customer);
+                await _uow.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var deleted = await _uow.Users.GetAsync(userId);
+                await _uow.Users.DeleteAsync(deleted, new CancellationToken());
+            }
+            
         }
 
         private async Task AssignFields(Users user, UserCommand command)

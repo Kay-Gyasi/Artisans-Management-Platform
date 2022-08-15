@@ -1,4 +1,5 @@
 ﻿using AMP.Processors.Authentication;
+using AMP.Processors.Payment;
 using AMP.Processors.Repositories;
 using AMP.Services.Authentication;
 using AMP.Services.Images;
@@ -13,6 +14,7 @@ namespace AMP.Services
             IConfiguration configuration)
         {
             services.AddSingleton<IAuthService, AuthService>();
+            //services.AddSingleton<IPaymentService, PaymentService>();
             services.Configure<CloudinaryOptions>(options 
                 => configuration.GetSection("CloudinaryOptions").Bind(options));
             services.AddSingleton<ICloudinaryService, CloudinaryService>();

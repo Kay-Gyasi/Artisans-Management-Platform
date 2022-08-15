@@ -11,12 +11,14 @@
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
 		<PackageReference Include="Azure.Identity" Version="1.4.0" />
+		<PackageReference Include="Flutterwave.Net" Version="2.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+		<PackageReference Include="Rave.NET" Version="1.0.3" />
 		<PackageReference Include="RestClient" Version="3.860.28084" />
 		<PackageReference Include="Seq.Extensions.Logging" Version="6.0.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
@@ -47,6 +49,7 @@
 
   <ItemGroup>
 	<Folder Include="Files\" />
+	<Folder Include="Payment\" />
   </ItemGroup>
 
 </Project>

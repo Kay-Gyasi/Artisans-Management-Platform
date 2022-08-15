@@ -13,6 +13,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Azure.Identity.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\CloudinaryDotNet.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\DotNetEnv.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Humanizer.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.dll
@@ -43,7 +44,10 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\PayStack.Net.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Rave.NET.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\RestClient.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\RestSharp.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Seq.Extensions.Logging.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Serilog.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Serilog.AspNetCore.dll
@@ -59,6 +63,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Serilog.Sinks.File.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Serilog.Sinks.PeriodicBatching.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Serilog.Sinks.Seq.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Sprache.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -112,3 +117,4 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.genruntimeconfig.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\ref\AMP.WebApi.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\flutterwave-dotnet.dll

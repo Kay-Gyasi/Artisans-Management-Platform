@@ -1,4 +1,5 @@
-﻿using AMP.Application.Features.Commands;
+﻿using System.Security.Claims;
+using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
@@ -11,6 +12,8 @@ namespace AMP.WebApi.Controllers.v1;
 [Authorize]
 public class DisputeController : BaseControllerv1
 {
+    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -22,13 +25,19 @@ public class DisputeController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<DisputeDto> Get(int id)
         => await Mediator.Send(new GetDispute.Query(id));
+    
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<DisputeCount> GetOpenDisputeCount()
+        => await Mediator.Send(new GetOpenDisputeCount.Query(Convert.ToInt32(UserId)));
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Save(DisputeCommand command)
     {
-        var id = await Mediator.Send(new SaveDispute.Command(command));
+        var id = await Mediator.Send(new SaveDispute.Command(command, Convert.ToInt32(UserId)));
         return CreatedAtAction(nameof(Get), new { id }, id);
     }
 

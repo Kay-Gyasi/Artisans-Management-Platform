@@ -20,9 +20,10 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(DisputeCommand command)
+        public async Task<int> Save(DisputeCommand command, int userId)
         {
             var isNew = command.Id == 0;
+            command.CustomerId = await _uow.Customers.GetCustomerId(userId);
 
             Disputes dispute;
             if (isNew)
@@ -51,6 +52,14 @@ namespace AMP.Processors.Processors
         public async Task<DisputeDto> Get(int id)
         {
             return _mapper.Map<DisputeDto>(await _uow.Disputes.GetAsync(id));
+        }
+        
+        public async Task<DisputeCount> GetOpenDisputeCount(int userId)
+        {
+            return new DisputeCount
+            {
+                Count = await _uow.Disputes.OpenDisputeCount(userId)
+            };
         }
 
         public async Task Delete(int id)

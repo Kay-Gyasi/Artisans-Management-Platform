@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.ViewModels;
 using AMP.Processors.Repositories.Base;
 using AMP.Shared.Domain.Models;
 
@@ -9,6 +11,7 @@ namespace AMP.Processors.Repositories
     public interface IOrderRepository : IRepositoryBase<Orders>
     {
         int GetCount(int artisanId);
+        Task<List<Lookup>> GetOpenOrdersLookup(int userId);
 
         Task<PaginatedList<Orders>> GetSchedule(PaginatedCommand paginated, int userId,
             CancellationToken cancellationToken);

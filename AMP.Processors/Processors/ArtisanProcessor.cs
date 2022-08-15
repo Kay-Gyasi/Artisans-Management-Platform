@@ -90,11 +90,7 @@ namespace AMP.Processors.Processors
 
         private async Task AssignFields(Artisans artisan, ArtisanCommand command, bool isNew = false)
         {
-            var names = new List<string>();
-            foreach (var service in command.Services)
-            {
-                names.Add(service.Name);
-            }
+            var names = command.Services.Select(service => service.Name).ToList();
 
             var services = await _uow.Services.BuildServices(names);
             artisan.WithBusinessName(command.BusinessName)

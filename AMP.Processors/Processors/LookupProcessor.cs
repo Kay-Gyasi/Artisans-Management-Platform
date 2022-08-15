@@ -30,6 +30,11 @@ namespace AMP.Processors.Processors
                 _ => new List<Lookup>()
             };
         }
+
+        public async Task<List<Lookup>> GetOpenOrdersLookup(int userId)
+        {
+            return await _uow.Orders.GetOpenOrdersLookup(userId);
+        }
     }
 
     public enum LookupType

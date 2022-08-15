@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Payments\PaymentService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Authentication\" />
     <Folder Include="Images\" />
+    <Folder Include="Payments\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +20,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.0" />
+    <PackageReference Include="PayStack.Net" Version="0.7.7" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
   </ItemGroup>
 

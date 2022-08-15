@@ -217,6 +217,10 @@
               "target": "Package",
               "version": "[6.22.0, )"
             },
+            "PayStack.Net": {
+              "target": "Package",
+              "version": "[0.7.7, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.22.0, )"

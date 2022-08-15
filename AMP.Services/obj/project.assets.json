@@ -260,6 +260,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "Paystack.Net/0.7.7": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/PayStack.Net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PayStack.Net.dll": {}
+        }
+      },
       "System.Buffers/4.5.1": {
         "type": "package",
         "compile": {
@@ -926,6 +938,18 @@
         "packageIcon.png"
       ]
     },
+    "Paystack.Net/0.7.7": {
+      "sha512": "WmSdOg65sXZnIEU/ZGe8D/NGESwNyCEoynYliczeErafYpiXqO8R1JOCg1pHwSNOFVvSvriXxDtsiBKBfe2/VA==",
+      "type": "package",
+      "path": "paystack.net/0.7.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/PayStack.Net.dll",
+        "paystack.net.0.7.7.nupkg.sha512",
+        "paystack.net.nuspec"
+      ]
+    },
     "System.Buffers/4.5.1": {
       "sha512": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
       "type": "package",
@@ -1352,6 +1376,7 @@
       "Microsoft.Extensions.Configuration.Abstractions >= 6.0.0",
       "Microsoft.Extensions.Configuration.Binder >= 6.0.0",
       "Microsoft.IdentityModel.Tokens >= 6.22.0",
+      "PayStack.Net >= 0.7.7",
       "System.IdentityModel.Tokens.Jwt >= 6.22.0"
     ]
   },
@@ -1421,6 +1446,10 @@
           "Microsoft.IdentityModel.Tokens": {
             "target": "Package",
             "version": "[6.22.0, )"
+          },
+          "PayStack.Net": {
+            "target": "Package",
+            "version": "[0.7.7, )"
           },
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",

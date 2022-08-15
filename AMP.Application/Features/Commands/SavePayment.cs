@@ -11,10 +11,12 @@ namespace AMP.Application.Features.Commands
         public class Command : IRequest<int>
         {
             public PaymentCommand PaymentCommand { get; }
+            public int UserId { get; }
 
-            public Command(PaymentCommand artisanCommand)
+            public Command(PaymentCommand artisanCommand, int userId)
             {
                 PaymentCommand = artisanCommand;
+                UserId = userId;
             }
         }
 
@@ -28,7 +30,7 @@ namespace AMP.Application.Features.Commands
             }
             public async Task<int> Handle(Command request, CancellationToken cancellationToken)
             {
-                return await _processor.Save(request.PaymentCommand);
+                return await _processor.Save(request.PaymentCommand, request.UserId);
             }
         }
     }

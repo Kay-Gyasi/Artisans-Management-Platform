@@ -5,6 +5,7 @@ using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
+using AMP.Processors.Payment;
 using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
@@ -16,28 +17,25 @@ namespace AMP.Processors.Processors
     [Processor]
     public class PaymentProcessor : ProcessorBase
     {
-        public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
+        private readonly IPaymentService _paymentService;
+
+        public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
+            IPaymentService paymentService) : base(uow, mapper, cache)
         {
+            _paymentService = paymentService;
         }
 
-        public async Task<int> Save(PaymentCommand command)
+        public async Task<int> Save(PaymentCommand command, int userId)
         {
-            var isNew = command.Id == 0;
+            var customer = await _uow.Customers.GetByUserIdAsync(userId);
 
-            Payments payment;
-            if (isNew)
-            {
-                payment = Payments.Create(command.CustomerId, command.OrderId)
-                    .CreatedOn(DateTime.UtcNow);
-                AssignField(payment, command, true);
-                await _uow.Payments.InsertAsync(payment);
-                await _uow.SaveChangesAsync();
-                return payment.Id;
-            }
+            var momoCommand = new MobileMoneyPayCommand(customer, command);
+            await _paymentService.PayViaMobileMoney(momoCommand);
 
-            payment = await _uow.Payments.GetAsync(command.Id);
-            AssignField(payment, command);
-            await _uow.Payments.UpdateAsync(payment);
+            var payment = Payments.Create(customer.Id, command.OrderId)
+                .CreatedOn(DateTime.UtcNow);
+            AssignField(payment, command, customer.Id, true);
+            await _uow.Payments.InsertAsync(payment);
             await _uow.SaveChangesAsync();
             return payment.Id;
         }
@@ -60,13 +58,13 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
 
-        private void AssignField(Payments payment, PaymentCommand command, bool isNew = false)
+        private void AssignField(Payments payment, PaymentCommand command, int customerId, bool isNew = false)
         {
             payment.WithAmountPaid(command.AmountPaid)
                 .WithStatus(command.Status);
 
             if (!isNew)
-                payment.ByCustomerWithId(command.CustomerId)
+                payment.ByCustomerWithId(customerId)
                     .OnOrderWithId(command.OrderId);
         }
     }

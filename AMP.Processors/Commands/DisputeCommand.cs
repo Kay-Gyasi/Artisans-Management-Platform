@@ -10,4 +10,9 @@ namespace AMP.Processors.Commands
         public int OrderId { get; set; }
         public string Details { get; set; }
     }
+
+    public class DisputeCount
+    {
+        public int Count { get; set; }
+    }
 }

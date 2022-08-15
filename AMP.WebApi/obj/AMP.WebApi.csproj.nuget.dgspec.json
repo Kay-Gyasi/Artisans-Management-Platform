@@ -400,6 +400,10 @@
               "target": "Package",
               "version": "[6.22.0, )"
             },
+            "PayStack.Net": {
+              "target": "Package",
+              "version": "[0.7.7, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.22.0, )"
@@ -610,6 +614,10 @@
               "target": "Package",
               "version": "[1.4.0, )"
             },
+            "Flutterwave.Net": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.7, )"
@@ -645,6 +653,10 @@
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.15.1, )"
+            },
+            "Rave.NET": {
+              "target": "Package",
+              "version": "[1.0.3, )"
             },
             "RestClient": {
               "target": "Package",

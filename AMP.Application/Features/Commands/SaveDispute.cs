@@ -11,10 +11,12 @@ namespace AMP.Application.Features.Commands
         public class Command : IRequest<int>
         {
             public DisputeCommand DisputeCommand { get; }
+            public int UserId { get; }
 
-            public Command(DisputeCommand artisanCommand)
+            public Command(DisputeCommand artisanCommand, int userId)
             {
                 DisputeCommand = artisanCommand;
+                UserId = userId;
             }
         }
 
@@ -28,7 +30,7 @@ namespace AMP.Application.Features.Commands
             }
             public async Task<int> Handle(Command request, CancellationToken cancellationToken)
             {
-                return await _processor.Save(request.DisputeCommand);
+                return await _processor.Save(request.DisputeCommand, request.UserId);
             }
         }
     }
