@@ -21,17 +21,17 @@ namespace AMP.Processors.Processors.Administration
 
         public async Task InitializeDatabase()
         {
-            await _uow.InitializeDb.InitializeDatabase();
+            //await _uow.InitializeDb.InitializeDatabase();
             await InitializeServices();
             await InitializeLanguages();
-            //await InitializeUsers();
+            await InitializeUsers();
             //await InitializeImages();
-            //await InitializeArtisans();
-            //await InitializeCustomers();
-            //await _uow.SaveChangesAsync();
+            await InitializeArtisans();
+            await InitializeCustomers();
+            await _uow.SaveChangesAsync();
             //await InitializeOrders();
 
-            await _uow.SaveChangesAsync();
+            //await _uow.SaveChangesAsync();
         }
 
         
@@ -385,7 +385,7 @@ namespace AMP.Processors.Processors.Administration
         {
             var orders = new List<Orders>
             {
-                Orders.Create(1, 1)
+                Orders.Create(3, 1)
                     .ForArtisanWithId(2)
                     .WithDescription("I need a painter to work on my house")
                     .WithUrgency(Urgency.High)
@@ -402,7 +402,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Hilda Hostel"))
                     .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 9)
+                Orders.Create(3, 9)
                     //.ForArtisanWithId(2)
                     .WithDescription("Installation of a kitchen sink")
                     .WithUrgency(Urgency.High)
@@ -411,7 +411,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithWorkAddress(Address.Create("Tarkwa", "UMaT"))
                     .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 12)
+                Orders.Create(3, 12)
                     //.ForArtisanWithId(2)
                     .WithDescription("Fixing kitchen sink")
                     .WithUrgency(Urgency.Low)
@@ -420,7 +420,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithWorkAddress(Address.Create("Takoradi", "Anaji-Estate"))
                     .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 6)
+                Orders.Create(3, 6)
                     .ForArtisanWithId(1)
                     .WithDescription("Carpenter needed to fix some furniture")
                     .WithUrgency(Urgency.Medium)
@@ -428,7 +428,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithWorkAddress(Address.Create("Tarkwa", "Cyanide"))
                     .RequestAccepted(false)
                     .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 1)
+                Orders.Create(3, 1)
                     .ForArtisanWithId(2)
                     .WithDescription("I need a painter to work on my house (completed)")
                     .WithUrgency(Urgency.High)

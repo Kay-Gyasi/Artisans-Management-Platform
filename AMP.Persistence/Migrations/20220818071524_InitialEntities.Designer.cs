@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AMP.Persistence.Migrations
 {
     [DbContext(typeof(AmpDbContext))]
-    [Migration("20220812175201_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20220818071524_InitialEntities")]
+    partial class InitialEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

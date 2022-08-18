@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AubV0KgM/JixslU/XZhc1kuMs+WO1cG5kTBAeCff/CgBt19m++LtX7zCU5Wgrq57pkcElbbZUWb6KoqbmIrwHw==",
+  "dgSpecHash": "PIKeaTD62KBTL2bX/Y+XcMXekZDcSd7Kss5bISAr7667MREClD8YwnhCAEUeFjzY2lpaYGPwX4KEaSnwM5aB7Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Services\\AMP.Services.csproj",
   "expectedPackageFiles": [
@@ -25,7 +25,6 @@
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.identitymodel.logging\\6.22.0\\microsoft.identitymodel.logging.6.22.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.22.0\\microsoft.identitymodel.tokens.6.22.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\paystack.net\\0.7.7\\paystack.net.0.7.7.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",

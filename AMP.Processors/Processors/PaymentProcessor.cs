@@ -5,7 +5,6 @@ using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
-using AMP.Processors.Payment;
 using AMP.Processors.Processors.Base;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
@@ -17,20 +16,14 @@ namespace AMP.Processors.Processors
     [Processor]
     public class PaymentProcessor : ProcessorBase
     {
-        private readonly IPaymentService _paymentService;
 
-        public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
-            IPaymentService paymentService) : base(uow, mapper, cache)
+        public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
-            _paymentService = paymentService;
         }
 
         public async Task<int> Save(PaymentCommand command, int userId)
         {
             var customer = await _uow.Customers.GetByUserIdAsync(userId);
-
-            var momoCommand = new MobileMoneyPayCommand(customer, command);
-            await _paymentService.PayViaMobileMoney(momoCommand);
 
             var payment = Payments.Create(customer.Id, command.OrderId)
                 .CreatedOn(DateTime.UtcNow);

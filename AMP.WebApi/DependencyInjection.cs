@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using AMP.Processors.Payment;
 using AMP.Services;
-using AMP.WebApi.Payment;
+using AMP.Services.Payments;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -27,7 +26,6 @@ public static class DependencyInjection
             .AddMemoryCache()
             .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration);
-        services.AddSingleton<IPaymentService, PaymentService>();
         return services;
     }
 

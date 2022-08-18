@@ -6,19 +6,23 @@
 	<UserSecretsId>bcbd57c0-2cb2-4f3f-a913-1cedc0c8ff38</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+	<Compile Remove="Payment\**" />
+	<Content Remove="Payment\**" />
+	<EmbeddedResource Remove="Payment\**" />
+	<None Remove="Payment\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
 		<PackageReference Include="Azure.Identity" Version="1.4.0" />
-		<PackageReference Include="Flutterwave.Net" Version="2.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-		<PackageReference Include="Rave.NET" Version="1.0.3" />
 		<PackageReference Include="RestClient" Version="3.860.28084" />
 		<PackageReference Include="Seq.Extensions.Logging" Version="6.0.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
@@ -27,11 +31,7 @@
 		<PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
 		<PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -49,7 +49,6 @@
 
   <ItemGroup>
 	<Folder Include="Files\" />
-	<Folder Include="Payment\" />
   </ItemGroup>
 
 </Project>

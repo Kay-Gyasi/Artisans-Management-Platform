@@ -35,7 +35,7 @@ namespace AMP.Persistence.Database
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;Include Error Detail=true");
-                optionsBuilder.UseSqlServer("Server=YOGA-X1;Database=AmpDevDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=SQL8004.site4now.net;Initial Catalog=db_a8b8b0_ampproddb;User Id=kaygyasidev;Password=Exdoegh715@sat;");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }

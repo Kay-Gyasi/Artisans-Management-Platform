@@ -1,7 +1,7 @@
 ﻿using AMP.Processors.Payment;
 using Rave;
-using Rave.NET.Models.Charge;
-using Rave.NET.Models.MobileMoney;
+using Rave.Models.Charge;
+using Rave.Models.MobileMoney;
 
 namespace AMP.WebApi.Payment;
 
@@ -20,8 +20,8 @@ public class PaymentService : IPaymentService
 
     public async Task PayViaMobileMoney(MobileMoneyPayCommand command)
     {
-        var raveConfig = new RaveConfig(_publicKey, _secretKey, false);
-        var mobilemoney = new ChargeMobileMoney(raveConfig);
+        var raveConfig = new RaveConfig(_publicKey, _secretKey, true);
+        var mobilemoney = new ChargeMobileMoney(raveConfig); 
 
         var payload = new MobileMoneyParams(_publicKey, _secretKey, 
             command.FirstName, command.LastName, command.Email, command.Amount,
