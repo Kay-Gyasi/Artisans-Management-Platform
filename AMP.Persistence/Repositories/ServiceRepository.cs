@@ -28,6 +28,7 @@ namespace AMP.Persistence.Repositories
                 .ToListAsync();
         }
 
+        
         public async Task<List<Services>> BuildServices(List<string> services)
         {
             var results = new List<Services>();
@@ -37,6 +38,14 @@ namespace AMP.Persistence.Repositories
                 results.Add(build);
             }
             return results;
+        }
+
+        public async Task<string> GetNameAsync(int serviceId)
+        {
+            var service = await GetBaseQuery()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == serviceId);
+            return service.Name;
         }
     }
 }

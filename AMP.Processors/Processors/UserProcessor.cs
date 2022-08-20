@@ -36,7 +36,7 @@ namespace AMP.Processors.Processors
 
         public async Task<int> Post(UserCommand command)
         {
-            var userExists = await _uow.Users.Exists(command.Contact.EmailAddress);
+            var userExists = await _uow.Users.Exists(command.Contact.PrimaryContact);
             if (userExists) return default;
 
             var user = Users.Create()
@@ -48,21 +48,7 @@ namespace AMP.Processors.Processors
             await _uow.Users.InsertAsync(user);
             await _uow.SaveChangesAsync();
 
-            switch (user.Type)
-            {
-                case UserType.Artisan:
-                    await PostArtisan(user);
-                    break;
-                case UserType.Customer:
-                    await PostCustomer(user);
-                    break;
-                case UserType.Developer:
-                    break;
-                case UserType.Administrator:
-                    break;
-                default:
-                    break;
-            }
+            await PostAsType(user);
             return user.Id;
         }
 
@@ -93,6 +79,24 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
 
+        private async Task PostAsType(Users user)
+        {
+            switch (user.Type)
+            {
+                case UserType.Artisan:
+                    await PostArtisan(user);
+                    break;
+                case UserType.Customer:
+                    await PostCustomer(user);
+                    break;
+                case UserType.Developer:
+                    break;
+                case UserType.Administrator:
+                    break;
+                default:
+                    break;
+            }
+        }
         private async Task PostArtisan(Users user)
         {
             try

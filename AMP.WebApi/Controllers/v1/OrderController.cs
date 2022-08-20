@@ -4,8 +4,10 @@ using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
+using AMP.Processors.Responses;
 using AMP.Shared.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace AMP.WebApi.Controllers.v1;
 
@@ -55,6 +57,15 @@ public class OrderController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<OrderDto> Get(int id)
         => await Mediator.Send(new GetOrder.Query(id));
+
+    [HttpGet("{serializedCommand}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<InsertOrderResponse> Insert(string serializedCommand)
+    {
+        var command = JsonConvert.DeserializeObject<OrderCommand>(serializedCommand);
+        return await Mediator.Send(new InsertOrder.Query(command));
+    } 
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]

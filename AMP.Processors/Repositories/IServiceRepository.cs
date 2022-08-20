@@ -8,5 +8,6 @@ namespace AMP.Processors.Repositories
     public interface IServiceRepository : IRepositoryBase<Services>
     {
         Task<List<Services>> BuildServices(List<string> services);
+        Task<string> GetNameAsync(int serviceId);
     }
 }

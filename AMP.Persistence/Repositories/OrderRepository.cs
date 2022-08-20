@@ -126,7 +126,9 @@ namespace AMP.Persistence.Repositories
 
         public int GetCount(int artisanId)
         {
-            return GetBaseQuery().Count(x => x.ArtisanId == artisanId);
+            return GetBaseQuery()
+                .AsNoTracking()
+                .Count(x => x.ArtisanId == artisanId);
         }
 
         public override IQueryable<Orders> GetBaseQuery()
@@ -154,7 +156,9 @@ namespace AMP.Persistence.Repositories
 
         public override Task<List<Lookup>> GetLookupAsync()
         {
-            return GetBaseQuery().Select(x => new Lookup()
+            return GetBaseQuery()
+                .AsNoTracking()
+                .Select(x => new Lookup()
             {
                 Id = x.Id,
                 Name = x.Description
@@ -162,7 +166,7 @@ namespace AMP.Persistence.Repositories
                 .ToListAsync();
         }
 
-        private async Task<PaginatedList<Orders>> BuildPage(IQueryable<Orders> whereQueryable, PaginatedCommand paginated,
+        private static async Task<PaginatedList<Orders>> BuildPage(IQueryable<Orders> whereQueryable, PaginatedCommand paginated,
             CancellationToken cancellationToken)
         {
             var pagedModel = await whereQueryable.PageBy(x => paginated.Take, paginated)
