@@ -1,6 +1,4 @@
-﻿using System;
-using AMP.Domain.Entities;
-using AMP.Domain.Enums;
+﻿using AMP.Domain.Entities;
 using AMP.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Languages = AMP.Domain.Entities.Languages;
@@ -35,7 +33,8 @@ namespace AMP.Persistence.Database
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseNpgsql("Host=localhost; Database=AmpDevDb; Username=postgres; Password=postgres;Include Error Detail=true");
-                optionsBuilder.UseSqlServer("Data Source=SQL8004.site4now.net;Initial Catalog=db_a8b8b0_ampproddb;User Id=kaygyasidev;Password=Exdoegh715@sat;");
+                //optionsBuilder.UseSqlServer("Data Source=SQL8004.site4now.net;Initial Catalog=db_a8b8b0_ampproddb;User Id=kaygyasidev;Password=Exdoegh715@sat;");
+                optionsBuilder.UseSqlServer("Data Source=YOGA-X1;Initial Catalog=AmpDevDb;Integrated Security=True;");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }

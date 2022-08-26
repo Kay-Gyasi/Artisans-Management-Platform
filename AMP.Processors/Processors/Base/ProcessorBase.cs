@@ -8,7 +8,7 @@ namespace AMP.Processors.Processors.Base
     {
         protected readonly IUnitOfWork _uow;
         protected readonly IMapper _mapper;
-        private readonly IMemoryCache _cache;
+        protected readonly IMemoryCache _cache;
 
         public ProcessorBase(IUnitOfWork uow, IMapper mapper, IMemoryCache cache)
         {

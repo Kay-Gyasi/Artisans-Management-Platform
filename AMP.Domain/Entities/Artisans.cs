@@ -11,7 +11,7 @@ namespace AMP.Domain.Entities
         public string Description { get; private set; }
         public bool IsVerified { get; private set; }
         public bool IsApproved { get; private set; }
-        public Users User { get; set; }
+        public Users User { get; private set; }
 
         private readonly List<Orders> _orders = new List<Orders>();
         public IEnumerable<Orders> Orders => _orders.AsReadOnly();

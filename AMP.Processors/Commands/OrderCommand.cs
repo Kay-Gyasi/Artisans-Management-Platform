@@ -18,7 +18,8 @@ namespace AMP.Processors.Commands
         public Urgency Urgency { get; set; }
         public ScopeOfWork Scope { get; set; }
         public OrderStatus Status { get; set; }
-        public DateTime PreferredDate { get; set; }
+        public DateTime PreferredStartDate { get; set; }
+        public DateTime PreferredCompletionDate { get; set; }
         public AddressCommand WorkAddress { get; set; }
         public PaymentCommand Payment { get; set; }
     }

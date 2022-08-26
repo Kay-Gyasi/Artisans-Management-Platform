@@ -18,6 +18,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class OrderProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Orderlookup";
+
         public OrderProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
@@ -27,6 +29,7 @@ namespace AMP.Processors.Processors
             var order = Orders.Create(command.CustomerId, command.ServiceId)
                 .CreatedOn(DateTime.UtcNow);
             await AssignFields(order, command, true);
+            _cache.Remove(LookupCacheKey);
             await _uow.Orders.InsertAsync(order);
             await _uow.SaveChangesAsync();
 
@@ -38,6 +41,7 @@ namespace AMP.Processors.Processors
         {
             var order = await _uow.Orders.GetAsync(command.Id);
             await AssignFields(order, command);
+            _cache.Remove(LookupCacheKey);
             await _uow.Orders.UpdateAsync(order);
             await _uow.SaveChangesAsync();
             return order.Id;
@@ -117,6 +121,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Orders.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Orders.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }
@@ -131,7 +136,8 @@ namespace AMP.Processors.Processors
                 .WithCost(command.Cost)
                 .WithUrgency(command.Urgency)
                 .WithStatus(command.Status)
-                .WithPreferredDate(command.PreferredDate)
+                .WithPreferredStartDate(command.PreferredStartDate)
+                .WithPreferredCompletionDate(command.PreferredCompletionDate)
                 .WithWorkAddress(_mapper.Map<Address>(command.WorkAddress))
                 .ForCustomerWithId(customerId)
                 .WithScope(command.Scope);

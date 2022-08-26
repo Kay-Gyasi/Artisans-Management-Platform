@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Processors.Authentication;
 using AMP.Processors.Commands;
 using Microsoft.Extensions.Configuration;
@@ -36,10 +37,10 @@ namespace AMP.Services.Authentication
             };
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(10),
+                Expires = user.Type == UserType.Customer ? DateTime.UtcNow.AddMinutes(20) : DateTime.UtcNow.AddHours(1),
                 IssuedAt = DateTime.UtcNow,
                 Issuer = _configuration["Jwt:Issuer"],
                 Audience = _configuration["Jwt:Audience"],

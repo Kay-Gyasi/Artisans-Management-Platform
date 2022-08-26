@@ -27,14 +27,22 @@ public class PaymentController : BaseControllerv1
     public async Task<PaymentDto> Get(int id)
         => await Mediator.Send(new GetPayment.Query(id));
 
-    [AllowAnonymous]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Save(PaymentCommand command)
     {
-        var id = await Mediator.Send(new SavePayment.Command(command, 1));
+        var id = await Mediator.Send(new SavePayment.Command(command));
         return CreatedAtAction(nameof(Get), new { id }, id);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Verify(VerifyPaymentCommand command)
+    {
+        await Mediator.Send(new VerifyPayment.Command(command));
+        return NoContent();
     }
 
     [HttpDelete("{id}")]

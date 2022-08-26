@@ -595,6 +595,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "ApiMultipartFormDataFormatter": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[11.0.1, )"

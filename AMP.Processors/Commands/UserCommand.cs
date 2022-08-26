@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using AMP.Domain.Enums;
-using Microsoft.AspNetCore.Http;
 
 namespace AMP.Processors.Commands
 {

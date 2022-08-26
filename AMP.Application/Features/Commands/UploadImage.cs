@@ -1,10 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Processors.Commands;
+﻿using AMP.Processors.Commands;
 using AMP.Processors.Processors;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AMP.Application.Features.Commands
 {
@@ -13,12 +14,12 @@ namespace AMP.Application.Features.Commands
         public class Command : IRequest
         {
             public int UserId { get; }
-            public IFormFile File { get; }
+            public IEnumerable<IFormFile> Files { get; }
 
-            public Command(IFormFile file, int userId)
+            public Command(IEnumerable<IFormFile> files, int userId)
             {
                 UserId = userId;
-                File = file;
+                Files = files;
             }
         }
 
@@ -32,10 +33,10 @@ namespace AMP.Application.Features.Commands
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var command = new ImageCommand()
+                var command = new ImageCommand
                 {
                     UserId = request.UserId,
-                    Image = request.File
+                    Image = request.Files.FirstOrDefault()
                 };
                 await _processor.UploadImage(command);
                 return Unit.Value;

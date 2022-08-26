@@ -1,8 +1,17 @@
-﻿using AMP.Domain.Enums;
+﻿using System.Net.Http;
+using AMP.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace AMP.Processors.Commands
 {
+
+    public class UploadImageCommand
+    {
+        public string Name { get; set; } = "file";
+        public StreamContent Content { get; set; }
+        public string FileName { get; set; }
+    }
+
     public class AddressCommand
     {
         public Countries Country { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
@@ -15,10 +16,16 @@ namespace AMP.Persistence.Repositories
         {
         }
 
+        public async Task Verify(string reference, string trxRef)
+        {
+            var payment = await GetBaseQuery().FirstOrDefaultAsync(x => x.Reference == reference);
+            payment.HasBeenVerified(true);
+            payment.WithTransactionReference(trxRef);
+        }
+
         public override IQueryable<Payments> GetBaseQuery()
         {
             return base.GetBaseQuery()
-                .Include(x => x.Customer)
                 .Include(x => x.Order);
         }
     }

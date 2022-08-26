@@ -249,7 +249,10 @@ namespace AMP.Persistence.Migrations
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PreferredDate")
+                    b.Property<DateTime>("PreferredCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PreferredStartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Scope")
@@ -296,7 +299,7 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomersId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
@@ -311,18 +314,24 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Normal");
 
+                    b.Property<bool>("IsForwarded")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("NotSent");
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionReference")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomersId");
 
                     b.HasIndex("OrderId")
                         .IsUnique();
@@ -654,19 +663,15 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Payments", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                    b.HasOne("AMP.Domain.Entities.Customers", null)
                         .WithMany("Payments")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomersId");
 
                     b.HasOne("AMP.Domain.Entities.Orders", "Order")
                         .WithOne("Payment")
                         .HasForeignKey("AMP.Domain.Entities.Payments", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Order");
                 });

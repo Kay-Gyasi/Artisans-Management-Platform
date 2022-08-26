@@ -18,6 +18,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class ArtisanProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Artisanlookup";
+
         public ArtisanProcessor(IUnitOfWork uow, 
             IMapper mapper, 
             IMemoryCache cache) : base(uow, mapper, cache)
@@ -34,6 +36,7 @@ namespace AMP.Processors.Processors
                 artisan = Artisans.Create(command.UserId)
                     .CreatedOn(DateTime.UtcNow);
                 await AssignFields(artisan, command, true);
+                _cache.Remove(LookupCacheKey);
                 await _uow.Artisans.InsertAsync(artisan);
                 await _uow.SaveChangesAsync();
                 return artisan.Id;
@@ -41,6 +44,7 @@ namespace AMP.Processors.Processors
 
             artisan = await _uow.Artisans.GetAsync(command.Id);
             await AssignFields(artisan, command);
+            _cache.Remove(LookupCacheKey);
             await _uow.Artisans.UpdateAsync(artisan);
             await _uow.SaveChangesAsync();
             return artisan.Id;
@@ -84,6 +88,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Artisans.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Artisans.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }

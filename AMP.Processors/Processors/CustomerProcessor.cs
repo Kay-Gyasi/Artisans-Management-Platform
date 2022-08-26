@@ -13,9 +13,12 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors
 {
+
     [Processor]
     public class CustomerProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Customerlookup";
+
         public CustomerProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
@@ -29,6 +32,7 @@ namespace AMP.Processors.Processors
             {
                 customer = Customers.Create(command.UserId)
                     .CreatedOn(DateTime.UtcNow);
+                _cache.Remove(LookupCacheKey);
                 await _uow.Customers.InsertAsync(customer);
                 await _uow.SaveChangesAsync();
                 return customer.Id;
@@ -36,6 +40,7 @@ namespace AMP.Processors.Processors
 
             customer = await _uow.Customers.GetAsync(command.Id);
             customer.ForUserId(command.UserId);
+            _cache.Remove(LookupCacheKey);
             await _uow.Customers.UpdateAsync(customer);
             await _uow.SaveChangesAsync();
             return customer.Id;
@@ -60,6 +65,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Customers.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Customers.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }

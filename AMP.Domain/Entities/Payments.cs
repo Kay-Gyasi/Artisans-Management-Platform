@@ -6,30 +6,24 @@ namespace AMP.Domain.Entities
 {
     public class Payments : EntityBase
     {
-        public int CustomerId { get; private set; }
         public int OrderId { get; private set; }
         public decimal AmountPaid { get; private set; }
-        public PaymentStatus Status { get; private set; }
-        public Customers Customer { get; private set; }
+        public bool IsVerified { get; private set; }
+        public bool IsForwarded { get; private set; }
+        public string TransactionReference { get; private set; }
+        public string Reference { get; private set; }
         public Orders Order { get; private set; }
 
         private Payments(){}
 
-        private Payments(int customerId, int orderId)
+        private Payments(int orderId)
         {
-            CustomerId = customerId;
             OrderId = orderId;
         }
 
-        public static Payments Create(int customerId, int orderId)
+        public static Payments Create(int orderId)
         {
-            return new Payments(customerId, orderId);
-        }
-
-        public Payments ByCustomerWithId(int customerId)
-        {
-            CustomerId = customerId;
-            return this;
+            return new Payments(orderId);
         }
 
         public Payments OnOrderWithId(int orderId)
@@ -44,15 +38,27 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Payments WithStatus(PaymentStatus status)
+        public Payments HasBeenVerified(bool isVerified)
         {
-            Status = status;
+            IsVerified = isVerified;
             return this;
         }
-
-        public Payments ByCustomer(Customers customer)
+        
+        public Payments WithTransactionReference(string trxRef)
         {
-            Customer = customer;
+            TransactionReference = trxRef;
+            return this;
+        }
+        
+        public Payments WithReference(string reference)
+        {
+            Reference = reference;
+            return this;
+        }
+        
+        public Payments HasBeenForwarded(bool isForwarded)
+        {
+            IsForwarded = isForwarded;
             return this;
         }
 

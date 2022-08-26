@@ -2,9 +2,8 @@
 {
     public enum PaymentStatus
     {
-        NotSent = 1,
-        Sent,
-        OnHold,
+        NotVerified = 1,
+        Verified,
         Forwarded
     }
 }

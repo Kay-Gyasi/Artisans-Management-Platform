@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
+﻿using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -10,27 +7,37 @@ using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class PaymentProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Paymentlookup";
 
         public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
-        public async Task<int> Save(PaymentCommand command, int userId)
+        public async Task<int> Save(PaymentCommand command)
         {
-            var customer = await _uow.Customers.GetByUserIdAsync(userId);
 
-            var payment = Payments.Create(customer.Id, command.OrderId)
+            var payment = Payments.Create(command.OrderId)
                 .CreatedOn(DateTime.UtcNow);
-            AssignField(payment, command, customer.Id, true);
+            AssignField(payment, command, true);
+            _cache.Remove(LookupCacheKey);
             await _uow.Payments.InsertAsync(payment);
             await _uow.SaveChangesAsync();
             return payment.Id;
+        }
+
+        public async Task Verify(VerifyPaymentCommand command)
+        {
+            await _uow.Payments.Verify(command.Reference, command.TransactionReference);
+            await _uow.SaveChangesAsync();
         }
 
         public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command)
@@ -47,18 +54,21 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Payments.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Payments.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }
 
-        private void AssignField(Payments payment, PaymentCommand command, int customerId, bool isNew = false)
+        private static void AssignField(Payments payment, PaymentCommand command, bool isNew = false)
         {
             payment.WithAmountPaid(command.AmountPaid)
-                .WithStatus(command.Status);
+                .HasBeenForwarded(false)
+                .WithReference(command.Reference)
+                .HasBeenVerified(false)
+                .CreatedOn(DateTime.UtcNow);
 
             if (!isNew)
-                payment.ByCustomerWithId(customerId)
-                    .OnOrderWithId(command.OrderId);
+                payment.OnOrderWithId(command.OrderId);
         }
     }
 }

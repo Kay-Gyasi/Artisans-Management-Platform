@@ -20,6 +20,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class UserProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Userlookup";
+
         private readonly IAuthService _authService;
 
         public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
@@ -45,6 +47,7 @@ namespace AMP.Processors.Processors
             await AssignFields(user, command);
             user.HasPassword(passes.Item1)
                 .HasPasswordKey(passes.Item2);
+            _cache.Remove(LookupCacheKey);
             await _uow.Users.InsertAsync(user);
             await _uow.SaveChangesAsync();
 
@@ -56,6 +59,7 @@ namespace AMP.Processors.Processors
         {
             var user = await _uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
+            _cache.Remove(LookupCacheKey);
             await _uow.Users.UpdateAsync(user);
             await _uow.SaveChangesAsync();
             return user.Id;
@@ -75,6 +79,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Users.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Users.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }

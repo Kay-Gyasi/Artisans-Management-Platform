@@ -10,7 +10,8 @@ namespace AMP.Processors.PageDtos
         public int CustomerId { get; set; }
         public string Description { get; set; }
         public ScopeOfWork Scope { get; set; }
-        public DateTime PreferredDate { get; set; }
+        public DateTime PreferredStartDate { get; set; }
+        public DateTime PreferredCompletionDate { get; set; }
         public Address WorkAddress { get; set; }
         public ServicePageDto Service { get; set; }
     }

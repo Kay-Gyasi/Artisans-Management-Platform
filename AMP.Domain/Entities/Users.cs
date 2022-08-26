@@ -23,7 +23,7 @@ namespace AMP.Domain.Entities
         public byte[] PasswordKey { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
-        public Images Image { get; set; }
+        public Images Image { get; private set; }
 
         private readonly List<Languages> _languages = new List<Languages>();
         public IEnumerable<Languages> Languages => _languages.AsReadOnly();
@@ -70,6 +70,12 @@ namespace AMP.Domain.Entities
         {
             if (id == 0) id = null;
             ImageId = id;
+            return this;
+        }
+        
+        public Users WithImage(Images image)
+        {
+            Image = image;
             return this;
         }
 

@@ -19,7 +19,8 @@ namespace AMP.Domain.Entities
         public Urgency Urgency { get; private set; }
         public ScopeOfWork Scope { get; private set; }
         public OrderStatus Status { get; private set; }
-        public DateTime PreferredDate { get; private set; }
+        public DateTime PreferredStartDate { get; private set; }
+        public DateTime PreferredCompletionDate { get; private set; }
         public Artisans Artisan { get; private set; }
         public Address WorkAddress { get; private set; }
         public Customers Customer { get; private set; }
@@ -105,9 +106,26 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Orders WithPreferredDate(DateTime date)
+        public Orders WithPreferredStartDate(DateTime date)
         {
-            PreferredDate = date; // make sure date is not past
+            if (date < DateTime.UtcNow)
+            {
+                PreferredStartDate = DateTime.UtcNow.AddDays(1);
+                return this;
+            }
+
+            PreferredStartDate = date;
+            return this;
+        }
+        
+        public Orders WithPreferredCompletionDate(DateTime date)
+        {
+            if (date < PreferredStartDate)
+            {
+                PreferredCompletionDate = DateTime.UtcNow.AddDays(1);
+                return this;
+            }
+            PreferredCompletionDate = date; // make sure date is not past
             return this;
         }
 

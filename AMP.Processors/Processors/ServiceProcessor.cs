@@ -16,6 +16,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class ServiceProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Servicelookup";
+
         public ServiceProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
@@ -29,6 +31,7 @@ namespace AMP.Processors.Processors
             {
                 service = Services.Create(command.Name, command.Description)
                     .CreatedOn(DateTime.UtcNow);
+                _cache.Remove(LookupCacheKey);
                 await _uow.Services.InsertAsync(service);
                 await _uow.SaveChangesAsync();
                 return service.Id;
@@ -37,6 +40,7 @@ namespace AMP.Processors.Processors
             service = await _uow.Services.GetAsync(command.Id);
             service.WithDescription(command.Description)
                 .WithName(command.Name);
+            _cache.Remove(LookupCacheKey);
             await _uow.Services.UpdateAsync(service);
             await _uow.SaveChangesAsync();
             return service.Id;
@@ -56,6 +60,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Services.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Services.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }

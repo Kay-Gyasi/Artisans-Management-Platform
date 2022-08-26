@@ -1,12 +1,10 @@
-﻿using System.Security.Claims;
-using System.Text;
-using AMP.Services;
-using AMP.Services.Payments;
+﻿using AMP.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Security.Claims;
+using System.Text;
 using ILogger = Serilog.ILogger;
 
 namespace AMP.WebApi;
@@ -33,7 +31,9 @@ public static class DependencyInjection
     {
         services.AddControllers()
             .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(opt =>
@@ -103,7 +103,8 @@ public static class DependencyInjection
 
         app.UseSerilogRequestLogging();
 
-        //app.UseStaticFiles();
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
         //app.UseStaticFiles(new StaticFileOptions()
         //{
         //    FileProvider = new PhysicalFileProvider

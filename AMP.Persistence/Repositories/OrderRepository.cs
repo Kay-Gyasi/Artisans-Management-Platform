@@ -97,7 +97,7 @@ namespace AMP.Persistence.Repositories
                                                            && x.Status != OrderStatus.Completed
                                                            && x.IsRequestAccepted)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                .OrderBy(x => x.PreferredDate);
+                .OrderBy(x => x.PreferredStartDate);
 
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
@@ -109,7 +109,7 @@ namespace AMP.Persistence.Repositories
                                                            && x.Status != OrderStatus.Completed
                                                            && !x.IsRequestAccepted)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                .OrderBy(x => x.PreferredDate);
+                .OrderBy(x => x.PreferredStartDate);
 
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
@@ -119,7 +119,7 @@ namespace AMP.Persistence.Repositories
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId && x.Status == OrderStatus.Completed)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                .OrderBy(x => x.PreferredDate);
+                .OrderBy(x => x.PreferredStartDate);
 
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }

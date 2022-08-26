@@ -16,6 +16,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class DisputeProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Disputelookup";
+
         public DisputeProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
@@ -31,6 +33,7 @@ namespace AMP.Processors.Processors
                 dispute = Disputes.Create(command.CustomerId, command.OrderId)
                     .CreatedOn(DateTime.UtcNow);
                 AssignFields(dispute, command, true);
+                _cache.Remove(LookupCacheKey);
                 await _uow.Disputes.InsertAsync(dispute);
                 await _uow.SaveChangesAsync();
                 return dispute.Id;
@@ -38,6 +41,7 @@ namespace AMP.Processors.Processors
 
             dispute = await _uow.Disputes.GetAsync(command.Id);
             AssignFields(dispute, command);
+            _cache.Remove(LookupCacheKey);
             await _uow.Disputes.UpdateAsync(dispute);
             await _uow.SaveChangesAsync();
             return dispute.Id;
@@ -65,10 +69,11 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var dispute = await _uow.Disputes.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (dispute != null) await _uow.Disputes.DeleteAsync(dispute, new CancellationToken());
         }
 
-        private void AssignFields(Disputes dispute, DisputeCommand command, bool isNew = false)
+        private static void AssignFields(Disputes dispute, DisputeCommand command, bool isNew = false)
         {
             dispute.WithDetails(command.Details)
                 .WithStatus(command.Status);

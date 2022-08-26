@@ -16,7 +16,8 @@ namespace AMP.Processors.Dtos
         public Urgency Urgency { get; set; }
         public ScopeOfWork Scope { get; private set; }
         public OrderStatus Status { get; set; }
-        public DateTime PreferredDate { get; set; }
+        public DateTime PreferredStartDate { get; set; }
+        public DateTime PreferredCompletionDate { get; set; }
         public ArtisanDto Artisan { get; set; }
         public AddressDto WorkAddress { get; set; }
         public CustomerDto Customer { get; set; }

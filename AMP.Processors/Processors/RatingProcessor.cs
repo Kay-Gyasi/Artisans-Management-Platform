@@ -16,6 +16,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class RatingProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Ratinglookup";
+
         public RatingProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
@@ -30,6 +32,7 @@ namespace AMP.Processors.Processors
                 rating = Ratings.Create(command.CustomerId, command.ArtisanId)
                     .CreatedOn(DateTime.UtcNow);
                 AssignFields(rating, command, true);
+                _cache.Remove(LookupCacheKey);
                 await _uow.Ratings.InsertAsync(rating);
                 await _uow.SaveChangesAsync();
                 return rating.Id;
@@ -37,6 +40,7 @@ namespace AMP.Processors.Processors
 
             rating = await _uow.Ratings.GetAsync(command.Id);
             AssignFields(rating, command);
+            _cache.Remove(LookupCacheKey);
             await _uow.Ratings.UpdateAsync(rating);
             await _uow.SaveChangesAsync();
             return rating.Id;
@@ -56,11 +60,12 @@ namespace AMP.Processors.Processors
         public async Task Delete(int id)
         {
             var artisan = await _uow.Ratings.GetAsync(id);
+            _cache.Remove(LookupCacheKey);
             if (artisan != null) await _uow.Ratings.DeleteAsync(artisan, new CancellationToken());
             await _uow.SaveChangesAsync();
         }
 
-        private void AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
+        private static void AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
         {
             rating.WithVotes(command.Votes)
                 .WithDescription(command.Description);
