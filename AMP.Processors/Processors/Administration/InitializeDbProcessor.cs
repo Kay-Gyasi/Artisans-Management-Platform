@@ -15,22 +15,20 @@ namespace AMP.Processors.Processors.Administration
     [Processor]
     public class InitializeDbProcessor : ProcessorBase
     {
-        public InitializeDbProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
+        public InitializeDbProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) 
+            : base(uow, mapper, cache)
         {
         }
 
         public async Task InitializeDatabase()
         {
-            await _uow.InitializeDb.InitializeDatabase();
+            //await _uow.InitializeDb.InitializeDatabase();
             await InitializeServices();
             await InitializeLanguages();
             await InitializeUsers();
             await InitializeArtisans();
             await InitializeCustomers();
             await _uow.SaveChangesAsync();
-            //await InitializeOrders();
-
-            //await _uow.SaveChangesAsync();
         }
 
         private async Task InitializeServices()
