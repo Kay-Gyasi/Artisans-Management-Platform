@@ -16,6 +16,12 @@ namespace AMP.Persistence.Repositories
         {
         }
 
+        public async Task<decimal> AmountPaid(int orderId)
+        {
+            return GetBaseQuery().Where(x => x.OrderId == orderId)
+                .Sum(x => x.AmountPaid);
+        }
+
         public async Task Verify(string reference, string trxRef)
         {
             var payment = await GetBaseQuery().FirstOrDefaultAsync(x => x.Reference == reference);

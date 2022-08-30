@@ -1,6 +1,5 @@
 ﻿using System;
 using AMP.Domain.Entities.Base;
-using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities
 {

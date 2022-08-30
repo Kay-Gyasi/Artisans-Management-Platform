@@ -11,11 +11,12 @@ namespace AMP.Domain.Entities
         public int CustomerId { get; private set; }
         public int? ArtisanId { get; private set; }
         public bool IsComplete { get; private set; }
+        public bool IsArtisanComplete { get; private set; }
         public bool IsRequestAccepted { get; private set; }
         public int ServiceId { get; private set; }
-        public int? PaymentId { get; private set; }
         public string Description { get; private set; }
-        public decimal Cost { get; private set; } // To be set by approved artisan
+        public decimal Cost { get; private set; }
+        public decimal PaymentMade { get; private set; }
         public Urgency Urgency { get; private set; }
         public ScopeOfWork Scope { get; private set; }
         public OrderStatus Status { get; private set; }
@@ -25,10 +26,12 @@ namespace AMP.Domain.Entities
         public Address WorkAddress { get; private set; }
         public Customers Customer { get; private set; }
         public Services Service { get; private set; }
-        public Payments Payment { get; private set; }
 
         private readonly List<Disputes> _disputes = new List<Disputes>();
         public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
+        
+        private readonly List<Payments> _payments = new List<Payments>();
+        public IEnumerable<Payments> Payments => _payments.AsReadOnly();
 
         private readonly List<Requests> _requests = new List<Requests>();
         public IEnumerable<Requests> Requests => _requests.AsReadOnly();
@@ -69,10 +72,10 @@ namespace AMP.Domain.Entities
             IsComplete = isCompleted;
             return this;
         }
-
-        public Orders WithPaymentId(int? paymentId)
+        
+        public Orders IsArtisanCompleted(bool isCompleted)
         {
-            PaymentId = paymentId;
+            IsArtisanComplete = isCompleted;
             return this;
         }
 
@@ -144,12 +147,6 @@ namespace AMP.Domain.Entities
         public Orders OnService(Services service)
         {
             Service = service;
-            return this;
-        }
-
-        public Orders WithPayment(Payments payment)
-        {
-            Payment = payment;
             return this;
         }
 

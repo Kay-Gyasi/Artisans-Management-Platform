@@ -4,14 +4,16 @@ using AMP.Persistence.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Migrations
 {
     [DbContext(typeof(AmpDbContext))]
-    partial class AmpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220830202302_ArtisanComplete")]
+    partial class ArtisanComplete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,8 +251,8 @@ namespace AMP.Persistence.Migrations
                     b.Property<bool>("IsRequestAccepted")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("PaymentMade")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PreferredCompletionDate")
                         .HasColumnType("datetime2");
@@ -336,7 +338,8 @@ namespace AMP.Persistence.Migrations
 
                     b.HasIndex("CustomersId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderId")
+                        .IsUnique();
 
                     b.ToTable("Payments");
                 });
@@ -670,8 +673,8 @@ namespace AMP.Persistence.Migrations
                         .HasForeignKey("CustomersId");
 
                     b.HasOne("AMP.Domain.Entities.Orders", "Order")
-                        .WithMany("Payments")
-                        .HasForeignKey("OrderId")
+                        .WithOne("Payment")
+                        .HasForeignKey("AMP.Domain.Entities.Payments", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -846,7 +849,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Navigation("Disputes");
 
-                    b.Navigation("Payments");
+                    b.Navigation("Payment");
 
                     b.Navigation("Requests");
                 });

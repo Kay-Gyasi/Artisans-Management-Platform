@@ -97,6 +97,18 @@ public class OrderController : BaseControllerv1
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task SetCost([FromBody] SetCostCommand command)
+        => await Mediator.Send(new OrderCost.Command(command));
+    
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task ArtisanComplete([FromBody] int id)
+        => await Mediator.Send(new ArtisanCompleteOrder.Command(id));
+    
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task Accept([FromBody] int id)
         => await Mediator.Send(new AcceptOrder.Command(id));
     

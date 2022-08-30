@@ -7,5 +7,6 @@ namespace AMP.Processors.Repositories
     public interface IPaymentRepository : IRepositoryBase<Payments>
     {
         Task Verify(string reference, string trxRef);
+        Task<decimal> AmountPaid(int orderId);
     }
 }

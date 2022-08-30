@@ -35,9 +35,6 @@ namespace AMP.Persistence.Configurations
                     .HasDefaultValue(Countries.Ghana)
                     .HasConversion(new EnumToStringConverter<Countries>());
             });
-            builder.HasOne(a => a.Payment)
-                .WithOne(a => a.Order)
-                .HasForeignKey<Payments>(c => c.OrderId);
         }
     }
 }

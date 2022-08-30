@@ -4,14 +4,16 @@ using AMP.Persistence.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Migrations
 {
     [DbContext(typeof(AmpDbContext))]
-    partial class AmpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220830215242_PaymentsOrders")]
+    partial class PaymentsOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

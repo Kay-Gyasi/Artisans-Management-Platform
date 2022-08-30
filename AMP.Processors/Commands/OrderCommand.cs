@@ -11,7 +11,6 @@ namespace AMP.Processors.Commands
         public int UserId { get; set; }
         public int ServiceId { get; set; }
         public int? ArtisanId { get; set; }
-        public int? PaymentId { get; set; }
         //public bool IsComplete { get; set; }
         public string Description { get; set; }
         public decimal Cost { get; set; } 
@@ -21,6 +20,5 @@ namespace AMP.Processors.Commands
         public DateTime PreferredStartDate { get; set; }
         public DateTime PreferredCompletionDate { get; set; }
         public AddressCommand WorkAddress { get; set; }
-        public PaymentCommand Payment { get; set; }
     }
 }

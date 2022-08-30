@@ -9,10 +9,13 @@ namespace AMP.Processors.Dtos
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public int? ArtisanId { get; set; }
+        //public bool IsComplete { get; set; }
+        public bool IsArtisanComplete { get; set; }
+        public bool IsRequestAccepted { get; set; }
         public int ServiceId { get; set; }
-        public int? PaymentId { get; set; }
         public string Description { get; set; }
-        public decimal Cost { get; set; } // To be set by approved artisan
+        public decimal Cost { get; set; }
+        public decimal PaymentMade { get; set; }
         public Urgency Urgency { get; set; }
         public ScopeOfWork Scope { get; private set; }
         public OrderStatus Status { get; set; }

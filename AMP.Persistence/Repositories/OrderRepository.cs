@@ -3,6 +3,7 @@ using AMP.Domain.Enums;
 using AMP.Domain.ViewModels;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
+using AMP.Processors.Commands;
 using AMP.Processors.Repositories;
 using AMP.Shared.Domain.Models;
 using AMP.Shared.Persistence;
@@ -34,11 +35,19 @@ namespace AMP.Persistence.Repositories
                 .ToListAsync();
         }
 
+      
         public async Task Complete(int orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.WithStatus(OrderStatus.Completed)
                 .IsCompleted(true);
+            await UpdateAsync(order);
+        }
+        
+        public async Task ArtisanComplete(int orderId)
+        {
+            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
+            order.IsArtisanCompleted(true);
             await UpdateAsync(order);
         }
 
@@ -137,7 +146,6 @@ namespace AMP.Persistence.Repositories
                 .Include(x => x.WorkAddress)
                 .Include(x => x.Artisan)
                 .Include(x => x.Service)
-                .Include(x => x.Payment)
                 .Include(x => x.Customer)
                 .ThenInclude(a => a.User);
         }
@@ -179,6 +187,12 @@ namespace AMP.Persistence.Repositories
                 totalCount: totalRecords,
                 currentPage: paginated.PageNumber,
                 pageSize: paginated.PageSize);
+        }
+
+        public async Task SetCost(SetCostCommand costCommand)
+        {
+            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
+            order.WithCost(costCommand.Cost);
         }
     }
 }

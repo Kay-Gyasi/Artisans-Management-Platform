@@ -37,6 +37,12 @@ namespace AMP.Processors.Processors
             return new InsertOrderResponse { OrderId = order.Id, Service = service };
         }
 
+        public async Task SetCost(SetCostCommand costCommand)
+        {
+            await _uow.Orders.SetCost(costCommand);
+            await _uow.SaveChangesAsync();
+        }
+
         public async Task<int> Save(OrderCommand command)
         {
             var order = await _uow.Orders.GetAsync(command.Id);
@@ -76,6 +82,12 @@ namespace AMP.Processors.Processors
             await _uow.Orders.Complete(orderId);
             await _uow.SaveChangesAsync();
         }
+        
+        public async Task ArtisanComplete(int orderId)
+        {
+            await _uow.Orders.ArtisanComplete(orderId);
+            await _uow.SaveChangesAsync();
+        }
 
         public async Task<PaginatedList<OrderPageDto>> GetPage(PaginatedCommand command)
         {
@@ -85,7 +97,9 @@ namespace AMP.Processors.Processors
 
         public async Task<OrderDto> Get(int id)
         {
-            return _mapper.Map<OrderDto>(await _uow.Orders.GetAsync(id));
+            var order = _mapper.Map<OrderDto>(await _uow.Orders.GetAsync(id));
+            order.PaymentMade = await _uow.Payments.AmountPaid(id);
+            return order;
         }
 
         public async Task<PaginatedList<OrderPageDto>> GetSchedule(PaginatedCommand command, int userId)
@@ -131,7 +145,6 @@ namespace AMP.Processors.Processors
             var customerId = await _uow.Customers.GetCustomerId(command.UserId);
             order.ForArtisanWithId(command.ArtisanId)
                 //.IsCompleted(command.IsComplete)
-                .WithPaymentId(command.PaymentId)
                 .WithDescription(command.Description)
                 .WithCost(command.Cost)
                 .WithUrgency(command.Urgency)
