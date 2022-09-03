@@ -53,9 +53,9 @@ namespace AMP.Processors.Processors
 
         public async Task Delete(int id)
         {
-            var artisan = await _uow.Payments.GetAsync(id);
+            var payment = await _uow.Payments.GetAsync(id);
             _cache.Remove(LookupCacheKey);
-            if (artisan != null) await _uow.Payments.DeleteAsync(artisan, new CancellationToken());
+            if (payment != null) await _uow.Payments.SoftDeleteAsync(payment);
             await _uow.SaveChangesAsync();
         }
 

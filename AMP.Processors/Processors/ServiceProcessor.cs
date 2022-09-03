@@ -59,9 +59,9 @@ namespace AMP.Processors.Processors
 
         public async Task Delete(int id)
         {
-            var artisan = await _uow.Services.GetAsync(id);
+            var service = await _uow.Services.GetAsync(id);
             _cache.Remove(LookupCacheKey);
-            if (artisan != null) await _uow.Services.DeleteAsync(artisan, new CancellationToken());
+            if (service != null) await _uow.Services.SoftDeleteAsync(service);
             await _uow.SaveChangesAsync();
         }
     }

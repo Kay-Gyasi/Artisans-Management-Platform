@@ -29,9 +29,11 @@ namespace AMP.Processors.Processors
             Ratings rating;
             if (isNew)
             {
-                rating = Ratings.Create(command.CustomerId, command.ArtisanId)
+                var customer = await _uow.Customers.GetCustomerId(command.UserId);
+                await _uow.Ratings.OverridePreviousRating(customer, command.ArtisanId);
+                rating = Ratings.Create(customer, command.ArtisanId)
                     .CreatedOn(DateTime.UtcNow);
-                AssignFields(rating, command, true);
+                await AssignFields(rating, command, true);
                 _cache.Remove(LookupCacheKey);
                 await _uow.Ratings.InsertAsync(rating);
                 await _uow.SaveChangesAsync();
@@ -39,7 +41,7 @@ namespace AMP.Processors.Processors
             }
 
             rating = await _uow.Ratings.GetAsync(command.Id);
-            AssignFields(rating, command);
+            await AssignFields(rating, command);
             _cache.Remove(LookupCacheKey);
             await _uow.Ratings.UpdateAsync(rating);
             await _uow.SaveChangesAsync();
@@ -51,6 +53,17 @@ namespace AMP.Processors.Processors
             var page = await _uow.Ratings.GetPage(command, new CancellationToken());
             return _mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
+        
+        public async Task<PaginatedList<RatingPageDto>> GetArtisanRatingPage(PaginatedCommand command, int userId)
+        {
+            var page = await _uow.Ratings.GetArtisanRatingPage(command, userId, new CancellationToken());
+            foreach(var rating in page.Data)
+            {
+                rating.ForArtisan(await _uow.Artisans.GetAsync(rating.ArtisanId))
+                    .ForCustomer(await _uow.Customers.GetAsync(rating.CustomerId));
+            }
+            return _mapper.Map<PaginatedList<RatingPageDto>>(page);
+        }
 
         public async Task<RatingDto> Get(int id)
         {
@@ -59,20 +72,23 @@ namespace AMP.Processors.Processors
 
         public async Task Delete(int id)
         {
-            var artisan = await _uow.Ratings.GetAsync(id);
+            var rating = await _uow.Ratings.GetAsync(id);
             _cache.Remove(LookupCacheKey);
-            if (artisan != null) await _uow.Ratings.DeleteAsync(artisan, new CancellationToken());
+            if (rating != null) await _uow.Ratings.SoftDeleteAsync(rating);
             await _uow.SaveChangesAsync();
         }
 
-        private static void AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
+        private async Task AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
         {
             rating.WithVotes(command.Votes)
                 .WithDescription(command.Description);
 
             if (!isNew)
-                rating.ForCustomerWithId(command.CustomerId)
-                    .ForArtisanWithId(command.ArtisanId);
+            {
+                var customer = await _uow.Customers.GetCustomerId(command.UserId);
+                rating.ForCustomerWithId(customer)
+                        .ForArtisanWithId(command.ArtisanId);
+            }
         }
     }
 }

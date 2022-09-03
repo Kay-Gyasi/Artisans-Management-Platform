@@ -24,6 +24,7 @@ public static class DependencyInjection
             .AddMemoryCache()
             .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration);
+        
         return services;
     }
 

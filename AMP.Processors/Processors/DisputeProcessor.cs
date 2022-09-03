@@ -70,7 +70,7 @@ namespace AMP.Processors.Processors
         {
             var dispute = await _uow.Disputes.GetAsync(id);
             _cache.Remove(LookupCacheKey);
-            if (dispute != null) await _uow.Disputes.DeleteAsync(dispute, new CancellationToken());
+            if (dispute != null) await _uow.Disputes.SoftDeleteAsync(dispute);
         }
 
         private static void AssignFields(Disputes dispute, DisputeCommand command, bool isNew = false)

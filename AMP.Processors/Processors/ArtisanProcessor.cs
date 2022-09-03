@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.ViewModels;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -74,6 +75,7 @@ namespace AMP.Processors.Processors
             var artisan = _mapper.Map<ArtisanDto>(await _uow.Artisans.GetAsync(id));
             artisan.NoOfOrders = _uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = _uow.Ratings.GetCount(artisan.Id);
+            artisan.Rating = _uow.Ratings.GetRating(artisan.Id);
             return artisan;
         }
 
@@ -82,14 +84,20 @@ namespace AMP.Processors.Processors
             var artisan = _mapper.Map<ArtisanDto>(await _uow.Artisans.GetArtisanByUserId(userId));
             artisan.NoOfOrders = _uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = _uow.Ratings.GetCount(artisan.Id);
+            artisan.Rating = _uow.Ratings.GetRating(artisan.Id);
             return artisan;
+        }
+
+        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(int userId)
+        {
+            return await Task.Run(() => _uow.Artisans.GetArtisansWhoHaveWorkedForCustomer(userId));
         }
 
         public async Task Delete(int id)
         {
             var artisan = await _uow.Artisans.GetAsync(id);
             _cache.Remove(LookupCacheKey);
-            if (artisan != null) await _uow.Artisans.DeleteAsync(artisan, new CancellationToken());
+            if (artisan != null) await _uow.Artisans.SoftDeleteAsync(artisan);
             await _uow.SaveChangesAsync();
         }
 

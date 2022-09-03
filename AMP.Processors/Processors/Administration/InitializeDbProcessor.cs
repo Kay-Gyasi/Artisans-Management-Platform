@@ -22,7 +22,7 @@ namespace AMP.Processors.Processors.Administration
 
         public async Task InitializeDatabase()
         {
-            //await _uow.InitializeDb.InitializeDatabase();
+            await _uow.InitializeDb.InitializeDatabase();
             await InitializeServices();
             await InitializeLanguages();
             await InitializeUsers();

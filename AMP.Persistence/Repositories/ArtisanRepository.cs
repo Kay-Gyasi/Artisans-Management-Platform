@@ -21,6 +21,16 @@ namespace AMP.Persistence.Repositories
         {
         }
 
+        public List<Lookup> GetArtisansWhoHaveWorkedForCustomer(int userId)
+        {
+            var artisans = GetBaseQuery().Where(x => x.Orders.Any(a => a.Customer.UserId == userId));
+            return artisans.Select(x => new Lookup
+            {
+                Id = x.Id,
+                Name = x.BusinessName
+            }).ToList();
+        }
+
         public async Task<Artisans> GetArtisanByUserId(int userId)
         {
             return await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
@@ -47,7 +57,8 @@ namespace AMP.Persistence.Repositories
             return base.GetBaseQuery()
                 .Include(x => x.User)
                 .ThenInclude(x => x.Languages)
-                .Include(x => x.Services);
+                .Include(x => x.Services)
+                .Include(x => x.Ratings);
         }
     }
 }

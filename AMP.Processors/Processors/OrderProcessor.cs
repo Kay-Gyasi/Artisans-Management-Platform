@@ -134,9 +134,9 @@ namespace AMP.Processors.Processors
 
         public async Task Delete(int id)
         {
-            var artisan = await _uow.Orders.GetAsync(id);
+            var order = await _uow.Orders.GetAsync(id);
             _cache.Remove(LookupCacheKey);
-            if (artisan != null) await _uow.Orders.DeleteAsync(artisan, new CancellationToken());
+            if (order != null) await _uow.Orders.SoftDeleteAsync(order);
             await _uow.SaveChangesAsync();
         }
 

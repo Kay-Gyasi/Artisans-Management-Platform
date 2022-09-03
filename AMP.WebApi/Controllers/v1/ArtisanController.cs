@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
+using AMP.Domain.ViewModels;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -32,6 +33,15 @@ public class ArtisanController : BaseControllerv1
     {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         return await Mediator.Send(new GetArtisanByUser.Query(Convert.ToInt32(userId)));
+    }
+    
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<List<Lookup>> GetArtisansWorkedForCustomer()
+    {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return await Mediator.Send(new GetArtisansWhoHaveWorkedForCustomer.Query(Convert.ToInt32(userId)));
     }
 
     [HttpPost]

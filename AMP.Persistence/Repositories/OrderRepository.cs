@@ -86,8 +86,9 @@ namespace AMP.Persistence.Repositories
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Status != OrderStatus.Completed && x.Customer.UserId == userId)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
-
-            return await BuildPage(whereQueryable, paginated, cancellationToken);
+            var orders = await BuildPage(whereQueryable, paginated, cancellationToken);
+            orders.Data.Reverse();
+            return orders;
         }
 
         public async Task<PaginatedList<Orders>> GetOrderHistory(PaginatedCommand paginated,
@@ -173,6 +174,11 @@ namespace AMP.Persistence.Repositories
             }).OrderBy(x => x.Name)
                 .ToListAsync();
         }
+        public async Task SetCost(SetCostCommand costCommand)
+        {
+            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
+            order.WithCost(costCommand.Cost);
+        }
 
         private static async Task<PaginatedList<Orders>> BuildPage(IQueryable<Orders> whereQueryable, PaginatedCommand paginated,
             CancellationToken cancellationToken)
@@ -189,10 +195,5 @@ namespace AMP.Persistence.Repositories
                 pageSize: paginated.PageSize);
         }
 
-        public async Task SetCost(SetCostCommand costCommand)
-        {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
-            order.WithCost(costCommand.Cost);
-        }
     }
 }

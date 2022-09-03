@@ -5,6 +5,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.runtimeconfig.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\ApiMultiPartFormData.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AutoMapper.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\Azure.Core.dll

@@ -20,18 +20,19 @@ namespace AMP.Persistence.Repositories.Administration
         {
             try
             {
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE LanguagesUsers");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Images");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Services");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Requests");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Disputes");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Ratings");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Languages");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Payments");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Orders");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Artisans");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Customers");
-                await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Users");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE LanguagesUsers");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Images");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Services");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Requests");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Disputes");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Ratings");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Languages");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Payments");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Orders");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Artisans");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Customers");
+                //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Users");
+                await _context.Database.MigrateAsync();
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
