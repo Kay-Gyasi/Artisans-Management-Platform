@@ -15,7 +15,7 @@ public class ImageController : BaseControllerv1
     {
         
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        await Mediator.Send(new UploadImage.Command(files, Convert.ToInt32(userId)));
+        await Mediator.Send(new UploadImage.Command(files, userId));
         return NoContent();
     }
 }

@@ -6,7 +6,7 @@ namespace AMP.Domain.Entities
 {
     public class Customers : EntityBase
     {
-        public int UserId { get; private set; }
+        public string UserId { get; private set; }
         public Users User { get; private set; }
 
         private readonly List<Ratings> _ratings = new List<Ratings>();
@@ -26,17 +26,17 @@ namespace AMP.Domain.Entities
 
         private Customers(){}
 
-        private Customers(int userId)
+        private Customers(string userId)
         {
             UserId = userId;
         }
 
-        public static Customers Create(int userId)
+        public static Customers Create(string userId)
         {
             return new Customers(userId);
         }
 
-        public Customers ForUserId(int userId)
+        public Customers ForUserId(string userId)
         {
             UserId = userId;
             return this;
@@ -54,7 +54,7 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Customers WithId(int id)
+        public Customers WithId(string id)
         {
             Id = id;
             return this;

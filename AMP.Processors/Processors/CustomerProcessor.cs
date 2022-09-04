@@ -23,9 +23,9 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(CustomerCommand command)
+        public async Task<string> Save(CustomerCommand command)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
 
             Customers customer;
             if (isNew)
@@ -52,17 +52,17 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<CustomerPageDto>>(page);
         }
 
-        public async Task<CustomerDto> Get(int id)
+        public async Task<CustomerDto> Get(string id)
         {
             return _mapper.Map<CustomerDto>(await _uow.Customers.GetAsync(id));
         }
 
-        public async Task<CustomerDto> GetByUserId(int userId)
+        public async Task<CustomerDto> GetByUserId(string userId)
         {
             return _mapper.Map<CustomerDto>(await _uow.Customers.GetByUserIdAsync(userId));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var customer = await _uow.Customers.GetAsync(id);
             _cache.Remove(LookupCacheKey);

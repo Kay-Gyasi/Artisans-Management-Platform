@@ -43,7 +43,7 @@ namespace AMP.Processors.Processors
             await _uow.SaveChangesAsync();
         }
 
-        public async Task<int> Save(OrderCommand command)
+        public async Task<string> Save(OrderCommand command)
         {
             var order = await _uow.Orders.GetAsync(command.Id);
             await AssignFields(order, command);
@@ -53,37 +53,37 @@ namespace AMP.Processors.Processors
             return order.Id;
         }
 
-        public async Task UnassignArtisan(int orderId)
+        public async Task UnassignArtisan(string orderId)
         {
             await _uow.Orders.UnassignArtisan(orderId);
             await _uow.SaveChangesAsync();
         }
 
-        public async Task AssignArtisan(int orderId, int artisanId)
+        public async Task AssignArtisan(string orderId, string artisanId)
         {
             await _uow.Orders.AssignArtisan(orderId, artisanId);
             await _uow.SaveChangesAsync();
         }
 
-        public async Task AcceptRequest(int orderId)
+        public async Task AcceptRequest(string orderId)
         {
             await _uow.Orders.AcceptRequest(orderId);
             await _uow.SaveChangesAsync();
         }
 
-        public async Task CancelRequest(int orderId)
+        public async Task CancelRequest(string orderId)
         {
             await _uow.Orders.CancelRequest(orderId);
             await _uow.SaveChangesAsync();
         }
 
-        public async Task Complete(int orderId)
+        public async Task Complete(string orderId)
         {
             await _uow.Orders.Complete(orderId);
             await _uow.SaveChangesAsync();
         }
         
-        public async Task ArtisanComplete(int orderId)
+        public async Task ArtisanComplete(string orderId)
         {
             await _uow.Orders.ArtisanComplete(orderId);
             await _uow.SaveChangesAsync();
@@ -95,44 +95,44 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task<OrderDto> Get(int id)
+        public async Task<OrderDto> Get(string id)
         {
             var order = _mapper.Map<OrderDto>(await _uow.Orders.GetAsync(id));
             order.PaymentMade = await _uow.Payments.AmountPaid(id);
             return order;
         }
 
-        public async Task<PaginatedList<OrderPageDto>> GetSchedule(PaginatedCommand command, int userId)
+        public async Task<PaginatedList<OrderPageDto>> GetSchedule(PaginatedCommand command, string userId)
         {
             var page = await _uow.Orders.GetSchedule(command, userId, new CancellationToken());
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task<PaginatedList<OrderPageDto>> GetRequests(PaginatedCommand command, int userId)
+        public async Task<PaginatedList<OrderPageDto>> GetRequests(PaginatedCommand command, string userId)
         {
             var page = await _uow.Orders.GetRequests(command, userId, new CancellationToken());
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task<PaginatedList<OrderPageDto>> GetWorkHistory(PaginatedCommand command, int userId)
+        public async Task<PaginatedList<OrderPageDto>> GetWorkHistory(PaginatedCommand command, string userId)
         {
             var page = await _uow.Orders.GetWorkHistory(command, userId, new CancellationToken());
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task<PaginatedList<OrderPageDto>> GetOrderHistory(PaginatedCommand command, int userId)
+        public async Task<PaginatedList<OrderPageDto>> GetOrderHistory(PaginatedCommand command, string userId)
         {
             var page = await _uow.Orders.GetOrderHistory(command, userId, new CancellationToken());
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task<PaginatedList<OrderPageDto>> GetCustomerOrderPage(PaginatedCommand command, int userId)
+        public async Task<PaginatedList<OrderPageDto>> GetCustomerOrderPage(PaginatedCommand command, string userId)
         {
             var page = await _uow.Orders.GetCustomerOrderPage(command, userId, new CancellationToken());
             return _mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var order = await _uow.Orders.GetAsync(id);
             _cache.Remove(LookupCacheKey);

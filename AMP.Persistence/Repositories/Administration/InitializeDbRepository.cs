@@ -32,6 +32,9 @@ namespace AMP.Persistence.Repositories.Administration
                 //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Artisans");
                 //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Customers");
                 //await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Users");
+
+
+                //TODO:: Write scripts to drop foreign keys then delete the tables 
                 await _context.Database.MigrateAsync();
                 await _context.SaveChangesAsync();
             }

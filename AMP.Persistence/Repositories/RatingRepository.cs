@@ -19,18 +19,18 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public async Task OverridePreviousRating(int customerId, int artisanId)
+        public async Task OverridePreviousRating(string customerId, string artisanId)
         {
             var rate = await GetBaseQuery().FirstOrDefaultAsync(x => x.ArtisanId == artisanId && x.CustomerId == customerId);
             if (rate != null) await SoftDeleteAsync(rate);
         }
 
-        public int GetCount(int artisanId)
+        public int GetCount(string artisanId)
         {
             return GetBaseQuery().Count(x => x.ArtisanId == artisanId);
         }
 
-        public double GetRating(int artisanId)
+        public double GetRating(string artisanId)
         {
             int votes = 0;
             var ratings = GetBaseQuery().Where(x => x.ArtisanId == artisanId);
@@ -51,7 +51,7 @@ namespace AMP.Persistence.Repositories
                 .ThenInclude(x => x.User);
         }
 
-        public async Task<PaginatedList<Ratings>> GetArtisanRatingPage(PaginatedCommand paginated, int userId, 
+        public async Task<PaginatedList<Ratings>> GetArtisanRatingPage(PaginatedCommand paginated, string userId, 
             CancellationToken cancellationToken)
         {
             IQueryable<Ratings> whereQueryable;
@@ -62,12 +62,11 @@ namespace AMP.Persistence.Repositories
             }
             else
             {
-                whereQueryable = GetBaseQuery().Where(x => x.ArtisanId.ToString() == paginated.OtherJson)
+                whereQueryable = GetBaseQuery().Where(x => x.ArtisanId == paginated.OtherJson)
                     .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
             }
 
             var orders = await BuildPage(whereQueryable, paginated, cancellationToken);
-            orders.Data.Reverse();
             return orders;
         }
 

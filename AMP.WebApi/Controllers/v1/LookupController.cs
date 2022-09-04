@@ -22,5 +22,5 @@ public class LookupController : BaseControllerv1
     [ProducesResponseType((StatusCodes.Status200OK))]
     [ProducesResponseType((StatusCodes.Status404NotFound))]
     public async Task<List<Lookup>> GetOpenOrdersLookup()
-        => await Mediator.Send(new GetOpenOrdersLookup.Query(Convert.ToInt32(UserId)));
+        => await Mediator.Send(new GetOpenOrdersLookup.Query(UserId));
 }

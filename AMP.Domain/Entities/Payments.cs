@@ -5,7 +5,7 @@ namespace AMP.Domain.Entities
 {
     public class Payments : EntityBase
     {
-        public int OrderId { get; private set; }
+        public string OrderId { get; private set; }
         public decimal AmountPaid { get; private set; }
         public bool IsVerified { get; private set; }
         public bool IsForwarded { get; private set; }
@@ -15,17 +15,17 @@ namespace AMP.Domain.Entities
 
         private Payments(){}
 
-        private Payments(int orderId)
+        private Payments(string orderId)
         {
             OrderId = orderId;
         }
 
-        public static Payments Create(int orderId)
+        public static Payments Create(string orderId)
         {
             return new Payments(orderId);
         }
 
-        public Payments OnOrderWithId(int orderId)
+        public Payments OnOrderWithId(string orderId)
         {
             OrderId = orderId;
             return this;
@@ -70,6 +70,12 @@ namespace AMP.Domain.Entities
         public Payments CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Payments WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

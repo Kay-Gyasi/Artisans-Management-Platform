@@ -6,7 +6,7 @@ namespace AMP.Domain.Entities
 {
     public class Artisans : EntityBase
     {
-        public int UserId { get; private set; }
+        public string UserId { get; private set; }
         public string BusinessName { get; private set; }
         public string Description { get; private set; }
         public bool IsVerified { get; private set; }
@@ -27,17 +27,17 @@ namespace AMP.Domain.Entities
 
         private Artisans(){}
 
-        private Artisans(int userId)
+        private Artisans(string userId)
         {
             UserId = userId;
         }
 
-        public static Artisans Create(int userId)
+        public static Artisans Create(string userId)
         {
             return new Artisans(userId);
         }
 
-        public Artisans ForUserId(int userId)
+        public Artisans ForUserId(string userId)
         {
             UserId = userId;
             return this;
@@ -83,6 +83,12 @@ namespace AMP.Domain.Entities
         {
             _services.Clear();
             _services.AddRange(services);
+            return this;
+        }
+
+        public Artisans WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

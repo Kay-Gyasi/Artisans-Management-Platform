@@ -6,11 +6,11 @@ namespace AMP.Processors.Commands
 {
     public class OrderCommand
     {
-        public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public int UserId { get; set; }
-        public int ServiceId { get; set; }
-        public int? ArtisanId { get; set; }
+        public string Id { get; set; }
+        public string CustomerId { get; set; }
+        public string UserId { get; set; }
+        public string ServiceId { get; set; }
+        public string? ArtisanId { get; set; }
         //public bool IsComplete { get; set; }
         public string Description { get; set; }
         public decimal Cost { get; set; } 

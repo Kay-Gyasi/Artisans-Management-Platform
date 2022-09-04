@@ -36,7 +36,7 @@ namespace AMP.Processors.Processors
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
-        public async Task<int> Post(UserCommand command)
+        public async Task<string> Post(UserCommand command)
         {
             var userExists = await _uow.Users.Exists(command.Contact.PrimaryContact);
             if (userExists) return default;
@@ -55,7 +55,7 @@ namespace AMP.Processors.Processors
             return user.Id;
         }
 
-        public async Task<int> Save(UserCommand command)
+        public async Task<string> Save(UserCommand command)
         {
             var user = await _uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
@@ -71,12 +71,12 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<UserPageDto>>(page);
         }
 
-        public async Task<UserDto> Get(int id)
+        public async Task<UserDto> Get(string id)
         {
             return _mapper.Map<UserDto>(await _uow.Users.GetAsync(id));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var user = await _uow.Users.GetAsync(id);
             _cache.Remove(LookupCacheKey);

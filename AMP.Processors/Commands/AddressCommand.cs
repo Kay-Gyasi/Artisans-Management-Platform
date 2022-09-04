@@ -31,8 +31,8 @@ namespace AMP.Processors.Commands
 
     public class ImageCommand
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        public string Id { get; set; }
+        public string UserId { get; set; }
         public string PublicId { get; set; }
         public string ImageUrl { get; set; }
         public IFormFile Image { get; set; }

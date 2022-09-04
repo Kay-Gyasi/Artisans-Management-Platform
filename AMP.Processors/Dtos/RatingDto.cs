@@ -2,9 +2,9 @@
 {
     public class RatingDto
     {
-        public int Id { get; set; }
-        public int ArtisanId { get; set; }
-        public int CustomerId { get; set; }
+        public string Id { get; set; }
+        public string ArtisanId { get; set; }
+        public string CustomerId { get; set; }
         public int Votes { get; set; }
         public string Description { get; set; }
         public ArtisanDto Artisan { get; set; }

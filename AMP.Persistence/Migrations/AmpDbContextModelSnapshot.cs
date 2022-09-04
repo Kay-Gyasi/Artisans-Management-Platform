@@ -21,10 +21,8 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BusinessName")
                         .IsRequired()
@@ -56,8 +54,9 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -68,10 +67,8 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Customers", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -85,8 +82,9 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Normal");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -97,13 +95,11 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Disputes", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -121,8 +117,8 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Normal");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -141,10 +137,8 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Images", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -166,8 +160,8 @@ namespace AMP.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -180,10 +174,8 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Languages", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -208,19 +200,18 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("ArtisanId")
-                        .HasColumnType("int");
+                    b.Property<string>("ArtisanId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -264,8 +255,9 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Maintenance");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
+                    b.Property<string>("ServiceId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -292,18 +284,16 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Payments", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("AmountPaid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int?>("CustomersId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomersId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -323,8 +313,9 @@ namespace AMP.Persistence.Migrations
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Reference")
                         .HasColumnType("nvarchar(max)");
@@ -343,16 +334,16 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Ratings", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ArtisanId")
-                        .HasColumnType("int");
+                    b.Property<string>("ArtisanId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -385,16 +376,16 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Requests", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ArtisanId")
-                        .HasColumnType("int");
+                    b.Property<string>("ArtisanId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -408,8 +399,9 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Normal");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -424,10 +416,8 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Services", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -455,10 +445,8 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Users", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -483,8 +471,8 @@ namespace AMP.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsRemoved")
                         .ValueGeneratedOnAdd()
@@ -525,11 +513,11 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("ArtisansServices", b =>
                 {
-                    b.Property<int>("ArtisansId")
-                        .HasColumnType("int");
+                    b.Property<string>("ArtisansId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ServicesId")
-                        .HasColumnType("int");
+                    b.Property<string>("ServicesId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ArtisansId", "ServicesId");
 
@@ -540,11 +528,11 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("LanguagesUsers", b =>
                 {
-                    b.Property<int>("LanguagesId")
-                        .HasColumnType("int");
+                    b.Property<string>("LanguagesId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("LanguagesId", "UsersId");
 
@@ -579,15 +567,11 @@ namespace AMP.Persistence.Migrations
                 {
                     b.HasOne("AMP.Domain.Entities.Customers", "Customer")
                         .WithMany("Disputes")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("AMP.Domain.Entities.Orders", "Order")
                         .WithMany("Disputes")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.Navigation("Customer");
 
@@ -623,10 +607,8 @@ namespace AMP.Persistence.Migrations
 
                     b.OwnsOne("AMP.Domain.ValueObjects.Address", "WorkAddress", b1 =>
                         {
-                            b1.Property<int>("OrdersId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            b1.Property<string>("OrdersId")
+                                .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");
@@ -728,10 +710,8 @@ namespace AMP.Persistence.Migrations
                 {
                     b.OwnsOne("AMP.Domain.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<int>("UsersId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            b1.Property<string>("UsersId")
+                                .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");
@@ -759,10 +739,8 @@ namespace AMP.Persistence.Migrations
 
                     b.OwnsOne("AMP.Domain.ValueObjects.Contact", "Contact", b1 =>
                         {
-                            b1.Property<int>("UsersId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            b1.Property<string>("UsersId")
+                                .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("EmailAddress")
                                 .HasColumnType("nvarchar(max)");

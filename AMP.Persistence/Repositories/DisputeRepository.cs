@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Domain.Enums;
-using AMP.Domain.ViewModels;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
 using AMP.Processors.Repositories;
@@ -19,7 +17,7 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public async Task<int> OpenDisputeCount(int userId)
+        public async Task<int> OpenDisputeCount(string userId)
         {
             return await GetBaseQuery().Where(x => x.Customer.UserId == userId 
                                                    && x.Status == DisputeStatus.Open).CountAsync();

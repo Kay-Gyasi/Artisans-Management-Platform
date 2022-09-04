@@ -12,6 +12,19 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors.Administration
 {
+    public static class InitIds
+    {
+        public static string KayAdmin => "d5ff4e1b-503d-428e-86f8-8395d81de8c3";
+        public static string KayArtisan => "1f0a2ca4-f51e-4f4c-91bb-6a526b28de5a";
+        public static string Woode => "ce770c59-321b-459f-8022-2d6c4c0b1e75";
+        public static string Awate => "e6c36d19-f3ea-4c27-a08e-919cef6dc9d5";
+        public static string Gloria => "91f9bc91-1d35-4299-b2d2-d35fcdddb294";
+        public static string Abolo => "2193d840-32c0-40fd-a72b-18e3e17ea185";
+        public static string Addae => "902b8d62-cb2b-46f8-91a9-cd1d10aedb76";
+        public static string KayDeveloper => "ca9f1186-c4f8-43c6-9567-23f18974e0a7";
+        public static string KaySuspended => "68c3f900-47cd-4fdc-8628-ad8d451b5258";
+    }
+
     [Processor]
     public class InitializeDbProcessor : ProcessorBase
     {
@@ -93,7 +106,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.KayAdmin),
                 Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Gyasi")
@@ -114,7 +128,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.KayArtisan),
                 Users.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Woode")
@@ -134,7 +149,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0556455344")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.Woode),
                 Users.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Awate")
@@ -155,7 +171,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557511677")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.Awate),
                 Users.Create()
                     .WithFirstName("Gloria")
                     .WithFamilyName("Mensah")
@@ -175,7 +192,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0204377833")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.Gloria),
                 Users.Create()
                     .WithFirstName("Emmanuel")
                     .WithFamilyName("Abolo")
@@ -195,7 +213,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0545366277")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.Abolo),
                 Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Addae")
@@ -214,7 +233,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0206744299")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.Addae),
                 Users.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
@@ -234,7 +254,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.KayDeveloper),
                 Users.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
@@ -256,8 +277,8 @@ namespace AMP.Processors.Processors.Administration
                     .IsSuspendedd(true)
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
-
+                    .CreatedOn(DateTime.UtcNow)
+                    .WithId(InitIds.KaySuspended),
             };
 
             await _uow.Users.InsertAsync(users);
@@ -278,7 +299,7 @@ namespace AMP.Processors.Processors.Administration
 
             var artisans = new List<Artisans>
             {
-                Artisans.Create(3)
+                Artisans.Create(InitIds.KayArtisan)
                     .WithBusinessName("Qface Group Ghana")
                     .WithDescription(builder.ToString())
                     .CreatedOn(DateTime.UtcNow)
@@ -288,7 +309,7 @@ namespace AMP.Processors.Processors.Administration
                         {
                             "Electrical Works"
                         })),
-                Artisans.Create(2)
+                Artisans.Create(InitIds.Woode)
                     .WithBusinessName("Aquaman Painting Works")
                     .WithDescription("")
                     .CreatedOn(DateTime.UtcNow)
@@ -299,7 +320,7 @@ namespace AMP.Processors.Processors.Administration
                         "Plumbing",
                         "Painting"
                     })),
-                Artisans.Create(7)
+                Artisans.Create(InitIds.Addae)
                     .WithBusinessName("Addae Uber Solutions")
                     .WithDescription("")
                     .CreatedOn(DateTime.UtcNow)
@@ -319,11 +340,11 @@ namespace AMP.Processors.Processors.Administration
         {
             var customers = new List<Customers>
             {
-                Customers.Create(1)
+                Customers.Create(InitIds.Awate)
                     .CreatedOn(DateTime.UtcNow),
-                Customers.Create(5)
+                Customers.Create(InitIds.Abolo)
                     .CreatedOn(DateTime.UtcNow),
-                Customers.Create(6)
+                Customers.Create(InitIds.Gloria)
                     .CreatedOn(DateTime.UtcNow),
             };
             await _uow.Customers.InsertAsync(customers);

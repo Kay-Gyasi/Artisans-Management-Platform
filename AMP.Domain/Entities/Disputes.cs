@@ -6,8 +6,8 @@ namespace AMP.Domain.Entities
 {
     public class Disputes : EntityBase
     {
-        public int CustomerId { get; private set; }
-        public int OrderId { get; private set; }
+        public string CustomerId { get; private set; }
+        public string OrderId { get; private set; }
         public string Details { get; private set; }
         public DisputeStatus Status { get; private set; }
         public Customers Customer { get; private set; }
@@ -15,24 +15,24 @@ namespace AMP.Domain.Entities
 
         private Disputes(){}
 
-        private Disputes(int customerId, int orderId)
+        private Disputes(string customerId, string orderId)
         {
             CustomerId = customerId;
             OrderId = orderId;
         }
 
-        public static Disputes Create(int customerId, int orderId)
+        public static Disputes Create(string customerId, string orderId)
         {
             return new Disputes(customerId, orderId);
         }
 
-        public Disputes ByCustomerWithId(int customerId)
+        public Disputes ByCustomerWithId(string customerId)
         {
             CustomerId = customerId;
             return this;
         }
 
-        public Disputes AgainstOrderWithId(int orderId)
+        public Disputes AgainstOrderWithId(string orderId)
         {
             OrderId = orderId;
             return this;
@@ -68,7 +68,7 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Disputes WithId(int id)
+        public Disputes WithId(string id)
         {
             Id = id;
             return this;

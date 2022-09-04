@@ -43,7 +43,7 @@ namespace AMP.Processors.Processors
             };
         }
 
-        public async Task<List<Lookup>> GetOpenOrdersLookup(int userId)
+        public async Task<List<Lookup>> GetOpenOrdersLookup(string userId)
         {
             return await _uow.Orders.GetOpenOrdersLookup(userId);
         }

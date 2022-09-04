@@ -22,9 +22,9 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(ServiceCommand command)
+        public async Task<string> Save(ServiceCommand command)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
 
             Services service;
             if (isNew)
@@ -52,12 +52,12 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<ServicePageDto>>(page);
         }
 
-        public async Task<ServiceDto> Get(int id)
+        public async Task<ServiceDto> Get(string id)
         {
             return _mapper.Map<ServiceDto>(await _uow.Services.GetAsync(id));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var service = await _uow.Services.GetAsync(id);
             _cache.Remove(LookupCacheKey);

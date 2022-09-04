@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
-using AMP.Domain.Enums;
 using AMP.Domain.ViewModels;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
@@ -21,7 +20,7 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public List<Lookup> GetArtisansWhoHaveWorkedForCustomer(int userId)
+        public List<Lookup> GetArtisansWhoHaveWorkedForCustomer(string userId)
         {
             var artisans = GetBaseQuery().Where(x => x.Orders.Any(a => a.Customer.UserId == userId));
             return artisans.Select(x => new Lookup
@@ -31,7 +30,7 @@ namespace AMP.Persistence.Repositories
             }).ToList();
         }
 
-        public async Task<Artisans> GetArtisanByUserId(int userId)
+        public async Task<Artisans> GetArtisanByUserId(string userId)
         {
             return await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
         }

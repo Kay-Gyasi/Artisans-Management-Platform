@@ -8,12 +8,12 @@ namespace AMP.Domain.Entities
 {
     public class Orders : EntityBase
     {
-        public int CustomerId { get; private set; }
-        public int? ArtisanId { get; private set; }
+        public string CustomerId { get; private set; }
+        public string? ArtisanId { get; private set; }
         public bool IsComplete { get; private set; }
         public bool IsArtisanComplete { get; private set; }
         public bool IsRequestAccepted { get; private set; }
-        public int ServiceId { get; private set; }
+        public string ServiceId { get; private set; }
         public string Description { get; private set; }
         public decimal Cost { get; private set; }
         public decimal PaymentMade { get; private set; }
@@ -38,30 +38,30 @@ namespace AMP.Domain.Entities
 
         private Orders() {}
 
-        private Orders(int customerId, int serviceId)
+        private Orders(string customerId, string serviceId)
         {
             CustomerId = customerId;
             ServiceId = serviceId;
         }
 
-        public static Orders Create(int customerId, int serviceId)
+        public static Orders Create(string customerId, string serviceId)
         {
             return new Orders(customerId, serviceId);
         }
 
-        public Orders ForCustomerWithId(int customerId)
+        public Orders ForCustomerWithId(string customerId)
         {
             CustomerId = customerId;
             return this;
         }
 
-        public Orders ForServiceWithId(int serviceId)
+        public Orders ForServiceWithId(string serviceId)
         {
             ServiceId = serviceId;
             return this;
         }
 
-        public Orders ForArtisanWithId(int? artisanId)
+        public Orders ForArtisanWithId(string? artisanId)
         {
             ArtisanId = artisanId;
             return this;
@@ -159,6 +159,12 @@ namespace AMP.Domain.Entities
         public Orders CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Orders WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

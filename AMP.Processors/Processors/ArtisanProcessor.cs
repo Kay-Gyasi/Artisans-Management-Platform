@@ -27,9 +27,9 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(ArtisanCommand command)
+        public async Task<string> Save(ArtisanCommand command)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
             Artisans artisan;
 
             if (isNew)
@@ -70,7 +70,7 @@ namespace AMP.Processors.Processors
                 paginated.PageSize);
         }
 
-        public async Task<ArtisanDto> Get(int id)
+        public async Task<ArtisanDto> Get(string id)
         {
             var artisan = _mapper.Map<ArtisanDto>(await _uow.Artisans.GetAsync(id));
             artisan.NoOfOrders = _uow.Orders.GetCount(artisan.Id);
@@ -79,7 +79,7 @@ namespace AMP.Processors.Processors
             return artisan;
         }
 
-        public async Task<ArtisanDto> GetByUserId(int userId)
+        public async Task<ArtisanDto> GetByUserId(string userId)
         {
             var artisan = _mapper.Map<ArtisanDto>(await _uow.Artisans.GetArtisanByUserId(userId));
             artisan.NoOfOrders = _uow.Orders.GetCount(artisan.Id);
@@ -88,12 +88,12 @@ namespace AMP.Processors.Processors
             return artisan;
         }
 
-        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(int userId)
+        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(string userId)
         {
             return await Task.Run(() => _uow.Artisans.GetArtisansWhoHaveWorkedForCustomer(userId));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var artisan = await _uow.Artisans.GetAsync(id);
             _cache.Remove(LookupCacheKey);

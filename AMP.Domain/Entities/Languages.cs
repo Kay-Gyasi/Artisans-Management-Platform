@@ -17,6 +17,12 @@ namespace AMP.Domain.Entities
             Name = name;
             return this;
         }
+
+        public Languages WithId(string id)
+        {
+            Id = id;
+            return this;
+        }
         public string Name { get; private set; }
 
         private readonly List<Users> _users = new List<Users>();

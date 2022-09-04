@@ -9,7 +9,7 @@ namespace AMP.Domain.Entities
 {
     public class Users : EntityBase
     {
-        public int? ImageId { get; private set; }
+        public string? ImageId { get; private set; }
         public string FirstName { get; private set; }
         public string FamilyName { get; private set; }
         public string OtherName { get; private set; }
@@ -66,9 +66,8 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users WithImageId(int? id)
+        public Users WithImageId(string? id)
         {
-            if (id == 0) id = null;
             ImageId = id;
             return this;
         }
@@ -143,6 +142,12 @@ namespace AMP.Domain.Entities
         public Users HasPasswordKey(byte[] hash)
         {
             PasswordKey = hash;
+            return this;
+        }
+
+        public Users WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

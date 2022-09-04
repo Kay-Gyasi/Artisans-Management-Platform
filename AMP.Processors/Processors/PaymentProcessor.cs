@@ -22,7 +22,7 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(PaymentCommand command)
+        public async Task<string> Save(PaymentCommand command)
         {
 
             var payment = Payments.Create(command.OrderId)
@@ -46,12 +46,12 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<PaymentPageDto>>(page);
         }
 
-        public async Task<PaymentDto> Get(int id)
+        public async Task<PaymentDto> Get(string id)
         {
             return _mapper.Map<PaymentDto>(await _uow.Payments.GetAsync(id));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var payment = await _uow.Payments.GetAsync(id);
             _cache.Remove(LookupCacheKey);

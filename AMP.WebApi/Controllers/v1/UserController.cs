@@ -21,7 +21,7 @@ public class UserController : BaseControllerv1
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<UserDto> Get(int id)
+    public async Task<UserDto> Get(string id)
         => await Mediator.Send(new GetUser.Query(id));
 
     [HttpPost]
@@ -48,7 +48,7 @@ public class UserController : BaseControllerv1
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task Delete(int id)
+    public async Task Delete(string id)
         => await Mediator.Send(new DeleteUser.Command(id));
 
     [AllowAnonymous]

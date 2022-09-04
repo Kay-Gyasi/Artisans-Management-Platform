@@ -11,9 +11,9 @@ namespace AMP.Application.Features.Queries
     {
         public class Query : IRequest<List<Lookup>>
         {
-            public int Id { get; }
+            public string Id { get; }
 
-            public Query(int id)
+            public Query(string id)
             {
                 Id = id;
             }

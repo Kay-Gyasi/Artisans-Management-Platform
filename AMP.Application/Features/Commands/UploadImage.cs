@@ -13,10 +13,10 @@ namespace AMP.Application.Features.Commands
     {
         public class Command : IRequest
         {
-            public int UserId { get; }
+            public string UserId { get; }
             public IEnumerable<IFormFile> Files { get; }
 
-            public Command(IEnumerable<IFormFile> files, int userId)
+            public Command(IEnumerable<IFormFile> files, string userId)
             {
                 UserId = userId;
                 Files = files;

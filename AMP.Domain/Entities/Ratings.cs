@@ -6,8 +6,8 @@ namespace AMP.Domain.Entities
 {
     public class Ratings : EntityBase
     {
-        public int ArtisanId { get; private set; }
-        public int CustomerId { get; private set; }
+        public string ArtisanId { get; private set; }
+        public string CustomerId { get; private set; }
         public int Votes { get; private set; }
         public string Description { get; private set; }
         public Artisans Artisan { get; private set; }
@@ -15,24 +15,24 @@ namespace AMP.Domain.Entities
 
         private Ratings(){}
 
-        private Ratings(int customerId, int artisanId)
+        private Ratings(string customerId, string artisanId)
         {
             CustomerId = customerId;
             ArtisanId = artisanId;
         }
 
-        public static Ratings Create(int customerId, int artisanId)
+        public static Ratings Create(string customerId, string artisanId)
         {
             return new Ratings(customerId, artisanId);
         }
 
-        public Ratings ForCustomerWithId(int customerId)
+        public Ratings ForCustomerWithId(string customerId)
         {
             CustomerId = customerId;
             return this;
         }
 
-        public Ratings ForArtisanWithId(int artisanId)
+        public Ratings ForArtisanWithId(string artisanId)
         {
             ArtisanId = artisanId;
             return this;
@@ -77,6 +77,12 @@ namespace AMP.Domain.Entities
         public Ratings CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Ratings WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

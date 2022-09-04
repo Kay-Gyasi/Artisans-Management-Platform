@@ -15,7 +15,7 @@ namespace AMP.Services
             services.AddSingleton<IAuthService, AuthService>();
             services.Configure<CloudinaryOptions>(options 
                 => configuration.GetSection("CloudinaryOptions").Bind(options));
-            services.AddSingleton<ICloudinaryService, CloudinaryService>();
+            services.AddSingleton<ICloudStorageService, CloudinaryService>();
             return services;
         }
     }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace AMP.Services.Images
 {
-    public class CloudinaryService : ICloudinaryService
+    public class CloudinaryService : ICloudStorageService
     {
         private readonly IOptions<CloudinaryOptions> _options;
         private readonly Cloudinary _cloudinary;

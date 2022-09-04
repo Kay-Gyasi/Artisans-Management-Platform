@@ -22,9 +22,9 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(RatingCommand command)
+        public async Task<string> Save(RatingCommand command)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
 
             Ratings rating;
             if (isNew)
@@ -54,7 +54,7 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
         
-        public async Task<PaginatedList<RatingPageDto>> GetArtisanRatingPage(PaginatedCommand command, int userId)
+        public async Task<PaginatedList<RatingPageDto>> GetArtisanRatingPage(PaginatedCommand command, string userId)
         {
             var page = await _uow.Ratings.GetArtisanRatingPage(command, userId, new CancellationToken());
             foreach(var rating in page.Data)
@@ -65,12 +65,12 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
 
-        public async Task<RatingDto> Get(int id)
+        public async Task<RatingDto> Get(string id)
         {
             return _mapper.Map<RatingDto>(await _uow.Ratings.GetAsync(id));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var rating = await _uow.Ratings.GetAsync(id);
             _cache.Remove(LookupCacheKey);

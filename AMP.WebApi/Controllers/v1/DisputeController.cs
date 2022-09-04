@@ -23,27 +23,27 @@ public class DisputeController : BaseControllerv1
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<DisputeDto> Get(int id)
+    public async Task<DisputeDto> Get(string id)
         => await Mediator.Send(new GetDispute.Query(id));
     
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<DisputeCount> GetOpenDisputeCount()
-        => await Mediator.Send(new GetOpenDisputeCount.Query(Convert.ToInt32(UserId)));
+        => await Mediator.Send(new GetOpenDisputeCount.Query(UserId));
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Save(DisputeCommand command)
     {
-        var id = await Mediator.Send(new SaveDispute.Command(command, Convert.ToInt32(UserId)));
+        var id = await Mediator.Send(new SaveDispute.Command(command, UserId));
         return CreatedAtAction(nameof(Get), new { id }, id);
     }
 
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task Delete(int id)
+    public async Task Delete(string id)
         => await Mediator.Send(new DeleteDispute.Command(id));
 }

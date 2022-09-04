@@ -25,7 +25,7 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public Task<List<Lookup>> GetOpenOrdersLookup(int userId)
+        public Task<List<Lookup>> GetOpenOrdersLookup(string userId)
         {
             return GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete).Select(x => new Lookup()
                 {
@@ -36,7 +36,7 @@ namespace AMP.Persistence.Repositories
         }
 
       
-        public async Task Complete(int orderId)
+        public async Task Complete(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.WithStatus(OrderStatus.Completed)
@@ -44,35 +44,35 @@ namespace AMP.Persistence.Repositories
             await UpdateAsync(order);
         }
         
-        public async Task ArtisanComplete(int orderId)
+        public async Task ArtisanComplete(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.IsArtisanCompleted(true);
             await UpdateAsync(order);
         }
 
-        public async Task AcceptRequest(int orderId)
+        public async Task AcceptRequest(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.RequestAccepted(true);
             await UpdateAsync(order);
         }
         
-        public async Task CancelRequest(int orderId)
+        public async Task CancelRequest(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.RequestAccepted(false);
             await UpdateAsync(order);
         }
 
-        public async Task UnassignArtisan(int orderId)
+        public async Task UnassignArtisan(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.ForArtisanWithId(null);
             await UpdateAsync(order);
         }
 
-        public async Task AssignArtisan(int orderId, int artisanId)
+        public async Task AssignArtisan(string orderId, string artisanId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order.ForArtisanWithId(artisanId);
@@ -82,7 +82,7 @@ namespace AMP.Persistence.Repositories
         }
 
         public async Task<PaginatedList<Orders>> GetCustomerOrderPage(PaginatedCommand paginated,
-            int userId, CancellationToken cancellationToken)
+            string userId, CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Status != OrderStatus.Completed && x.Customer.UserId == userId)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
@@ -92,7 +92,7 @@ namespace AMP.Persistence.Repositories
         }
 
         public async Task<PaginatedList<Orders>> GetOrderHistory(PaginatedCommand paginated,
-            int userId, CancellationToken cancellationToken)
+            string userId, CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Customer.UserId == userId && x.Status == OrderStatus.Completed)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
@@ -100,7 +100,7 @@ namespace AMP.Persistence.Repositories
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
 
-        public async Task<PaginatedList<Orders>> GetSchedule(PaginatedCommand paginated, int userId, 
+        public async Task<PaginatedList<Orders>> GetSchedule(PaginatedCommand paginated, string userId, 
             CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId 
@@ -112,7 +112,7 @@ namespace AMP.Persistence.Repositories
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
         
-        public async Task<PaginatedList<Orders>> GetRequests(PaginatedCommand paginated, int userId, 
+        public async Task<PaginatedList<Orders>> GetRequests(PaginatedCommand paginated, string userId, 
             CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId 
@@ -124,7 +124,7 @@ namespace AMP.Persistence.Repositories
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
 
-        public async Task<PaginatedList<Orders>> GetWorkHistory(PaginatedCommand paginated, int userId
+        public async Task<PaginatedList<Orders>> GetWorkHistory(PaginatedCommand paginated, string userId
             , CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId && x.Status == OrderStatus.Completed)
@@ -134,7 +134,7 @@ namespace AMP.Persistence.Repositories
             return await BuildPage(whereQueryable, paginated, cancellationToken);
         }
 
-        public int GetCount(int artisanId)
+        public int GetCount(string artisanId)
         {
             return GetBaseQuery()
                 .AsNoTracking()

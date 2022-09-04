@@ -5,8 +5,8 @@ namespace AMP.Processors.Commands
 {
     public class UserCommand
     {
-        public int Id { get; set; }
-        public int? ImageId { get; set; }
+        public string Id { get; set; }
+        public string? ImageId { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
         public string? OtherName { get; set; }

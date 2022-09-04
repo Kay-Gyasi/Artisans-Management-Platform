@@ -12,12 +12,12 @@ namespace AMP.Processors.Processors
     [Processor]
     public class ImageProcessor : ProcessorBase
     {
-        private readonly ICloudinaryService _cloudinary;
+        private readonly ICloudStorageService _cloudinary;
 
         public ImageProcessor(IUnitOfWork uow, 
             IMapper mapper, 
             IMemoryCache cache,
-            ICloudinaryService cloudinary) : base(uow, mapper, cache)
+            ICloudStorageService cloudinary) : base(uow, mapper, cache)
         {
             _cloudinary = cloudinary;
         }

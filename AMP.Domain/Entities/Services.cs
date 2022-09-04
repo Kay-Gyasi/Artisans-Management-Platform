@@ -46,7 +46,7 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Services WithId(int id)
+        public Services WithId(string id)
         {
             Id = id;
             return this;

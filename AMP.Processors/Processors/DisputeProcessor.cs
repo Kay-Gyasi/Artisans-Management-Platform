@@ -22,9 +22,9 @@ namespace AMP.Processors.Processors
         {
         }
 
-        public async Task<int> Save(DisputeCommand command, int userId)
+        public async Task<string> Save(DisputeCommand command, string userId)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
             command.CustomerId = await _uow.Customers.GetCustomerId(userId);
 
             Disputes dispute;
@@ -53,12 +53,12 @@ namespace AMP.Processors.Processors
             return _mapper.Map<PaginatedList<DisputePageDto>>(page);
         }
 
-        public async Task<DisputeDto> Get(int id)
+        public async Task<DisputeDto> Get(string id)
         {
             return _mapper.Map<DisputeDto>(await _uow.Disputes.GetAsync(id));
         }
         
-        public async Task<DisputeCount> GetOpenDisputeCount(int userId)
+        public async Task<DisputeCount> GetOpenDisputeCount(string userId)
         {
             return new DisputeCount
             {
@@ -66,7 +66,7 @@ namespace AMP.Processors.Processors
             };
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var dispute = await _uow.Disputes.GetAsync(id);
             _cache.Remove(LookupCacheKey);

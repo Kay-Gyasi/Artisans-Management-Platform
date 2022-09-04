@@ -1,12 +1,10 @@
 ﻿using AMP.Domain.Entities.Base;
-using Microsoft.AspNetCore.Http;
 
 namespace AMP.Domain.Entities
 {
     public class Images : EntityBase
     {
-        public int Id { get; private set; }
-        public int? UserId { get; private set; }
+        public string? UserId { get; private set; }
         public string PublicId { get; private set; }
         public string ImageUrl { get; private set; }
         public Users User { get; private set; }
@@ -34,9 +32,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Images ForUserWithId(int? userId)
+        public Images ForUserWithId(string? userId)
         {
             UserId = userId;
+            return this;
+        }
+
+        public Images WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

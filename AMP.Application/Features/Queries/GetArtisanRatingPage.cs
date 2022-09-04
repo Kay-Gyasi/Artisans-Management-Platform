@@ -12,9 +12,9 @@ namespace AMP.Application.Features.Queries
         public class Query : IRequest<PaginatedList<RatingPageDto>>
         {
             public PaginatedCommand Command { get; }
-            public int UserId { get; }
+            public string UserId { get; }
 
-            public Query(PaginatedCommand command, int userId)
+            public Query(PaginatedCommand command, string userId)
             {
                 Command = command;
                 UserId = userId;

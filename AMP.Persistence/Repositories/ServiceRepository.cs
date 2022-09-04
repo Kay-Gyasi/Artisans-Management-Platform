@@ -40,7 +40,7 @@ namespace AMP.Persistence.Repositories
             return results;
         }
 
-        public async Task<string> GetNameAsync(int serviceId)
+        public async Task<string> GetNameAsync(string serviceId)
         {
             var service = await GetBaseQuery()
                 .AsNoTracking()
