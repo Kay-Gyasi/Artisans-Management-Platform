@@ -17,7 +17,8 @@ namespace AMP.Processors.Processors
         Payment,
         Rating,
         Service,
-        User
+        User,
+        ArtisanServices
     }
 
     [Processor]
@@ -39,6 +40,7 @@ namespace AMP.Processors.Processors
                 LookupType.Rating => await Get(LookupType.Rating, await _uow.Ratings.GetLookupAsync()),
                 LookupType.Service => await Get(LookupType.Service, await _uow.Services.GetLookupAsync()),
                 LookupType.User => await Get(LookupType.User, await _uow.Users.GetLookupAsync()),
+                LookupType.ArtisanServices => await Get(LookupType.ArtisanServices, await _uow.Services.GetAvailableServices()),
                 _ => new List<Lookup>()
             };
         }

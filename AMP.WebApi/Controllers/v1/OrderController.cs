@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using System.Web;
 using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
@@ -58,12 +59,11 @@ public class OrderController : BaseControllerv1
     public async Task<OrderDto> Get(string id)
         => await Mediator.Send(new GetOrder.Query(id));
 
-    [HttpGet("{serializedCommand}")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<InsertOrderResponse> Insert(string serializedCommand)
+    public async Task<InsertOrderResponse> Insert([FromBody] OrderCommand command)
     {
-        var command = JsonConvert.DeserializeObject<OrderCommand>(serializedCommand);
         return await Mediator.Send(new InsertOrder.Query(command));
     } 
 

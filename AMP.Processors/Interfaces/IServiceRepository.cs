@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.ViewModels;
 using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories
@@ -9,5 +10,6 @@ namespace AMP.Processors.Repositories
     {
         Task<List<Services>> BuildServices(List<string> services);
         Task<string> GetNameAsync(string serviceId);
+        Task<List<Lookup>> GetAvailableServices();
     }
 }

@@ -18,17 +18,28 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public override Task<List<Lookup>> GetLookupAsync()
+        public Task<List<Lookup>> GetAvailableServices()
         {
-            return GetBaseQuery().Select(x => new Lookup()
+            return GetBaseQuery().Where(x => x.Artisans.Any())
+                .Select(x => new Lookup()
                 {
                     Id = x.Id,
                     Name = x.Name
                 }).OrderBy(x => x.Name)
+                    .ToListAsync();
+        }
+
+        public override Task<List<Lookup>> GetLookupAsync()
+        {
+            return GetBaseQuery().Select(x => new Lookup()
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).OrderBy(x => x.Name)
                 .ToListAsync();
         }
 
-        
+
         public async Task<List<Services>> BuildServices(List<string> services)
         {
             var results = new List<Services>();
