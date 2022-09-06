@@ -19,10 +19,10 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public async Task<string> GetIdByEmail(string email)
+        public async Task<string> GetIdByPhone(string phone)
         {
             var user = await GetBaseQuery()
-                .FirstOrDefaultAsync(x => x.Contact.EmailAddress == email);
+                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
             return user.Id;
         }
 

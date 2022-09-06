@@ -7,7 +7,7 @@ namespace AMP.Processors.Repositories
 {
     public interface IUserRepository : IRepositoryBase<Users>
     {
-        Task<string> GetIdByEmail(string email);
+        Task<string> GetIdByPhone(string phone);
         Task<Users> Authenticate(SigninCommand command);
         (byte[], byte[]) Register(UserCommand command);
         (byte[], byte[]) Register(string password);

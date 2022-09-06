@@ -106,16 +106,17 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var artisan = Artisans.Create(userId)
                     .WithBusinessName(user.DisplayName)
+                    .WithDescription(string.Empty)
                     .CreatedOn(DateTime.UtcNow);
                 await _uow.Artisans.InsertAsync(artisan);
                 await _uow.SaveChangesAsync();
             }
             catch (Exception)
             {
-                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var deleted = await _uow.Users.GetAsync(userId);
                 await _uow.Users.DeleteAsync(deleted, new CancellationToken());
             }
@@ -126,7 +127,7 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var customer = Customers.Create(userId)
                     .CreatedOn(DateTime.UtcNow);
                 await _uow.Customers.InsertAsync(customer);
@@ -134,7 +135,7 @@ namespace AMP.Processors.Processors
             }
             catch (Exception)
             {
-                var userId = await _uow.Users.GetIdByEmail(user.Contact.EmailAddress);
+                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var deleted = await _uow.Users.GetAsync(userId);
                 await _uow.Users.DeleteAsync(deleted, new CancellationToken());
             }
