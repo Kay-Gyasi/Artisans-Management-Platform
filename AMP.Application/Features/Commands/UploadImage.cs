@@ -14,12 +14,12 @@ namespace AMP.Application.Features.Commands
         public class Command : IRequest
         {
             public string UserId { get; }
-            public IEnumerable<IFormFile> Files { get; }
+            public IFormFile File { get; }
 
-            public Command(IEnumerable<IFormFile> files, string userId)
+            public Command(IFormFile file, string userId)
             {
                 UserId = userId;
-                Files = files;
+                File = file;
             }
         }
 
@@ -36,7 +36,7 @@ namespace AMP.Application.Features.Commands
                 var command = new ImageCommand
                 {
                     UserId = request.UserId,
-                    Image = request.Files.FirstOrDefault()
+                    Image = request.File
                 };
                 await _processor.UploadImage(command);
                 return Unit.Value;

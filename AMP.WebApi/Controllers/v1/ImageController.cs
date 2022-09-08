@@ -11,7 +11,7 @@ public class ImageController : BaseControllerv1
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Upload([FromForm] IEnumerable<IFormFile> files)
+    public async Task<IActionResult> Upload([FromForm] IFormFile files)
     {
         
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

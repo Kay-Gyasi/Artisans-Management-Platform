@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using System.Web;
 using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
@@ -8,7 +7,6 @@ using AMP.Processors.PageDtos;
 using AMP.Processors.Responses;
 using AMP.Shared.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
 
 namespace AMP.WebApi.Controllers.v1;
 
