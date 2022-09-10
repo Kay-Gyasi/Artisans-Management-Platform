@@ -87,7 +87,7 @@ namespace AMP.Persistence.Repositories
             var whereQueryable = GetBaseQuery().Where(x => x.Status != OrderStatus.Completed && x.Customer.UserId == userId)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
             var orders = await BuildPage(whereQueryable, paginated, cancellationToken);
-            orders.Data.Reverse();
+            _ = orders.Data.OrderByDescending(x => x.DateCreated);
             return orders;
         }
 

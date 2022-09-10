@@ -57,7 +57,9 @@ namespace AMP.Persistence.Repositories
                 .Include(x => x.User)
                 .ThenInclude(x => x.Languages)
                 .Include(x => x.Services)
-                .Include(x => x.Ratings);
+                .Include(x => x.Ratings)
+                .Include(x => x.User)
+                .ThenInclude(x => x.Image); ;
         }
     }
 }

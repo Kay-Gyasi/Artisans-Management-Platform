@@ -22,7 +22,9 @@ namespace AMP.Persistence.Repositories
         {
             return base.GetBaseQuery()
                 .Include(x => x.User)
-                .ThenInclude(x => x.Languages);
+                .ThenInclude(x => x.Languages)
+                .Include(x => x.User)
+                .ThenInclude(x => x.Image);
         }
 
         public override Task<List<Lookup>> GetLookupAsync()
