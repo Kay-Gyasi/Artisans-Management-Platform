@@ -162,6 +162,12 @@ namespace AMP.Domain.Entities
             return this;
         }
 
+        public Orders LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
+
         public Orders WithId(string id)
         {
             Id = id;

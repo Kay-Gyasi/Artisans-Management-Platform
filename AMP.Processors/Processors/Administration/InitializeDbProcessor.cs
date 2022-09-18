@@ -49,17 +49,17 @@ namespace AMP.Processors.Processors.Administration
             var services = new List<Services>
             {
                 Services.Create("Masonry")
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Services.Create("Electrical Works")
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Services.Create("Plumbing")
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Services.Create("Mechanics")
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Services.Create("Carpentry")
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Services.Create("Painting")
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
             };
 
             await _uow.Services.InsertAsync(services);
@@ -106,7 +106,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.KayAdmin),
                 Users.Create()
                     .WithFirstName("Kofi")
@@ -128,7 +128,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.KayArtisan),
                 Users.Create()
                     .WithFirstName("Samuel")
@@ -149,7 +149,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0556455344")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.Woode),
                 Users.Create()
                     .WithFirstName("Samuel")
@@ -171,7 +171,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557511677")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.Awate),
                 Users.Create()
                     .WithFirstName("Gloria")
@@ -192,7 +192,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0204377833")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.Gloria),
                 Users.Create()
                     .WithFirstName("Emmanuel")
@@ -213,7 +213,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0545366277")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.Abolo),
                 Users.Create()
                     .WithFirstName("Kofi")
@@ -233,7 +233,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0206744299")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.Addae),
                 Users.Create()
                     .WithFirstName("Kay")
@@ -254,7 +254,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.KayDeveloper),
                 Users.Create()
                     .WithFirstName("Kay")
@@ -277,7 +277,7 @@ namespace AMP.Processors.Processors.Administration
                     .IsSuspendedd(true)
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .WithId(InitIds.KaySuspended),
             };
 
@@ -302,7 +302,7 @@ namespace AMP.Processors.Processors.Administration
                 Artisans.Create(InitIds.KayArtisan)
                     .WithBusinessName("Qface Group Ghana")
                     .WithDescription(builder.ToString())
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .IsVerifiedd(true)
                     .IsApprovedd(true)
                     .Offers(await BuildService(new List<string>
@@ -312,7 +312,7 @@ namespace AMP.Processors.Processors.Administration
                 Artisans.Create(InitIds.Woode)
                     .WithBusinessName("Aquaman Painting Works")
                     .WithDescription("")
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .IsVerifiedd(false)
                     .IsApprovedd(false)
                     .Offers(await BuildService(new List<string>
@@ -323,7 +323,7 @@ namespace AMP.Processors.Processors.Administration
                 Artisans.Create(InitIds.Addae)
                     .WithBusinessName("Addae Uber Solutions")
                     .WithDescription("")
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .IsVerifiedd(true)
                     .IsApprovedd(true)
                     .Offers(await BuildService(new List<string>
@@ -341,11 +341,11 @@ namespace AMP.Processors.Processors.Administration
             var customers = new List<Customers>
             {
                 Customers.Create(InitIds.Awate)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Customers.Create(InitIds.Abolo)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
                 Customers.Create(InitIds.Gloria)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn(),
             };
             await _uow.Customers.InsertAsync(customers);
         }

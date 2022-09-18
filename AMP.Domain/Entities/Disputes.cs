@@ -68,6 +68,11 @@ namespace AMP.Domain.Entities
             return this;
         }
 
+        public Disputes LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
         public Disputes WithId(string id)
         {
             Id = id;

@@ -7,5 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
+    <_PublishTargetUrl>ftp://win8044.site4now.net:21/ampprodapi</_PublishTargetUrl>
+    <History>False|2022-09-10T12:59:06.9085364Z;</History>
   </PropertyGroup>
 </Project>

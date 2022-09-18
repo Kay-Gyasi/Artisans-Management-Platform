@@ -127,9 +127,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users CreatedOn(DateTime date)
+        public Users CreatedOn()
         {
-            DateCreated = date;
+            DateCreated = DateTime.UtcNow;
+            return this;
+        }
+
+        public Users LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
             return this;
         }
 

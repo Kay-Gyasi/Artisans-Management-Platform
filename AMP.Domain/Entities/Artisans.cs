@@ -73,9 +73,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Artisans CreatedOn(DateTime date)
+        public Artisans CreatedOn()
         {
-            DateCreated = date;
+            DateCreated = DateTime.UtcNow;
+            return this;
+        }
+        
+        public Artisans LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
             return this;
         }
 

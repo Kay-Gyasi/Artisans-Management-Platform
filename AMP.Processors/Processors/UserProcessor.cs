@@ -42,7 +42,7 @@ namespace AMP.Processors.Processors
             if (userExists) return default;
 
             var user = Users.Create()
-                .CreatedOn(DateTime.UtcNow);
+                .CreatedOn();
             var passes = _uow.Users.Register(command);
             await AssignFields(user, command);
             user.HasPassword(passes.Item1)
@@ -59,6 +59,7 @@ namespace AMP.Processors.Processors
         {
             var user = await _uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
+            user.LastModifiedOn();
             _cache.Remove(LookupCacheKey);
             await _uow.Users.UpdateAsync(user);
             await _uow.SaveChangesAsync();
@@ -110,7 +111,7 @@ namespace AMP.Processors.Processors
                 var artisan = Artisans.Create(userId)
                     .WithBusinessName(user.DisplayName)
                     .WithDescription(string.Empty)
-                    .CreatedOn(DateTime.UtcNow);
+                    .CreatedOn();
                 await _uow.Artisans.InsertAsync(artisan);
                 await _uow.SaveChangesAsync();
             }
@@ -129,7 +130,7 @@ namespace AMP.Processors.Processors
             {
                 var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var customer = Customers.Create(userId)
-                    .CreatedOn(DateTime.UtcNow);
+                    .CreatedOn();
                 await _uow.Customers.InsertAsync(customer);
                 await _uow.SaveChangesAsync();
             }

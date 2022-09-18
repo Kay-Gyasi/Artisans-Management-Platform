@@ -155,7 +155,8 @@ namespace AMP.Processors.Processors
                 .ForCustomerWithId(customerId)
                 .WithScope(command.Scope);
 
-            if (!isNew) order.ForServiceWithId(command.ServiceId);
+            if (!isNew) order.ForServiceWithId(command.ServiceId)
+                    .LastModifiedOn();
         }
     }
 }

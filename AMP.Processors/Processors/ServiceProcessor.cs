@@ -30,7 +30,7 @@ namespace AMP.Processors.Processors
             if (isNew)
             {
                 service = Services.Create(command.Name, command.Description)
-                    .CreatedOn(DateTime.UtcNow);
+                    .CreatedOn();
                 _cache.Remove(LookupCacheKey);
                 await _uow.Services.InsertAsync(service);
                 await _uow.SaveChangesAsync();
@@ -39,7 +39,8 @@ namespace AMP.Processors.Processors
 
             service = await _uow.Services.GetAsync(command.Id);
             service.WithDescription(command.Description)
-                .WithName(command.Name);
+                .WithName(command.Name)
+                .LastModifiedOn();
             _cache.Remove(LookupCacheKey);
             await _uow.Services.UpdateAsync(service);
             await _uow.SaveChangesAsync();

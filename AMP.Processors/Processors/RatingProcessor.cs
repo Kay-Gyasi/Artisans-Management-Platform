@@ -87,7 +87,8 @@ namespace AMP.Processors.Processors
             {
                 var customer = await _uow.Customers.GetCustomerId(command.UserId);
                 rating.ForCustomerWithId(customer)
-                        .ForArtisanWithId(command.ArtisanId);
+                        .ForArtisanWithId(command.ArtisanId)
+                        .LastModifiedOn();
             }
         }
     }

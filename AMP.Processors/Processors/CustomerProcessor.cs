@@ -31,7 +31,7 @@ namespace AMP.Processors.Processors
             if (isNew)
             {
                 customer = Customers.Create(command.UserId)
-                    .CreatedOn(DateTime.UtcNow);
+                    .CreatedOn();
                 _cache.Remove(LookupCacheKey);
                 await _uow.Customers.InsertAsync(customer);
                 await _uow.SaveChangesAsync();
@@ -39,7 +39,8 @@ namespace AMP.Processors.Processors
             }
 
             customer = await _uow.Customers.GetAsync(command.Id);
-            customer.ForUserId(command.UserId);
+            customer.ForUserId(command.UserId)
+                .LastModifiedOn();
             _cache.Remove(LookupCacheKey);
             await _uow.Customers.UpdateAsync(customer);
             await _uow.SaveChangesAsync();

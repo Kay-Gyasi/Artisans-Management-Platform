@@ -64,11 +64,11 @@ namespace AMP.Processors.Processors
             payment.WithAmountPaid(command.AmountPaid)
                 .HasBeenForwarded(false)
                 .WithReference(command.Reference)
-                .HasBeenVerified(false)
-                .CreatedOn(DateTime.UtcNow);
+                .HasBeenVerified(false);
 
             if (!isNew)
-                payment.OnOrderWithId(command.OrderId);
+                payment.OnOrderWithId(command.OrderId)
+                    .LastModifiedOn();
         }
     }
 }

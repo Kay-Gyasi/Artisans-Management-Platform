@@ -80,6 +80,12 @@ namespace AMP.Domain.Entities
             return this;
         }
 
+        public Ratings LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
+
         public Ratings WithId(string id)
         {
             Id = id;

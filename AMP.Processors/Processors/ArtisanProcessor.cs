@@ -35,7 +35,7 @@ namespace AMP.Processors.Processors
             if (isNew)
             {
                 artisan = Artisans.Create(command.UserId)
-                    .CreatedOn(DateTime.UtcNow);
+                    .CreatedOn();
                 await AssignFields(artisan, command, true);
                 _cache.Remove(LookupCacheKey);
                 await _uow.Artisans.InsertAsync(artisan);
@@ -111,7 +111,8 @@ namespace AMP.Processors.Processors
                 .IsVerifiedd(command.IsVerified)
                 .IsApprovedd(command.IsApproved)
                 .Offers(services);
-            if (!isNew) artisan.ForUserId(command.UserId);
+            if (!isNew) artisan.ForUserId(command.UserId)
+                    .LastModifiedOn();
         }
     }
 }

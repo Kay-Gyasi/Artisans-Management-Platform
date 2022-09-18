@@ -40,9 +40,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Services CreatedOn(DateTime date)
+        public Services CreatedOn()
         {
-            DateCreated = date;
+            DateCreated = DateTime.UtcNow;
+            return this;
+        }
+
+        public Services LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
             return this;
         }
 

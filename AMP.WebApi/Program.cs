@@ -1,6 +1,3 @@
-using AMP.Persistence.Database;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 WebApplication app;
 var logger = new LoggerConfiguration()

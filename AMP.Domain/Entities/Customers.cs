@@ -48,9 +48,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Customers CreatedOn(DateTime date)
+        public Customers CreatedOn()
         {
-            DateCreated = date;
+            DateCreated = DateTime.UtcNow; 
+            return this;
+        }
+
+        public Customers LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
             return this;
         }
 
