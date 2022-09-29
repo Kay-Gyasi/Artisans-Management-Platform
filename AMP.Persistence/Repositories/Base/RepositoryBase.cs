@@ -272,8 +272,10 @@ namespace AMP.Persistence.Repositories.Base
             return await _context.Set<T>().CountAsync();
         }
 
+        // TODO:: Remove async from method
         public virtual async Task<List<Lookup>> GetLookupAsync()
         {
+            await Task.CompletedTask;
             return new List<Lookup>();
         }
 

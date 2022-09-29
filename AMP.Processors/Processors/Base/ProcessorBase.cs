@@ -6,15 +6,15 @@ namespace AMP.Processors.Processors.Base
 {
     public class ProcessorBase
     {
-        protected readonly IUnitOfWork _uow;
-        protected readonly IMapper _mapper;
-        protected readonly IMemoryCache _cache;
+        protected readonly IUnitOfWork Uow;
+        protected readonly IMapper Mapper;
+        protected readonly IMemoryCache Cache;
 
-        public ProcessorBase(IUnitOfWork uow, IMapper mapper, IMemoryCache cache)
+        protected ProcessorBase(IUnitOfWork uow, IMapper mapper, IMemoryCache cache)
         {
-            _uow = uow;
-            _mapper = mapper;
-            _cache = cache;
+            Uow = uow;
+            Mapper = mapper;
+            Cache = cache;
         }
     }
 }

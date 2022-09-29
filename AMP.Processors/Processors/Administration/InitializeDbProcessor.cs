@@ -35,13 +35,13 @@ namespace AMP.Processors.Processors.Administration
 
         public async Task InitializeDatabase()
         {
-            await _uow.InitializeDb.InitializeDatabase();
+            await Uow.InitializeDb.InitializeDatabase();
             await InitializeServices();
             await InitializeLanguages();
             await InitializeUsers();
             await InitializeArtisans();
             await InitializeCustomers();
-            await _uow.SaveChangesAsync();
+            await Uow.SaveChangesAsync();
         }
 
         private async Task InitializeServices()
@@ -62,7 +62,7 @@ namespace AMP.Processors.Processors.Administration
                     .CreatedOn()
             };
 
-            await _uow.Services.InsertAsync(services);
+            await Uow.Services.InsertAsync(services);
         }
 
         private async Task InitializeLanguages()
@@ -76,13 +76,13 @@ namespace AMP.Processors.Processors.Administration
                 Languages.Create("French"),
             };
 
-            await _uow.Languages.InsertAsync(languages);
-            await _uow.SaveChangesAsync();
+            await Uow.Languages.InsertAsync(languages);
+            await Uow.SaveChangesAsync();
         }
 
         private async Task InitializeUsers()
         {
-            var password = _uow.Users.Register("pass");
+            var password = Uow.Users.Register("pass");
 
             var users = new List<Users>()
             {
@@ -281,8 +281,8 @@ namespace AMP.Processors.Processors.Administration
                     .WithId(InitIds.KaySuspended),
             };
 
-            await _uow.Users.InsertAsync(users);
-            await _uow.SaveChangesAsync();
+            await Uow.Users.InsertAsync(users);
+            await Uow.SaveChangesAsync();
         }
 
         private async Task InitializeArtisans()
@@ -333,7 +333,7 @@ namespace AMP.Processors.Processors.Administration
                     })),
             };
 
-            await _uow.Artisans.InsertAsync(artisans);
+            await Uow.Artisans.InsertAsync(artisans);
         }
 
         private async Task InitializeCustomers()
@@ -347,18 +347,18 @@ namespace AMP.Processors.Processors.Administration
                 Customers.Create(InitIds.Gloria)
                     .CreatedOn(),
             };
-            await _uow.Customers.InsertAsync(customers);
+            await Uow.Customers.InsertAsync(customers);
         }
 
 
         private async Task<List<Languages>> BuildLanguage(List<string> languages)
         {
-            return await _uow.Languages.BuildLanguages(languages);
+            return await Uow.Languages.BuildLanguages(languages);
         }
 
         private async Task<List<Services>> BuildService(List<string> services)
         {
-            return await _uow.Services.BuildServices(services);
+            return await Uow.Services.BuildServices(services);
         }
     }
 }

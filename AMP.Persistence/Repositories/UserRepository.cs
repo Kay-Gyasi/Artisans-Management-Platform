@@ -28,9 +28,9 @@ namespace AMP.Persistence.Repositories
 
         public async Task<bool> Exists(string phone)
         {
-            return GetBaseQuery()
+            return await Task.Run(() => GetBaseQuery()
                 .AsNoTracking()
-                .Any(x => x.Contact.PrimaryContact == phone);
+                .Any(x => x.Contact.PrimaryContact == phone));
         }
 
         public override IQueryable<Users> GetBaseQuery()

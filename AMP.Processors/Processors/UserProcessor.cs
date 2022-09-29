@@ -32,24 +32,24 @@ namespace AMP.Processors.Processors
 
         public async Task<SigninResponse> Login(SigninCommand command)
         {
-            var user = await _uow.Users.Authenticate(command);
+            var user = await Uow.Users.Authenticate(command);
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
         public async Task<string> Post(UserCommand command)
         {
-            var userExists = await _uow.Users.Exists(command.Contact.PrimaryContact);
+            var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);
             if (userExists) return default;
 
             var user = Users.Create()
                 .CreatedOn();
-            var passes = _uow.Users.Register(command);
+            var passes = Uow.Users.Register(command);
             await AssignFields(user, command);
             user.HasPassword(passes.Item1)
                 .HasPasswordKey(passes.Item2);
-            _cache.Remove(LookupCacheKey);
-            await _uow.Users.InsertAsync(user);
-            await _uow.SaveChangesAsync();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Users.InsertAsync(user);
+            await Uow.SaveChangesAsync();
 
             await PostAsType(user);
             return user.Id;
@@ -57,32 +57,32 @@ namespace AMP.Processors.Processors
 
         public async Task<string> Save(UserCommand command)
         {
-            var user = await _uow.Users.GetAsync(command.Id);
+            var user = await Uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
             user.LastModifiedOn();
-            _cache.Remove(LookupCacheKey);
-            await _uow.Users.UpdateAsync(user);
-            await _uow.SaveChangesAsync();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Users.UpdateAsync(user);
+            await Uow.SaveChangesAsync();
             return user.Id;
         }
 
         public async Task<PaginatedList<UserPageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Users.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<UserPageDto>>(page);
+            var page = await Uow.Users.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<UserPageDto>>(page);
         }
 
         public async Task<UserDto> Get(string id)
         {
-            return _mapper.Map<UserDto>(await _uow.Users.GetAsync(id));
+            return Mapper.Map<UserDto>(await Uow.Users.GetAsync(id));
         }
 
         public async Task Delete(string id)
         {
-            var user = await _uow.Users.GetAsync(id);
-            _cache.Remove(LookupCacheKey);
-            if (user != null) await _uow.Users.SoftDeleteAsync(user);
-            await _uow.SaveChangesAsync();
+            var user = await Uow.Users.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (user != null) await Uow.Users.SoftDeleteAsync(user);
+            await Uow.SaveChangesAsync();
         }
 
         private async Task PostAsType(Users user)
@@ -107,46 +107,50 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var artisan = Artisans.Create(userId)
                     .WithBusinessName(user.DisplayName)
                     .WithDescription(string.Empty)
                     .CreatedOn();
-                await _uow.Artisans.InsertAsync(artisan);
-                await _uow.SaveChangesAsync();
+                await Uow.Artisans.InsertAsync(artisan);
             }
             catch (Exception)
             {
-                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-                var deleted = await _uow.Users.GetAsync(userId);
-                await _uow.Users.DeleteAsync(deleted, new CancellationToken());
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var deleted = await Uow.Users.GetAsync(userId);
+                await Uow.Users.DeleteAsync(deleted, new CancellationToken());
             }
-            
+            finally
+            {
+                await Uow.SaveChangesAsync();
+            }
         }
         
         private async Task PostCustomer(Users user)
         {
             try
             {
-                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
                 var customer = Customers.Create(userId)
                     .CreatedOn();
-                await _uow.Customers.InsertAsync(customer);
-                await _uow.SaveChangesAsync();
+                await Uow.Customers.InsertAsync(customer);
             }
             catch (Exception)
             {
-                var userId = await _uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-                var deleted = await _uow.Users.GetAsync(userId);
-                await _uow.Users.DeleteAsync(deleted, new CancellationToken());
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var deleted = await Uow.Users.GetAsync(userId);
+                await Uow.Users.DeleteAsync(deleted, new CancellationToken());
             }
-            
+            finally
+            {
+                await Uow.SaveChangesAsync();
+            }
         }
 
         private async Task AssignFields(Users user, UserCommand command)
         {
-            var lsit = command.Languages.Select(lang => lang.Name).ToList();
-            var languages = await _uow.Languages.BuildLanguages(lsit);
+            var list = command.Languages.Select(lang => lang.Name).ToList();
+            var languages = await Uow.Languages.BuildLanguages(list);
             user.WithFirstName(command.FirstName)
                 .WithFamilyName(command.FamilyName)
                 .WithOtherName(command.OtherName)

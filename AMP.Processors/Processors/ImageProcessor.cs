@@ -30,11 +30,11 @@ namespace AMP.Processors.Processors
 
             var image = Images.Create(result.SecureUrl.AbsoluteUri, result.PublicId)
                 .ForUserWithId(command.UserId);
-            await _uow.Images.InsertAsync(image);
-            var user = await _uow.Users.GetAsync(command.UserId);
+            await Uow.Images.InsertAsync(image);
+            var user = await Uow.Users.GetAsync(command.UserId);
             user.WithImageId(image.Id);
-            await _uow.Users.UpdateAsync(user);
-            await _uow.SaveChangesAsync();
+            await Uow.Users.UpdateAsync(user);
+            await Uow.SaveChangesAsync();
         }
     }
 }

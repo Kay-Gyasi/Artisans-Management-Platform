@@ -31,39 +31,39 @@ namespace AMP.Processors.Processors
             {
                 service = Services.Create(command.Name, command.Description)
                     .CreatedOn();
-                _cache.Remove(LookupCacheKey);
-                await _uow.Services.InsertAsync(service);
-                await _uow.SaveChangesAsync();
+                Cache.Remove(LookupCacheKey);
+                await Uow.Services.InsertAsync(service);
+                await Uow.SaveChangesAsync();
                 return service.Id;
             }
 
-            service = await _uow.Services.GetAsync(command.Id);
+            service = await Uow.Services.GetAsync(command.Id);
             service.WithDescription(command.Description)
                 .WithName(command.Name)
                 .LastModifiedOn();
-            _cache.Remove(LookupCacheKey);
-            await _uow.Services.UpdateAsync(service);
-            await _uow.SaveChangesAsync();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Services.UpdateAsync(service);
+            await Uow.SaveChangesAsync();
             return service.Id;
         }
 
         public async Task<PaginatedList<ServicePageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Services.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<ServicePageDto>>(page);
+            var page = await Uow.Services.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<ServicePageDto>>(page);
         }
 
         public async Task<ServiceDto> Get(string id)
         {
-            return _mapper.Map<ServiceDto>(await _uow.Services.GetAsync(id));
+            return Mapper.Map<ServiceDto>(await Uow.Services.GetAsync(id));
         }
 
         public async Task Delete(string id)
         {
-            var service = await _uow.Services.GetAsync(id);
-            _cache.Remove(LookupCacheKey);
-            if (service != null) await _uow.Services.SoftDeleteAsync(service);
-            await _uow.SaveChangesAsync();
+            var service = await Uow.Services.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (service != null) await Uow.Services.SoftDeleteAsync(service);
+            await Uow.SaveChangesAsync();
         }
     }
 }

@@ -32,43 +32,43 @@ namespace AMP.Processors.Processors
             {
                 customer = Customers.Create(command.UserId)
                     .CreatedOn();
-                _cache.Remove(LookupCacheKey);
-                await _uow.Customers.InsertAsync(customer);
-                await _uow.SaveChangesAsync();
+                Cache.Remove(LookupCacheKey);
+                await Uow.Customers.InsertAsync(customer);
+                await Uow.SaveChangesAsync();
                 return customer.Id;
             }
 
-            customer = await _uow.Customers.GetAsync(command.Id);
+            customer = await Uow.Customers.GetAsync(command.Id);
             customer.ForUserId(command.UserId)
                 .LastModifiedOn();
-            _cache.Remove(LookupCacheKey);
-            await _uow.Customers.UpdateAsync(customer);
-            await _uow.SaveChangesAsync();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Customers.UpdateAsync(customer);
+            await Uow.SaveChangesAsync();
             return customer.Id;
         }
 
         public async Task<PaginatedList<CustomerPageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Customers.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<CustomerPageDto>>(page);
+            var page = await Uow.Customers.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<CustomerPageDto>>(page);
         }
 
         public async Task<CustomerDto> Get(string id)
         {
-            return _mapper.Map<CustomerDto>(await _uow.Customers.GetAsync(id));
+            return Mapper.Map<CustomerDto>(await Uow.Customers.GetAsync(id));
         }
 
         public async Task<CustomerDto> GetByUserId(string userId)
         {
-            return _mapper.Map<CustomerDto>(await _uow.Customers.GetByUserIdAsync(userId));
+            return Mapper.Map<CustomerDto>(await Uow.Customers.GetByUserIdAsync(userId));
         }
 
         public async Task Delete(string id)
         {
-            var customer = await _uow.Customers.GetAsync(id);
-            _cache.Remove(LookupCacheKey);
-            if (customer != null) await _uow.Customers.SoftDeleteAsync(customer);
-            await _uow.SaveChangesAsync();
+            var customer = await Uow.Customers.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (customer != null) await Uow.Customers.SoftDeleteAsync(customer);
+            await Uow.SaveChangesAsync();
         }
 
     }

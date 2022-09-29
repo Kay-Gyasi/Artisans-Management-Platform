@@ -29,53 +29,53 @@ namespace AMP.Processors.Processors
             Ratings rating;
             if (isNew)
             {
-                var customer = await _uow.Customers.GetCustomerId(command.UserId);
-                await _uow.Ratings.OverridePreviousRating(customer, command.ArtisanId);
+                var customer = await Uow.Customers.GetCustomerId(command.UserId);
+                await Uow.Ratings.OverridePreviousRating(customer, command.ArtisanId);
                 rating = Ratings.Create(customer, command.ArtisanId)
                     .CreatedOn(DateTime.UtcNow);
                 await AssignFields(rating, command, true);
-                _cache.Remove(LookupCacheKey);
-                await _uow.Ratings.InsertAsync(rating);
-                await _uow.SaveChangesAsync();
+                Cache.Remove(LookupCacheKey);
+                await Uow.Ratings.InsertAsync(rating);
+                await Uow.SaveChangesAsync();
                 return rating.Id;
             }
 
-            rating = await _uow.Ratings.GetAsync(command.Id);
+            rating = await Uow.Ratings.GetAsync(command.Id);
             await AssignFields(rating, command);
-            _cache.Remove(LookupCacheKey);
-            await _uow.Ratings.UpdateAsync(rating);
-            await _uow.SaveChangesAsync();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Ratings.UpdateAsync(rating);
+            await Uow.SaveChangesAsync();
             return rating.Id;
         }
 
         public async Task<PaginatedList<RatingPageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Ratings.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<RatingPageDto>>(page);
+            var page = await Uow.Ratings.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
         
         public async Task<PaginatedList<RatingPageDto>> GetArtisanRatingPage(PaginatedCommand command, string userId)
         {
-            var page = await _uow.Ratings.GetArtisanRatingPage(command, userId, new CancellationToken());
+            var page = await Uow.Ratings.GetArtisanRatingPage(command, userId, new CancellationToken());
             foreach(var rating in page.Data)
             {
-                rating.ForArtisan(await _uow.Artisans.GetAsync(rating.ArtisanId))
-                    .ForCustomer(await _uow.Customers.GetAsync(rating.CustomerId));
+                rating.ForArtisan(await Uow.Artisans.GetAsync(rating.ArtisanId))
+                    .ForCustomer(await Uow.Customers.GetAsync(rating.CustomerId));
             }
-            return _mapper.Map<PaginatedList<RatingPageDto>>(page);
+            return Mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
 
         public async Task<RatingDto> Get(string id)
         {
-            return _mapper.Map<RatingDto>(await _uow.Ratings.GetAsync(id));
+            return Mapper.Map<RatingDto>(await Uow.Ratings.GetAsync(id));
         }
 
         public async Task Delete(string id)
         {
-            var rating = await _uow.Ratings.GetAsync(id);
-            _cache.Remove(LookupCacheKey);
-            if (rating != null) await _uow.Ratings.SoftDeleteAsync(rating);
-            await _uow.SaveChangesAsync();
+            var rating = await Uow.Ratings.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (rating != null) await Uow.Ratings.SoftDeleteAsync(rating);
+            await Uow.SaveChangesAsync();
         }
 
         private async Task AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
@@ -85,7 +85,7 @@ namespace AMP.Processors.Processors
 
             if (!isNew)
             {
-                var customer = await _uow.Customers.GetCustomerId(command.UserId);
+                var customer = await Uow.Customers.GetCustomerId(command.UserId);
                 rating.ForCustomerWithId(customer)
                         .ForArtisanWithId(command.ArtisanId)
                         .LastModifiedOn();
