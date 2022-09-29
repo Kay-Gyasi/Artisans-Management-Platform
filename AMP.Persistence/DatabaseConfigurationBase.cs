@@ -16,6 +16,7 @@ namespace AMP.Persistence
             builder.Property(a => a.EntityStatus).HasDefaultValue(EntityStatus.Normal)
                 .HasConversion(new EnumToStringConverter<EntityStatus>());
             builder.HasQueryFilter(a => a.EntityStatus == EntityStatus.Normal);
+            builder.Property(a => a.Id).HasColumnType("varchar(36)");
         }
     }
 }
