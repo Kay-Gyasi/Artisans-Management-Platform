@@ -2,7 +2,7 @@
 
 namespace AMP.Domain.Entities
 {
-    public class Images : EntityBase
+    public sealed class Images : EntityBase
     {
         public string? UserId { get; private set; }
         public string PublicId { get; private set; }
@@ -15,10 +15,8 @@ namespace AMP.Domain.Entities
             PublicId = publicId;
         }
 
-        public static Images Create(string imageUrl, string publicId)
-        {
-            return new Images(imageUrl, publicId);
-        }
+        public static Images Create(string imageUrl, string publicId) 
+            => new Images(imageUrl, publicId);
 
         public Images WithUrl(string imageUrl)
         {

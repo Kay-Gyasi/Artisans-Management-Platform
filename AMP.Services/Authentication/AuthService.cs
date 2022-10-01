@@ -27,7 +27,7 @@ namespace AMP.Services.Authentication
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Name, user.DisplayName),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Surname, user.FamilyName),
                 new Claim("ImageUrl", user.Image?.ImageUrl ?? ""),
                 new Claim(ClaimTypes.MobilePhone, user.Contact?.PrimaryContact ?? ""),

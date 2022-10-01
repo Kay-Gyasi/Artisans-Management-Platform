@@ -3,7 +3,7 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Payments : EntityBase
+    public sealed class Payments : EntityBase
     {
         public string OrderId { get; private set; }
         public decimal AmountPaid { get; private set; }
@@ -20,10 +20,8 @@ namespace AMP.Domain.Entities
             OrderId = orderId;
         }
 
-        public static Payments Create(string orderId)
-        {
-            return new Payments(orderId);
-        }
+        public static Payments Create(string orderId) 
+            => new Payments(orderId);
 
         public Payments OnOrderWithId(string orderId)
         {

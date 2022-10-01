@@ -4,7 +4,7 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Ratings : EntityBase
+    public sealed class Ratings : EntityBase
     {
         public string ArtisanId { get; private set; }
         public string CustomerId { get; private set; }
@@ -21,10 +21,8 @@ namespace AMP.Domain.Entities
             ArtisanId = artisanId;
         }
 
-        public static Ratings Create(string customerId, string artisanId)
-        {
-            return new Ratings(customerId, artisanId);
-        }
+        public static Ratings Create(string customerId, string artisanId) 
+            => new Ratings(customerId, artisanId);
 
         public Ratings ForCustomerWithId(string customerId)
         {
@@ -41,18 +39,12 @@ namespace AMP.Domain.Entities
         public Ratings WithVotes(int votes)
         {
             if (votes < 0)
-            {
                 Votes = 0;
-                return this;
-            }
-
-            if (votes > 5)
-            {
+            else if (votes > 5)
                 Votes = 5;
-                return this;
-            }
-
-            Votes = votes;
+            else
+                Votes = votes;
+            
             return this;
         }
 

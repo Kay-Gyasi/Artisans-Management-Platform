@@ -4,7 +4,7 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Customers : EntityBase
+    public sealed class Customers : EntityBase
     {
         public string UserId { get; private set; }
         public Users User { get; private set; }
@@ -31,10 +31,8 @@ namespace AMP.Domain.Entities
             UserId = userId;
         }
 
-        public static Customers Create(string userId)
-        {
-            return new Customers(userId);
-        }
+        public static Customers Create(string userId) 
+            => new Customers(userId);
 
         public Customers ForUserId(string userId)
         {

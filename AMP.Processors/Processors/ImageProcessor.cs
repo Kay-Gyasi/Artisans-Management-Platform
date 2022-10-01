@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Processors.Base;
@@ -22,19 +23,28 @@ namespace AMP.Processors.Processors
             _cloudinary = cloudinary;
         }
 
-        public async Task UploadImage(ImageCommand command)
+        public async Task<bool> UploadImage(ImageCommand command)
         {
-            if (command.Image is null) return;
-            var result = await _cloudinary.UploadPhotoAsync(command.Image);
-            if (result.Error != null) return;
+            try
+            {
+                if (command.Image is null) return false;
+                var result = await _cloudinary.UploadPhotoAsync(command.Image);
+                if (result.Error != null) return false;
 
-            var image = Images.Create(result.SecureUrl.AbsoluteUri, result.PublicId)
-                .ForUserWithId(command.UserId);
-            await Uow.Images.InsertAsync(image);
-            var user = await Uow.Users.GetAsync(command.UserId);
-            user.WithImageId(image.Id);
-            await Uow.Users.UpdateAsync(user);
-            await Uow.SaveChangesAsync();
+                await Uow.Images.RemoveCurrentDetails(command.UserId);
+                var image = Images.Create(result.SecureUrl.AbsoluteUri, result.PublicId)
+                    .ForUserWithId(command.UserId);
+                await Uow.Images.InsertAsync(image);
+                var user = await Uow.Users.GetAsync(command.UserId);
+                user.WithImageId(image.Id);
+                await Uow.Users.UpdateAsync(user);
+                await Uow.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

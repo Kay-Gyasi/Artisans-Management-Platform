@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Processors.Commands;
-using AMP.Processors.Repositories.Base;
+using AMP.Processors.Interfaces.Base;
 
 namespace AMP.Processors.Repositories
 {

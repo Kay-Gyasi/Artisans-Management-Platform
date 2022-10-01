@@ -60,10 +60,8 @@ public class OrderController : BaseControllerv1
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<InsertOrderResponse> Insert([FromBody] OrderCommand command)
-    {
-        return await Mediator.Send(new InsertOrder.Query(command));
-    } 
+    public async Task<InsertOrderResponse> Insert([FromBody] OrderCommand command) 
+        => await Mediator.Send(new InsertOrder.Command(command));
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
-using AMP.Processors.Repositories.Base;
+using AMP.Processors.Interfaces.Base;
 using AMP.Shared.Domain.Models;
 
 namespace AMP.Processors.Repositories

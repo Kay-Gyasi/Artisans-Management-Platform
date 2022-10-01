@@ -5,6 +5,7 @@ namespace AMP.Processors.Dtos
 {
     public class OrderDto
     {
+        public string ReferenceNo { get; set; }
         public string Id { get; set; }
         public string CustomerId { get; set; }
         public string? ArtisanId { get; set; }

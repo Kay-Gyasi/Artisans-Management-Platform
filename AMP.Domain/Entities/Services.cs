@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AMP.Domain.Entities
 {
-    public class Services : EntityBase
+    public sealed class Services : EntityBase
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
@@ -23,10 +23,8 @@ namespace AMP.Domain.Entities
             Description = description;
         }
 
-        public static Services Create(string name, string description = "")
-        {
-            return new Services(name, description);
-        }
+        public static Services Create(string name, string description = "") 
+            => new Services(name, description);
 
         public Services WithName(string name)
         {

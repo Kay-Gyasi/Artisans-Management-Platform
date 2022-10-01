@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AMP.Domain.ViewModels;
 using AMP.Shared.Domain.Models;
 
-namespace AMP.Processors.Repositories.Base
+namespace AMP.Processors.Interfaces.Base
 {
 	public interface IRepositoryBase<T>
 	{

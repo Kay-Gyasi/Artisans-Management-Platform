@@ -53,7 +53,7 @@ namespace AMP.Processors.Processors
 
         public async Task<PaginatedList<ArtisanPageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await Uow.Artisans.GetPage(command, new CancellationToken());
+            var page = await Uow.Artisans.GetArtisanPage(command, new CancellationToken());
             var paginated = Mapper.Map<PaginatedList<ArtisanPageDto>>(page);
             var data = paginated.Data.Select(x => new ArtisanPageDto()
             {

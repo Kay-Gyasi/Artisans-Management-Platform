@@ -6,6 +6,7 @@ namespace AMP.Processors.Commands
 {
     public class OrderCommand
     {
+        public string ReferenceNo { get; set; }
         public string Id { get; set; }
         public string CustomerId { get; set; }
         public string UserId { get; set; }

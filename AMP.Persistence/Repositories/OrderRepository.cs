@@ -15,6 +15,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using AMP.Persistence.Extensions;
 
 namespace AMP.Persistence.Repositories
 {
@@ -24,7 +25,7 @@ namespace AMP.Persistence.Repositories
         public OrderRepository(AmpDbContext context, ILogger<Orders> logger) : base(context, logger)
         {
         }
-
+        
         public Task<List<Lookup>> GetOpenOrdersLookup(string userId)
         {
             return GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete).Select(x => new Lookup()
@@ -34,7 +35,6 @@ namespace AMP.Persistence.Repositories
                 }).OrderBy(x => x.Name)
                 .ToListAsync();
         }
-
       
         public async Task Complete(string orderId)
         {
@@ -86,7 +86,7 @@ namespace AMP.Persistence.Repositories
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Status != OrderStatus.Completed && x.Customer.UserId == userId)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
-            var orders = await BuildPage(whereQueryable, paginated, cancellationToken);
+            var orders = await whereQueryable.BuildPage(paginated, cancellationToken);
             _ = orders.Data.OrderByDescending(x => x.DateCreated);
             return orders;
         }
@@ -97,7 +97,7 @@ namespace AMP.Persistence.Repositories
             var whereQueryable = GetBaseQuery().Where(x => x.Customer.UserId == userId && x.Status == OrderStatus.Completed)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
-            return await BuildPage(whereQueryable, paginated, cancellationToken);
+            return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
         public async Task<PaginatedList<Orders>> GetSchedule(PaginatedCommand paginated, string userId, 
@@ -109,7 +109,7 @@ namespace AMP.Persistence.Repositories
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
                 .OrderBy(x => x.PreferredStartDate);
 
-            return await BuildPage(whereQueryable, paginated, cancellationToken);
+            return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
         
         public async Task<PaginatedList<Orders>> GetRequests(PaginatedCommand paginated, string userId, 
@@ -121,7 +121,7 @@ namespace AMP.Persistence.Repositories
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
                 .OrderBy(x => x.PreferredStartDate);
 
-            return await BuildPage(whereQueryable, paginated, cancellationToken);
+            return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
         public async Task<PaginatedList<Orders>> GetWorkHistory(PaginatedCommand paginated, string userId
@@ -131,7 +131,7 @@ namespace AMP.Persistence.Repositories
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
                 .OrderBy(x => x.PreferredStartDate);
 
-            return await BuildPage(whereQueryable, paginated, cancellationToken);
+            return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
         public int GetCount(string artisanId)
@@ -178,21 +178,6 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
             order.WithCost(costCommand.Cost);
-        }
-
-        private static async Task<PaginatedList<Orders>> BuildPage(IQueryable<Orders> whereQueryable, PaginatedCommand paginated,
-            CancellationToken cancellationToken)
-        {
-            var pagedModel = await whereQueryable.PageBy(x => paginated.Take, paginated)
-                .ToListAsync(cancellationToken);
-
-            var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);
-
-
-            return new PaginatedList<Orders>(data: pagedModel,
-                totalCount: totalRecords,
-                currentPage: paginated.PageNumber,
-                pageSize: paginated.PageSize);
         }
 
     }

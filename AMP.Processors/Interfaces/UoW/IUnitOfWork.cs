@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AMP.Processors.Interfaces;
 using AMP.Processors.Repositories.Administration;
 
 namespace AMP.Processors.Repositories.UoW

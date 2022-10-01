@@ -4,7 +4,7 @@ using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities
 {
-    public class Disputes : EntityBase
+    public sealed class Disputes : EntityBase
     {
         public string CustomerId { get; private set; }
         public string OrderId { get; private set; }
@@ -21,10 +21,8 @@ namespace AMP.Domain.Entities
             OrderId = orderId;
         }
 
-        public static Disputes Create(string customerId, string orderId)
-        {
-            return new Disputes(customerId, orderId);
-        }
+        public static Disputes Create(string customerId, string orderId) 
+            => new Disputes(customerId, orderId);
 
         public Disputes ByCustomerWithId(string customerId)
         {

@@ -6,8 +6,9 @@ using AMP.Domain.ValueObjects;
 
 namespace AMP.Domain.Entities
 {
-    public class Orders : EntityBase
+    public sealed class Orders : EntityBase
     {
+        public string ReferenceNo { get; private set; }
         public string CustomerId { get; private set; }
         public string? ArtisanId { get; private set; }
         public bool IsComplete { get; private set; }
@@ -44,10 +45,8 @@ namespace AMP.Domain.Entities
             ServiceId = serviceId;
         }
 
-        public static Orders Create(string customerId, string serviceId)
-        {
-            return new Orders(customerId, serviceId);
-        }
+        public static Orders Create(string customerId, string serviceId) 
+            => new Orders(customerId, serviceId);
 
         public Orders ForCustomerWithId(string customerId)
         {
@@ -82,6 +81,12 @@ namespace AMP.Domain.Entities
         public Orders WithDescription(string description)
         {
             Description = description;
+            return this;
+        }
+        
+        public Orders WithReferenceNo(string referenceNo)
+        {
+            ReferenceNo = referenceNo;
             return this;
         }
 

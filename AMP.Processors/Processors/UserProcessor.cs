@@ -36,6 +36,12 @@ namespace AMP.Processors.Processors
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
+        public async Task<SigninResponse> GetRefreshToken(string userId)
+        {
+            var user = await Uow.Users.GetAsync(userId);
+            return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
+        }
+
         public async Task<string> Post(UserCommand command)
         {
             var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);

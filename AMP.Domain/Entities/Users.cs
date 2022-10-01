@@ -7,7 +7,7 @@ using AMP.Domain.ValueObjects;
 
 namespace AMP.Domain.Entities
 {
-    public class Users : EntityBase
+    public sealed class Users : EntityBase
     {
         public string? ImageId { get; private set; }
         public string FirstName { get; private set; }
@@ -36,10 +36,8 @@ namespace AMP.Domain.Entities
 
         private Users() {}
 
-        public static Users Create()
-        {
-            return new Users();
-        }
+        public static Users Create() 
+            => new Users();
 
 
         public Users WithFirstName(string firstName)
@@ -102,7 +100,7 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users Speaks(List<Languages> languages)
+        public Users Speaks(IEnumerable<Languages> languages)
         {
             _languages.Clear();
             _languages.AddRange(languages);

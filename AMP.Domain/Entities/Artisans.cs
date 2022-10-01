@@ -4,7 +4,7 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Artisans : EntityBase
+    public sealed class Artisans : EntityBase
     {
         public string UserId { get; private set; }
         public string BusinessName { get; private set; }
@@ -32,10 +32,8 @@ namespace AMP.Domain.Entities
             UserId = userId;
         }
 
-        public static Artisans Create(string userId)
-        {
-            return new Artisans(userId);
-        }
+        public static Artisans Create(string userId) 
+            => new Artisans(userId);
 
         public Artisans ForUserId(string userId)
         {

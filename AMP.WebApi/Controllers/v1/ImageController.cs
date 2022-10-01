@@ -10,12 +10,12 @@ public class ImageController : BaseControllerv1
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Upload([FromForm] IFormFile file) //naming
     {
         
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        await Mediator.Send(new UploadImage.Command(file, userId));
-        return NoContent();
+        var result = await Mediator.Send(new UploadImage.Command(file, userId));
+        return result ? NoContent() : BadRequest();
     }
 }

@@ -1,7 +1,10 @@
-﻿using AMP.Domain.Entities;
+﻿using System.Threading.Tasks;
+using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
 using AMP.Processors.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace AMP.Persistence.Repositories
@@ -11,6 +14,17 @@ namespace AMP.Persistence.Repositories
     {
         public ImageRepository(AmpDbContext context, ILogger<Images> logger) : base(context, logger)
         {
+        }
+
+        public async Task RemoveCurrentDetails(string userId)
+        {
+            var old = await _context.Images.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (old == default) return;
+            old.ForUserWithId(null);
+            old.EntityStatus = EntityStatus.Deleted;
+
+            var user = await _context.Users.FindAsync(userId);
+            user.WithImageId(null);
         }
     }
 }

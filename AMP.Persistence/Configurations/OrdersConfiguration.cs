@@ -6,17 +6,26 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations
 {
-    public class OrdersConfiguration : DatabaseConfigurationBase<Orders>
+    public sealed class OrdersConfiguration : DatabaseConfigurationBase<Orders>
     {
         public override void Configure(EntityTypeBuilder<Orders> builder)
         {
             base.Configure(builder);
             builder.Property(a => a.CustomerId)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(36);
+            builder.Property(a => a.ArtisanId)
+                .HasColumnType("varchar")
+                .HasMaxLength(36);
             builder.Property(a => a.ServiceId)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(36);
             builder.Property(a => a.Description)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("nvarchar")
+                .HasMaxLength(200);
             builder.Property(a => a.IsComplete)
                 .HasDefaultValue(false);
             builder.Property(a => a.Urgency)
@@ -30,7 +39,10 @@ namespace AMP.Persistence.Configurations
                 .HasConversion(new EnumToStringConverter<ScopeOfWork>());
             builder.OwnsOne(x => x.WorkAddress, a =>
             {
-                a.Property(x => x.StreetAddress).IsRequired();
+                a.Property(x => x.StreetAddress)
+                    .IsRequired()
+                    .HasColumnType("varchar")
+                    .HasMaxLength(100);
                 a.Property(x => x.Country)
                     .HasDefaultValue(Countries.Ghana)
                     .HasConversion(new EnumToStringConverter<Countries>());

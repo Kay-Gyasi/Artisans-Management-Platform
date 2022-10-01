@@ -40,9 +40,9 @@ namespace AMP.Processors.Processors
             await Uow.SaveChangesAsync();
         }
 
-        public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command)
+        public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)
         {
-            var page = await Uow.Payments.GetPage(command, new CancellationToken());
+            var page = await Uow.Payments.GetUserPage(command, userId, role, new CancellationToken());
             return Mapper.Map<PaginatedList<PaymentPageDto>>(page);
         }
 

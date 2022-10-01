@@ -3,7 +3,6 @@ using AMP.Domain.Enums;
 using AMP.Domain.ViewModels;
 using AMP.Persistence.Database;
 using AMP.Processors.ExceptionHandlers;
-using AMP.Processors.Repositories.Base;
 using AMP.Shared.Domain.Models;
 using AMP.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +14,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using AMP.Processors.Interfaces.Base;
 
 namespace AMP.Persistence.Repositories.Base
 {

@@ -1,4 +1,5 @@
-﻿using AMP.Application.Features.Commands;
+﻿using System.Security.Claims;
+using AMP.Application.Features.Commands;
 using AMP.Application.Features.Queries;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
@@ -11,7 +12,7 @@ namespace AMP.WebApi.Controllers.v1;
 [Authorize]
 public class UserController : BaseControllerv1
 {
-
+    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -57,4 +58,10 @@ public class UserController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<SigninResponse> Login(SigninCommand command)
         => await Mediator.Send(new AuthenticateUser.Command(command));
+    
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<SigninResponse> GetRefreshToken()
+        => await Mediator.Send(new RefreshTokenCommand.Command(UserId));
 }
