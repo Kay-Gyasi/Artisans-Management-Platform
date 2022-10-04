@@ -70,7 +70,7 @@ public static class DependencyInjection
                     NameClaimType = ClaimTypes.Name
                 };
             });
-        return services;
+       return services;
     }
 
     public static WebApplication AddApplicationBuilder(this WebApplicationBuilder builder, ILogger logger)
@@ -105,13 +105,8 @@ public static class DependencyInjection
         app.UseSerilogRequestLogging();
 
         app.UseDefaultFiles();
+        
         app.UseStaticFiles();
-        //app.UseStaticFiles(new StaticFileOptions()
-        //{
-        //    FileProvider = new PhysicalFileProvider
-        //        (Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
-        //    RequestPath = new PathString("/Files")
-        //});
 
         app.UseAuthentication();
 

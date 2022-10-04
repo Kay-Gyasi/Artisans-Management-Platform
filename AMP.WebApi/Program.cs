@@ -4,7 +4,6 @@ var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .CreateLogger();
-builder.Configuration.AddUserSecrets<Program>();
 
 try
 {
@@ -12,6 +11,7 @@ try
     builder.Services.AddAmp(builder.Configuration, logger);
     app = builder.AddApplicationBuilder(logger);
 
+    // create as middleware
     //logger.Information("Applying migrations...");
     //using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
     //{

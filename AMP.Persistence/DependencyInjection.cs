@@ -18,7 +18,8 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("AmpDb"), opt =>
+                // TODO:: switch db
+                options.UseSqlServer(configuration.GetConnectionString("AmpProdDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                 });
