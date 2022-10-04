@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>netstandard2.1</TargetFramework>
@@ -7,22 +7,21 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
 	</ItemGroup>
 
   <ItemGroup>
-	<Folder Include="Commands\" />
 	<Folder Include="Mapping\" />
 	<Folder Include="Authentication\" />
 	<Folder Include="PageDtos\" />
 	<Folder Include="Processors\Administration\" />
 	<Folder Include="Processors\Base\" />
-	<Folder Include="Repositories\UoW\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
-    <ProjectReference Include="..\AMP.Shared.Domain\AMP.Shared.Domain.csproj" />
+	<ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
+	<ProjectReference Include="..\AMP.Shared.Domain\AMP.Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>

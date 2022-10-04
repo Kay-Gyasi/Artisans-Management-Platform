@@ -22,7 +22,9 @@ namespace AMP.Persistence.Repositories
         {
             return base.GetBaseQuery()
                 .Include(x => x.User)
-                .ThenInclude(x => x.Languages);
+                .ThenInclude(x => x.Languages)
+                .Include(x => x.User)
+                .ThenInclude(x => x.Image);
         }
 
         public override Task<List<Lookup>> GetLookupAsync()
@@ -36,12 +38,12 @@ namespace AMP.Persistence.Repositories
         }
 
 
-        public async Task<Customers> GetByUserIdAsync(int userId)
+        public async Task<Customers> GetByUserIdAsync(string userId)
         {
             return await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
         }
         
-        public async Task<int> GetCustomerId(int userId)
+        public async Task<string> GetCustomerId(string userId)
         {
             var customer = await GetByUserIdAsync(userId);
             return customer.Id;

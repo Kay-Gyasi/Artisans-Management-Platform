@@ -16,48 +16,54 @@ namespace AMP.Processors.Processors
     [Processor]
     public class ServiceProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Servicelookup";
+
         public ServiceProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
-        public async Task<int> Save(ServiceCommand command)
+        public async Task<string> Save(ServiceCommand command)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
 
             Services service;
             if (isNew)
             {
                 service = Services.Create(command.Name, command.Description)
-                    .CreatedOn(DateTime.UtcNow);
-                await _uow.Services.InsertAsync(service);
-                await _uow.SaveChangesAsync();
+                    .CreatedOn();
+                Cache.Remove(LookupCacheKey);
+                await Uow.Services.InsertAsync(service);
+                await Uow.SaveChangesAsync();
                 return service.Id;
             }
 
-            service = await _uow.Services.GetAsync(command.Id);
+            service = await Uow.Services.GetAsync(command.Id);
             service.WithDescription(command.Description)
-                .WithName(command.Name);
-            await _uow.Services.UpdateAsync(service);
-            await _uow.SaveChangesAsync();
+                .WithName(command.Name)
+                .LastModifiedOn();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Services.UpdateAsync(service);
+            await Uow.SaveChangesAsync();
             return service.Id;
         }
 
         public async Task<PaginatedList<ServicePageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Services.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<ServicePageDto>>(page);
+            var page = await Uow.Services.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<ServicePageDto>>(page);
         }
 
-        public async Task<ServiceDto> Get(int id)
+        public async Task<ServiceDto> Get(string id)
         {
-            return _mapper.Map<ServiceDto>(await _uow.Services.GetAsync(id));
+            return Mapper.Map<ServiceDto>(await Uow.Services.GetAsync(id));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
-            var artisan = await _uow.Services.GetAsync(id);
-            if (artisan != null) await _uow.Services.DeleteAsync(artisan, new CancellationToken());
-            await _uow.SaveChangesAsync();
+            var service = await Uow.Services.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (service != null) await Uow.Services.SoftDeleteAsync(service);
+            await Uow.SaveChangesAsync();
         }
     }
 }

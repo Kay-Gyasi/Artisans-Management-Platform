@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Processors.Authentication;
 using AMP.Processors.Commands;
 using Microsoft.Extensions.Configuration;
@@ -26,20 +27,20 @@ namespace AMP.Services.Authentication
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Name, user.DisplayName),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Surname, user.FamilyName),
-                new Claim("ImageUrl", user.ImageUrl),
-                new Claim(ClaimTypes.MobilePhone, user.Contact.PrimaryContact),
+                new Claim("ImageUrl", user.Image?.ImageUrl ?? ""),
+                new Claim(ClaimTypes.MobilePhone, user.Contact?.PrimaryContact ?? ""),
                 new Claim(ClaimTypes.Role, user.Type.ToString()),
-                new Claim(ClaimTypes.Email, user.Contact.EmailAddress),
-                new Claim(ClaimTypes.StreetAddress, user.Address.StreetAddress),
+                new Claim(ClaimTypes.Email, user.Contact?.EmailAddress ?? ""),
+                new Claim(ClaimTypes.StreetAddress, user.Address?.StreetAddress ?? ""),
             };
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(10),
+                Expires = user.Type == UserType.Customer ? DateTime.UtcNow.AddMinutes(20) : DateTime.UtcNow.AddHours(1),
                 IssuedAt = DateTime.UtcNow,
                 Issuer = _configuration["Jwt:Issuer"],
                 Audience = _configuration["Jwt:Audience"],

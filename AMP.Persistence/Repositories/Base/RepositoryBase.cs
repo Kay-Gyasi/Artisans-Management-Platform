@@ -3,7 +3,6 @@ using AMP.Domain.Enums;
 using AMP.Domain.ViewModels;
 using AMP.Persistence.Database;
 using AMP.Processors.ExceptionHandlers;
-using AMP.Processors.Repositories.Base;
 using AMP.Shared.Domain.Models;
 using AMP.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +14,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using AMP.Processors.Interfaces.Base;
 
 namespace AMP.Persistence.Repositories.Base
 {
@@ -38,11 +38,12 @@ namespace AMP.Persistence.Repositories.Base
         public virtual IQueryable<T> Table => Entities;
         public virtual IQueryable<T> TableNoTracking => Entities.AsNoTracking();
 
-        public async Task<T> GetAsync(int id)
+        public async Task<T> GetAsync(string id)
         {
-            if (id <= 0) throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
+            //if (id <= 0) throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
+            if (string.IsNullOrEmpty(id)) throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
             var keyProperty = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
-            return await GetBaseQuery().FirstOrDefaultAsync(e => EF.Property<int>(e, keyProperty.Name) == id);
+            return await GetBaseQuery().FirstOrDefaultAsync(e => EF.Property<string>(e, keyProperty.Name) == id);
         }
 
         public virtual IQueryable<T> GetBaseQuery()
@@ -192,16 +193,16 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
+        public async Task DeleteAsync(string id, CancellationToken cancellationToken)
         {
             try
             {
-                if (id <= 0)
+                if (string.IsNullOrEmpty(id))
                     throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
 
                 var keyProperty = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
                 var entity = await GetBaseQuery()
-                    .FirstOrDefaultAsync(e => EF.Property<int>(e, keyProperty.Name) == id, cancellationToken);
+                    .FirstOrDefaultAsync(e => EF.Property<string>(e, keyProperty.Name) == id, cancellationToken);
                 if (entity == null)
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
@@ -271,8 +272,10 @@ namespace AMP.Persistence.Repositories.Base
             return await _context.Set<T>().CountAsync();
         }
 
+        // TODO:: Remove async from method
         public virtual async Task<List<Lookup>> GetLookupAsync()
         {
+            await Task.CompletedTask;
             return new List<Lookup>();
         }
 

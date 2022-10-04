@@ -9,9 +9,9 @@ namespace AMP.Application.Features.Commands
     {
         public class Command : IRequest
         {
-            public int OrderId { get; }
+            public string OrderId { get; }
 
-            public Command(int orderId)
+            public Command(string orderId)
             {
                 OrderId = orderId;
             }

@@ -4,10 +4,10 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Ratings : EntityBase
+    public sealed class Ratings : EntityBase
     {
-        public int ArtisanId { get; private set; }
-        public int CustomerId { get; private set; }
+        public string ArtisanId { get; private set; }
+        public string CustomerId { get; private set; }
         public int Votes { get; private set; }
         public string Description { get; private set; }
         public Artisans Artisan { get; private set; }
@@ -15,24 +15,22 @@ namespace AMP.Domain.Entities
 
         private Ratings(){}
 
-        private Ratings(int customerId, int artisanId)
+        private Ratings(string customerId, string artisanId)
         {
             CustomerId = customerId;
             ArtisanId = artisanId;
         }
 
-        public static Ratings Create(int customerId, int artisanId)
-        {
-            return new Ratings(customerId, artisanId);
-        }
+        public static Ratings Create(string customerId, string artisanId) 
+            => new Ratings(customerId, artisanId);
 
-        public Ratings ForCustomerWithId(int customerId)
+        public Ratings ForCustomerWithId(string customerId)
         {
             CustomerId = customerId;
             return this;
         }
 
-        public Ratings ForArtisanWithId(int artisanId)
+        public Ratings ForArtisanWithId(string artisanId)
         {
             ArtisanId = artisanId;
             return this;
@@ -41,18 +39,12 @@ namespace AMP.Domain.Entities
         public Ratings WithVotes(int votes)
         {
             if (votes < 0)
-            {
                 Votes = 0;
-                return this;
-            }
-
-            if (votes > 5)
-            {
+            else if (votes > 5)
                 Votes = 5;
-                return this;
-            }
-
-            Votes = votes;
+            else
+                Votes = votes;
+            
             return this;
         }
 
@@ -77,6 +69,18 @@ namespace AMP.Domain.Entities
         public Ratings CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Ratings LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
+
+        public Ratings WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

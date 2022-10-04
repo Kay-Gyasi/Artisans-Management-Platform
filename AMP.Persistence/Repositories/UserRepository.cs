@@ -19,19 +19,35 @@ namespace AMP.Persistence.Repositories
         {
         }
 
+        public async Task<string> GetIdByPhone(string phone)
+        {
+            var user = await GetBaseQuery()
+                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
+            return user.Id;
+        }
+
+        public async Task<bool> Exists(string phone)
+        {
+            return await Task.Run(() => GetBaseQuery()
+                .AsNoTracking()
+                .Any(x => x.Contact.PrimaryContact == phone));
+        }
+
         public override IQueryable<Users> GetBaseQuery()
         {
             return base.GetBaseQuery()
-                .Include(x => x.Languages);
+                .Include(x => x.Languages)
+                .Include(x => x.Image);
         }
 
         public async Task<Users> Authenticate(SigninCommand command)
         {
-            var user = await GetBaseQuery().FirstOrDefaultAsync(x => x.Contact.EmailAddress == command.Email);
+            var user = await GetBaseQuery()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == command.Phone);
             if (user?.PasswordKey == null || !MatchPasswordHash(command.Password, user.Password, user.PasswordKey))
-            {
                 return null;
-            }
+            
 
             return user;
         }
@@ -62,7 +78,7 @@ namespace AMP.Persistence.Repositories
             return (passwordHash, passwordKey);
         }
 
-        private bool MatchPasswordHash(string passwordText, byte[] password, byte[] passwordKey)
+        private static bool MatchPasswordHash(string passwordText, byte[] password, byte[] passwordKey)
         {
             using var hmac = new HMACSHA512(passwordKey);
             var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(passwordText));

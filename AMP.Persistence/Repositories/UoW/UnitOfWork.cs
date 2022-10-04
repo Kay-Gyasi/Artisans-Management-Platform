@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AMP.Persistence.Database;
+using AMP.Processors.Interfaces;
 using AMP.Processors.Repositories;
 using AMP.Processors.Repositories.Administration;
 using AMP.Processors.Repositories.UoW;
@@ -19,6 +20,8 @@ namespace AMP.Persistence.Repositories.UoW
         private readonly IServiceRepository _serviceRepository;
         private readonly ILanguageRepository _languageRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IImageRepository _imageRepository;
+        private readonly IRequestRepository _requestRepository;
 
         public UnitOfWork(AmpDbContext dbContext, 
             IInitializeDbRepository initializeDbRepository,
@@ -30,7 +33,9 @@ namespace AMP.Persistence.Repositories.UoW
             IRatingRepository ratingRepository,
             IServiceRepository serviceRepository,
             ILanguageRepository languageRepository,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IImageRepository imageRepository,
+            IRequestRepository requestRepository
             )
         {
             _dbContext = dbContext;
@@ -44,6 +49,8 @@ namespace AMP.Persistence.Repositories.UoW
             _serviceRepository = serviceRepository;
             _languageRepository = languageRepository;
             _userRepository = userRepository;
+            _imageRepository = imageRepository;
+            _requestRepository = requestRepository;
         }
 
         public IInitializeDbRepository InitializeDb => _initializeDbRepository;
@@ -56,6 +63,8 @@ namespace AMP.Persistence.Repositories.UoW
         public IServiceRepository Services => _serviceRepository;
         public IUserRepository Users => _userRepository;
         public ILanguageRepository Languages => _languageRepository;
+        public IImageRepository Images => _imageRepository;
+        public IRequestRepository Requests => _requestRepository;
 
         public async Task<bool> SaveChangesAsync()
         {

@@ -7,14 +7,13 @@ using AMP.Domain.ValueObjects;
 
 namespace AMP.Domain.Entities
 {
-    public class Users : EntityBase
+    public sealed class Users : EntityBase
     {
-        
+        public string? ImageId { get; private set; }
         public string FirstName { get; private set; }
         public string FamilyName { get; private set; }
         public string OtherName { get; private set; }
         public string DisplayName { get; private set; }  
-        public string ImageUrl { get; private set; }
         public string MomoNumber { get; private set; }
         public bool IsSuspended { get; private set; }
         public bool IsRemoved { get; private set; }
@@ -24,6 +23,7 @@ namespace AMP.Domain.Entities
         public byte[] PasswordKey { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
+        public Images Image { get; private set; }
 
         private readonly List<Languages> _languages = new List<Languages>();
         public IEnumerable<Languages> Languages => _languages.AsReadOnly();
@@ -36,10 +36,8 @@ namespace AMP.Domain.Entities
 
         private Users() {}
 
-        public static Users Create()
-        {
-            return new Users();
-        }
+        public static Users Create() 
+            => new Users();
 
 
         public Users WithFirstName(string firstName)
@@ -66,9 +64,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users WithImageUrl(string imageUrl)
+        public Users WithImageId(string? id)
         {
-            ImageUrl = imageUrl;
+            ImageId = id;
+            return this;
+        }
+        
+        public Users WithImage(Images image)
+        {
+            Image = image;
             return this;
         }
 
@@ -96,7 +100,7 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users Speaks(List<Languages> languages)
+        public Users Speaks(IEnumerable<Languages> languages)
         {
             _languages.Clear();
             _languages.AddRange(languages);
@@ -121,9 +125,15 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users CreatedOn(DateTime date)
+        public Users CreatedOn()
         {
-            DateCreated = date;
+            DateCreated = DateTime.UtcNow;
+            return this;
+        }
+
+        public Users LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
             return this;
         }
 
@@ -136,6 +146,12 @@ namespace AMP.Domain.Entities
         public Users HasPasswordKey(byte[] hash)
         {
             PasswordKey = hash;
+            return this;
+        }
+
+        public Users WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

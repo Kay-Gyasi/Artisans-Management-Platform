@@ -4,10 +4,9 @@ namespace AMP.Processors.Commands
 {
     public class PaymentCommand
     {
-        public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public PaymentStatus Status { get; set; }
-        public int OrderId { get; set; }
+        public string Id { get; set; }
+        public string OrderId { get; set; }
+        public string Reference { get; set; }
         public decimal AmountPaid { get; set; }
     }
 }

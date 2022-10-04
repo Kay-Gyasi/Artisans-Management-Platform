@@ -16,58 +16,80 @@ namespace AMP.Processors.Processors
     [Processor]
     public class RatingProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Ratinglookup";
+
         public RatingProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
-        public async Task<int> Save(RatingCommand command)
+        public async Task<string> Save(RatingCommand command)
         {
-            var isNew = command.Id == 0;
+            var isNew = string.IsNullOrEmpty(command.Id);
 
             Ratings rating;
             if (isNew)
             {
-                rating = Ratings.Create(command.CustomerId, command.ArtisanId)
+                var customer = await Uow.Customers.GetCustomerId(command.UserId);
+                await Uow.Ratings.OverridePreviousRating(customer, command.ArtisanId);
+                rating = Ratings.Create(customer, command.ArtisanId)
                     .CreatedOn(DateTime.UtcNow);
-                AssignFields(rating, command, true);
-                await _uow.Ratings.InsertAsync(rating);
-                await _uow.SaveChangesAsync();
+                await AssignFields(rating, command, true);
+                Cache.Remove(LookupCacheKey);
+                await Uow.Ratings.InsertAsync(rating);
+                await Uow.SaveChangesAsync();
                 return rating.Id;
             }
 
-            rating = await _uow.Ratings.GetAsync(command.Id);
-            AssignFields(rating, command);
-            await _uow.Ratings.UpdateAsync(rating);
-            await _uow.SaveChangesAsync();
+            rating = await Uow.Ratings.GetAsync(command.Id);
+            await AssignFields(rating, command);
+            Cache.Remove(LookupCacheKey);
+            await Uow.Ratings.UpdateAsync(rating);
+            await Uow.SaveChangesAsync();
             return rating.Id;
         }
 
         public async Task<PaginatedList<RatingPageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Ratings.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<RatingPageDto>>(page);
+            var page = await Uow.Ratings.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
-
-        public async Task<RatingDto> Get(int id)
+        
+        public async Task<PaginatedList<RatingPageDto>> GetArtisanRatingPage(PaginatedCommand command, string userId)
         {
-            return _mapper.Map<RatingDto>(await _uow.Ratings.GetAsync(id));
+            var page = await Uow.Ratings.GetArtisanRatingPage(command, userId, new CancellationToken());
+            foreach(var rating in page.Data)
+            {
+                rating.ForArtisan(await Uow.Artisans.GetAsync(rating.ArtisanId))
+                    .ForCustomer(await Uow.Customers.GetAsync(rating.CustomerId));
+            }
+            return Mapper.Map<PaginatedList<RatingPageDto>>(page);
         }
 
-        public async Task Delete(int id)
+        public async Task<RatingDto> Get(string id)
         {
-            var artisan = await _uow.Ratings.GetAsync(id);
-            if (artisan != null) await _uow.Ratings.DeleteAsync(artisan, new CancellationToken());
-            await _uow.SaveChangesAsync();
+            return Mapper.Map<RatingDto>(await Uow.Ratings.GetAsync(id));
         }
 
-        private void AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
+        public async Task Delete(string id)
+        {
+            var rating = await Uow.Ratings.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (rating != null) await Uow.Ratings.SoftDeleteAsync(rating);
+            await Uow.SaveChangesAsync();
+        }
+
+        private async Task AssignFields(Ratings rating, RatingCommand command, bool isNew = false)
         {
             rating.WithVotes(command.Votes)
                 .WithDescription(command.Description);
 
             if (!isNew)
-                rating.ForCustomerWithId(command.CustomerId)
-                    .ForArtisanWithId(command.ArtisanId);
+            {
+                var customer = await Uow.Customers.GetCustomerId(command.UserId);
+                rating.ForCustomerWithId(customer)
+                        .ForArtisanWithId(command.ArtisanId)
+                        .LastModifiedOn();
+            }
         }
     }
 }

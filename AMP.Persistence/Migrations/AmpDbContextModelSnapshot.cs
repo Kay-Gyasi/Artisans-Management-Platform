@@ -3,8 +3,8 @@ using System;
 using AMP.Persistence.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AMP.Persistence.Migrations
 {
@@ -15,49 +15,53 @@ namespace AMP.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("BusinessName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(70)
+                        .HasColumnType("varchar(70)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
                     b.Property<bool>("IsApproved")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false);
 
                     b.Property<bool>("IsVerified")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -68,25 +72,27 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Customers", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -97,37 +103,42 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Disputes", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("integer");
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Open");
 
                     b.HasKey("Id");
@@ -139,28 +150,71 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Disputes");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Languages", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.Images", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Languages", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("Id");
 
@@ -169,66 +223,84 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int?>("ArtisanId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ArtisanId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<decimal>("Cost")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
+
+                    b.Property<bool>("IsArtisanComplete")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsComplete")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int?>("PaymentId")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsRequestAccepted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("PreferredDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<decimal>("PaymentMade")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PreferredCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PreferredStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Scope")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Maintenance");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ServiceId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Placed");
 
                     b.Property<string>("Urgency")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Medium");
 
                     b.HasKey("Id");
@@ -244,81 +316,97 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Payments", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<decimal>("AmountPaid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
+                    b.Property<string>("CustomersId")
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsForwarded")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Status")
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OrderId")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
-                        .HasDefaultValue("NotSent");
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("Reference")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("TransactionReference")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomersId");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("AMP.Domain.Entities.Ratings", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("ArtisanId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ArtisanId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
                     b.Property<int>("Votes")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasDefaultValue(0);
 
                     b.HasKey("Id");
@@ -330,31 +418,78 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Ratings");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Services", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.Requests", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("ArtisanId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtisanId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Services", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
 
                     b.HasKey("Id");
 
@@ -363,67 +498,73 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Users", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("FamilyName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("text");
+                    b.Property<string>("ImageId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<bool>("IsRemoved")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false);
 
                     b.Property<bool>("IsSuspended")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false);
 
                     b.Property<string>("LevelOfEducation")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MomoNumber")
-                        .HasColumnType("text");
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("OtherName")
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<byte[]>("Password")
-                        .HasColumnType("bytea");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordKey")
-                        .HasColumnType("bytea");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("Customer");
 
                     b.HasKey("Id");
@@ -433,11 +574,11 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("ArtisansServices", b =>
                 {
-                    b.Property<int>("ArtisansId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ArtisansId")
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("ServicesId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ServicesId")
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("ArtisansId", "ServicesId");
 
@@ -448,11 +589,11 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("LanguagesUsers", b =>
                 {
-                    b.Property<int>("LanguagesId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LanguagesId")
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UsersId")
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("LanguagesId", "UsersId");
 
@@ -502,6 +643,15 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("AMP.Domain.Entities.Images", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.Users", "User")
+                        .WithOne("Image")
+                        .HasForeignKey("AMP.Domain.Entities.Images", "UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
                 {
                     b.HasOne("AMP.Domain.Entities.Artisans", "Artisan")
@@ -522,28 +672,27 @@ namespace AMP.Persistence.Migrations
 
                     b.OwnsOne("AMP.Domain.ValueObjects.Address", "WorkAddress", b1 =>
                         {
-                            b1.Property<int>("OrdersId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                            b1.Property<string>("OrdersId")
+                                .HasColumnType("varchar(36)");
 
                             b1.Property<string>("City")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasColumnType("nvarchar(max)")
                                 .HasDefaultValue("Ghana");
 
                             b1.Property<string>("StreetAddress")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasMaxLength(100)
+                                .HasColumnType("varchar(100)");
 
                             b1.Property<string>("StreetAddress2")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Town")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("OrdersId");
 
@@ -564,19 +713,15 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("AMP.Domain.Entities.Payments", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                    b.HasOne("AMP.Domain.Entities.Customers", null)
                         .WithMany("Payments")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomersId");
 
                     b.HasOne("AMP.Domain.Entities.Orders", "Order")
-                        .WithOne("Payment")
-                        .HasForeignKey("AMP.Domain.Entities.Payments", "OrderId")
+                        .WithMany("Payments")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Order");
                 });
@@ -600,30 +745,56 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("AMP.Domain.Entities.Requests", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.Artisans", "Artisan")
+                        .WithMany("Requests")
+                        .HasForeignKey("ArtisanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                        .WithMany("Requests")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.Orders", "Order")
+                        .WithMany("Requests")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artisan");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("AMP.Domain.Entities.Users", b =>
                 {
                     b.OwnsOne("AMP.Domain.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<int>("UsersId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                            b1.Property<string>("UsersId")
+                                .HasColumnType("varchar(36)");
 
                             b1.Property<string>("City")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<int>("Country")
-                                .HasColumnType("integer");
+                                .HasColumnType("int");
 
                             b1.Property<string>("StreetAddress")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasMaxLength(80)
+                                .HasColumnType("varchar(80)");
 
                             b1.Property<string>("StreetAddress2")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Town")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("UsersId");
 
@@ -635,23 +806,22 @@ namespace AMP.Persistence.Migrations
 
                     b.OwnsOne("AMP.Domain.ValueObjects.Contact", "Contact", b1 =>
                         {
-                            b1.Property<int>("UsersId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                            b1.Property<string>("UsersId")
+                                .HasColumnType("varchar(36)");
 
                             b1.Property<string>("EmailAddress")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PrimaryContact")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasMaxLength(15)
+                                .HasColumnType("varchar(15)");
 
                             b1.Property<string>("PrimaryContact2")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PrimaryContact3")
-                                .HasColumnType("text");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("UsersId");
 
@@ -701,6 +871,8 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("AMP.Domain.Entities.Customers", b =>
@@ -712,13 +884,17 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Payments");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
                 {
                     b.Navigation("Disputes");
 
-                    b.Navigation("Payment");
+                    b.Navigation("Payments");
+
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("AMP.Domain.Entities.Services", b =>
@@ -731,6 +907,8 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Artisans");
 
                     b.Navigation("Customers");
+
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

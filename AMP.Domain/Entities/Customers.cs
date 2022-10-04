@@ -4,9 +4,9 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Customers : EntityBase
+    public sealed class Customers : EntityBase
     {
-        public int UserId { get; private set; }
+        public string UserId { get; private set; }
         public Users User { get; private set; }
 
         private readonly List<Ratings> _ratings = new List<Ratings>();
@@ -21,19 +21,20 @@ namespace AMP.Domain.Entities
         private readonly List<Payments> _payments = new List<Payments>();
         public IEnumerable<Payments> Payments => _payments.AsReadOnly();
 
+        private readonly List<Requests> _requests = new List<Requests>();
+        public IEnumerable<Requests> Requests => _requests.AsReadOnly();
+
         private Customers(){}
 
-        private Customers(int userId)
+        private Customers(string userId)
         {
             UserId = userId;
         }
 
-        public static Customers Create(int userId)
-        {
-            return new Customers(userId);
-        }
+        public static Customers Create(string userId) 
+            => new Customers(userId);
 
-        public Customers ForUserId(int userId)
+        public Customers ForUserId(string userId)
         {
             UserId = userId;
             return this;
@@ -45,13 +46,19 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Customers CreatedOn(DateTime date)
+        public Customers CreatedOn()
         {
-            DateCreated = date;
+            DateCreated = DateTime.UtcNow; 
             return this;
         }
 
-        public Customers WithId(int id)
+        public Customers LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
+
+        public Customers WithId(string id)
         {
             Id = id;
             return this;

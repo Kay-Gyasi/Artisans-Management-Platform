@@ -1,0 +1,50 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": false,
+      "restoreTime": "2022-08-13T06:22:37.7688423Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "c890e610-aba2-4dd3-bebe-15fccb83b4cf"
+    },
+    "mssql1.resourceGroupLocation": {
+      "Name": "mssql1.resourceGroupLocation",
+      "Type": "location",
+      "Value": "westeurope"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "c890e610-aba2-4dd3-bebe-15fccb83b4cf"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "artisanmanagementresourcegroup"
+    },
+    "AMPWebApi.resourceGroupName": {
+      "Name": "AMPWebApi.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "artisanmanagementresourcegroup"
+    },
+    "AMPWebApi.subscriptionId": {
+      "Name": "AMPWebApi.subscriptionId",
+      "Type": "subscription",
+      "Value": "c890e610-aba2-4dd3-bebe-15fccb83b4cf"
+    },
+    "AMPWebApi.resourceName": {
+      "Name": "AMPWebApi.resourceName",
+      "Type": null,
+      "Value": "AMPWebApi"
+    },
+    "AMPWebApi.resourceGroupLocation": {
+      "Name": "AMPWebApi.resourceGroupLocation",
+      "Type": null,
+      "Value": "westeurope"
+    }
+  }
+}

@@ -1,14 +1,18 @@
 ﻿using AMP.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations
 {
-    public class CustomersConfiguration : DatabaseConfigurationBase<Customers>
+    public sealed class CustomersConfiguration : DatabaseConfigurationBase<Customers>
     {
         public override void Configure(EntityTypeBuilder<Customers> builder)
         {
             base.Configure(builder);
-            builder.Property(a => a.UserId).IsRequired();
+            builder.Property(a => a.UserId)
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(36);        
         }
     }
 }

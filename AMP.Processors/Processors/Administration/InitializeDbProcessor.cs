@@ -12,66 +12,57 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors.Administration
 {
+    public static class InitIds
+    {
+        public static string KayAdmin => "d5ff4e1b-503d-428e-86f8-8395d81de8c3";
+        public static string KayArtisan => "1f0a2ca4-f51e-4f4c-91bb-6a526b28de5a";
+        public static string Woode => "ce770c59-321b-459f-8022-2d6c4c0b1e75";
+        public static string Awate => "e6c36d19-f3ea-4c27-a08e-919cef6dc9d5";
+        public static string Gloria => "91f9bc91-1d35-4299-b2d2-d35fcdddb294";
+        public static string Abolo => "2193d840-32c0-40fd-a72b-18e3e17ea185";
+        public static string Addae => "902b8d62-cb2b-46f8-91a9-cd1d10aedb76";
+        public static string KayDeveloper => "ca9f1186-c4f8-43c6-9567-23f18974e0a7";
+        public static string KaySuspended => "68c3f900-47cd-4fdc-8628-ad8d451b5258";
+    }
+
     [Processor]
     public class InitializeDbProcessor : ProcessorBase
     {
-        public InitializeDbProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
+        public InitializeDbProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) 
+            : base(uow, mapper, cache)
         {
         }
 
         public async Task InitializeDatabase()
         {
-            await _uow.InitializeDb.InitializeDatabase();
+            await Uow.InitializeDb.InitializeDatabase();
             await InitializeServices();
             await InitializeLanguages();
             await InitializeUsers();
             await InitializeArtisans();
             await InitializeCustomers();
-            await _uow.SaveChangesAsync();
-            await InitializeOrders();
-
-            await _uow.SaveChangesAsync();
+            await Uow.SaveChangesAsync();
         }
 
-        
         private async Task InitializeServices()
         {
-            var count = await _uow.Services.CountAsync();
-            if (count > 0) return;
-
             var services = new List<Services>
             {
-                Services.Create("Bricklayer")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Electrician")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Millwright")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Boilermaker")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Plumber")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Mechanic including Automotive Mechanic")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Diesel Mechanic")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Carpenter")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Welder")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Rigger")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Fitter and Turner")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Mechanical Fitter")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Pipe Fitter")
-                    .CreatedOn(DateTime.UtcNow),
-                Services.Create("Painter")
-                    .CreatedOn(DateTime.UtcNow)
+                Services.Create("Masonry")
+                    .CreatedOn(),
+                Services.Create("Electrical Works")
+                    .CreatedOn(),
+                Services.Create("Plumbing")
+                    .CreatedOn(),
+                Services.Create("Mechanics")
+                    .CreatedOn(),
+                Services.Create("Carpentry")
+                    .CreatedOn(),
+                Services.Create("Painting")
+                    .CreatedOn()
             };
 
-            await _uow.Services.InsertAsync(services);
+            await Uow.Services.InsertAsync(services);
         }
 
         private async Task InitializeLanguages()
@@ -85,15 +76,13 @@ namespace AMP.Processors.Processors.Administration
                 Languages.Create("French"),
             };
 
-            await _uow.Languages.InsertAsync(languages);
-            await _uow.SaveChangesAsync();
+            await Uow.Languages.InsertAsync(languages);
+            await Uow.SaveChangesAsync();
         }
 
         private async Task InitializeUsers()
         {
-            var count = await _uow.Users.CountAsync();
-            if (count > 0) return;
-            var password = _uow.Users.Register("pass");
+            var password = Uow.Users.Register("pass");
 
             var users = new List<Users>()
             {
@@ -102,7 +91,7 @@ namespace AMP.Processors.Processors.Administration
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Administrator)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -117,13 +106,14 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.KayAdmin),
                 Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -138,13 +128,14 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.KayArtisan),
                 Users.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Woode")
                     .WithOtherName("Aquaman")
+                    .WithImageId(null)
                     .SetDisplayName()
-                    .WithImageUrl("")
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.Masters)
                     .WithContact(Contact.Create("0557511677")
@@ -158,13 +149,14 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0556455344")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.Woode),
                 Users.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Awate")
                     .WithOtherName("Mumuni")
+                    .WithImageId(null)
                     .SetDisplayName()
-                    .WithImageUrl("")
                     .OfType(UserType.Customer)
                     .HasLevelOfEducation(LevelOfEducation.Undergraduate)
                     .WithContact(Contact.Create("0556455344")
@@ -179,13 +171,14 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557511677")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.Awate),
                 Users.Create()
                     .WithFirstName("Gloria")
                     .WithFamilyName("Mensah")
                     .WithOtherName("Reddington")
+                    .WithImageId(null)
                     .SetDisplayName()
-                    .WithImageUrl("")
                     .OfType(UserType.Customer)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0204377833")
@@ -199,13 +192,14 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0204377833")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.Gloria),
                 Users.Create()
                     .WithFirstName("Emmanuel")
                     .WithFamilyName("Abolo")
                     .WithOtherName("Financial Abolo")
                     .SetDisplayName()
-                    .WithImageUrl("")
+                    .WithImageId(null)
                     .OfType(UserType.Customer)
                     .HasLevelOfEducation(LevelOfEducation.Shs)
                     .WithContact(Contact.Create("0545366277")
@@ -219,12 +213,13 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0545366277")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.Abolo),
                 Users.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Addae")
                     .SetDisplayName()
-                    .WithImageUrl("")
+                    .WithImageId(null)
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.Shs)
                     .WithContact(Contact.Create("0206744299")
@@ -238,12 +233,13 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0206744299")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.Addae),
                 Users.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Developer)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -258,13 +254,14 @@ namespace AMP.Processors.Processors.Administration
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
+                    .CreatedOn()
+                    .WithId(InitIds.KayDeveloper),
                 Users.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Suspended")
                     .SetDisplayName()
-                    .WithImageUrl("https://avatars.githubusercontent.com/u/69327748?v=4")
+                    .WithImageId(null)
                     .OfType(UserType.Artisan)
                     .HasLevelOfEducation(LevelOfEducation.PhD)
                     .WithContact(Contact.Create("0557833216")
@@ -280,19 +277,16 @@ namespace AMP.Processors.Processors.Administration
                     .IsSuspendedd(true)
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn(DateTime.UtcNow),
-
+                    .CreatedOn()
+                    .WithId(InitIds.KaySuspended),
             };
 
-            await _uow.Users.InsertAsync(users);
-            await _uow.SaveChangesAsync();
+            await Uow.Users.InsertAsync(users);
+            await Uow.SaveChangesAsync();
         }
 
         private async Task InitializeArtisans()
         {
-            var count = await _uow.Artisans.CountAsync();
-            if (count > 0) return;
-
             var builder = new StringBuilder();
             builder.Append("With over 6 years experience, ");
             builder.Append("QFace Group Ghana brings to you a wide variety of professional ");
@@ -305,126 +299,66 @@ namespace AMP.Processors.Processors.Administration
 
             var artisans = new List<Artisans>
             {
-                Artisans.Create(3)
+                Artisans.Create(InitIds.KayArtisan)
                     .WithBusinessName("Qface Group Ghana")
                     .WithDescription(builder.ToString())
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .IsVerifiedd(true)
                     .IsApprovedd(true)
                     .Offers(await BuildService(new List<string>
                         {
-                            "Electrician"
+                            "Electrical Works"
                         })),
-                Artisans.Create(2)
+                Artisans.Create(InitIds.Woode)
                     .WithBusinessName("Aquaman Painting Works")
                     .WithDescription("")
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .IsVerifiedd(false)
                     .IsApprovedd(false)
                     .Offers(await BuildService(new List<string>
                     {
-                        "Plumber",
-                        "Painter"
+                        "Plumbing",
+                        "Painting"
                     })),
-                Artisans.Create(7)
+                Artisans.Create(InitIds.Addae)
                     .WithBusinessName("Addae Uber Solutions")
                     .WithDescription("")
-                    .CreatedOn(DateTime.UtcNow)
+                    .CreatedOn()
                     .IsVerifiedd(true)
                     .IsApprovedd(true)
                     .Offers(await BuildService(new List<string>
                     {
-                        "Carpenter",
-                        "Bricklayer"
+                        "Carpentry",
+                        "Masonry"
                     })),
             };
 
-            await _uow.Artisans.InsertAsync(artisans);
+            await Uow.Artisans.InsertAsync(artisans);
         }
 
         private async Task InitializeCustomers()
         {
-            var count = await _uow.Customers.CountAsync();
-            if (count > 0) return;
-
             var customers = new List<Customers>
             {
-                Customers.Create(1)
-                    .CreatedOn(DateTime.UtcNow),
-                Customers.Create(5)
-                    .CreatedOn(DateTime.UtcNow),
-                Customers.Create(6)
-                    .CreatedOn(DateTime.UtcNow),
+                Customers.Create(InitIds.Awate)
+                    .CreatedOn(),
+                Customers.Create(InitIds.Abolo)
+                    .CreatedOn(),
+                Customers.Create(InitIds.Gloria)
+                    .CreatedOn(),
             };
-            await _uow.Customers.InsertAsync(customers);
-        }
-
-        private async Task InitializeOrders()
-        {
-            var orders = new List<Orders>
-            {
-                Orders.Create(1, 1)
-                    .ForArtisanWithId(2)
-                    .WithDescription("I need a painter to work on my house")
-                    .WithUrgency(Urgency.High)
-                    .WithScope(ScopeOfWork.New)
-                    .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(7))
-                    .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Kaspa Hostel"))
-                    .CreatedOn(DateTime.UtcNow),
-                Orders.Create(2, 1)
-                    .WithDescription("Painter needed for some maintenance work")
-                    .WithUrgency(Urgency.High)
-                    .WithScope(ScopeOfWork.Maintenance)
-                    .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(7))
-                    .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Hilda Hostel"))
-                    .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 9)
-                    //.ForArtisanWithId(2)
-                    .WithDescription("Installation of a kitchen sink")
-                    .WithUrgency(Urgency.High)
-                    .WithScope(ScopeOfWork.New)
-                    .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(7))
-                    .WithWorkAddress(Address.Create("Tarkwa", "UMaT"))
-                    .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 12)
-                    //.ForArtisanWithId(2)
-                    .WithDescription("Fixing kitchen sink")
-                    .WithUrgency(Urgency.Low)
-                    .WithScope(ScopeOfWork.Maintenance)
-                    .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(4))
-                    .WithWorkAddress(Address.Create("Takoradi", "Anaji-Estate"))
-                    .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 6)
-                    .ForArtisanWithId(1)
-                    .WithDescription("Carpenter needed to fix some furniture")
-                    .WithUrgency(Urgency.Medium)
-                    .WithPreferredDate(DateTime.Today + TimeSpan.FromDays(4))
-                    .WithWorkAddress(Address.Create("Tarkwa", "Cyanide"))
-                    .CreatedOn(DateTime.UtcNow),
-                Orders.Create(1, 1)
-                    .ForArtisanWithId(2)
-                    .WithDescription("I need a painter to work on my house (completed)")
-                    .WithUrgency(Urgency.High)
-                    .WithScope(ScopeOfWork.New)
-                    .WithPreferredDate(DateTime.Today)
-                    .WithWorkAddress(Address.Create("Tarkwa", "Brahabebome, Kaspa Hostel"))
-                    .CreatedOn(DateTime.UtcNow)
-                    .IsCompleted(true)
-                    .WithStatus(OrderStatus.Completed),
-            };
-
-            await _uow.Orders.InsertAsync(orders);
+            await Uow.Customers.InsertAsync(customers);
         }
 
 
         private async Task<List<Languages>> BuildLanguage(List<string> languages)
         {
-            return await _uow.Languages.BuildLanguages(languages);
+            return await Uow.Languages.BuildLanguages(languages);
         }
 
         private async Task<List<Services>> BuildService(List<string> services)
         {
-            return await _uow.Services.BuildServices(services);
+            return await Uow.Services.BuildServices(services);
         }
     }
 }

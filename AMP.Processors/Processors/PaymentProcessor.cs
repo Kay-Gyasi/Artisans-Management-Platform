@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
+﻿using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
@@ -10,64 +7,68 @@ using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class PaymentProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Paymentlookup";
+
         public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {
         }
 
-        public async Task<int> Save(PaymentCommand command)
+        public async Task<string> Save(PaymentCommand command)
         {
-            var isNew = command.Id == 0;
 
-            Payments payment;
-            if (isNew)
-            {
-                payment = Payments.Create(command.CustomerId, command.OrderId)
-                    .CreatedOn(DateTime.UtcNow);
-                AssignField(payment, command, true);
-                await _uow.Payments.InsertAsync(payment);
-                await _uow.SaveChangesAsync();
-                return payment.Id;
-            }
-
-            payment = await _uow.Payments.GetAsync(command.Id);
-            AssignField(payment, command);
-            await _uow.Payments.UpdateAsync(payment);
-            await _uow.SaveChangesAsync();
+            var payment = Payments.Create(command.OrderId)
+                .CreatedOn(DateTime.UtcNow);
+            AssignField(payment, command, true);
+            Cache.Remove(LookupCacheKey);
+            await Uow.Payments.InsertAsync(payment);
+            await Uow.SaveChangesAsync();
             return payment.Id;
         }
 
-        public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command)
+        public async Task Verify(VerifyPaymentCommand command)
         {
-            var page = await _uow.Payments.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<PaymentPageDto>>(page);
+            await Uow.Payments.Verify(command.Reference, command.TransactionReference);
+            await Uow.SaveChangesAsync();
         }
 
-        public async Task<PaymentDto> Get(int id)
+        public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)
         {
-            return _mapper.Map<PaymentDto>(await _uow.Payments.GetAsync(id));
+            var page = await Uow.Payments.GetUserPage(command, userId, role, new CancellationToken());
+            return Mapper.Map<PaginatedList<PaymentPageDto>>(page);
         }
 
-        public async Task Delete(int id)
+        public async Task<PaymentDto> Get(string id)
         {
-            var artisan = await _uow.Payments.GetAsync(id);
-            if (artisan != null) await _uow.Payments.DeleteAsync(artisan, new CancellationToken());
-            await _uow.SaveChangesAsync();
+            return Mapper.Map<PaymentDto>(await Uow.Payments.GetAsync(id));
         }
 
-        private void AssignField(Payments payment, PaymentCommand command, bool isNew = false)
+        public async Task Delete(string id)
+        {
+            var payment = await Uow.Payments.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (payment != null) await Uow.Payments.SoftDeleteAsync(payment);
+            await Uow.SaveChangesAsync();
+        }
+
+        private static void AssignField(Payments payment, PaymentCommand command, bool isNew = false)
         {
             payment.WithAmountPaid(command.AmountPaid)
-                .WithStatus(command.Status);
+                .HasBeenForwarded(false)
+                .WithReference(command.Reference)
+                .HasBeenVerified(false);
 
             if (!isNew)
-                payment.ByCustomerWithId(command.CustomerId)
-                    .OnOrderWithId(command.OrderId);
+                payment.OnOrderWithId(command.OrderId)
+                    .LastModifiedOn();
         }
     }
 }

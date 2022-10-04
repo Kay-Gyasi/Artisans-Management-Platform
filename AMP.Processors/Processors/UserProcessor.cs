@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
 using AMP.Processors.Authentication;
 using AMP.Processors.Commands;
@@ -20,6 +20,8 @@ namespace AMP.Processors.Processors
     [Processor]
     public class UserProcessor : ProcessorBase
     {
+        private const string LookupCacheKey = "Userlookup";
+
         private readonly IAuthService _authService;
 
         public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
@@ -30,62 +32,136 @@ namespace AMP.Processors.Processors
 
         public async Task<SigninResponse> Login(SigninCommand command)
         {
-            var user = await _uow.Users.Authenticate(command);
+            var user = await Uow.Users.Authenticate(command);
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
-        public async Task<int> Save(UserCommand command)
+        public async Task<SigninResponse> GetRefreshToken(string userId)
         {
-            var isNew = command.Id == 0;
+            var user = await Uow.Users.GetAsync(userId);
+            return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
+        }
 
-            Users user;
-            if (isNew)
-            {
-                user = Users.Create()
-                    .CreatedOn(DateTime.UtcNow);
-                var passes =  _uow.Users.Register(command);
-                await AssignFields(user, command);
-                user.HasPassword(passes.Item1)
-                    .HasPasswordKey(passes.Item2);
-                await _uow.Users.InsertAsync(user);
-                await _uow.SaveChangesAsync();
-                return user.Id;
-            }
+        public async Task<string> Post(UserCommand command)
+        {
+            var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);
+            if (userExists) return default;
 
-            user = await _uow.Users.GetAsync(command.Id);
+            var user = Users.Create()
+                .CreatedOn();
+            var passes = Uow.Users.Register(command);
             await AssignFields(user, command);
-            await _uow.Users.UpdateAsync(user);
-            await _uow.SaveChangesAsync();
+            user.HasPassword(passes.Item1)
+                .HasPasswordKey(passes.Item2);
+            Cache.Remove(LookupCacheKey);
+            await Uow.Users.InsertAsync(user);
+            await Uow.SaveChangesAsync();
+
+            await PostAsType(user);
+            return user.Id;
+        }
+
+        public async Task<string> Save(UserCommand command)
+        {
+            var user = await Uow.Users.GetAsync(command.Id);
+            await AssignFields(user, command);
+            user.LastModifiedOn();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Users.UpdateAsync(user);
+            await Uow.SaveChangesAsync();
             return user.Id;
         }
 
         public async Task<PaginatedList<UserPageDto>> GetPage(PaginatedCommand command)
         {
-            var page = await _uow.Users.GetPage(command, new CancellationToken());
-            return _mapper.Map<PaginatedList<UserPageDto>>(page);
+            var page = await Uow.Users.GetPage(command, new CancellationToken());
+            return Mapper.Map<PaginatedList<UserPageDto>>(page);
         }
 
-        public async Task<UserDto> Get(int id)
+        public async Task<UserDto> Get(string id)
         {
-            return _mapper.Map<UserDto>(await _uow.Users.GetAsync(id));
+            return Mapper.Map<UserDto>(await Uow.Users.GetAsync(id));
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
-            var artisan = await _uow.Users.GetAsync(id);
-            if (artisan != null) await _uow.Users.DeleteAsync(artisan, new CancellationToken());
-            await _uow.SaveChangesAsync();
+            var user = await Uow.Users.GetAsync(id);
+            Cache.Remove(LookupCacheKey);
+            if (user != null) await Uow.Users.SoftDeleteAsync(user);
+            await Uow.SaveChangesAsync();
+        }
+
+        private async Task PostAsType(Users user)
+        {
+            switch (user.Type)
+            {
+                case UserType.Artisan:
+                    await PostArtisan(user);
+                    break;
+                case UserType.Customer:
+                    await PostCustomer(user);
+                    break;
+                case UserType.Developer:
+                    break;
+                case UserType.Administrator:
+                    break;
+                default:
+                    break;
+            }
+        }
+        private async Task PostArtisan(Users user)
+        {
+            try
+            {
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var artisan = Artisans.Create(userId)
+                    .WithBusinessName(user.DisplayName)
+                    .WithDescription(string.Empty)
+                    .CreatedOn();
+                await Uow.Artisans.InsertAsync(artisan);
+            }
+            catch (Exception)
+            {
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var deleted = await Uow.Users.GetAsync(userId);
+                await Uow.Users.DeleteAsync(deleted, new CancellationToken());
+            }
+            finally
+            {
+                await Uow.SaveChangesAsync();
+            }
+        }
+        
+        private async Task PostCustomer(Users user)
+        {
+            try
+            {
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var customer = Customers.Create(userId)
+                    .CreatedOn();
+                await Uow.Customers.InsertAsync(customer);
+            }
+            catch (Exception)
+            {
+                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+                var deleted = await Uow.Users.GetAsync(userId);
+                await Uow.Users.DeleteAsync(deleted, new CancellationToken());
+            }
+            finally
+            {
+                await Uow.SaveChangesAsync();
+            }
         }
 
         private async Task AssignFields(Users user, UserCommand command)
         {
-            var lsit = command.Languages.Select(lang => lang.Name).ToList();
-            var languages = await _uow.Languages.BuildLanguages(lsit);
+            var list = command.Languages.Select(lang => lang.Name).ToList();
+            var languages = await Uow.Languages.BuildLanguages(list);
             user.WithFirstName(command.FirstName)
                 .WithFamilyName(command.FamilyName)
                 .WithOtherName(command.OtherName)
                 .SetDisplayName()
-                .WithImageUrl(command.ImageUrl)
+                .WithImageId(command.ImageId)
                 .OfType(command.Type)
                 .HasLevelOfEducation(command.LevelOfEducation)
                 .WithContact(Contact.Create(command.Contact.PrimaryContact ?? "")

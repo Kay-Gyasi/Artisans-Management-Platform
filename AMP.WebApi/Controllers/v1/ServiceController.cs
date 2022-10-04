@@ -21,7 +21,7 @@ public class ServiceController : BaseControllerv1
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ServiceDto> Get(int id)
+    public async Task<ServiceDto> Get(string id)
         => await Mediator.Send(new GetService.Query(id));
 
     [HttpPost]
@@ -36,6 +36,6 @@ public class ServiceController : BaseControllerv1
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task Delete(int id)
+    public async Task Delete(string id)
         => await Mediator.Send(new DeleteService.Command(id));
 }

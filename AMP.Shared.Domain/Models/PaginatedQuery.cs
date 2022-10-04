@@ -26,7 +26,7 @@ namespace AMP.Shared.Domain.Models
 		[JsonProperty("start")]
 		public int Take { get; set; } = 0;
 		public string? OrderBy { get; set; }
-		public int Skip { get; set; }
+		public int Skip => (_pageNumber - 1) * _pageSize;
 
 		public int LastEntityId
 		{

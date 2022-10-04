@@ -6,15 +6,31 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations
 {
-    public class UsersConfiguration : DatabaseConfigurationBase<Users>
+    public sealed class UsersConfiguration : DatabaseConfigurationBase<Users>
     {
         public override void Configure(EntityTypeBuilder<Users> builder)
         {
             base.Configure(builder);
             builder.Property(a => a.FirstName)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
             builder.Property(a => a.FamilyName)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
+            builder.Property(a => a.OtherName)
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
+            builder.Property(a => a.ImageId)
+                .HasColumnType("varchar")
+                .HasMaxLength(36);  
+            builder.Property(a => a.DisplayName)
+                .HasColumnType("varchar")
+                .HasMaxLength(100);
+            builder.Property(a => a.MomoNumber)
+                .HasColumnType("varchar")
+                .HasMaxLength(15);  
             builder.Property(a => a.IsSuspended)
                 .HasDefaultValue(false);
             builder.Property(a => a.IsRemoved)
@@ -26,12 +42,21 @@ namespace AMP.Persistence.Configurations
                 .HasConversion(new EnumToStringConverter<LevelOfEducation>());
             builder.OwnsOne(a => a.Contact, x =>
             {
-                x.Property(a => a.PrimaryContact).IsRequired();
+                x.Property(a => a.PrimaryContact)
+                    .IsRequired()
+                    .HasColumnType("varchar")
+                    .HasMaxLength(15);
             });
             builder.OwnsOne(a => a.Address, x =>
             {
-                x.Property(a => a.StreetAddress).IsRequired();
+                x.Property(a => a.StreetAddress)
+                    .IsRequired()
+                    .HasColumnType("varchar")
+                    .HasMaxLength(80);
             });
+            builder.HasOne(a => a.Image)
+                .WithOne(a => a.User)
+                .HasForeignKey<Images>(a => a.UserId);
             builder.HasQueryFilter(x => !x.IsRemoved);
             builder.HasQueryFilter(x => !x.IsSuspended);
         }

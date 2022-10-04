@@ -3,18 +3,25 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities
 {
-    public class Languages : EntityBase
+    public sealed class Languages : EntityBase
     {
         private Languages(string name)
         {
             Name = name;
         }
 
-        public static Languages Create(string name) => new Languages(name);
+        public static Languages Create(string name) 
+            => new Languages(name);
 
         public Languages WithName(string name)
         {
             Name = name;
+            return this;
+        }
+
+        public Languages WithId(string id)
+        {
+            Id = id;
             return this;
         }
         public string Name { get; private set; }

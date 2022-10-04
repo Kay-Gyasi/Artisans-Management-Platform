@@ -1,10 +1,10 @@
-﻿using System.Security.Claims;
-using System.Text;
-using AMP.Services;
+﻿using AMP.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Security.Claims;
+using System.Text;
 using ILogger = Serilog.ILogger;
 
 namespace AMP.WebApi;
@@ -22,8 +22,9 @@ public static class DependencyInjection
             .AddCaching()
             .AddDefaultConfig()
             .AddMemoryCache()
-            .RegisterInfrastructure()
+            .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration);
+        
         return services;
     }
 
@@ -31,7 +32,9 @@ public static class DependencyInjection
     {
         services.AddControllers()
             .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(opt =>
@@ -47,7 +50,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var secretKey = configuration.GetSection("Jwt:Key").Value;
+        var secretKey = configuration["Jwt:Key"];
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opts =>
@@ -67,7 +70,7 @@ public static class DependencyInjection
                     NameClaimType = ClaimTypes.Name
                 };
             });
-        return services;
+       return services;
     }
 
     public static WebApplication AddApplicationBuilder(this WebApplicationBuilder builder, ILogger logger)
@@ -100,6 +103,10 @@ public static class DependencyInjection
         app.UseHttpsRedirection();
 
         app.UseSerilogRequestLogging();
+
+        app.UseDefaultFiles();
+        
+        app.UseStaticFiles();
 
         app.UseAuthentication();
 

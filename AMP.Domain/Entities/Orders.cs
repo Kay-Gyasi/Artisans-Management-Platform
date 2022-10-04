@@ -6,54 +6,61 @@ using AMP.Domain.ValueObjects;
 
 namespace AMP.Domain.Entities
 {
-    public class Orders : EntityBase
+    public sealed class Orders : EntityBase
     {
-        public int CustomerId { get; private set; }
-        public int? ArtisanId { get; private set; }
+        public string ReferenceNo { get; private set; }
+        public string CustomerId { get; private set; }
+        public string? ArtisanId { get; private set; }
         public bool IsComplete { get; private set; }
-        public int ServiceId { get; private set; }
-        public int? PaymentId { get; private set; }
+        public bool IsArtisanComplete { get; private set; }
+        public bool IsRequestAccepted { get; private set; }
+        public string ServiceId { get; private set; }
         public string Description { get; private set; }
-        public decimal Cost { get; private set; } // To be set by approved artisan
+        public decimal Cost { get; private set; }
+        public decimal PaymentMade { get; private set; }
         public Urgency Urgency { get; private set; }
         public ScopeOfWork Scope { get; private set; }
         public OrderStatus Status { get; private set; }
-        public DateTime PreferredDate { get; private set; }
+        public DateTime PreferredStartDate { get; private set; }
+        public DateTime PreferredCompletionDate { get; private set; }
         public Artisans Artisan { get; private set; }
         public Address WorkAddress { get; private set; }
         public Customers Customer { get; private set; }
         public Services Service { get; private set; }
-        public Payments Payment { get; private set; }
 
         private readonly List<Disputes> _disputes = new List<Disputes>();
         public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
+        
+        private readonly List<Payments> _payments = new List<Payments>();
+        public IEnumerable<Payments> Payments => _payments.AsReadOnly();
+
+        private readonly List<Requests> _requests = new List<Requests>();
+        public IEnumerable<Requests> Requests => _requests.AsReadOnly();
 
         private Orders() {}
 
-        private Orders(int customerId, int serviceId)
+        private Orders(string customerId, string serviceId)
         {
             CustomerId = customerId;
             ServiceId = serviceId;
         }
 
-        public static Orders Create(int customerId, int serviceId)
-        {
-            return new Orders(customerId, serviceId);
-        }
+        public static Orders Create(string customerId, string serviceId) 
+            => new Orders(customerId, serviceId);
 
-        public Orders ForCustomerWithId(int customerId)
+        public Orders ForCustomerWithId(string customerId)
         {
             CustomerId = customerId;
             return this;
         }
 
-        public Orders ForServiceWithId(int serviceId)
+        public Orders ForServiceWithId(string serviceId)
         {
             ServiceId = serviceId;
             return this;
         }
 
-        public Orders ForArtisanWithId(int? artisanId)
+        public Orders ForArtisanWithId(string? artisanId)
         {
             ArtisanId = artisanId;
             return this;
@@ -64,16 +71,22 @@ namespace AMP.Domain.Entities
             IsComplete = isCompleted;
             return this;
         }
-
-        public Orders WithPaymentId(int? paymentId)
+        
+        public Orders IsArtisanCompleted(bool isCompleted)
         {
-            PaymentId = paymentId;
+            IsArtisanComplete = isCompleted;
             return this;
         }
 
         public Orders WithDescription(string description)
         {
             Description = description;
+            return this;
+        }
+        
+        public Orders WithReferenceNo(string referenceNo)
+        {
+            ReferenceNo = referenceNo;
             return this;
         }
 
@@ -101,9 +114,26 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Orders WithPreferredDate(DateTime date)
+        public Orders WithPreferredStartDate(DateTime date)
         {
-            PreferredDate = date; // make sure date is not past
+            if (date < DateTime.UtcNow)
+            {
+                PreferredStartDate = DateTime.UtcNow.AddDays(1);
+                return this;
+            }
+
+            PreferredStartDate = date;
+            return this;
+        }
+        
+        public Orders WithPreferredCompletionDate(DateTime date)
+        {
+            if (date < PreferredStartDate)
+            {
+                PreferredCompletionDate = DateTime.UtcNow.AddDays(1);
+                return this;
+            }
+            PreferredCompletionDate = date; // make sure date is not past
             return this;
         }
 
@@ -125,15 +155,27 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Orders WithPayment(Payments payment)
+        public Orders RequestAccepted(bool isRequestAccepted)
         {
-            Payment = payment;
+            IsRequestAccepted = isRequestAccepted;
             return this;
         }
 
         public Orders CreatedOn(DateTime date)
         {
             DateCreated = date;
+            return this;
+        }
+
+        public Orders LastModifiedOn()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
+
+        public Orders WithId(string id)
+        {
+            Id = id;
             return this;
         }
     }

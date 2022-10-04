@@ -10,6 +10,16 @@ try
     logger.Information("App starting up...");
     builder.Services.AddAmp(builder.Configuration, logger);
     app = builder.AddApplicationBuilder(logger);
+
+    // create as middleware
+    //logger.Information("Applying migrations...");
+    //using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+    //{
+    //    var context = serviceScope.ServiceProvider.GetService<AmpDbContext>();
+    //    context.Database.Migrate();
+    //}
+    //logger.Information("Done applying migrations");
+
     logger.Information("App started");
 }
 catch (Exception e)
