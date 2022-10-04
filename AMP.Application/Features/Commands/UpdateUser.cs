@@ -31,7 +31,5 @@ namespace AMP.Application.Features.Commands
                 return await _processor.Update(request.UserCommand);
             }
         }
-        
-        // TODO:: do validation
     }
 }

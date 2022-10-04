@@ -117,3 +117,4 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\ApiMultiPartFormData.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\FluentValidation.DependencyInjectionExtensions.dll
