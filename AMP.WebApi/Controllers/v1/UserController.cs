@@ -25,12 +25,12 @@ public class UserController : BaseControllerv1
     public async Task<UserDto> Get(string id)
         => await Mediator.Send(new GetUser.Query(id));
 
-    [HttpPost]
+    [HttpPut]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Save(UserCommand command)
+    public async Task<IActionResult> Update(UserCommand command)
     {
-        var id = await Mediator.Send(new SaveUser.Command(command));
+        var id = await Mediator.Send(new UpdateUser.Command(command));
         return CreatedAtAction(nameof(Get), new {id}, id);
     }
 

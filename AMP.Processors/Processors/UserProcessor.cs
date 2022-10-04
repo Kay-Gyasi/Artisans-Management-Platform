@@ -61,7 +61,7 @@ namespace AMP.Processors.Processors
             return user.Id;
         }
 
-        public async Task<string> Save(UserCommand command)
+        public async Task<string> Update(UserCommand command)
         {
             var user = await Uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);

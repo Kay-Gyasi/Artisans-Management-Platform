@@ -6,7 +6,7 @@ using MediatR;
 
 namespace AMP.Application.Features.Commands
 {
-    public class SaveUser
+    public class UpdateUser
     {
         public class Command : IRequest<string>
         {
@@ -28,8 +28,10 @@ namespace AMP.Application.Features.Commands
             }
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
-                return await _processor.Save(request.UserCommand);
+                return await _processor.Update(request.UserCommand);
             }
         }
+        
+        // TODO:: do validation
     }
 }
