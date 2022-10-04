@@ -1,0 +1,114 @@
+<changelist name="Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]" date="1664868842769" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Merge at 10/4/2022 7:33 AM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Services/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Services/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Application/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Application/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget1.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Amp.IntegrationTests/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="Amp.IntegrationTests/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget2.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Domain/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Domain/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget3.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Application/obj/Debug/netstandard2.1/AMP.Application.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="AMP.Application/obj/Debug/netstandard2.1/AMP.Application.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/AMP.Application.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Processors/obj/Debug/netstandard2.1/AMP.Processors.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="AMP.Processors/obj/Debug/netstandard2.1/AMP.Processors.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/AMP.Processors.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".vs/Artisans Management Platform/DesignTimeBuild/.dtbcache.v2" />
+    <option name="AFTER_PATH" value=".vs/Artisans Management Platform/DesignTimeBuild/.dtbcache.v2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/.dtbcache.v2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Amp.UnitTests/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="Amp.UnitTests/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget4.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Processors/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Processors/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget5.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/Amp.IntegrationTests.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Persistence/obj/Debug/netstandard2.1/AMP.Persistence.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="AMP.Persistence/obj/Debug/netstandard2.1/AMP.Persistence.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/AMP.Persistence.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Shared.Persistence/obj/Debug/netstandard2.1/AMP.Shared.Persistence.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="AMP.Shared.Persistence/obj/Debug/netstandard2.1/AMP.Shared.Persistence.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/AMP.Shared.Persistence.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Services/obj/Debug/netstandard2.1/AMP.Services.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="AMP.Services/obj/Debug/netstandard2.1/AMP.Services.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/AMP.Services.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Persistence/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Persistence/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget6.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".vs/Artisans Management Platform/v17/.suo" />
+    <option name="AFTER_PATH" value=".vs/Artisans Management Platform/v17/.suo" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/.suo" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Shared.Domain/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Shared.Domain/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget7.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".vs/ProjectEvaluation/artisans management platform.projects.v2" />
+    <option name="AFTER_PATH" value=".vs/ProjectEvaluation/artisans management platform.projects.v2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/artisans management platform.projects.v2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.WebApi/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.WebApi/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget8.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".vs/Artisans Management Platform/v17/.futdcache.v1" />
+    <option name="AFTER_PATH" value=".vs/Artisans Management Platform/v17/.futdcache.v1" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/.futdcache.v1" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/AMP.WebApi.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".vs/ProjectEvaluation/artisans management platform.metadata.v2" />
+    <option name="AFTER_PATH" value=".vs/ProjectEvaluation/artisans management platform.metadata.v2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/artisans management platform.metadata.v2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="AMP.Shared.Persistence/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="AMP.Shared.Persistence/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/shelf/Uncommitted_changes_before_Merge_at_10_4_2022_7_33_AM_[Changes]/project.nuget9.cache" />
+  </binary>
+</changelist>
