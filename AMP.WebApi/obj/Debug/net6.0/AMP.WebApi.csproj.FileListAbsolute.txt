@@ -15,6 +15,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\CloudinaryDotNet.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Humanizer.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.Contracts.dll
@@ -117,4 +118,3 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.genruntimeconfig.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\ref\AMP.WebApi.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

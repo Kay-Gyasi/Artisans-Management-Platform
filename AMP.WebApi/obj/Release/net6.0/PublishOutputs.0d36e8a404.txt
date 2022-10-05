@@ -14,6 +14,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\Azure.Security.KeyVault.Secrets.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\CloudinaryDotNet.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\FluentValidation.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\MediatR.Contracts.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\MediatR.Extensions.Microsoft.DependencyInjection.dll

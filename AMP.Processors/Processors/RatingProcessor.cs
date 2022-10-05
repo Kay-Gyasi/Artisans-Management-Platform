@@ -48,15 +48,19 @@ namespace AMP.Processors.Processors
             return rating.Id;
         }
 
-        public async Task<PaginatedList<RatingPageDto>> GetPage(PaginatedCommand command)
-        {
-            var page = await Uow.Ratings.GetPage(command, new CancellationToken());
-            return Mapper.Map<PaginatedList<RatingPageDto>>(page);
-        }
-        
         public async Task<PaginatedList<RatingPageDto>> GetArtisanRatingPage(PaginatedCommand command, string userId)
         {
             var page = await Uow.Ratings.GetArtisanRatingPage(command, userId, new CancellationToken());
+            foreach(var rating in page.Data)
+            {
+                rating.ForArtisan(await Uow.Artisans.GetAsync(rating.ArtisanId))
+                    .ForCustomer(await Uow.Customers.GetAsync(rating.CustomerId));
+            }
+            return Mapper.Map<PaginatedList<RatingPageDto>>(page);
+        }
+        public async Task<PaginatedList<RatingPageDto>> GetCustomerRatingPage(PaginatedCommand command, string userId)
+        {
+            var page = await Uow.Ratings.GetCustomerRatingPage(command, userId, new CancellationToken());
             foreach(var rating in page.Data)
             {
                 rating.ForArtisan(await Uow.Artisans.GetAsync(rating.ArtisanId))

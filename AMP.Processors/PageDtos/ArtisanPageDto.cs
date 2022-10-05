@@ -8,6 +8,7 @@ namespace AMP.Processors.PageDtos
         public string UserId { get; set; }
         public string BusinessName { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
         public bool IsVerified { get; set; }
         public bool IsApproved { get; set; }
         public double Rating { get; set; } 

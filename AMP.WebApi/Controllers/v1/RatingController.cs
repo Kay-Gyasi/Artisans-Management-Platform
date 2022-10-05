@@ -17,8 +17,8 @@ public class RatingController : BaseControllerv1
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<PaginatedList<RatingPageDto>> GetPage(PaginatedCommand command)
-        => await Mediator.Send(new GetRatingPage.Query(command));
+    public async Task<PaginatedList<RatingPageDto>> GetCustomerPage(PaginatedCommand command)
+        => await Mediator.Send(new GetRatingPage.Query(command, UserId));
     
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]

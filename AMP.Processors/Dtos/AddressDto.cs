@@ -10,21 +10,4 @@ namespace AMP.Processors.Dtos
             public string StreetAddress { get; set; }
             public string StreetAddress2 { get; set; }
     }
-
-    public class ContactDto
-    {
-        public string EmailAddress { get; set; }
-        public string PrimaryContact { get; set; }
-        public string PrimaryContact2 { get; set; }
-        public string PrimaryContact3 { get; set; }
-    }
-    
-    public class ImageDto
-    {
-        public string Id { get; set; }
-        public string? UserId { get; set; }
-        public string PublicId { get; set; }
-        public string ImageUrl { get; set; }
-        public UserDto User { get; set; }
-    }
 }

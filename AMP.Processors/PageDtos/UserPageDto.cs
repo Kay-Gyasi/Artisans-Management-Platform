@@ -1,4 +1,5 @@
-﻿using AMP.Domain.Enums;
+﻿using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
 
 namespace AMP.Processors.PageDtos
@@ -18,5 +19,6 @@ namespace AMP.Processors.PageDtos
         public LevelOfEducation LevelOfEducation { get; set; }
         public Contact Contact { get; set; }
         public Address Address { get; set; }
+        public ImagePageDto Image { get; set; }
     }
 }

@@ -64,7 +64,8 @@ namespace AMP.Processors.Processors
                 IsVerified = x.IsVerified,
                 IsApproved = x.IsApproved,
                 Rating = Uow.Ratings.GetRating(x.Id),
-                User = x.User
+                User = x.User,
+                ImageUrl = x.User?.Image?.ImageUrl
             }).ToList();
             return new PaginatedList<ArtisanPageDto>(data, paginated.TotalCount, paginated.CurrentPage,
                 paginated.PageSize);

@@ -69,6 +69,25 @@ namespace AMP.Persistence.Repositories
             var orders = await BuildPage(whereQueryable, paginated, cancellationToken);
             return orders;
         }
+        
+        public async Task<PaginatedList<Ratings>> GetCustomerRatingPage(PaginatedCommand paginated, string userId, 
+            CancellationToken cancellationToken)
+        {
+            IQueryable<Ratings> whereQueryable;
+            if (string.IsNullOrEmpty(paginated.OtherJson))
+            {
+                whereQueryable = base.GetBaseQuery().Where(x => x.Customer.UserId == userId)
+                    .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
+            }
+            else
+            {
+                whereQueryable = GetBaseQuery().Where(x => x.CustomerId == paginated.OtherJson)
+                    .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
+            }
+
+            var orders = await BuildPage(whereQueryable, paginated, cancellationToken);
+            return orders;
+        }
 
 
         private static async Task<PaginatedList<Ratings>> BuildPage(IQueryable<Ratings> whereQueryable, PaginatedCommand paginated,

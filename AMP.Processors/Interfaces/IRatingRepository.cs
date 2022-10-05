@@ -14,5 +14,7 @@ namespace AMP.Processors.Repositories
 
         Task<PaginatedList<Ratings>> GetArtisanRatingPage(PaginatedCommand paginated, string userId,
             CancellationToken cancellationToken);
+        Task<PaginatedList<Ratings>> GetCustomerRatingPage(PaginatedCommand paginated, string userId,
+            CancellationToken cancellationToken);
     }
 }
