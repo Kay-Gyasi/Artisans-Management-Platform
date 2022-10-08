@@ -39,7 +39,8 @@ namespace AMP.Persistence.Repositories
         public async Task Complete(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order.WithStatus(OrderStatus.Completed)
+            if (order is null || !order.IsArtisanComplete) return;
+            order?.WithStatus(OrderStatus.Completed)
                 .IsCompleted(true);
             await UpdateAsync(order);
         }
@@ -47,38 +48,38 @@ namespace AMP.Persistence.Repositories
         public async Task ArtisanComplete(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order.IsArtisanCompleted(true);
+            order?.IsArtisanCompleted(true);
             await UpdateAsync(order);
         }
 
         public async Task AcceptRequest(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order.RequestAccepted(true);
+            order?.RequestAccepted(true);
             await UpdateAsync(order);
         }
         
         public async Task CancelRequest(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order.RequestAccepted(false);
+            order?.RequestAccepted(false);
             await UpdateAsync(order);
         }
 
         public async Task UnassignArtisan(string orderId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order.ForArtisanWithId(null);
+            order?.ForArtisanWithId(null);
             await UpdateAsync(order);
         }
 
         public async Task AssignArtisan(string orderId, string artisanId)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order.ForArtisanWithId(artisanId);
+            order?.ForArtisanWithId(artisanId);
             await UpdateAsync(order);
 
-            await _context.Requests.AddAsync(Requests.Create(order.CustomerId, artisanId, orderId));
+            await Context.Requests.AddAsync(Requests.Create(order?.CustomerId, artisanId, orderId));
         }
 
         public async Task<PaginatedList<Orders>> GetCustomerOrderPage(PaginatedCommand paginated,
@@ -177,7 +178,7 @@ namespace AMP.Persistence.Repositories
         public async Task SetCost(SetCostCommand costCommand)
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
-            order.WithCost(costCommand.Cost);
+            order?.WithCost(costCommand.Cost);
         }
 
     }

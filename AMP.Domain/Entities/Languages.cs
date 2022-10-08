@@ -12,21 +12,10 @@ namespace AMP.Domain.Entities
 
         public static Languages Create(string name) 
             => new Languages(name);
-
-        public Languages WithName(string name)
-        {
-            Name = name;
-            return this;
-        }
-
-        public Languages WithId(string id)
-        {
-            Id = id;
-            return this;
-        }
+        
         public string Name { get; private set; }
 
-        private readonly List<Users> _users = new List<Users>();
+        private readonly List<Users> _users = new();
         public IReadOnlyList<Users> Users => _users.AsReadOnly();
     }
 }

@@ -4,7 +4,6 @@ using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
 using AMP.Processors.PageDtos;
 using AMP.Processors.Processors.Base;
-using AMP.Processors.Repositories.UoW;
 using AMP.Processors.Responses;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
@@ -13,6 +12,7 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AMP.Processors.Interfaces.UoW;
 
 namespace AMP.Processors.Processors
 {

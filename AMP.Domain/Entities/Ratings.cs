@@ -77,11 +77,5 @@ namespace AMP.Domain.Entities
             DateModified = DateTime.UtcNow;
             return this;
         }
-
-        public Ratings WithId(string id)
-        {
-            Id = id;
-            return this;
-        }
     }
 }

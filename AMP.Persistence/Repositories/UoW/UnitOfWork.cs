@@ -1,30 +1,17 @@
 ﻿using System.Threading.Tasks;
 using AMP.Persistence.Database;
 using AMP.Processors.Interfaces;
+using AMP.Processors.Interfaces.UoW;
 using AMP.Processors.Repositories;
 using AMP.Processors.Repositories.Administration;
-using AMP.Processors.Repositories.UoW;
 
 namespace AMP.Persistence.Repositories.UoW
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AmpDbContext _dbContext;
-        private readonly IInitializeDbRepository _initializeDbRepository;
-        private readonly IArtisanRepository _artisanRepository;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IDisputeRepository _disputeRepository;
-        private readonly IOrderRepository _orderRepository;
-        private readonly IPaymentRepository _paymentRepository;
-        private readonly IRatingRepository _ratingRepository;
-        private readonly IServiceRepository _serviceRepository;
-        private readonly ILanguageRepository _languageRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IImageRepository _imageRepository;
-        private readonly IRequestRepository _requestRepository;
 
         public UnitOfWork(AmpDbContext dbContext, 
-            IInitializeDbRepository initializeDbRepository,
             IArtisanRepository artisanRepository,
             ICustomerRepository customerRepository,
             IDisputeRepository disputeRepository,
@@ -35,40 +22,45 @@ namespace AMP.Persistence.Repositories.UoW
             ILanguageRepository languageRepository,
             IUserRepository userRepository,
             IImageRepository imageRepository,
-            IRequestRepository requestRepository
-            )
+            IRequestRepository requestRepository)
         {
             _dbContext = dbContext;
-            _initializeDbRepository = initializeDbRepository;
-            _artisanRepository = artisanRepository;
-            _customerRepository = customerRepository;
-            _disputeRepository = disputeRepository;
-            _orderRepository = orderRepository;
-            _paymentRepository = paymentRepository;
-            _ratingRepository = ratingRepository;
-            _serviceRepository = serviceRepository;
-            _languageRepository = languageRepository;
-            _userRepository = userRepository;
-            _imageRepository = imageRepository;
-            _requestRepository = requestRepository;
+            Artisans = artisanRepository;
+            Customers = customerRepository;
+            Disputes = disputeRepository;
+            Orders = orderRepository;
+            Payments = paymentRepository;
+            Ratings = ratingRepository;
+            Services = serviceRepository;
+            Languages = languageRepository;
+            Users = userRepository;
+            Images = imageRepository;
+            Requests = requestRepository;
         }
+        
+        public IArtisanRepository Artisans { get; }
 
-        public IInitializeDbRepository InitializeDb => _initializeDbRepository;
-        public IArtisanRepository Artisans => _artisanRepository;
-        public ICustomerRepository Customers => _customerRepository;
-        public IDisputeRepository Disputes => _disputeRepository;
-        public IOrderRepository Orders => _orderRepository;
-        public IPaymentRepository Payments => _paymentRepository;
-        public IRatingRepository Ratings => _ratingRepository;
-        public IServiceRepository Services => _serviceRepository;
-        public IUserRepository Users => _userRepository;
-        public ILanguageRepository Languages => _languageRepository;
-        public IImageRepository Images => _imageRepository;
-        public IRequestRepository Requests => _requestRepository;
+        public ICustomerRepository Customers { get; }
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return await _dbContext.SaveChangesAsync() > 0;
-        }
+        public IDisputeRepository Disputes { get; }
+
+        public IOrderRepository Orders { get; }
+
+        public IPaymentRepository Payments { get; }
+
+        public IRatingRepository Ratings { get; }
+
+        public IServiceRepository Services { get; }
+
+        public IUserRepository Users { get; }
+
+        public ILanguageRepository Languages { get; }
+
+        public IImageRepository Images { get; }
+
+        public IRequestRepository Requests { get; }
+
+        public async Task<bool> SaveChangesAsync() 
+            => await _dbContext.SaveChangesAsync() > 0;
     }
 }

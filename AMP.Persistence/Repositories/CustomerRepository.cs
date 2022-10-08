@@ -38,11 +38,9 @@ namespace AMP.Persistence.Repositories
         }
 
 
-        public async Task<Customers> GetByUserIdAsync(string userId)
-        {
-            return await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
-        }
-        
+        public async Task<Customers> GetByUserIdAsync(string userId) 
+            => await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
+
         public async Task<string> GetCustomerId(string userId)
         {
             var customer = await GetByUserIdAsync(userId);

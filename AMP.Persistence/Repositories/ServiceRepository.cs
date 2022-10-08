@@ -56,7 +56,7 @@ namespace AMP.Persistence.Repositories
             var service = await GetBaseQuery()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == serviceId);
-            return service.Name;
+            return service?.Name;
         }
     }
 }

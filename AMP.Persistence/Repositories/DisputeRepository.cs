@@ -17,11 +17,9 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public async Task<int> OpenDisputeCount(string userId)
-        {
-            return await GetBaseQuery().Where(x => x.Customer.UserId == userId 
-                                                   && x.Status == DisputeStatus.Open).CountAsync();
-        }
+        public async Task<int> OpenDisputeCount(string userId) =>
+            await GetBaseQuery().Where(x => x.Customer.UserId == userId 
+                                            && x.Status == DisputeStatus.Open).CountAsync();
 
         public override IQueryable<Disputes> GetBaseQuery()
         {

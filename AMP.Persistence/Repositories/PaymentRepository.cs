@@ -27,17 +27,15 @@ namespace AMP.Persistence.Repositories
             _logger = logger;
         }
 
-        public async Task<decimal> AmountPaid(string orderId)
-        {
-            return await Task.Run(() => GetBaseQuery().Where(x => x.OrderId == orderId)
+        public async Task<decimal> AmountPaid(string orderId) =>
+            await Task.Run(() => GetBaseQuery().Where(x => x.OrderId == orderId)
                 .Sum(x => x.AmountPaid));
-        }
 
         public async Task Verify(string reference, string trxRef)
         {
             var payment = await GetBaseQuery().FirstOrDefaultAsync(x => x.Reference == reference);
-            payment.HasBeenVerified(true);
-            payment.WithTransactionReference(trxRef);
+            payment?.HasBeenVerified(true);
+            payment?.WithTransactionReference(trxRef);
         }
 
         public async Task<PaginatedList<Payments>> GetUserPage(PaginatedCommand paginated, 
@@ -54,11 +52,9 @@ namespace AMP.Persistence.Repositories
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
-        public override IQueryable<Payments> GetBaseQuery()
-        {
-            return base.GetBaseQuery()
+        public override IQueryable<Payments> GetBaseQuery() =>
+            base.GetBaseQuery()
                 .Include(x => x.Order);
-        }
 
         protected override Expression<Func<Payments, bool>> GetSearchCondition(string search)
         {
@@ -72,8 +68,8 @@ namespace AMP.Persistence.Repositories
             try
             {
                 var userTypeId = role == "Artisan"
-                    ? (await _context.Artisans.FirstOrDefaultAsync(x => x.UserId == userId)).Id
-                    : (await _context.Customers.FirstOrDefaultAsync(x => x.UserId == userId)).Id;
+                    ? (await Context.Artisans.FirstOrDefaultAsync(x => x.UserId == userId))?.Id
+                    : (await Context.Customers.FirstOrDefaultAsync(x => x.UserId == userId))?.Id;
                 if (string.IsNullOrEmpty(userTypeId)) throw new UserTypeIdNotFoundException();
                 return userTypeId;
             }

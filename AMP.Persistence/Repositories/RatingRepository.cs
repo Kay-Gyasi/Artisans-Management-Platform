@@ -25,14 +25,12 @@ namespace AMP.Persistence.Repositories
             if (rate != null) await SoftDeleteAsync(rate);
         }
 
-        public int GetCount(string artisanId)
-        {
-            return GetBaseQuery().Count(x => x.ArtisanId == artisanId);
-        }
+        public int GetCount(string artisanId) 
+            => GetBaseQuery().Count(x => x.ArtisanId == artisanId);
 
         public double GetRating(string artisanId)
         {
-            int votes = 0;
+            var votes = 0;
             var ratings = GetBaseQuery().Where(x => x.ArtisanId == artisanId);
             foreach (var rating in ratings)
             {

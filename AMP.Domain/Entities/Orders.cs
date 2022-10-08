@@ -28,13 +28,13 @@ namespace AMP.Domain.Entities
         public Customers Customer { get; private set; }
         public Services Service { get; private set; }
 
-        private readonly List<Disputes> _disputes = new List<Disputes>();
+        private readonly List<Disputes> _disputes = new();
         public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
         
-        private readonly List<Payments> _payments = new List<Payments>();
+        private readonly List<Payments> _payments = new();
         public IEnumerable<Payments> Payments => _payments.AsReadOnly();
 
-        private readonly List<Requests> _requests = new List<Requests>();
+        private readonly List<Requests> _requests = new();
         public IEnumerable<Requests> Requests => _requests.AsReadOnly();
 
         private Orders() {}
@@ -170,12 +170,6 @@ namespace AMP.Domain.Entities
         public Orders LastModifiedOn()
         {
             DateModified = DateTime.UtcNow;
-            return this;
-        }
-
-        public Orders WithId(string id)
-        {
-            Id = id;
             return this;
         }
     }

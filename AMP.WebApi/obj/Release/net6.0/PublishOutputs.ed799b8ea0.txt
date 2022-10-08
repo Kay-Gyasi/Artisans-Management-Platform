@@ -72,13 +72,9 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\publish\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll

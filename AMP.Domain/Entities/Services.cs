@@ -9,10 +9,10 @@ namespace AMP.Domain.Entities
         public string Name { get; private set; }
         public string Description { get; private set; }
 
-        private readonly List<Artisans> _artisans = new List<Artisans>();
+        private readonly List<Artisans> _artisans = new();
         public IEnumerable<Artisans> Artisans => _artisans.AsReadOnly();
 
-        private readonly List<Orders> _orders = new List<Orders>();
+        private readonly List<Orders> _orders = new();
         public IEnumerable<Orders> Orders => _orders.AsReadOnly();
 
         private Services(){}
@@ -47,12 +47,6 @@ namespace AMP.Domain.Entities
         public Services LastModifiedOn()
         {
             DateModified = DateTime.UtcNow;
-            return this;
-        }
-
-        public Services WithId(string id)
-        {
-            Id = id;
             return this;
         }
     }

@@ -25,13 +25,13 @@ namespace AMP.Domain.Entities
         public Address Address { get; private set; }
         public Images Image { get; private set; }
 
-        private readonly List<Languages> _languages = new List<Languages>();
+        private readonly List<Languages> _languages = new();
         public IEnumerable<Languages> Languages => _languages.AsReadOnly();
         
-        private readonly List<Artisans> _artisans = new List<Artisans>();
+        private readonly List<Artisans> _artisans = new();
         public IEnumerable<Artisans> Artisans => _artisans.AsReadOnly();
 
-        private readonly List<Customers> _customers = new List<Customers>();
+        private readonly List<Customers> _customers = new();
         public IEnumerable<Customers> Customers => _customers.AsReadOnly();
 
         private Users() {}

@@ -21,18 +21,18 @@ namespace AMP.Persistence.Repositories.Base
     public class RepositoryBase<T> : IRepositoryBase<T> where T : EntityBase
     {
         private DbSet<T> _entities;
-        protected readonly AmpDbContext _context;
+        protected readonly AmpDbContext Context;
         private readonly ILogger<T> _logger;
 
         protected RepositoryBase(AmpDbContext context, ILogger<T> logger)
         {
-            _context = context;
+            Context = context;
             _logger = logger;
         }
 
         protected virtual DbSet<T> Entities
         {
-            get { return _entities ??= _context.Set<T>(); }
+            get { return _entities ??= Context.Set<T>(); }
         }
 
         public virtual IQueryable<T> Table => Entities;
@@ -41,45 +41,34 @@ namespace AMP.Persistence.Repositories.Base
         public async Task<T> GetAsync(string id)
         {
             //if (id <= 0) throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
-            if (string.IsNullOrEmpty(id)) throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
-            var keyProperty = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
+            if (string.IsNullOrEmpty(id)) throw new InvalidIdException($"{nameof(id)} cannot be empty!");
+            var keyProperty = Context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties[0];
             return await GetBaseQuery().FirstOrDefaultAsync(e => EF.Property<string>(e, keyProperty.Name) == id);
         }
 
-        public virtual IQueryable<T> GetBaseQuery()
-        {
-            return Entities.Where(x => x.EntityStatus == EntityStatus.Normal);
-        }
-        public virtual IQueryable<T> GetDeletedBaseQuery()
-        {
-            return Entities.Where(x => x.EntityStatus == EntityStatus.Deleted);
-        }
-        public virtual IQueryable<T> GetArchivedBaseQuery()
-        {
-            return Entities.Where(x => x.EntityStatus == EntityStatus.Archived);
-        }
+        public virtual IQueryable<T> GetBaseQuery() 
+            => Entities.Where(x => x.EntityStatus == EntityStatus.Normal);
 
-        public async Task<List<T>> GetAllAsync()
-        {
-            return await GetBaseQuery().ToListAsync();
-        }
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await GetBaseQuery().Where(predicate).ToListAsync();
-        }
+        public virtual IQueryable<T> GetDeletedBaseQuery() 
+            => Entities.Where(x => x.EntityStatus == EntityStatus.Deleted);
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
-        {
-            return await GetBaseQuery().Where(predicate).ToListAsync(cancellationToken);
-        }
-        public async Task<List<T>> GetAllDeletedAsync()
-        {
-            return await GetDeletedBaseQuery().ToListAsync();
-        }
-        public async Task<List<T>> GetAllArchivedAsync()
-        {
-            return await GetArchivedBaseQuery().ToListAsync();
-        }
+        public virtual IQueryable<T> GetArchivedBaseQuery() 
+            => Entities.Where(x => x.EntityStatus == EntityStatus.Archived);
+
+        public async Task<List<T>> GetAllAsync() 
+            => await GetBaseQuery().ToListAsync();
+
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate) 
+            => await GetBaseQuery().Where(predicate).ToListAsync();
+
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken) 
+            => await GetBaseQuery().Where(predicate).ToListAsync(cancellationToken);
+
+        public async Task<List<T>> GetAllDeletedAsync() 
+            => await GetDeletedBaseQuery().ToListAsync();
+
+        public async Task<List<T>> GetAllArchivedAsync() 
+            => await GetArchivedBaseQuery().ToListAsync();
 
         public virtual async Task<PaginatedList<T>> GetPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
@@ -200,7 +189,7 @@ namespace AMP.Persistence.Repositories.Base
                 if (string.IsNullOrEmpty(id))
                     throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
 
-                var keyProperty = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
+                var keyProperty = Context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
                 var entity = await GetBaseQuery()
                     .FirstOrDefaultAsync(e => EF.Property<string>(e, keyProperty.Name) == id, cancellationToken);
                 if (entity == null)
@@ -257,20 +246,8 @@ namespace AMP.Persistence.Repositories.Base
             }
         }
 
-        //public async Task CommitAsync()
-        //{
-        //    await _context.SaveChangesAsync();
-        //}
-
-        //public async Task CommitAsync(CancellationToken cancellationToken)
-        //{
-        //    await _context.SaveChangesAsync(cancellationToken);
-        //}
-
-        public async Task<int> CountAsync()
-        {
-            return await _context.Set<T>().CountAsync();
-        }
+        public async Task<int> CountAsync() 
+            => await Context.Set<T>().CountAsync();
 
         // TODO:: Remove async from method
         public virtual async Task<List<Lookup>> GetLookupAsync()
@@ -279,13 +256,7 @@ namespace AMP.Persistence.Repositories.Base
             return new List<Lookup>();
         }
 
-
-
-
-        protected virtual Expression<Func<T, bool>> GetSearchCondition(string search)
-        {
-            return x => x.DateCreated.ToString(CultureInfo.InvariantCulture).Contains(search);
-        }
-
+        protected virtual Expression<Func<T, bool>> GetSearchCondition(string search) 
+            => x => x.DateCreated.ToString(CultureInfo.InvariantCulture).Contains(search);
     }
 }

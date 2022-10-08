@@ -34,10 +34,8 @@ namespace AMP.Persistence.Repositories
             }).ToList();
         }
 
-        public async Task<Artisans> GetArtisanByUserId(string userId)
-        {
-            return await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
-        }
+        public async Task<Artisans> GetArtisanByUserId(string userId) 
+            => await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
 
         public async Task<PaginatedList<Artisans>> GetArtisanPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
@@ -51,10 +49,8 @@ namespace AMP.Persistence.Repositories
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
-        protected override Expression<Func<Artisans, bool>> GetSearchCondition(string search)
-        {
-            return x => x.Services.Any(a => a.Name == search);
-        }
+        protected override Expression<Func<Artisans, bool>> GetSearchCondition(string search) 
+            => x => x.Services.Any(a => a.Name == search);
 
 
         public override Task<List<Lookup>> GetLookupAsync()

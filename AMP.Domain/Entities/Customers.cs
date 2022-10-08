@@ -9,19 +9,19 @@ namespace AMP.Domain.Entities
         public string UserId { get; private set; }
         public Users User { get; private set; }
 
-        private readonly List<Ratings> _ratings = new List<Ratings>();
+        private readonly List<Ratings> _ratings = new();
         public IEnumerable<Ratings> Ratings => _ratings.AsReadOnly();
         
-        private readonly List<Orders> _orders = new List<Orders>();
+        private readonly List<Orders> _orders = new();
         public IEnumerable<Orders> Orders => _orders.AsReadOnly();
 
-        private readonly List<Disputes> _disputes = new List<Disputes>();
+        private readonly List<Disputes> _disputes = new();
         public IEnumerable<Disputes> Disputes => _disputes.AsReadOnly();
         
-        private readonly List<Payments> _payments = new List<Payments>();
+        private readonly List<Payments> _payments = new();
         public IEnumerable<Payments> Payments => _payments.AsReadOnly();
 
-        private readonly List<Requests> _requests = new List<Requests>();
+        private readonly List<Requests> _requests = new();
         public IEnumerable<Requests> Requests => _requests.AsReadOnly();
 
         private Customers(){}
@@ -55,12 +55,6 @@ namespace AMP.Domain.Entities
         public Customers LastModifiedOn()
         {
             DateModified = DateTime.UtcNow;
-            return this;
-        }
-
-        public Customers WithId(string id)
-        {
-            Id = id;
             return this;
         }
     }

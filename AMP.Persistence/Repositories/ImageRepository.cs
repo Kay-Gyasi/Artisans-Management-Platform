@@ -18,13 +18,13 @@ namespace AMP.Persistence.Repositories
 
         public async Task RemoveCurrentDetails(string userId)
         {
-            var old = await _context.Images.FirstOrDefaultAsync(x => x.UserId == userId);
+            var old = await Context.Images.FirstOrDefaultAsync(x => x.UserId == userId);
             if (old == default) return;
             old.ForUserWithId(null);
             old.EntityStatus = EntityStatus.Deleted;
 
-            var user = await _context.Users.FindAsync(userId);
-            user.WithImageId(null);
+            var user = await Context.Users.FindAsync(userId);
+            user?.WithImageId(null);
         }
     }
 }

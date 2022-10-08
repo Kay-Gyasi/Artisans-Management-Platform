@@ -23,7 +23,7 @@ namespace AMP.Persistence.Repositories
         {
             var user = await GetBaseQuery()
                 .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
-            return user.Id;
+            return user?.Id;
         }
 
         public async Task<bool> Exists(string phone)

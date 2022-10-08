@@ -35,11 +35,5 @@ namespace AMP.Domain.Entities
             UserId = userId;
             return this;
         }
-
-        public Images WithId(string id)
-        {
-            Id = id;
-            return this;
-        }
     }
 }

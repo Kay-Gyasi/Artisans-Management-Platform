@@ -13,16 +13,16 @@ namespace AMP.Domain.Entities
         public bool IsApproved { get; private set; }
         public Users User { get; private set; }
 
-        private readonly List<Orders> _orders = new List<Orders>();
+        private readonly List<Orders> _orders = new();
         public IEnumerable<Orders> Orders => _orders.AsReadOnly();
 
-        private readonly List<Services> _services = new List<Services>();
+        private readonly List<Services> _services = new();
         public IEnumerable<Services> Services => _services.AsReadOnly();
 
-        private readonly List<Ratings> _ratings = new List<Ratings>();
+        private readonly List<Ratings> _ratings = new();
         public IEnumerable<Ratings> Ratings => _ratings.AsReadOnly();
 
-        private readonly List<Requests> _requests = new List<Requests>();
+        private readonly List<Requests> _requests = new();
         public IEnumerable<Requests> Requests => _requests.AsReadOnly();
 
         private Artisans(){}
@@ -83,16 +83,10 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Artisans Offers(List<Services> services)
+        public Artisans Offers(IEnumerable<Services> services)
         {
             _services.Clear();
             _services.AddRange(services);
-            return this;
-        }
-
-        public Artisans WithId(string id)
-        {
-            Id = id;
             return this;
         }
     }

@@ -1,11 +1,11 @@
 ﻿using System;
 using AMP.Domain.ViewModels;
 using AMP.Processors.Processors.Base;
-using AMP.Processors.Repositories.UoW;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AMP.Processors.Interfaces.UoW;
 
 namespace AMP.Processors.Processors
 {

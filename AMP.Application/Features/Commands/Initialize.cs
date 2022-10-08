@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AMP.Processors.Processors.Administration;
-using AMP.Processors.Repositories.UoW;
 using MediatR;
 
 namespace AMP.Application.Features.Commands

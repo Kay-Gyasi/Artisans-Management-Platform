@@ -20,11 +20,5 @@ namespace AMP.Domain.Entities
 
         public static Requests Create(string customerId, string artisanId, string orderId) 
             => new Requests(customerId, artisanId, orderId);
-
-        public Requests WithId(string id)
-        {
-            Id = id;
-            return this;
-        }
     }
 }

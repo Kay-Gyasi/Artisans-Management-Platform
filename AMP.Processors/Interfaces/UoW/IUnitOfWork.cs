@@ -1,12 +1,10 @@
 ﻿using System.Threading.Tasks;
-using AMP.Processors.Interfaces;
-using AMP.Processors.Repositories.Administration;
+using AMP.Processors.Repositories;
 
-namespace AMP.Processors.Repositories.UoW
+namespace AMP.Processors.Interfaces.UoW
 {
     public interface IUnitOfWork
     {
-        public IInitializeDbRepository InitializeDb { get; }
         public IArtisanRepository Artisans { get; }
         public ICustomerRepository Customers { get; }
         public IDisputeRepository Disputes { get; }

@@ -76,11 +76,5 @@ namespace AMP.Domain.Entities
             DateModified = DateTime.UtcNow;
             return this;
         }
-
-        public Payments WithId(string id)
-        {
-            Id = id;
-            return this;
-        }
     }
 }
