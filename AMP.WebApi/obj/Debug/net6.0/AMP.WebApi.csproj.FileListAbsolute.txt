@@ -17,6 +17,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Humanizer.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\PhoneNumbers.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.Contracts.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
@@ -32,7 +33,10 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.UserSecrets.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Hosting.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Identity.Client.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll

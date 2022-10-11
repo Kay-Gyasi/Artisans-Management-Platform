@@ -9,7 +9,7 @@ using AMP.Persistence.Database;
 using AMP.Persistence.Extensions;
 using AMP.Persistence.Repositories.Base;
 using AMP.Processors.ExceptionHandlers;
-using AMP.Processors.Interfaces;
+using AMP.Processors.Repositories;
 using AMP.Shared.Domain.Models;
 using AMP.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +28,7 @@ namespace AMP.Persistence.Repositories
         }
 
         public async Task<decimal> AmountPaid(string orderId) =>
-            await Task.Run(() => GetBaseQuery().Where(x => x.OrderId == orderId)
+            await Task.Run(() => GetBaseQuery().Where(x => x.OrderId == orderId && x.IsVerified)
                 .Sum(x => x.AmountPaid));
 
         public async Task Verify(string reference, string trxRef)
@@ -44,13 +44,19 @@ namespace AMP.Persistence.Repositories
             var typeId = await GetUserTypeId(userId, role);
 
             var whereQueryable = role == "Artisan"
-                ? GetBaseQuery().Where(x => x.Order.ArtisanId == typeId)
+                ? GetBaseQuery()
+                    .Where(x => x.Order.ArtisanId == typeId && x.IsVerified)
                     .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                : GetBaseQuery().Where(x => x.Order.CustomerId == typeId)
+                : GetBaseQuery().Where(x => x.Order.CustomerId == typeId && x.IsVerified)
                     .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
+
+        public async Task<Payments> GetByTrxRef(string trxRef) 
+            => await GetBaseQuery()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.TransactionReference == trxRef);
 
         public override IQueryable<Payments> GetBaseQuery() =>
             base.GetBaseQuery()

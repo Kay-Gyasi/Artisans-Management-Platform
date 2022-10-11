@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
-using AMP.Processors.Interfaces.UoW;
 using AMP.Processors.PageDtos;
 using AMP.Processors.Processors.Base;
+using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
@@ -91,8 +91,7 @@ namespace AMP.Processors.Processors
             {
                 var customer = await Uow.Customers.GetCustomerId(command.UserId);
                 rating.ForCustomerWithId(customer)
-                        .ForArtisanWithId(command.ArtisanId)
-                        .LastModifiedOn();
+                        .ForArtisanWithId(command.ArtisanId);
             }
         }
     }

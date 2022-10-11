@@ -4,7 +4,7 @@ using System.Reflection;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.UoW;
 using AMP.Processors.ExceptionHandlers;
-using AMP.Processors.Interfaces.UoW;
+using AMP.Processors.Repositories.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -20,10 +20,6 @@ public class UpdateUserValidator : AbstractValidator<UpdateUser.Command>
             .NotEmpty()
             .NotNull()
             .Must(x => x != "string");
-        RuleFor(x => x.UserCommand.Password)
-            .NotEmpty()
-            .NotNull()
-            .Must(x => x != "string");
         RuleFor(x => x.UserCommand.Type)
             .Must(x => x is UserType.Artisan or UserType.Customer);
     }

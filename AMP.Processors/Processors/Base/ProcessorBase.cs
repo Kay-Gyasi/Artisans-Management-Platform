@@ -1,4 +1,4 @@
-﻿using AMP.Processors.Interfaces.UoW;
+﻿using AMP.Processors.Repositories.UoW;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
 

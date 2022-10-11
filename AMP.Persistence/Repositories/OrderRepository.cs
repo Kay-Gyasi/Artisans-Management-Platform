@@ -180,6 +180,5 @@ namespace AMP.Persistence.Repositories
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
             order?.WithCost(costCommand.Cost);
         }
-
     }
 }

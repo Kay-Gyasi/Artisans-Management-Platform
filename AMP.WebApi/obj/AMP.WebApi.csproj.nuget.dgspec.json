@@ -319,6 +319,18 @@
             "Microsoft.Extensions.Caching.Memory": {
               "target": "Package",
               "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "libphonenumber-csharp": {
+              "target": "Package",
+              "version": "[8.12.56, )"
             }
           },
           "imports": [
@@ -397,6 +409,10 @@
               "version": "[6.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[6.0.0, )"
             },
@@ -672,10 +688,6 @@
             "Serilog.Sinks.Seq": {
               "target": "Package",
               "version": "[5.1.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.2.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

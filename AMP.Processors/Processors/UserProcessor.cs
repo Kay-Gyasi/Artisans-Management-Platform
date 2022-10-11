@@ -8,9 +8,10 @@ using AMP.Domain.ValueObjects;
 using AMP.Processors.Authentication;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
-using AMP.Processors.Interfaces.UoW;
+using AMP.Processors.Messaging;
 using AMP.Processors.PageDtos;
 using AMP.Processors.Processors.Base;
+using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
@@ -65,7 +66,6 @@ namespace AMP.Processors.Processors
         {
             var user = await Uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
-            user.LastModifiedOn();
             Cache.Remove(LookupCacheKey);
             await Uow.Users.UpdateAsync(user);
             await Uow.SaveChangesAsync();

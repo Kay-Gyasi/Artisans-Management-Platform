@@ -65,11 +65,5 @@ namespace AMP.Domain.Entities
             DateCreated = date;
             return this;
         }
-
-        public Disputes LastModifiedOn()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using AMP.Persistence.Database;
-using AMP.Processors.Interfaces;
-using AMP.Processors.Interfaces.UoW;
 using AMP.Processors.Repositories;
 using AMP.Processors.Repositories.Administration;
+using AMP.Processors.Repositories.UoW;
 
 namespace AMP.Persistence.Repositories.UoW
 {

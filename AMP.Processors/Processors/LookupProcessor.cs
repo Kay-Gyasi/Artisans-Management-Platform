@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AMP.Processors.Interfaces.UoW;
+using AMP.Processors.Repositories.UoW;
 
 namespace AMP.Processors.Processors
 {

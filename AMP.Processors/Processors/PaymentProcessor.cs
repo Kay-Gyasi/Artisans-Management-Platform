@@ -9,7 +9,9 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AMP.Processors.Interfaces.UoW;
+using AMP.Processors.Repositories.UoW;
+using AMP.Processors.Workers;
+using AMP.Processors.Workers.Enums;
 
 namespace AMP.Processors.Processors
 {
@@ -37,7 +39,8 @@ namespace AMP.Processors.Processors
         public async Task Verify(VerifyPaymentCommand command)
         {
             await Uow.Payments.Verify(command.Reference, command.TransactionReference);
-            await Uow.SaveChangesAsync();
+            var success = await Uow.SaveChangesAsync();
+            if(success) SmsService.DoTask(SmsType.PaymentVerified, command.TransactionReference);
         }
 
         public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)
@@ -67,8 +70,7 @@ namespace AMP.Processors.Processors
                 .HasBeenVerified(false);
 
             if (!isNew)
-                payment.OnOrderWithId(command.OrderId)
-                    .LastModifiedOn();
+                payment.OnOrderWithId(command.OrderId);
         }
     }
 }

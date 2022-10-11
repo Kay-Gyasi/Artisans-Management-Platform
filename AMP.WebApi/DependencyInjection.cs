@@ -23,7 +23,9 @@ public static class DependencyInjection
             .AddDefaultConfig()
             .AddMemoryCache()
             .RegisterInfrastructure(configuration)
-            .AddAuthentication(configuration);
+            .AddAuthentication(configuration)
+            .AddSmsMessaging()
+            .AddWorkers();
         
         return services;
     }
@@ -105,7 +107,7 @@ public static class DependencyInjection
         app.UseSerilogRequestLogging();
 
         app.UseDefaultFiles();
-        
+
         app.UseStaticFiles();
 
         app.UseAuthentication();

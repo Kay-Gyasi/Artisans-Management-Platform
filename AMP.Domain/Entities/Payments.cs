@@ -70,11 +70,5 @@ namespace AMP.Domain.Entities
             DateCreated = date;
             return this;
         }
-
-        public Payments LastModifiedOn()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

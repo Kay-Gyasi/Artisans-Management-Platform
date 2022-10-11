@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
+using AMP.Processors.Workers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace AMP.Processors
 {
@@ -31,6 +33,17 @@ namespace AMP.Processors
         public static IServiceCollection AddCaching(this IServiceCollection services)
         {
             services.AddMemoryCache();
+            return services;
+        }
+        
+        public static IServiceCollection AddWorkers(this IServiceCollection services)
+        {
+            services.AddHostedService<SmsService>();
+            services.AddScoped<MessageGenerator>();
+            services.Configure<HostOptions>(options =>
+            {
+                options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.StopHost;
+            });
             return services;
         }
     }

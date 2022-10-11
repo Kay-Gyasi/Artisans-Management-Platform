@@ -7,14 +7,10 @@ namespace AMP.Persistence.Database
 {
     public class AmpDbContext : DbContext
     {
-        public AmpDbContext()
-        {
-        }
+        public AmpDbContext() { }
 
         public AmpDbContext(DbContextOptions<AmpDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Artisans> Artisans { get; set; }
         public DbSet<Customers> Customers { get; set; }
@@ -32,7 +28,7 @@ namespace AMP.Persistence.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=YOGA-X1;Initial Catalog=AmpDevDb;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Data Source=YOGA-X1;Integrated Security=True;Initial Catalog=AmpDevDb;");
             }
             optionsBuilder.EnableSensitiveDataLogging();
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AMP.Domain.Entities.Base;
+using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities
 {
@@ -8,6 +10,12 @@ namespace AMP.Domain.Entities
     {
         public string UserId { get; private set; }
         public string BusinessName { get; private set; }
+        public BusinessType Type { get; private set; }
+        
+        /// <summary>
+        /// Energy Commission Certification Number (for electricians only)
+        /// </summary>
+        public string ECCN { get; private set; }
         public string Description { get; private set; }
         public bool IsVerified { get; private set; }
         public bool IsApproved { get; private set; }
@@ -76,17 +84,29 @@ namespace AMP.Domain.Entities
             DateCreated = DateTime.UtcNow;
             return this;
         }
-        
-        public Artisans LastModifiedOn()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
 
         public Artisans Offers(IEnumerable<Services> services)
         {
             _services.Clear();
             _services.AddRange(services);
+            return this;
+        }
+
+        public Artisans OfType(BusinessType type)
+        {
+            Type = type;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the Energy Commission Certificate Number for electricians.
+        /// </summary>
+        /// <param name="eccn"></param>
+        /// <returns>This instance of Artisans.</returns>
+        public Artisans HasEccn(string eccn)
+        {
+            if (Services.All(x => x.Name != "Electrical Works")) return this;
+            ECCN = eccn;
             return this;
         }
     }

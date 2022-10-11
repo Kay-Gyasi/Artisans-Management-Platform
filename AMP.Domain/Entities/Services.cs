@@ -43,11 +43,5 @@ namespace AMP.Domain.Entities
             DateCreated = DateTime.UtcNow;
             return this;
         }
-
-        public Services LastModifiedOn()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

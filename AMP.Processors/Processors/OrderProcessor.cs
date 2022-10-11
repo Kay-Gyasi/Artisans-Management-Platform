@@ -12,7 +12,9 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AMP.Processors.Interfaces.UoW;
+using AMP.Processors.Repositories.UoW;
+using AMP.Processors.Workers;
+using AMP.Processors.Workers.Enums;
 
 namespace AMP.Processors.Processors
 {
@@ -57,6 +59,7 @@ namespace AMP.Processors.Processors
 
         public async Task UnassignArtisan(string orderId)
         {
+            //SmsService.DoTask(SmsType.UnassignArtisan, orderId);
             await Uow.Orders.UnassignArtisan(orderId);
             await Uow.SaveChangesAsync();
         }
@@ -64,13 +67,15 @@ namespace AMP.Processors.Processors
         public async Task AssignArtisan(string orderId, string artisanId)
         {
             await Uow.Orders.AssignArtisan(orderId, artisanId);
-            await Uow.SaveChangesAsync();
+            var success = await Uow.SaveChangesAsync();
+            if(success) SmsService.DoTask(SmsType.AssignArtisan, orderId, artisanId);
         }
 
         public async Task AcceptRequest(string orderId)
         {
             await Uow.Orders.AcceptRequest(orderId);
-            await Uow.SaveChangesAsync();
+            var success = await Uow.SaveChangesAsync();
+            if(success) SmsService.DoTask(SmsType.AcceptRequest, orderId);
         }
 
         public async Task CancelRequest(string orderId)
@@ -157,8 +162,7 @@ namespace AMP.Processors.Processors
                 .ForCustomerWithId(customerId)
                 .WithScope(command.Scope);
 
-            if (!isNew) order.ForServiceWithId(command.ServiceId)
-                    .LastModifiedOn();
+            if (!isNew) order.ForServiceWithId(command.ServiceId);
         }
 
         // Generates a random string with a given size.    

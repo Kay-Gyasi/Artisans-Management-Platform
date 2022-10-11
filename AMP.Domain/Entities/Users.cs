@@ -131,12 +131,6 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users LastModifiedOn()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
-
         public Users HasPassword(byte[] hash)
         {
             Password = hash;

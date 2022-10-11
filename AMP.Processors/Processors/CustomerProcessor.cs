@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Processors.Commands;
 using AMP.Processors.Dtos;
-using AMP.Processors.Interfaces.UoW;
 using AMP.Processors.PageDtos;
 using AMP.Processors.Processors.Base;
+using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
@@ -39,8 +39,7 @@ namespace AMP.Processors.Processors
             }
 
             customer = await Uow.Customers.GetAsync(command.Id);
-            customer.ForUserId(command.UserId)
-                .LastModifiedOn();
+            customer.ForUserId(command.UserId);
             Cache.Remove(LookupCacheKey);
             await Uow.Customers.UpdateAsync(customer);
             await Uow.SaveChangesAsync();
