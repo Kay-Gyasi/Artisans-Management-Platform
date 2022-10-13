@@ -21,7 +21,8 @@ namespace AMP.Persistence.Repositories.UoW
             ILanguageRepository languageRepository,
             IUserRepository userRepository,
             IImageRepository imageRepository,
-            IRequestRepository requestRepository)
+            IRequestRepository requestRepository,
+            IRegistrationRepository registrationRepository)
         {
             _dbContext = dbContext;
             Artisans = artisanRepository;
@@ -35,6 +36,7 @@ namespace AMP.Persistence.Repositories.UoW
             Users = userRepository;
             Images = imageRepository;
             Requests = requestRepository;
+            Registrations = registrationRepository;
         }
         
         public IArtisanRepository Artisans { get; }
@@ -58,6 +60,7 @@ namespace AMP.Persistence.Repositories.UoW
         public IImageRepository Images { get; }
 
         public IRequestRepository Requests { get; }
+        public IRegistrationRepository Registrations { get; }
 
         public async Task<bool> SaveChangesAsync() 
             => await _dbContext.SaveChangesAsync() > 0;

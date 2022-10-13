@@ -35,6 +35,8 @@ namespace AMP.Persistence.Configurations
                 .HasDefaultValue(false);
             builder.Property(a => a.IsRemoved)
                 .HasDefaultValue(false);
+            builder.Property(a => a.IsVerified)
+                .HasDefaultValue(false);
             builder.Property(a => a.Type)
                 .HasDefaultValue(UserType.Customer)
                 .HasConversion(new EnumToStringConverter<UserType>());

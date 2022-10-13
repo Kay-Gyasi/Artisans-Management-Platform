@@ -7,7 +7,7 @@ public class SmsCommand
 {
     public SmsCommand() { }
     
-    public string Sender { get; set; } = "AMP";
+    public string Sender { get; set; } = "Qface Group";
     public string Message { get; set; }
     public IEnumerable<string> Recipients { get; set; }
 

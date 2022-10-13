@@ -23,6 +23,7 @@ namespace AMP.Persistence.Database
         public DbSet<Languages> Languages { get; set; }
         public DbSet<Images> Images { get; set; }
         public DbSet<Requests> Requests { get; set; }
+        public DbSet<Registrations> Registrations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

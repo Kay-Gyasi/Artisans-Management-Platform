@@ -12,7 +12,7 @@ namespace AMP.Persistence.Configurations
             builder.Property(a => a.UserId)
                 .IsRequired()
                 .HasColumnType("varchar")
-                .HasMaxLength(36);        
+                .HasMaxLength(36);
         }
     }
 }

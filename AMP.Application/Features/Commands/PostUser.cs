@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AMP.Processors.Commands;
 using AMP.Processors.Processors;
+using AMP.Processors.Responses;
 using MediatR;
 
 namespace AMP.Application.Features.Commands
@@ -20,15 +21,15 @@ namespace AMP.Application.Features.Commands
 
         public class Handler : IRequestHandler<Command, string>
         {
-            private readonly UserProcessor _processor;
+            private readonly RegistrationProcessor _processor;
 
-            public Handler(UserProcessor processor)
+            public Handler(RegistrationProcessor processor)
             {
                 _processor = processor;
             }
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
-                return await _processor.Post(request.UserCommand);
+                return await _processor.Save(request.UserCommand);
             }
         }
     }

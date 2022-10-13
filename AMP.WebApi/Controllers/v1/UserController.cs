@@ -34,18 +34,6 @@ public class UserController : BaseControllerv1
         return CreatedAtAction(nameof(Get), new {id}, id);
     }
 
-    [AllowAnonymous]
-    [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Post(UserCommand command) 
-    {
-        var id = await Mediator.Send(new PostUser.Command(command));
-
-        if (id == default) return Conflict();
-        return CreatedAtAction(nameof(Get), new {id}, id);
-    }
-
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,5 +51,32 @@ public class UserController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<SigninResponse> GetRefreshToken()
-        => await Mediator.Send(new RefreshTokenCommand.Command(UserId));
+        => await Mediator.Send(new RefreshToken.Command(UserId));
+    
+    [AllowAnonymous]
+    [HttpGet("{phone}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> SendPasswordResetLink(string phone) 
+    {
+        var response = await Mediator.Send(new SendPassResetLink.Command(phone));
+        if (!response) return NotFound();
+        return Ok();
+    }
+
+    [AllowAnonymous]
+    [HttpGet("{phone}/{confirmCode}/{newPassword}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> ResetPassword(string phone, string confirmCode, string newPassword) 
+    {
+        var response = await Mediator.Send(new ResetPassword.Command(new ResetPasswordCommand
+        {
+            Phone = phone,
+            ConfirmCode = confirmCode,
+            NewPassword = newPassword
+        }));
+        if (!response) return NotFound();
+        return Ok();
+    }
 }

@@ -12,6 +12,7 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AMP.Processors.Processors.Helpers;
 using AMP.Processors.Repositories.UoW;
 using AMP.Processors.Workers;
 using AMP.Processors.Workers.Enums;
@@ -31,7 +32,7 @@ namespace AMP.Processors.Processors
         {
             var order = Orders.Create(command.CustomerId, command.ServiceId)
                 .CreatedOn(DateTime.UtcNow)
-                .WithReferenceNo(await Task.Run(() => GenerateReferenceNo(12)));
+                .WithReferenceNo(await Task.Run(() => RandomStringHelper.Generate(12)));
             await AssignFields(order, command, true);
             Cache.Remove(LookupCacheKey);
             await Uow.Orders.InsertAsync(order);
@@ -164,29 +165,5 @@ namespace AMP.Processors.Processors
 
             if (!isNew) order.ForServiceWithId(command.ServiceId);
         }
-
-        // Generates a random string with a given size.    
-        private static string GenerateReferenceNo(int size, bool lowerCase = false)
-        {
-            var rand = new Random();
-            var builder = new StringBuilder(size);  
-  
-            // Unicode/ASCII Letters are divided into two blocks
-            // (Letters 65–90 / 97–122):
-            // The first group containing the uppercase letters and
-            // the second group containing the lowercase.  
-
-            // char is a single Unicode character  
-            var offset = lowerCase ? 'a' : 'A';  
-            const int lettersOffset = 26; // A...Z or a..z: length=26  
-  
-            for (var i = 0; i < size; i++)  
-            {  
-                var @char = (char)rand.Next(offset, offset + lettersOffset);  
-                builder.Append(@char);  
-            }  
-  
-            return lowerCase ? builder.ToString().ToLower() : builder.ToString();  
-        }  
     }
 }

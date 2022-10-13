@@ -29,6 +29,8 @@ namespace AMP.Persistence.Configurations
                 .HasConversion(new EnumToStringConverter<BusinessType>())
                 .HasColumnType("varchar")
                 .HasMaxLength(12);
+            builder.Property(x => x.IsVerified)
+                .HasDefaultValue(false);
         }
     }
 }

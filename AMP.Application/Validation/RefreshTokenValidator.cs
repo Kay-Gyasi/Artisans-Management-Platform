@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AMP.Application.Validation;
 
-public class RefreshTokenValidator : AbstractValidator<RefreshTokenCommand.Command>
+public class RefreshTokenValidator : AbstractValidator<RefreshToken.Command>
 {
     public RefreshTokenValidator()
     {

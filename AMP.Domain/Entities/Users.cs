@@ -16,6 +16,7 @@ namespace AMP.Domain.Entities
         public string DisplayName { get; private set; }  
         public string MomoNumber { get; private set; }
         public bool IsSuspended { get; private set; }
+        public bool IsVerified { get; private set; }
         public bool IsRemoved { get; private set; }
         public UserType Type { get; private set; }
         public LevelOfEducation LevelOfEducation { get; private set; }
@@ -146,6 +147,12 @@ namespace AMP.Domain.Entities
         public Users WithId(string id)
         {
             Id = id;
+            return this;
+        }
+        
+        public Users Verify()
+        {
+            IsVerified = true;
             return this;
         }
     }

@@ -6,6 +6,7 @@ using AMP.Domain.Entities;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
 using AMP.Processors.Commands;
+using AMP.Processors.Processors.Helpers;
 using AMP.Processors.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -33,6 +34,20 @@ namespace AMP.Persistence.Repositories
                 .Any(x => x.Contact.PrimaryContact == phone));
         }
 
+        public async Task<Users> GetByPhone(string phone) 
+            => await GetBaseQuery().FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
+
+        public async Task<Users> GetByPhoneAndConfirmCode(string phone, string confirmCode)
+        {
+            var user = await GetBaseQuery().FirstOrDefaultAsync(x =>
+                x.Contact.PrimaryContact == phone);
+            if (user is null) return null;
+            var passKeyString = Encoding.UTF8.GetString(user.PasswordKey)
+                .RemoveSpecialCharacters();
+            return passKeyString != confirmCode ? null : user;
+        }
+
+
         public override IQueryable<Users> GetBaseQuery()
         {
             return base.GetBaseQuery()
@@ -44,7 +59,7 @@ namespace AMP.Persistence.Repositories
         {
             var user = await GetBaseQuery()
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == command.Phone);
+                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == command.Phone && x.IsVerified);
             if (user?.PasswordKey == null || !MatchPasswordHash(command.Password, user.Password, user.PasswordKey))
                 return null;
             

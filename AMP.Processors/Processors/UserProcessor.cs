@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
@@ -11,6 +12,7 @@ using AMP.Processors.Dtos;
 using AMP.Processors.Messaging;
 using AMP.Processors.PageDtos;
 using AMP.Processors.Processors.Base;
+using AMP.Processors.Processors.Helpers;
 using AMP.Processors.Repositories.UoW;
 using AMP.Shared.Domain.Models;
 using AutoMapper;
@@ -24,11 +26,14 @@ namespace AMP.Processors.Processors
         private const string LookupCacheKey = "Userlookup";
 
         private readonly IAuthService _authService;
+        private readonly ISmsMessaging _smsMessaging;
 
         public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
-            IAuthService authService) : base(uow, mapper, cache)
+            IAuthService authService,
+            ISmsMessaging smsMessaging) : base(uow, mapper, cache)
         {
             _authService = authService;
+            _smsMessaging = smsMessaging;
         }
 
         public async Task<SigninResponse> Login(SigninCommand command)
@@ -37,29 +42,37 @@ namespace AMP.Processors.Processors
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
+        // TODO:: Implement this
         public async Task<SigninResponse> GetRefreshToken(string userId)
         {
             var user = await Uow.Users.GetAsync(userId);
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
-        public async Task<string> Post(UserCommand command)
+        public async Task<bool> SendPasswordResetLink(string phone)
         {
-            var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);
-            if (userExists) return default;
+            var user = await Uow.Users.GetByPhone(phone);
+            if (user is null) return false;
 
-            var user = Users.Create()
-                .CreatedOn();
-            var passes = Uow.Users.Register(command);
-            await AssignFields(user, command);
+            var confirmCode = Encoding.UTF8.GetString(user.PasswordKey)
+                .RemoveSpecialCharacters();
+            var message = MessageGenerator.SendPasswordResetLink(phone, 
+                confirmCode, user.DisplayName);
+            await _smsMessaging.Send(new SmsCommand {Message = message.Item1, Recipients = new[] {message.Item2}});
+            return true;
+        }
+
+        public async Task<bool> ResetPassword(ResetPasswordCommand command)
+        {
+            var user = await Uow.Users.GetByPhoneAndConfirmCode(command.Phone, command.ConfirmCode);
+            if (user is null) return false;
+
+            var passes = Uow.Users.Register(command.NewPassword);
             user.HasPassword(passes.Item1)
                 .HasPasswordKey(passes.Item2);
-            Cache.Remove(LookupCacheKey);
-            await Uow.Users.InsertAsync(user);
+            await Uow.Users.UpdateAsync(user);
             await Uow.SaveChangesAsync();
-
-            await PostAsType(user);
-            return user.Id;
+            return true;
         }
 
         public async Task<string> Update(UserCommand command)
@@ -78,10 +91,8 @@ namespace AMP.Processors.Processors
             return Mapper.Map<PaginatedList<UserPageDto>>(page);
         }
 
-        public async Task<UserDto> Get(string id)
-        {
-            return Mapper.Map<UserDto>(await Uow.Users.GetAsync(id));
-        }
+        public async Task<UserDto> Get(string id) 
+            => Mapper.Map<UserDto>(await Uow.Users.GetAsync(id));
 
         public async Task Delete(string id)
         {
@@ -89,68 +100,6 @@ namespace AMP.Processors.Processors
             Cache.Remove(LookupCacheKey);
             if (user != null) await Uow.Users.SoftDeleteAsync(user);
             await Uow.SaveChangesAsync();
-        }
-
-        private async Task PostAsType(Users user)
-        {
-            switch (user.Type)
-            {
-                case UserType.Artisan:
-                    await PostArtisan(user);
-                    break;
-                case UserType.Customer:
-                    await PostCustomer(user);
-                    break;
-                case UserType.Developer:
-                    break;
-                case UserType.Administrator:
-                    break;
-                default:
-                    break;
-            }
-        }
-        private async Task PostArtisan(Users user)
-        {
-            try
-            {
-                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-                var artisan = Artisans.Create(userId)
-                    .WithBusinessName(user.DisplayName)
-                    .WithDescription(string.Empty)
-                    .CreatedOn();
-                await Uow.Artisans.InsertAsync(artisan);
-            }
-            catch (Exception)
-            {
-                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-                var deleted = await Uow.Users.GetAsync(userId);
-                await Uow.Users.DeleteAsync(deleted, new CancellationToken());
-            }
-            finally
-            {
-                await Uow.SaveChangesAsync();
-            }
-        }
-        
-        private async Task PostCustomer(Users user)
-        {
-            try
-            {
-                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-                var customer = Customers.Create(userId)
-                    .CreatedOn();
-                await Uow.Customers.InsertAsync(customer);
-            }
-            catch (Exception)
-            {
-                var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-                var deleted = await Uow.Users.GetAsync(userId);
-                await Uow.Users.DeleteAsync(deleted, new CancellationToken());
-            }
-            finally
-            {
-                await Uow.SaveChangesAsync();
-            }
         }
 
         private async Task AssignFields(Users user, UserCommand command)
