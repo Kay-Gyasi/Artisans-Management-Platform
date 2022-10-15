@@ -55,6 +55,7 @@ namespace AMP.Processors.Mapping
             CreateMap<Images, ImageDto>().ReverseMap();
             CreateMap<Images, ImagePageDto>().ReverseMap();
             CreateMap<Images, ImageCommand>().ReverseMap();
+            CreateMap<Invitations, InvitationDto>().ReverseMap();
 
         }
     }

@@ -8,6 +8,7 @@ namespace AMP.Persistence.Configurations
     {
         public override void Configure(EntityTypeBuilder<Requests> builder)
         {
+            base.Configure(builder);
             builder.Property(x => x.ArtisanId)
                 .IsRequired()
                 .HasColumnType("varchar")
@@ -20,7 +21,6 @@ namespace AMP.Persistence.Configurations
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(36);
-            base.Configure(builder);
         }
     }
 }

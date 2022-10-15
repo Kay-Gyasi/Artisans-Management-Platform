@@ -16,6 +16,7 @@ namespace AMP.Processors.Repositories.UoW
         public IImageRepository Images { get; }
         public IRequestRepository Requests { get; }
         public IRegistrationRepository Registrations { get; }
+        public IInvitationRepository Invitations { get; }
 
         Task<bool> SaveChangesAsync();
     }

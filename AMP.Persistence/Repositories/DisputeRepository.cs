@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Domain.Enums;
@@ -28,6 +30,9 @@ namespace AMP.Persistence.Repositories
                 .Include(x => x.Customer);
         }
 
-
+        protected override Expression<Func<Disputes, bool>> GetSearchCondition(string search)
+        {
+            return x => x.Status != DisputeStatus.Resolved;
+        }
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XAgVuiVl1eSZCoHsk3k0Fr994ifrjxQJ/2mdDB0HX3Kw8amJKEGZXBoTIVRvxGv5WeC9680g2aRyXqb2kU8hqQ==",
+  "dgSpecHash": "cfLZBQ2tydx+/m2tTO59vCgtR9C7+qQYr9LB+O5seyNlOOOoex0M15LsdVOyKPQxrQQ2IlIEX+yNIbCZ4K9/wA==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi\\AMP.WebApi.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.9\\microsoft.entityframeworkcore.abstractions.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.9\\microsoft.entityframeworkcore.analyzers.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.9\\microsoft.entityframeworkcore.design.6.0.9.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.9\\microsoft.entityframeworkcore.inmemory.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.9\\microsoft.entityframeworkcore.relational.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.9\\microsoft.entityframeworkcore.sqlserver.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

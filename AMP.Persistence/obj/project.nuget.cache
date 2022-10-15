@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LmQ/nziDccKIC2NF7I6HzneMRrk4oIjizX7gt52Uoj2r/9r23ZtTH3/TvdtRIRB47wrD7v/FHZ1+ToA7RGaNFg==",
+  "dgSpecHash": "rmi6Y2a0IzsRTBc89fpLrqW93kXmTeOuR2wZhUdCsmOZctmHBGmHos1+5Q0jTIDsWrwOCMrNQRwzASLcx/lESA==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Persistence\\AMP.Persistence.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.9\\microsoft.entityframeworkcore.abstractions.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.9\\microsoft.entityframeworkcore.analyzers.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.9\\microsoft.entityframeworkcore.design.6.0.9.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.9\\microsoft.entityframeworkcore.inmemory.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.9\\microsoft.entityframeworkcore.relational.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.9\\microsoft.entityframeworkcore.sqlserver.6.0.9.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.9\\microsoft.entityframeworkcore.tools.6.0.9.nupkg.sha512",

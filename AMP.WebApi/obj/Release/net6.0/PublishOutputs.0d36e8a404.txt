@@ -2,6 +2,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\appsettings.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\logs\kessewa.log.json
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\_tests\http-client.private.env.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.runtimeconfig.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.pdb

@@ -1,4 +1,2 @@
-﻿@baseUrl=https://localhost:7149/api/v1/administrationcontrollerv1
-
-POST {{baseUrl}}/InitializeDb
+﻿POST {{baseUrl}}/InitializeDb
 Content-Type: application/json

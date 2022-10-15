@@ -8,11 +8,11 @@ namespace AMP.Persistence.Configurations
     {
         public override void Configure(EntityTypeBuilder<Languages> builder)
         {
+            base.Configure(builder);
             builder.Property(a => a.Name)
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(30);
-            base.Configure(builder);
         }
     }
 }

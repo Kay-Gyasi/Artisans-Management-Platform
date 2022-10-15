@@ -43,7 +43,7 @@ public class UserController : BaseControllerv1
     [AllowAnonymous]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<SigninResponse> Login(SigninCommand command)
         => await Mediator.Send(new AuthenticateUser.Command(command));
     

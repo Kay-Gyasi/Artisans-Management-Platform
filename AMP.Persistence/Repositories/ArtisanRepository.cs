@@ -40,11 +40,11 @@ namespace AMP.Persistence.Repositories
         public async Task<PaginatedList<Artisans>> GetArtisanPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery()
-                .OrderByDescending(x => x.Ratings.Sum(a => a.Votes))
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
                 .WhereIf(!string.IsNullOrEmpty(paginated.OtherJson), 
                     x => x.User.DisplayName.Contains(paginated.OtherJson) 
-                         || x.BusinessName.Contains(paginated.OtherJson));
+                         || x.BusinessName.Contains(paginated.OtherJson))
+                .OrderByDescending(x => x.Ratings.Sum(a => a.Votes));
             
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }

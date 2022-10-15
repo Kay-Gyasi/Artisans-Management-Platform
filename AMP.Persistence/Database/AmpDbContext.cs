@@ -24,6 +24,7 @@ namespace AMP.Persistence.Database
         public DbSet<Images> Images { get; set; }
         public DbSet<Requests> Requests { get; set; }
         public DbSet<Registrations> Registrations { get; set; }
+        public DbSet<Invitations> Invitations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

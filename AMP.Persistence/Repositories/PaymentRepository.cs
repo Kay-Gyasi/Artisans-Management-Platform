@@ -47,8 +47,10 @@ namespace AMP.Persistence.Repositories
                 ? GetBaseQuery()
                     .Where(x => x.Order.ArtisanId == typeId && x.IsVerified)
                     .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
+                    .OrderBy(x => x.DateCreated)
                 : GetBaseQuery().Where(x => x.Order.CustomerId == typeId && x.IsVerified)
-                    .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
+                    .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
+                    .OrderBy(x => x.DateCreated);
 
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }

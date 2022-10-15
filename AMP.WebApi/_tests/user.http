@@ -1,9 +1,7 @@
-﻿@baseUrl=https://localhost:7149/api/v1/user
-
-GET {{baseUrl}}/get/7
+﻿GET {{baseUrl}}user/get/7
 
 ###
-POST {{baseUrl}}/save
+POST {{baseUrl}}user/save
 Content-Type: application/json
 
 {
@@ -46,10 +44,10 @@ Content-Type: application/json
 }
 
 ###
-POST {{baseUrl}}/login
+POST {{baseUrl}}user/login
 Content-Type: application/json
 
 {
-    "email": "kofigyasidev@gmail.com",
+    "phone": "0557833216",
     "password": "pass"
 }

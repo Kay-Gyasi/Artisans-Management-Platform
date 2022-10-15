@@ -19,6 +19,19 @@
           "lib/netcoreapp3.1/ApiMultiPartFormData.dll": {}
         }
       },
+      "AutoFixture/4.17.0": {
+        "type": "package",
+        "dependencies": {
+          "Fare": "[2.1.1, 3.0.0)",
+          "System.ComponentModel.Annotations": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoFixture.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoFixture.dll": {}
+        }
+      },
       "AutoMapper/12.0.0": {
         "type": "package",
         "dependencies": {
@@ -128,6 +141,18 @@
         "type": "package",
         "build": {
           "build/netstandard1.0/coverlet.collector.targets": {}
+        }
+      },
+      "Fare/2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/Fare.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Fare.dll": {}
         }
       },
       "FluentAssertions/6.7.0": {
@@ -444,10 +469,10 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Microsoft.AspNetCore.Mvc.Testing/6.0.6": {
+      "Microsoft.AspNetCore.Mvc.Testing/6.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.TestHost": "6.0.6",
+          "Microsoft.AspNetCore.TestHost": "6.0.10",
           "Microsoft.Extensions.DependencyModel": "6.0.0",
           "Microsoft.Extensions.Hosting": "6.0.1"
         },
@@ -504,7 +529,7 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Routing.Abstractions.dll": {}
         }
       },
-      "Microsoft.AspNetCore.TestHost/6.0.6": {
+      "Microsoft.AspNetCore.TestHost/6.0.10": {
         "type": "package",
         "dependencies": {
           "System.IO.Pipelines": "6.0.3"
@@ -541,7 +566,7 @@
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {}
         }
       },
-      "Microsoft.CodeCoverage/17.2.0": {
+      "Microsoft.CodeCoverage/17.1.0": {
         "type": "package",
         "compile": {
           "lib/netcoreapp1.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {}
@@ -652,6 +677,18 @@
         },
         "runtime": {
           "lib/netstandard2.0/_._": {}
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/6.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.9"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/6.0.9": {
@@ -1262,11 +1299,11 @@
           "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Microsoft.NET.Test.Sdk/17.2.0": {
+      "Microsoft.NET.Test.Sdk/17.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.CodeCoverage": "17.2.0",
-          "Microsoft.TestPlatform.TestHost": "17.2.0"
+          "Microsoft.CodeCoverage": "17.1.0",
+          "Microsoft.TestPlatform.TestHost": "17.1.0"
         },
         "compile": {
           "lib/netcoreapp2.1/_._": {}
@@ -1309,7 +1346,7 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
         }
       },
-      "Microsoft.TestPlatform.ObjectModel/17.2.0": {
+      "Microsoft.TestPlatform.ObjectModel/17.1.0": {
         "type": "package",
         "dependencies": {
           "NuGet.Frameworks": "5.11.0",
@@ -1406,10 +1443,10 @@
           }
         }
       },
-      "Microsoft.TestPlatform.TestHost/17.2.0": {
+      "Microsoft.TestPlatform.TestHost/17.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.2.0",
+          "Microsoft.TestPlatform.ObjectModel": "17.1.0",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -3431,16 +3468,10 @@
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.visualstudio/2.4.5": {
+      "xunit.runner.visualstudio/2.4.3": {
         "type": "package",
-        "compile": {
-          "lib/netcoreapp3.1/_._": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.1/_._": {}
-        },
         "build": {
-          "build/netcoreapp3.1/xunit.runner.visualstudio.props": {}
+          "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
       },
       "AMP.Application/1.0.0": {
@@ -3486,6 +3517,7 @@
           "AMP.Shared.Domain": "1.0.0",
           "AMP.Shared.Persistence": "1.0.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Microsoft.EntityFrameworkCore.InMemory": "6.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.Extensions.Configuration": "6.0.1",
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
@@ -3619,6 +3651,27 @@
         "lib/netcoreapp2.2/ApiMultiPartFormData.dll",
         "lib/netcoreapp3.0/ApiMultiPartFormData.dll",
         "lib/netcoreapp3.1/ApiMultiPartFormData.dll"
+      ]
+    },
+    "AutoFixture/4.17.0": {
+      "sha512": "efMRCG3Epc4QDELwdmQGf6/caQUleRXPRCnLAq5gLMpTuOTcOQWV12vEJ8qo678Rj97/TjjxHYu/34rGkXdVAA==",
+      "type": "package",
+      "path": "autofixture/4.17.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "autofixture.4.17.0.nupkg.sha512",
+        "autofixture.nuspec",
+        "icon.png",
+        "lib/net452/AutoFixture.dll",
+        "lib/net452/AutoFixture.pdb",
+        "lib/net452/AutoFixture.xml",
+        "lib/netstandard1.5/AutoFixture.dll",
+        "lib/netstandard1.5/AutoFixture.pdb",
+        "lib/netstandard1.5/AutoFixture.xml",
+        "lib/netstandard2.0/AutoFixture.dll",
+        "lib/netstandard2.0/AutoFixture.pdb",
+        "lib/netstandard2.0/AutoFixture.xml"
       ]
     },
     "AutoMapper/12.0.0": {
@@ -3787,6 +3840,21 @@
         "coverlet-icon.png",
         "coverlet.collector.3.1.2.nupkg.sha512",
         "coverlet.collector.nuspec"
+      ]
+    },
+    "Fare/2.1.1": {
+      "sha512": "HaI8puqA66YU7/9cK4Sgbs1taUTP1Ssa4QT2PIzqJ7GvAbN1QgkjbRsjH+FSbMh1MJdvS0CIwQNLtFT+KF6KpA==",
+      "type": "package",
+      "path": "fare/2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fare.2.1.1.nupkg.sha512",
+        "fare.nuspec",
+        "lib/net35/Fare.dll",
+        "lib/net35/Fare.xml",
+        "lib/netstandard1.1/Fare.dll",
+        "lib/netstandard1.1/Fare.xml"
       ]
     },
     "FluentAssertions/6.7.0": {
@@ -4137,10 +4205,10 @@
         "microsoft.aspnetcore.mvc.newtonsoftjson.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Mvc.Testing/6.0.6": {
-      "sha512": "+hk16yU7yGCXEjtUbuAXzysm4TCq7l8dam8bnyVkWv0hRg++INK/gBBecjmtIrm5KVTsmbd1rh8/DSzqbsnvBA==",
+    "Microsoft.AspNetCore.Mvc.Testing/6.0.10": {
+      "sha512": "M3LfOtDan9nrRVo1txlYL+3h+8QUH5WnV+frhS/3QQFQoRIT8do8O/EsQGTLiOk/tBExTGOSOOFVcDAcAj+2ZA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.mvc.testing/6.0.6",
+      "path": "microsoft.aspnetcore.mvc.testing/6.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4150,7 +4218,7 @@
         "buildTransitive/net6.0/Microsoft.AspNetCore.Mvc.Testing.targets",
         "lib/net6.0/Microsoft.AspNetCore.Mvc.Testing.dll",
         "lib/net6.0/Microsoft.AspNetCore.Mvc.Testing.xml",
-        "microsoft.aspnetcore.mvc.testing.6.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.testing.6.0.10.nupkg.sha512",
         "microsoft.aspnetcore.mvc.testing.nuspec",
         "tasks/netstandard2.0/Microsoft.AspNetCore.Mvc.Testing.Tasks.dll"
       ]
@@ -4196,10 +4264,10 @@
         "microsoft.aspnetcore.routing.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.TestHost/6.0.6": {
-      "sha512": "B96HzkKGKiRdQAjHTcwsJy0oPi30nGs2wkGKQPlqNRCL189fN2n6vHt6bKWW6BvCW2dBFo6puuUcgy7diu3uqg==",
+    "Microsoft.AspNetCore.TestHost/6.0.10": {
+      "sha512": "RuJClyh5eomPQ68aYgIT+JJmnsBDFSaA5e8S7RHCryTJbJ1KFO2YCl6WYQbqR+nV03HFskhCeKetgdhf7QxTeA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.testhost/6.0.6",
+      "path": "microsoft.aspnetcore.testhost/6.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4207,7 +4275,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net6.0/Microsoft.AspNetCore.TestHost.dll",
         "lib/net6.0/Microsoft.AspNetCore.TestHost.xml",
-        "microsoft.aspnetcore.testhost.6.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.testhost.6.0.10.nupkg.sha512",
         "microsoft.aspnetcore.testhost.nuspec"
       ]
     },
@@ -4248,10 +4316,10 @@
         "version.txt"
       ]
     },
-    "Microsoft.CodeCoverage/17.2.0": {
-      "sha512": "MsKhJmwIfHxNDbTIlgQy29UpWSWPpbZOQPhQ7xalRy+ABnl8/neFHZGzSP3XlpW2dKAXHTFrtIcKzW/kopY2Bg==",
+    "Microsoft.CodeCoverage/17.1.0": {
+      "sha512": "0N/ZJ71ncCxQWhgtkEYKOgu2oMHa8h1tsOUbhmIKXF8UwtSUCe4vHAsJ3DVcNWRwNfQzSTy263ZE+QF6MdIhhQ==",
       "type": "package",
-      "path": "microsoft.codecoverage/17.2.0",
+      "path": "microsoft.codecoverage/17.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4265,10 +4333,19 @@
         "build/netstandard1.0/CodeCoverage/amd64/VanguardInstrumentationProfiler_x64.config",
         "build/netstandard1.0/CodeCoverage/amd64/covrun64.dll",
         "build/netstandard1.0/CodeCoverage/amd64/msdia140.dll",
+        "build/netstandard1.0/CodeCoverage/amd64/msvcdis140.dll",
+        "build/netstandard1.0/CodeCoverage/amd64/msvcp140.dll",
+        "build/netstandard1.0/CodeCoverage/amd64/msvcp140_atomic_wait.dll",
+        "build/netstandard1.0/CodeCoverage/amd64/vcruntime140.dll",
+        "build/netstandard1.0/CodeCoverage/amd64/vcruntime140_1.dll",
         "build/netstandard1.0/CodeCoverage/codecoveragemessages.dll",
         "build/netstandard1.0/CodeCoverage/coreclr/Microsoft.VisualStudio.CodeCoverage.Shim.dll",
         "build/netstandard1.0/CodeCoverage/covrun32.dll",
         "build/netstandard1.0/CodeCoverage/msdia140.dll",
+        "build/netstandard1.0/CodeCoverage/msvcdis140.dll",
+        "build/netstandard1.0/CodeCoverage/msvcp140.dll",
+        "build/netstandard1.0/CodeCoverage/msvcp140_atomic_wait.dll",
+        "build/netstandard1.0/CodeCoverage/vcruntime140.dll",
         "build/netstandard1.0/InstrumentationEngine/alpine/x64/VanguardInstrumentationProfiler_x64.config",
         "build/netstandard1.0/InstrumentationEngine/alpine/x64/libCoverageInstrumentationMethod.so",
         "build/netstandard1.0/InstrumentationEngine/alpine/x64/libInstrumentationEngine.so",
@@ -4304,7 +4381,7 @@
         "build/netstandard1.0/zh-Hant/Microsoft.VisualStudio.TraceDataCollector.resources.dll",
         "lib/net45/Microsoft.VisualStudio.CodeCoverage.Shim.dll",
         "lib/netcoreapp1.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll",
-        "microsoft.codecoverage.17.2.0.nupkg.sha512",
+        "microsoft.codecoverage.17.1.0.nupkg.sha512",
         "microsoft.codecoverage.nuspec"
       ]
     },
@@ -4505,6 +4582,20 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.6.0.9.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/6.0.9": {
+      "sha512": "uQWxbNXOSvvQWgcDRTIfP6xC6NvyH/B8TlhCumzrPOy681LOS9RAoMPTlClboE3NyK5ptfzZhkO2vRTki0lFFw==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/6.0.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.6.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/6.0.9": {
@@ -5401,10 +5492,10 @@
         "microsoft.net.http.headers.nuspec"
       ]
     },
-    "Microsoft.NET.Test.Sdk/17.2.0": {
-      "sha512": "kYmkDYbcDd+jNvmMH4TMtgHjsUYbIsWENM2VcjB0X7TawXbehL5I8OIsu2TgFS/nQCgZE94InrqMxrm7WDy+Lw==",
+    "Microsoft.NET.Test.Sdk/17.1.0": {
+      "sha512": "MVKvOsHIfrZrvg+8aqOF5dknO/qWrR1sWZjMPQ1N42MKMlL/zQL30FQFZxPeWfmVKWUWAOmAHYsqB5OerTKziw==",
       "type": "package",
-      "path": "microsoft.net.test.sdk/17.2.0",
+      "path": "microsoft.net.test.sdk/17.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5431,7 +5522,7 @@
         "lib/netcoreapp1.0/_._",
         "lib/netcoreapp2.1/_._",
         "lib/uap10.0/_._",
-        "microsoft.net.test.sdk.17.2.0.nupkg.sha512",
+        "microsoft.net.test.sdk.17.1.0.nupkg.sha512",
         "microsoft.net.test.sdk.nuspec"
       ]
     },
@@ -5484,10 +5575,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "Microsoft.TestPlatform.ObjectModel/17.2.0": {
-      "sha512": "7j1KYDHLhU98XnCEbECMncXLydI9fNiFLcFsiBsP3lV6EkHOaj5kTPAWHYkKnPGRC9TbZUboSQq8rWI4dTQsxg==",
+    "Microsoft.TestPlatform.ObjectModel/17.1.0": {
+      "sha512": "OMo/FYnKGy3lZEK0gfitskRM3ga/YBt6MyCyFPq0xNLeybGOQ6HnYNAAvzyePo5WPuMiw3LX+HiuRWNjnas1fA==",
       "type": "package",
-      "path": "microsoft.testplatform.objectmodel/17.2.0",
+      "path": "microsoft.testplatform.objectmodel/17.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5725,14 +5816,14 @@
         "lib/uap10.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll",
         "lib/uap10.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll",
         "lib/uap10.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll",
-        "microsoft.testplatform.objectmodel.17.2.0.nupkg.sha512",
+        "microsoft.testplatform.objectmodel.17.1.0.nupkg.sha512",
         "microsoft.testplatform.objectmodel.nuspec"
       ]
     },
-    "Microsoft.TestPlatform.TestHost/17.2.0": {
-      "sha512": "bI67J+hers241h7eD2eecS02p9CbKcQDIeoRvO4FgMlTWg2ZTzc0D3uWLYr5U+K5x9O1pNmyMoMDbYIeWY/TWw==",
+    "Microsoft.TestPlatform.TestHost/17.1.0": {
+      "sha512": "JS0JDLniDhIzkSPLHz7N/x1CG8ywJOtwInFDYA3KQvbz+ojGoT5MT2YDVReL1b86zmNRV8339vsTSm/zh0RcMg==",
       "type": "package",
-      "path": "microsoft.testplatform.testhost/17.2.0",
+      "path": "microsoft.testplatform.testhost/17.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5946,7 +6037,7 @@
         "lib/uap10.0/Microsoft.VisualStudio.TestPlatform.Common.dll",
         "lib/uap10.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll",
         "lib/uap10.0/testhost.dll",
-        "microsoft.testplatform.testhost.17.2.0.nupkg.sha512",
+        "microsoft.testplatform.testhost.17.1.0.nupkg.sha512",
         "microsoft.testplatform.testhost.nuspec"
       ]
     },
@@ -10713,24 +10804,24 @@
         "xunit.extensibility.execution.nuspec"
       ]
     },
-    "xunit.runner.visualstudio/2.4.5": {
-      "sha512": "OwHamvBdUKgqsXfBzWiCW/O98BTx81UKzx2bieIOQI7CZFE5NEQZGi8PBQGIKawDW96xeRffiNf20SjfC0x9hw==",
+    "xunit.runner.visualstudio/2.4.3": {
+      "sha512": "kZZSmOmKA8OBlAJaquPXnJJLM9RwQ27H7BMVqfMLUcTi9xHinWGJiWksa3D4NEtz0wZ/nxd2mogObvBgJKCRhQ==",
       "type": "package",
-      "path": "xunit.runner.visualstudio/2.4.5",
+      "path": "xunit.runner.visualstudio/2.4.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "License.txt",
-        "build/net462/xunit.abstractions.dll",
-        "build/net462/xunit.runner.reporters.net452.dll",
-        "build/net462/xunit.runner.utility.net452.dll",
-        "build/net462/xunit.runner.visualstudio.props",
-        "build/net462/xunit.runner.visualstudio.testadapter.dll",
-        "build/netcoreapp3.1/xunit.abstractions.dll",
-        "build/netcoreapp3.1/xunit.runner.reporters.netcoreapp10.dll",
-        "build/netcoreapp3.1/xunit.runner.utility.netcoreapp10.dll",
-        "build/netcoreapp3.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll",
-        "build/netcoreapp3.1/xunit.runner.visualstudio.props",
+        "build/net452/xunit.abstractions.dll",
+        "build/net452/xunit.runner.reporters.net452.dll",
+        "build/net452/xunit.runner.utility.net452.dll",
+        "build/net452/xunit.runner.visualstudio.props",
+        "build/net452/xunit.runner.visualstudio.testadapter.dll",
+        "build/netcoreapp2.1/xunit.abstractions.dll",
+        "build/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll",
+        "build/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll",
+        "build/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll",
+        "build/netcoreapp2.1/xunit.runner.visualstudio.props",
         "build/uap10.0.16299/xunit.runner.reporters.netstandard15.dll",
         "build/uap10.0.16299/xunit.runner.utility.netstandard15.dll",
         "build/uap10.0.16299/xunit.runner.utility.uwp10.dll",
@@ -10739,11 +10830,8 @@
         "build/uap10.0.16299/xunit.runner.visualstudio.targets",
         "build/uap10.0.16299/xunit.runner.visualstudio.uwp.testadapter.dll",
         "build/uap10.0.16299/xunit.runner.visualstudio.uwp.testadapter.pri",
-        "lib/net462/_._",
-        "lib/netcoreapp3.1/_._",
-        "lib/uap10.0.16299/_._",
         "logo-512-transparent.png",
-        "xunit.runner.visualstudio.2.4.5.nupkg.sha512",
+        "xunit.runner.visualstudio.2.4.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
     },
@@ -10790,17 +10878,16 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AMP.Persistence >= 1.0.0",
       "AMP.WebApi >= 1.0.0",
+      "AutoFixture >= 4.17.0",
       "FluentAssertions >= 6.7.0",
-      "Microsoft.AspNetCore.Mvc.Testing >= 6.0.6",
-      "Microsoft.EntityFrameworkCore >= 6.0.9",
+      "Microsoft.AspNetCore.Mvc.Testing >= 6.0.10",
       "Microsoft.Extensions.Configuration >= 6.0.1",
       "Microsoft.Extensions.Configuration.Abstractions >= 6.0.0",
-      "Microsoft.NET.Test.Sdk >= 17.2.0",
+      "Microsoft.NET.Test.Sdk >= 17.1.0",
       "coverlet.collector >= 3.1.2",
       "xunit >= 2.4.1",
-      "xunit.runner.visualstudio >= 2.4.5"
+      "xunit.runner.visualstudio >= 2.4.3"
     ]
   },
   "packageFolders": {
@@ -10831,9 +10918,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Persistence\\AMP.Persistence.csproj": {
-              "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Persistence\\AMP.Persistence.csproj"
-            },
             "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi\\AMP.WebApi.csproj": {
               "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi\\AMP.WebApi.csproj"
             }
@@ -10850,17 +10934,17 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "AutoFixture": {
+            "target": "Package",
+            "version": "[4.17.0, )"
+          },
           "FluentAssertions": {
             "target": "Package",
             "version": "[6.7.0, )"
           },
           "Microsoft.AspNetCore.Mvc.Testing": {
             "target": "Package",
-            "version": "[6.0.6, )"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[6.0.9, )"
+            "version": "[6.0.10, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
@@ -10872,7 +10956,7 @@
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "[17.2.0, )"
+            "version": "[17.1.0, )"
           },
           "coverlet.collector": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -10888,7 +10972,7 @@
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.4.5, )"
+            "version": "[2.4.3, )"
           }
         },
         "imports": [
@@ -10902,6 +10986,9 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }

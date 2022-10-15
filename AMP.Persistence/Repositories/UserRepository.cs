@@ -62,7 +62,6 @@ namespace AMP.Persistence.Repositories
                 .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == command.Phone && x.IsVerified);
             if (user?.PasswordKey == null || !MatchPasswordHash(command.Password, user.Password, user.PasswordKey))
                 return null;
-            
 
             return user;
         }

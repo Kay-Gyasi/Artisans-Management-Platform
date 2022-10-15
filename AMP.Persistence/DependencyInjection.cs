@@ -22,6 +22,7 @@ namespace AMP.Persistence
                 options.UseSqlServer(configuration.GetConnectionString("AmpProdDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
+                    opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 });
             });
             return services;

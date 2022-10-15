@@ -84,8 +84,6 @@ public class SmsService : BackgroundService
         var command = SmsCommand.Create()
             .WithMessage(message.Item1)
             .To(new[] {message.Item2});
-        var internationalNumber = FormatNumber(command.Recipients);
-        command.To(new[] {internationalNumber});
         await smsMessaging.Send(command);
         FinishTask();
     } 
@@ -96,8 +94,6 @@ public class SmsService : BackgroundService
         var command = SmsCommand.Create()
             .WithMessage(message.Item1)
             .To(new[] {message.Item2});
-        var internationalNumber = FormatNumber(command.Recipients);
-        command.To(new[] {internationalNumber});
         await smsMessaging.Send(command);
         FinishTask();
     } 
@@ -108,8 +104,6 @@ public class SmsService : BackgroundService
         var command = SmsCommand.Create()
             .WithMessage(message.Item1)
             .To(new[] {message.Item2});
-        var internationalNumber = FormatNumber(command.Recipients);
-        command.To(new[] {internationalNumber});
         await smsMessaging.Send(command);
         FinishTask();
     }
@@ -120,8 +114,6 @@ public class SmsService : BackgroundService
         var command = SmsCommand.Create()
             .WithMessage(message.Item1)
             .To(new[] {message.Item2});
-        var internationalNumber = FormatNumber(command.Recipients);
-        command.To(new[] {internationalNumber});
         await smsMessaging.Send(command);
     }
     
@@ -131,8 +123,6 @@ public class SmsService : BackgroundService
         var command = SmsCommand.Create()
             .WithMessage(message.Item1)
             .To(new[] {message.Item2});
-        var internationalNumber = FormatNumber(command.Recipients);
-        command.To(new[] {internationalNumber});
         await smsMessaging.Send(command);
     }
 
@@ -143,10 +133,5 @@ public class SmsService : BackgroundService
         _startTask = false;
     }
 
-    private static string FormatNumber(IEnumerable<string> recipients)
-    {
-        var pn = PhoneNumberUtil.GetInstance().Parse(recipients.First(), "GH");
-        var internationalNumber = PhoneNumberUtil.GetInstance().Format(pn, PhoneNumberFormat.INTERNATIONAL);
-        return internationalNumber;
-    }
+    
 }

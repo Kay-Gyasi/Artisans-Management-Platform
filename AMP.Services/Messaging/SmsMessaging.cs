@@ -24,7 +24,7 @@ namespace AMP.Services.Messaging
         {
             try
             {
-                var response = await _client.PostAsJsonAsync("sms/send", command, new CancellationToken());
+                await _client.PostAsJsonAsync("sms/send", command, new CancellationToken());
             }
             catch (Exception e)
             {
