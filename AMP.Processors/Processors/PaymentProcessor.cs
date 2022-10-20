@@ -57,6 +57,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(string id)
         {
             var payment = await Uow.Payments.GetAsync(id);
+            payment?.SetLastModified();
             Cache.Remove(LookupCacheKey);
             if (payment != null) await Uow.Payments.SoftDeleteAsync(payment);
             await Uow.SaveChangesAsync();
@@ -70,7 +71,8 @@ namespace AMP.Processors.Processors
                 .HasBeenVerified(false);
 
             if (!isNew)
-                payment.OnOrderWithId(command.OrderId);
+                payment.OnOrderWithId(command.OrderId)
+                    .SetLastModified();
         }
     }
 }

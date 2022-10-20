@@ -19,7 +19,7 @@ namespace AMP.Persistence.Repositories
         {
         }
 
-        public async Task OverridePreviousRating(string customerId, string artisanId)
+        public async Task DeletePreviousRatingForSameArtisan(string customerId, string artisanId)
         {
             var rate = await GetBaseQuery().FirstOrDefaultAsync(x => x.ArtisanId == artisanId && x.CustomerId == customerId);
             if (rate != null) await SoftDeleteAsync(rate);

@@ -155,5 +155,11 @@ namespace AMP.Domain.Entities
             IsVerified = true;
             return this;
         }
+        
+        public Users SetLastModified()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
     }
 }

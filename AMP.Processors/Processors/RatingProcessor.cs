@@ -30,7 +30,7 @@ namespace AMP.Processors.Processors
             if (isNew)
             {
                 var customer = await Uow.Customers.GetCustomerId(command.UserId);
-                await Uow.Ratings.OverridePreviousRating(customer, command.ArtisanId);
+                await Uow.Ratings.DeletePreviousRatingForSameArtisan(customer, command.ArtisanId);
                 rating = Ratings.Create(customer, command.ArtisanId)
                     .CreatedOn(DateTime.UtcNow);
                 await AssignFields(rating, command, true);

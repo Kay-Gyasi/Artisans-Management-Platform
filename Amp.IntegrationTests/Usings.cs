@@ -10,3 +10,7 @@ global using AMP.Persistence.Database;
 global using AMP.Processors.Repositories.UoW;
 global using Microsoft.AspNetCore.Mvc.Testing;
 global using Microsoft.EntityFrameworkCore;
+global using AMP.Processors.Dtos;
+global using AMP.Processors.PageDtos;
+global using AMP.Shared.Domain.Models;
+

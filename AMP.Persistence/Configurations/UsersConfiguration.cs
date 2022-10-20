@@ -1,4 +1,5 @@
-﻿using AMP.Domain.Entities;
+﻿using System;
+using AMP.Domain.Entities;
 using AMP.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,6 +12,8 @@ namespace AMP.Persistence.Configurations
         public override void Configure(EntityTypeBuilder<Users> builder)
         {
             base.Configure(builder);
+            // builder.Property(x => x.DateModified)
+            //     .HasDefaultValue(DateTime.UtcNow);
             builder.Property(a => a.FirstName)
                 .IsRequired()
                 .HasColumnType("varchar")

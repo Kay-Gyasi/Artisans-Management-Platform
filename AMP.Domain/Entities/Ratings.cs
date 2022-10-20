@@ -71,5 +71,11 @@ namespace AMP.Domain.Entities
             DateCreated = date;
             return this;
         }
+        
+        public Ratings SetLastModified()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
     }
 }

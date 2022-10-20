@@ -166,5 +166,11 @@ namespace AMP.Domain.Entities
             DateCreated = date;
             return this;
         }
+        
+        public Orders SetLastModified()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
     }
 }

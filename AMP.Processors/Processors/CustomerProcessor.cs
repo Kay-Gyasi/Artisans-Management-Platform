@@ -38,7 +38,8 @@ namespace AMP.Processors.Processors
             }
 
             customer = await Uow.Customers.GetAsync(command.Id);
-            customer.ForUserId(command.UserId);
+            customer.ForUserId(command.UserId)
+                .SetLastModified();
             Cache.Remove(LookupCacheKey);
             await Uow.Customers.UpdateAsync(customer);
             await Uow.SaveChangesAsync();
@@ -64,6 +65,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(string id)
         {
             var customer = await Uow.Customers.GetAsync(id);
+            customer?.SetLastModified();
             Cache.Remove(LookupCacheKey);
             if (customer != null) await Uow.Customers.SoftDeleteAsync(customer);
             await Uow.SaveChangesAsync();

@@ -80,7 +80,8 @@ namespace AMP.Processors.Processors
 
             if (!isNew)
                 dispute.ByCustomerWithId(command.CustomerId)
-                    .AgainstOrderWithId(command.OrderId);
+                    .AgainstOrderWithId(command.OrderId)
+                    .SetLastModified();
         }
     }
 }

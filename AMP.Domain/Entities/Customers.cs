@@ -51,5 +51,11 @@ namespace AMP.Domain.Entities
             DateCreated = DateTime.UtcNow; 
             return this;
         }
+        
+        public Customers SetLastModified()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
     }
 }

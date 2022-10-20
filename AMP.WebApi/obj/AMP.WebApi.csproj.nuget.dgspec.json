@@ -320,6 +320,10 @@
               "target": "Package",
               "version": "[1.19.0, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
             "Microsoft.Extensions.Caching.Memory": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -619,10 +623,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "ApiMultipartFormDataFormatter": {
-              "target": "Package",
-              "version": "[3.0.0, )"
-            },
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.0, )"
@@ -692,10 +692,6 @@
             "Serilog.Sinks.Seq": {
               "target": "Package",
               "version": "[5.1.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.2.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

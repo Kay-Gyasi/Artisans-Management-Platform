@@ -31,14 +31,24 @@ namespace AMP.Processors.Processors
                 var result = await _cloudinary.UploadPhotoAsync(command.Image);
                 if (result.Error != null) return false;
 
-                await Uow.Images.RemoveCurrentDetails(command.UserId);
-                var image = Images.Create(result.SecureUrl.AbsoluteUri, result.PublicId)
-                    .ForUserWithId(command.UserId);
-                await Uow.Images.InsertAsync(image);
-                var user = await Uow.Users.GetAsync(command.UserId);
-                user.WithImageId(image.Id);
-                await Uow.Users.UpdateAsync(user);
-                await Uow.SaveChangesAsync();
+                await using var transaction = Uow.BeginTransaction();
+                try
+                {
+                    await Uow.Images.RemoveCurrentDetails(command.UserId);
+                    var image = Images.Create(result.SecureUrl.AbsoluteUri, result.PublicId)
+                        .ForUserWithId(command.UserId);
+                    await Uow.Images.InsertAsync(image);
+                    var user = await Uow.Users.GetAsync(command.UserId);
+                    user.WithImageId(image.Id);
+                    await Uow.Users.UpdateAsync(user);
+                    await Uow.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
                 return true;
             }
             catch (Exception e)

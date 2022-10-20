@@ -7,7 +7,6 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AMP.WebApi.runtimeconfig.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AMP.WebApi.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AMP.WebApi.pdb
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\ApiMultiPartFormData.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Azure.Core.dll

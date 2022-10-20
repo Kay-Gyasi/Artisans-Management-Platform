@@ -1,6 +1,7 @@
 ﻿using AMP.Domain.Entities;
 using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
+using AMP.Processors.Commands;
 
 namespace AMP.Processors.PageDtos
 {
@@ -17,8 +18,8 @@ namespace AMP.Processors.PageDtos
         public bool IsRemoved { get; set; }
         public UserType Type { get; set; }
         public LevelOfEducation LevelOfEducation { get; set; }
-        public Contact Contact { get; set; }
-        public Address Address { get; set; }
+        public ContactCommand Contact { get; set; }
+        public AddressCommand Address { get; set; }
         public ImagePageDto Image { get; set; }
     }
 }

@@ -33,11 +33,22 @@ public class RegistrationProcessor : ProcessorBase
         var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);
         if (userExists) return default;
 
-        var user = await SaveUser(command);
-        var code = await SaveRegistration(command.Contact.PrimaryContact);
-        await Uow.SaveChangesAsync();
-        await Task.WhenAll(SendVerificationLink(user.Contact.PrimaryContact, code), PostAsType(user));
-        return user.Id;
+        // decide on isolation level
+        await using var transaction = Uow.BeginTransaction();
+        try
+        {
+            var user = await SaveUser(command);
+            var code = await SaveRegistration(command.Contact.PrimaryContact);
+            await Uow.SaveChangesAsync();
+            await Task.WhenAll(SendVerificationLink(user.Contact.PrimaryContact, code), PostAsType(user));
+            await transaction.CommitAsync();
+            return user.Id;
+        }
+        catch (Exception)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task<bool> VerifyUser(string phone, string code)
@@ -102,46 +113,22 @@ public class RegistrationProcessor : ProcessorBase
     
     private async Task PostArtisan(Users user)
     {
-        try
-        {
-            var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-            var artisan = Artisans.Create(userId)
-                .WithBusinessName(user.DisplayName)
-                .WithDescription(string.Empty)
-                .CreatedOn();
-            await Uow.Artisans.InsertAsync(artisan);
-        }
-        catch (Exception)
-        {
-            var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-            var deleted = await Uow.Users.GetAsync(userId);
-            await Uow.Users.DeleteAsync(deleted, new CancellationToken());
-        }
-        finally
-        {
-            await Uow.SaveChangesAsync();
-        }
+        var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+        var artisan = Artisans.Create(userId)
+            .WithBusinessName(user.DisplayName)
+            .WithDescription(string.Empty)
+            .CreatedOn();
+        await Uow.Artisans.InsertAsync(artisan);
+        await Uow.SaveChangesAsync();
     }
     
     private async Task PostCustomer(Users user)
     {
-        try
-        {
-            var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-            var customer = Customers.Create(userId)
-                .CreatedOn();
-            await Uow.Customers.InsertAsync(customer);
-        }
-        catch (Exception)
-        {
-            var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
-            var deleted = await Uow.Users.GetAsync(userId);
-            await Uow.Users.DeleteAsync(deleted, new CancellationToken());
-        }
-        finally
-        {
-            await Uow.SaveChangesAsync();
-        }
+        var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+        var customer = Customers.Create(userId)
+            .CreatedOn();
+        await Uow.Customers.InsertAsync(customer);
+        await Uow.SaveChangesAsync();
     }
     
     private async Task AssignFields(Users user, UserCommand command)
@@ -167,8 +154,6 @@ public class RegistrationProcessor : ProcessorBase
                 .FromTown(command.Address.Town ?? "")
                 .FromCountry(command.Address.Country))
             .Speaks(languages)
-            .WithMomoNumber(command.MomoNumber ?? "")
-            .IsSuspendedd(command.IsSuspended)
-            .IsRemovedd(command.IsRemoved);
+            .WithMomoNumber(command.MomoNumber ?? "");
     }
 }

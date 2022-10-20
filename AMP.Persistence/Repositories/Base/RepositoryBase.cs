@@ -256,7 +256,7 @@ namespace AMP.Persistence.Repositories.Base
             return new List<Lookup>();
         }
 
-        protected virtual Expression<Func<T, bool>> GetSearchCondition(string search) 
-            => x => x.DateCreated.ToString(CultureInfo.InvariantCulture).Contains(search);
+        protected virtual Expression<Func<T, bool>> GetSearchCondition(string search)
+            => x => true;
     }
 }

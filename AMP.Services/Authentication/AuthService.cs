@@ -26,14 +26,14 @@ namespace AMP.Services.Authentication
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var claims = new Claim[]
             {
-                new Claim(ClaimTypes.Name, user.DisplayName),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Surname, user.FamilyName),
-                new Claim("ImageUrl", user.Image?.ImageUrl ?? ""),
-                new Claim(ClaimTypes.MobilePhone, user.Contact?.PrimaryContact ?? ""),
-                new Claim(ClaimTypes.Role, user.Type.ToString()),
-                new Claim(ClaimTypes.Email, user.Contact?.EmailAddress ?? ""),
-                new Claim(ClaimTypes.StreetAddress, user.Address?.StreetAddress ?? ""),
+                new(ClaimTypes.Name, user.DisplayName),
+                new(ClaimTypes.NameIdentifier, user.Id),
+                new(ClaimTypes.Surname, user.FamilyName),
+                new("ImageUrl", user.Image?.ImageUrl ?? ""),
+                new(ClaimTypes.MobilePhone, user.Contact?.PrimaryContact ?? ""),
+                new(ClaimTypes.Role, user.Type.ToString()),
+                new(ClaimTypes.Email, user.Contact?.EmailAddress ?? ""),
+                new(ClaimTypes.StreetAddress, user.Address?.StreetAddress ?? ""),
             };
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);

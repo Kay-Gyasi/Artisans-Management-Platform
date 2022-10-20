@@ -96,6 +96,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(string id)
         {
             var artisan = await Uow.Artisans.GetAsync(id);
+            artisan?.SetLastModified();
             Cache.Remove(LookupCacheKey);
             if (artisan != null) await Uow.Artisans.SoftDeleteAsync(artisan);
             await Uow.SaveChangesAsync();
@@ -113,7 +114,8 @@ namespace AMP.Processors.Processors
                 .Offers(services)
                 .OfType(command.Type)
                 .HasEccn(command.ECCN);
-            if (!isNew) artisan.ForUserId(command.UserId);
+            if (!isNew) artisan.ForUserId(command.UserId)
+                .SetLastModified();
         }
     }
 }

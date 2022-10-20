@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -102,27 +103,27 @@ namespace AMP.Processors.Processors
 
         private async Task AssignFields(Users user, UserCommand command)
         {
+            command.Languages ??= new List<LanguagesCommand>();
+            command.Address ??= new AddressCommand();
+            command.Contact ??= new ContactCommand();
             var list = command.Languages.Select(lang => lang.Name).ToList();
             var languages = await Uow.Languages.BuildLanguages(list);
-            user.WithFirstName(command.FirstName)
-                .WithFamilyName(command.FamilyName)
-                .WithOtherName(command.OtherName)
+            user.WithFirstName(command.FirstName ?? "")
+                .WithFamilyName(command.FamilyName ?? "")
+                .WithOtherName(command.OtherName ?? "")
                 .SetDisplayName()
-                .WithImageId(command.ImageId)
-                .OfType(command.Type)
+                .WithImageId(command.ImageId ?? "")
                 .HasLevelOfEducation(command.LevelOfEducation)
                 .WithContact(Contact.Create(command.Contact.PrimaryContact ?? "")
                     .WithPrimaryContact2(command.Contact.PrimaryContact2 ?? "")
                     .WithPrimaryContact3(command.Contact.PrimaryContact3 ?? "")
                     .WithEmailAddress(command.Contact.EmailAddress ?? ""))
-                .WithAddress(Address.Create(command.Address.City, command.Address.StreetAddress)
-                    .WithStreetAddress2(command.Address.StreetAddress2)
-                    .FromTown(command.Address.Town)
+                .WithAddress(Address.Create(command.Address.City ?? "", command.Address.StreetAddress ?? "")
+                    .WithStreetAddress2(command.Address.StreetAddress2 ?? "")
+                    .FromTown(command.Address.Town ?? "")
                     .FromCountry(command.Address.Country))
                 .Speaks(languages)
-                .WithMomoNumber(command.MomoNumber)
-                .IsSuspendedd(command.IsSuspended)
-                .IsRemovedd(command.IsRemoved);
+                .WithMomoNumber(command.MomoNumber ?? "");
         }
     }
 }

@@ -42,6 +42,7 @@ namespace AMP.Persistence.Repositories
             if (order is null || !order.IsArtisanComplete) return;
             order?.WithStatus(OrderStatus.Completed)
                 .IsCompleted(true);
+            order?.SetLastModified();
             await UpdateAsync(order);
         }
         
@@ -49,6 +50,7 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order?.IsArtisanCompleted(true);
+            order?.SetLastModified();
             await UpdateAsync(order);
         }
 
@@ -56,6 +58,7 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order?.RequestAccepted(true);
+            order?.SetLastModified();
             await UpdateAsync(order);
         }
         
@@ -63,6 +66,7 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order?.RequestAccepted(false);
+            order?.SetLastModified();
             await UpdateAsync(order);
         }
 
@@ -70,6 +74,7 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order?.ForArtisanWithId(null);
+            order?.SetLastModified();
             await UpdateAsync(order);
         }
 
@@ -77,6 +82,7 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             order?.ForArtisanWithId(artisanId);
+            order?.SetLastModified();
             await UpdateAsync(order);
 
             await Context.Requests.AddAsync(Requests.Create(order?.CustomerId, artisanId, orderId));
@@ -179,6 +185,7 @@ namespace AMP.Persistence.Repositories
         {
             var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
             order?.WithCost(costCommand.Cost);
+            order?.SetLastModified();
         }
     }
 }

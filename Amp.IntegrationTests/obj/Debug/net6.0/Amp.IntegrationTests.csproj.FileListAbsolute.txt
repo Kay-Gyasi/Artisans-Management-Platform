@@ -306,7 +306,6 @@ C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bi
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\refs\System.Xml.XPath.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\refs\System.Xml.XPath.XDocument.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\refs\WindowsBase.dll
-C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\ApiMultiPartFormData.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\AutoFixture.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

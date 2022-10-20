@@ -143,6 +143,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(string id)
         {
             var order = await Uow.Orders.GetAsync(id);
+            order?.SetLastModified();
             Cache.Remove(LookupCacheKey);
             if (order != null) await Uow.Orders.SoftDeleteAsync(order);
             await Uow.SaveChangesAsync();
@@ -163,7 +164,8 @@ namespace AMP.Processors.Processors
                 .ForCustomerWithId(customerId)
                 .WithScope(command.Scope);
 
-            if (!isNew) order.ForServiceWithId(command.ServiceId);
+            if (!isNew) order.ForServiceWithId(command.ServiceId)
+                .SetLastModified();
         }
     }
 }

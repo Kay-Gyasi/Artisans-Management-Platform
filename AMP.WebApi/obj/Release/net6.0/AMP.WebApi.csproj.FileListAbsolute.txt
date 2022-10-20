@@ -112,7 +112,6 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\System.Memory.Data.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\ApiMultiPartFormData.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\PhoneNumbers.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\Microsoft.Extensions.Configuration.EnvironmentVariables.dll

@@ -47,9 +47,9 @@ public class UserController : BaseControllerv1
     public async Task<SigninResponse> Login(SigninCommand command)
         => await Mediator.Send(new AuthenticateUser.Command(command));
     
-    [HttpPost]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<SigninResponse> GetRefreshToken()
         => await Mediator.Send(new RefreshToken.Command(UserId));
     

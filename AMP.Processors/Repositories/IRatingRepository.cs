@@ -10,7 +10,7 @@ namespace AMP.Processors.Repositories
     {
         double GetRating(string artisanId);
         int GetCount(string artisanId);
-        Task OverridePreviousRating(string customerId, string artisanId);
+        Task DeletePreviousRatingForSameArtisan(string customerId, string artisanId);
 
         Task<PaginatedList<Ratings>> GetArtisanRatingPage(PaginatedCommand paginated, string userId,
             CancellationToken cancellationToken);

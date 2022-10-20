@@ -12,81 +12,169 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5f159e4-3203-4332-a4db-887f6f77bfe1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Amp.IntegrationTests/Tests/RegistrationControllerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Amp.IntegrationTests/Tests/UserControllerTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Artisans Management Platform/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/49a45a83-5bca-407e-9b50-7ab05e11abe3.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/5137e92e-7d22-4601-b3ac-d68bd07b9fd2.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/d507287d-cf21-4fe1-8afd-ef871bfe9499.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/df846d9d-d175-44a3-b417-ff27313ae8fe.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/v17/.futdcache.v1" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Artisans Management Platform/v17/.futdcache.v1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/011fbac8-5785-4524-af80-1b64610b4b72.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/6b18d43f-a6d8-4f86-8f8c-c05b9f4e9a09.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/7854a121-c5c4-4aad-b584-3ddc288e456d.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/FileContentIndex/f4f147ce-08c4-4056-a755-a3101c3d798f.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Artisans Management Platform/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Artisans Management Platform/v17/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/artisans management platform.metadata.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/artisans management platform.metadata.v2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/artisans management platform.projects.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/artisans management platform.projects.v2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/Validation/UpdateUserValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/Validation/UpdateUserValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Application.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Application.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Application.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Application.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Application.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Processors.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Processors.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Release/net6.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/AMP.Application.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/AMP.Application.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/AMP.Application.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/AMP.Application.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/ref/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/ref/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/refint/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net6.0/refint/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/ref/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/ref/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/refint/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Release/net6.0/refint/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Application/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Artisans.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Artisans.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Customers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Customers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Disputes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Disputes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Orders.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Orders.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Payments.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Payments.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Ratings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Ratings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Domain/Entities/Users.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/Entities/Users.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Domain/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Configurations/UsersConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Configurations/UsersConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Repositories/Base/RepositoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Repositories/Base/RepositoryBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Repositories/OrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Repositories/OrderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Repositories/RatingRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Repositories/RatingRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Repositories/UoW/UnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Repositories/UoW/UnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Persistence.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Persistence.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Persistence.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Persistence.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Persistence.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Persistence.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Processors.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Processors.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Domain.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Persistence.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Release/net6.0/AMP.Shared.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/AMP.Persistence.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/AMP.Persistence.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/AMP.Persistence.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/AMP.Persistence.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/ref/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/ref/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/refint/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net6.0/refint/AMP.Persistence.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/AMP.Persistence.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/ref/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/ref/AMP.Persistence.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/refint/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Release/net6.0/refint/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/AMP.Processors.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/AMP.Processors.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/PageDtos/UserPageDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/PageDtos/UserPageDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/ArtisanProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/ArtisanProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/CustomerProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/CustomerProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/DisputeProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/DisputeProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/ImageProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/ImageProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/OrderProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/OrderProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/PaymentProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/PaymentProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/RatingProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/RatingProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/RegistrationProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/RegistrationProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/UserProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/UserProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Repositories/IRatingRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Repositories/IRatingRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Repositories/UoW/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Repositories/UoW/IUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net6.0/AMP.Processors.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net6.0/AMP.Processors.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Processors.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Processors.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Processors.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Processors.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Release/net6.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/AMP.Processors.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/AMP.Processors.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/AMP.Processors.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/AMP.Processors.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/ref/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/ref/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/refint/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net6.0/refint/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/ref/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/ref/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/refint/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Release/net6.0/refint/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/Authentication/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/Authentication/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Services.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Services.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Services.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net6.0/AMP.Services.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Processors.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Services.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Services.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Services.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Release/net6.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/AMP.Services.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/AMP.Services.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/AMP.Services.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/AMP.Services.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net6.0/AMP.Services.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Release/net6.0/AMP.Services.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Release/netstandard2.1/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Release/netstandard2.1/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Release/netstandard2.1/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Release/netstandard2.1/AMP.Shared.Domain.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Release/netstandard2.1/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Release/netstandard2.1/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Release/netstandard2.1/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Release/netstandard2.1/AMP.Shared.Domain.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Domain.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Persistence.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Release/netstandard2.1/AMP.Shared.Persistence.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/netstandard2.1/AMP.Shared.Persistence.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/netstandard2.1/AMP.Shared.Persistence.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Release/netstandard2.1/AMP.Shared.Persistence.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Release/netstandard2.1/AMP.Shared.Persistence.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Release/netstandard2.1/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Release/netstandard2.1/AMP.Shared.Persistence.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Release/netstandard2.1/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Release/netstandard2.1/AMP.Shared.Persistence.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/AMP.WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/AMP.WebApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/Controllers/v1/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/Controllers/v1/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/Properties/PublishProfiles/kofigyasi-001-site2 - Web Deploy.pubxml.user" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/Properties/PublishProfiles/kofigyasi-001-site2 - Web Deploy.pubxml.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Services.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.Services.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.WebApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.WebApi.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/AMP.WebApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/ApiMultiPartFormData.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net6.0/logs/kessewa.log.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Application.pdb" afterDir="false" />
@@ -96,15 +184,24 @@
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Processors.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Services.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Domain.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Persistence.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.Shared.Persistence.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.WebApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.WebApi.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/AMP.WebApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/ApiMultiPartFormData.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Release/net6.0/logs/kessewa.log.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/logs/kessewa.log.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/AMP.WebApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/ref/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/ref/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/refint/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net6.0/refint/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/AMP.WebApi.csproj.CoreCompileInputs.cache" afterDir="false" />
@@ -120,21 +217,58 @@
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Processors.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Services.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Domain.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Persistence.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.Shared.Persistence.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.WebApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.WebApi.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/AMP.WebApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/ApiMultiPartFormData.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PubTmp/Out/logs/kessewa.log.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PublishOutputs.0d36e8a404.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/PublishOutputs.0d36e8a404.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/ref/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/ref/AMP.WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/refint/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Release/net6.0/refint/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/staticwebassets.pack.sentinel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/CustomWebApplicationFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/CustomWebApplicationFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/RegistrationControllerTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/UserControllerTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/Usings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/Usings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Application.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Application.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Persistence.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Persistence.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Processors.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Processors.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Services.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Services.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Services.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.Services.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.WebApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.WebApi.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/AMP.WebApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/Amp.IntegrationTests.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/Amp.IntegrationTests.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/Amp.IntegrationTests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/Amp.IntegrationTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/Amp.IntegrationTests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/ApiMultiPartFormData.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net6.0/logs/kessewa.log.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/Amp.IntegrationTests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/ref/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/ref/Amp.IntegrationTests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/refint/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net6.0/refint/Amp.IntegrationTests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Release/net6.0/Amp.IntegrationTests.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Release/net6.0/Amp.IntegrationTests.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Release/net6.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Release/net6.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/staticwebassets.pack.sentinel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Artisans Management Platform.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Artisans Management Platform.sln.DotSettings.user" afterDir="false" />
@@ -163,10 +297,12 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/377b61b613ea444f826f377d9474ffca3c9a8/b5/3e1114a1/TestInvoker`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2656e3487208acb3487490904326ac4e1fdc62459bbaf6dc682863a3c37a/ParameterExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3444aea72fd552a5be14e6c6d1bb43569412a5547ca7f0b93136753e44471e5c/CallSiteRuntimeResolver.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4b95b9936aceaca7b7986abdecd044bd5135c35a492a08b2c3bb2f907882/HostBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/59a49a354f3a53bfac82d059788f3fa1f46d379da646dd78cb48bb8bcaf8c58d/HttpHeaders.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/66efbec125c33fdfb3a1bec1ed20a19604e9735174ac7196e96ed9476726/Mediator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/686ecdf55b0afec278130ed1d8e7aaac77b377dfa7a6a67da3ce328916e4b8c/DynamicServiceProviderEngine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/835e918f865081a17f4db4eb792436785ecdfa3faa383eb94defdf7a7484e/WebApplicationFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8c54972f91e9f1369a47cbb0a8a950e5e423d1e344b06b2fe0849c2f6189f0/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="SKIP_HIGHLIGHTING" />
@@ -199,7 +335,7 @@
     &quot;com.github.minasploit.migrationfacilitator.startup_project&quot;: &quot;AMP.WebApi&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;rest.client.default.execution.environment&quot;: &quot;dev&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.environmentSetup&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -329,6 +465,13 @@
       <workItem from="1665784516613" duration="7084000" />
       <workItem from="1665825109400" duration="21022000" />
       <workItem from="1665872775123" duration="216000" />
+      <workItem from="1665914766259" duration="3788000" />
+      <workItem from="1665925275222" duration="98000" />
+      <workItem from="1665925559380" duration="10947000" />
+      <workItem from="1666039836915" duration="9897000" />
+      <workItem from="1666133629472" duration="2512000" />
+      <workItem from="1666177151920" duration="8278000" />
+      <workItem from="1666216805216" duration="3061000" />
     </task>
     <task id="LOCAL-00001" summary="change db nvarchar types">
       <created>1664418504027</created>

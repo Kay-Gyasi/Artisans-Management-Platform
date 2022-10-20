@@ -70,5 +70,11 @@ namespace AMP.Domain.Entities
             DateCreated = date;
             return this;
         }
+        
+        public Payments SetLastModified()
+        {
+            DateModified = DateTime.UtcNow;
+            return this;
+        }
     }
 }

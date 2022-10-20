@@ -1,8 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AMP.Domain.Entities;
+using AMP.Domain.Enums;
 using AMP.Persistence.Database;
 using AMP.Persistence.Repositories.Base;
 using AMP.Processors.Commands;
@@ -46,7 +50,6 @@ namespace AMP.Persistence.Repositories
                 .RemoveSpecialCharacters();
             return passKeyString != confirmCode ? null : user;
         }
-
 
         public override IQueryable<Users> GetBaseQuery()
         {
@@ -98,6 +101,20 @@ namespace AMP.Persistence.Repositories
             var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(passwordText));
 
             return !passwordHash.Where((t, i) => t != password[i]).Any();
+        }
+
+        protected override Expression<Func<Users, bool>> GetSearchCondition(string search)
+        {
+            if (int.TryParse(search, out var a))
+            {
+                return x => x.DisplayName.Contains(search)
+                            || x.OtherName.Contains(search)
+                            || x.Type == (UserType)a
+                            || x.Contact.PrimaryContact.Contains(search);
+            }
+            return x => x.DisplayName.Contains(search)
+                        || x.OtherName.Contains(search)
+                        || x.Contact.PrimaryContact.Contains(search);
         }
     }
 }

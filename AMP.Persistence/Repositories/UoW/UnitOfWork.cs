@@ -3,6 +3,7 @@ using AMP.Persistence.Database;
 using AMP.Processors.Repositories;
 using AMP.Processors.Repositories.Administration;
 using AMP.Processors.Repositories.UoW;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace AMP.Persistence.Repositories.UoW
 {
@@ -64,6 +65,8 @@ namespace AMP.Persistence.Repositories.UoW
         public IRequestRepository Requests { get; }
         public IRegistrationRepository Registrations { get; }
         public IInvitationRepository Invitations { get; }
+
+        public IDbContextTransaction BeginTransaction() => _dbContext.Database.BeginTransaction();
 
         public async Task<bool> SaveChangesAsync() 
             => await _dbContext.SaveChangesAsync() > 0;
