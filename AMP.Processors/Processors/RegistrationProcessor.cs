@@ -12,6 +12,8 @@ using AMP.Processors.Processors.Base;
 using AMP.Processors.Processors.Helpers;
 using AMP.Processors.Repositories.UoW;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace AMP.Processors.Processors;
@@ -34,21 +36,27 @@ public class RegistrationProcessor : ProcessorBase
         if (userExists) return default;
 
         // decide on isolation level
-        await using var transaction = Uow.BeginTransaction();
-        try
+        var userId = "";
+        var executionStrategy = Uow.GetExecutionStrategy();
+        await executionStrategy.ExecuteAsync(async () =>
         {
-            var user = await SaveUser(command);
-            var code = await SaveRegistration(command.Contact.PrimaryContact);
-            await Uow.SaveChangesAsync();
-            await Task.WhenAll(SendVerificationLink(user.Contact.PrimaryContact, code), PostAsType(user));
-            await transaction.CommitAsync();
-            return user.Id;
-        }
-        catch (Exception)
-        {
-            await transaction.RollbackAsync();
-            throw;
-        }
+            await using var transaction = Uow.BeginTransaction();
+            try
+            {
+                var user = await SaveUser(command);
+                var code = await SaveRegistration(command.Contact.PrimaryContact);
+                await Uow.SaveChangesAsync();
+                await Task.WhenAll(SendVerificationLink(user.Contact.PrimaryContact, code), PostAsType(user));
+                await transaction.CommitAsync();
+                userId = user.Id;
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        });
+        return userId;
     }
 
     public async Task<bool> VerifyUser(string phone, string code)
@@ -72,7 +80,7 @@ public class RegistrationProcessor : ProcessorBase
         var message = MessageGenerator.SendVerificationLink(phone, code);
         await _smsMessaging.Send(new SmsCommand {Message = message.Item1, Recipients = new [] {message.Item2}});
     }
-    
+
     private async Task PostAsType(Users user)
     {
         switch (user.Type)

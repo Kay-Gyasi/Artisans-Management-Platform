@@ -9,6 +9,8 @@ public class InvitationsConfiguration : DatabaseConfigurationBase<Invitations>
     public override void Configure(EntityTypeBuilder<Invitations> builder)
     {
         base.Configure(builder);
+        builder.HasIndex(x => x.InvitedPhone)
+            .HasDatabaseName("Index_Phone");
         builder.Property(x => x.InvitedPhone)
             .IsRequired()
             .HasColumnType("varchar")

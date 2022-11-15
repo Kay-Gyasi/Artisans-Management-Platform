@@ -9,6 +9,8 @@ namespace AMP.Persistence.Configurations
         public override void Configure(EntityTypeBuilder<Languages> builder)
         {
             base.Configure(builder);
+            builder.HasIndex(x => x.Name)
+                .HasDatabaseName("Index_Lang_Name");
             builder.Property(a => a.Name)
                 .IsRequired()
                 .HasColumnType("varchar")

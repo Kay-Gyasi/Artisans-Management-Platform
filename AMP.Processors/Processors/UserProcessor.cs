@@ -41,7 +41,6 @@ namespace AMP.Processors.Processors
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
-        // TODO:: Implement this
         public async Task<SigninResponse> GetRefreshToken(string userId)
         {
             var user = await Uow.Users.GetAsync(userId);
@@ -68,7 +67,8 @@ namespace AMP.Processors.Processors
 
             var passes = Uow.Users.Register(command.NewPassword);
             user.HasPassword(passes.Item1)
-                .HasPasswordKey(passes.Item2);
+                .HasPasswordKey(passes.Item2)
+                .SetLastModified();
             await Uow.Users.UpdateAsync(user);
             await Uow.SaveChangesAsync();
             return true;
@@ -96,6 +96,7 @@ namespace AMP.Processors.Processors
         public async Task Delete(string id)
         {
             var user = await Uow.Users.GetAsync(id);
+            user?.SetLastModified();
             Cache.Remove(LookupCacheKey);
             if (user != null) await Uow.Users.SoftDeleteAsync(user);
             await Uow.SaveChangesAsync();
@@ -123,7 +124,8 @@ namespace AMP.Processors.Processors
                     .FromTown(command.Address.Town ?? "")
                     .FromCountry(command.Address.Country))
                 .Speaks(languages)
-                .WithMomoNumber(command.MomoNumber ?? "");
+                .WithMomoNumber(command.MomoNumber ?? "")
+                .SetLastModified();
         }
     }
 }

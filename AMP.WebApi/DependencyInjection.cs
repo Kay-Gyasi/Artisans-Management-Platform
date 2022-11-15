@@ -1,5 +1,6 @@
 ﻿using AMP.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -25,8 +26,16 @@ public static class DependencyInjection
             .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration)
             .AddSmsMessaging()
-            .AddWorkers();
-        
+            .AddWorkers()
+            .AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200", "https://artisan-management-platform.com")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });        
         return services;
     }
 
@@ -91,9 +100,8 @@ public static class DependencyInjection
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseDeveloperExceptionPage();
         }
-
-        //app.UseDeveloperExceptionPage();
 
         app.UseSwagger();
         app.UseSwaggerUI(c =>
@@ -108,7 +116,12 @@ public static class DependencyInjection
 
         app.UseDefaultFiles();
 
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
+            RequestPath = new PathString("/Files")
+        });
+        app.UseCors();
 
         app.UseAuthentication();
 

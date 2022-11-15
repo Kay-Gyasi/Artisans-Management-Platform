@@ -38,8 +38,8 @@ namespace AMP.Persistence.Repositories
       
         public async Task Complete(string orderId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            if (order is null || !order.IsArtisanComplete) return;
+            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId && x.IsArtisanComplete);
+            if (order is null) return;
             order?.WithStatus(OrderStatus.Completed)
                 .IsCompleted(true);
             order?.SetLastModified();
@@ -101,7 +101,7 @@ namespace AMP.Persistence.Repositories
         public async Task<PaginatedList<Orders>> GetOrderHistory(PaginatedCommand paginated,
             string userId, CancellationToken cancellationToken)
         {
-            var whereQueryable = GetBaseQuery().Where(x => x.Customer.UserId == userId && x.Status == OrderStatus.Completed)
+            var whereQueryable = GetBaseQuery().Where(x => x.Status == OrderStatus.Completed && x.Customer.UserId == userId)
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
             return await whereQueryable.BuildPage(paginated, cancellationToken);

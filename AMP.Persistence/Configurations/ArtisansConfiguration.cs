@@ -11,6 +11,10 @@ namespace AMP.Persistence.Configurations
         public override void Configure(EntityTypeBuilder<Artisans> builder)
         {
             base.Configure(builder);
+            builder.HasIndex(x => x.BusinessName)
+                .HasDatabaseName("Index_Artisan_BusinessName");
+            builder.HasIndex(x => x.Type)
+                .HasDatabaseName("Index_Artisan_Type");
             builder.Property(a => a.UserId)
                 .IsRequired()
                 .HasColumnType("varchar")

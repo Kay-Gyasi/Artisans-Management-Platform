@@ -21,5 +21,6 @@ namespace AMP.Processors.Repositories.UoW
 
         Task<bool> SaveChangesAsync();
         IDbContextTransaction BeginTransaction();
+        IExecutionStrategy GetExecutionStrategy();
     }
 }

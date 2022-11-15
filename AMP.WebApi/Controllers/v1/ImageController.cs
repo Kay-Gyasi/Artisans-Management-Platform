@@ -9,9 +9,9 @@ public class ImageController : BaseControllerv1
 {
 
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Upload([FromForm] IFormFile file) //naming
+    public async Task<IActionResult> Upload([FromForm(Name = "uploadedFile")] IFormFile file) //naming
     {
         
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

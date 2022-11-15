@@ -1,8 +1,0 @@
-{
-  "AMP.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Application",
-  "AMP.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain",
-  "AMP.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Persistence",
-  "AMP.Processors, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors",
-  "AMP.Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Services",
-  "AMP.WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi"
-}

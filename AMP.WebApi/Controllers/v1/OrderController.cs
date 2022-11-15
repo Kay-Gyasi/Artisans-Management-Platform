@@ -78,16 +78,16 @@ public class OrderController : BaseControllerv1
     public async Task Delete(string id)
         => await Mediator.Send(new DeleteOrder.Command(id));
     
-    [HttpPut]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task UnassignArtisan([FromBody] string id)
+    public async Task UnassignArtisan(string id)
         => await Mediator.Send(new UnassignArtisan.Command(id));
     
-    [HttpPut]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task Complete([FromBody] string id)
+    public async Task Complete(string id)
         => await Mediator.Send(new CompleteOrder.Command(id));
     
     [HttpPut]
@@ -96,27 +96,27 @@ public class OrderController : BaseControllerv1
     public async Task SetCost([FromBody] SetCostCommand command)
         => await Mediator.Send(new OrderCost.Command(command));
     
-    [HttpPut]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task ArtisanComplete([FromBody] string id)
+    public async Task ArtisanComplete(string id)
         => await Mediator.Send(new ArtisanCompleteOrder.Command(id));
     
-    [HttpPut]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task Accept([FromBody] string id)
+    public async Task Accept(string id)
         => await Mediator.Send(new AcceptOrder.Command(id));
     
-    [HttpPut]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task Cancel([FromBody] string id)
+    public async Task Cancel(string id)
         => await Mediator.Send(new CancelOrder.Command(id));
     
-    [HttpPut("{artisanId}")]
+    [HttpPut("{artisanId}/{orderId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task AssignArtisan([FromBody] string orderId, string artisanId)
+    public async Task AssignArtisan(string orderId, string artisanId)
         => await Mediator.Send(new AssignArtisan.Command(orderId, artisanId));
 }

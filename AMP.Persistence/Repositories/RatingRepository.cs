@@ -96,7 +96,6 @@ namespace AMP.Persistence.Repositories
 
             var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);
 
-
             return new PaginatedList<Ratings>(data: pagedModel,
                 totalCount: totalRecords,
                 currentPage: paginated.PageNumber,

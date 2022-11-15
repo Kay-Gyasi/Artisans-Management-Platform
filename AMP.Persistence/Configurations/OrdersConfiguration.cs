@@ -11,6 +11,16 @@ namespace AMP.Persistence.Configurations
         public override void Configure(EntityTypeBuilder<Orders> builder)
         {
             base.Configure(builder);
+            builder.HasIndex(x => x.ReferenceNo)
+                .HasDatabaseName("IX_Orders_ReferenceNo");
+            builder.HasIndex(x => new {x.Id, x.IsArtisanComplete})
+                .HasDatabaseName("IX_Id_IsArtisanComplete");
+            builder.HasIndex(x => new {x.Status, x.IsRequestAccepted})
+                .HasDatabaseName("IX_Status_RequestAc_UserId");
+            builder.HasIndex(x => new {x.Status})
+                .HasDatabaseName("IX_Status_ArtisanUserId");
+            builder.HasIndex(x => new{x.ServiceId})
+                .HasDatabaseName("IX_Service_CusUserId");
             builder.Property(a => a.CustomerId)
                 .IsRequired()
                 .HasColumnType("varchar")

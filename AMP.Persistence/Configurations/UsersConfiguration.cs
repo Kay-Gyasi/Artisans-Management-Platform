@@ -12,8 +12,14 @@ namespace AMP.Persistence.Configurations
         public override void Configure(EntityTypeBuilder<Users> builder)
         {
             base.Configure(builder);
-            // builder.Property(x => x.DateModified)
-            //     .HasDefaultValue(DateTime.UtcNow);
+
+            // TODO:: Add these indexes manually
+            //builder.HasIndex(x => x.Contact.PrimaryContact)
+                //.HasDatabaseName("IX_Contact");
+            //builder.HasIndex(x => new {x.Contact.PrimaryContact, x.IsVerified})
+                //.HasDatabaseName("IX_Search");
+            builder.HasIndex(x => x.Type)
+                .HasDatabaseName("IX_Type");
             builder.Property(a => a.FirstName)
                 .IsRequired()
                 .HasColumnType("varchar")

@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AMP.Persistence.Database;
+using AMP.Processors.Commands;
 using AMP.Processors.Repositories;
 using AMP.Processors.Repositories.Administration;
 using AMP.Processors.Repositories.UoW;
@@ -67,6 +69,7 @@ namespace AMP.Persistence.Repositories.UoW
         public IInvitationRepository Invitations { get; }
 
         public IDbContextTransaction BeginTransaction() => _dbContext.Database.BeginTransaction();
+        public IExecutionStrategy GetExecutionStrategy() => _dbContext.Database.CreateExecutionStrategy();
 
         public async Task<bool> SaveChangesAsync() 
             => await _dbContext.SaveChangesAsync() > 0;
