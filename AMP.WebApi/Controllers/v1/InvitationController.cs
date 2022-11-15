@@ -1,11 +1,4 @@
-﻿using System.Security.Claims;
-using AMP.Application.Features.Commands;
-using AMP.Application.Features.Queries;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using Microsoft.AspNetCore.Authorization;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class InvitationController : BaseControllerv1

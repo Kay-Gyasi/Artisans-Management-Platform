@@ -1,8 +1,4 @@
-﻿using System.Security.Claims;
-using AMP.Application.Features.Queries;
-using AMP.Domain.ViewModels;
-using AMP.Processors.Processors;
-using Microsoft.AspNetCore.Authorization;
+﻿using AMP.Processors.Processors;
 
 namespace AMP.WebApi.Controllers.v1;
 

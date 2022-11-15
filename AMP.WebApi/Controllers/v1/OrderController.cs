@@ -1,14 +1,4 @@
-﻿using System.Security.Claims;
-using AMP.Application.Features.Commands;
-using AMP.Application.Features.Queries;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.PageDtos;
-using AMP.Processors.Responses;
-using AMP.Shared.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class OrderController : BaseControllerv1

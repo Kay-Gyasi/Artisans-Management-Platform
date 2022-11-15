@@ -1,13 +1,4 @@
-﻿using AMP.Application.Features.Commands;
-using AMP.Application.Features.Queries;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.PageDtos;
-using AMP.Shared.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class RatingController : BaseControllerv1

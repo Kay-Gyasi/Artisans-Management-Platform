@@ -31,8 +31,7 @@ public static class DependencyInjection
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200", "http://kofigyasi-001-site3.btempurl.com",
-                        "https://amp-flame-ten.vercel.app/")
+                    policy.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 });
@@ -113,6 +112,14 @@ public static class DependencyInjection
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
+
+        app.UseCors();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
         app.UseSerilogRequestLogging();
 
         app.UseDefaultFiles();
@@ -122,11 +129,6 @@ public static class DependencyInjection
             FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
             RequestPath = new PathString("/Files")
         });
-        app.UseCors();
-
-        app.UseAuthentication();
-
-        app.UseAuthorization();
 
         app.MapControllers();
 

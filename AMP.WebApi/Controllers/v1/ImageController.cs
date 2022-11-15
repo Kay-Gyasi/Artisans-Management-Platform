@@ -1,8 +1,4 @@
-﻿using AMP.Application.Features.Commands;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class ImageController : BaseControllerv1

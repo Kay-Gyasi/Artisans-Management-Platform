@@ -1,8 +1,4 @@
-﻿using AMP.Application.Features.Commands;
-using AMP.Application.Features.Queries;
-using AMP.Processors.Commands;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 public class RegistrationController : BaseControllerv1
 {
