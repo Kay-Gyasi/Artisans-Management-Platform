@@ -31,7 +31,8 @@ public static class DependencyInjection
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200", "https://artisan-management-platform.com")
+                    policy.WithOrigins("http://localhost:4200", "http://kofigyasi-001-site3.btempurl.com",
+                        "https://amp-flame-ten.vercel.app/")
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 });
