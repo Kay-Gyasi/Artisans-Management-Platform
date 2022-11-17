@@ -1,27 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
-using AMP.Processors.Commands;
-using AMP.Processors.Messaging;
-using AMP.Processors.Processors.Base;
-using AMP.Processors.Processors.Helpers;
-using AMP.Processors.Repositories.UoW;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace AMP.Processors.Processors;
+﻿namespace AMP.Processors.Processors;
 
 [Processor]
 public class RegistrationProcessor : ProcessorBase
 {
     private readonly ISmsMessaging _smsMessaging;
+    private const string _lookupCacheKey = "Userlookup";
 
     public RegistrationProcessor(IUnitOfWork uow, IMapper mapper, 
         IMemoryCache cache,
@@ -61,10 +44,11 @@ public class RegistrationProcessor : ProcessorBase
 
     public async Task<bool> VerifyUser(string phone, string code)
     {
-        var verified = await Uow.Registrations.Crosscheck(phone, code);
-        if (!verified) return false;
+        var isMatch = await Uow.Registrations.Crosscheck(phone, code);
+        if (!isMatch) return false;
 
         await Uow.Registrations.Verify(phone, code);
+        Cache.Remove(_lookupCacheKey);
         return true;
     }
 
@@ -106,7 +90,6 @@ public class RegistrationProcessor : ProcessorBase
         await AssignFields(user, command);
         user.HasPassword(passes.Item1)
             .HasPasswordKey(passes.Item2);
-        //Cache.Remove(LookupCacheKey); (add this when you verify user)
         await Uow.Users.InsertAsync(user);
         return user;
     }

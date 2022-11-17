@@ -1,28 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.ValueObjects;
-using AMP.Processors.Authentication;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.Messaging;
-using AMP.Processors.PageDtos;
-using AMP.Processors.Processors.Base;
-using AMP.Processors.Processors.Helpers;
-using AMP.Processors.Repositories.UoW;
-using AMP.Shared.Domain.Models;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace AMP.Processors.Processors
+﻿namespace AMP.Processors.Processors
 {
     [Processor]
     public class UserProcessor : ProcessorBase
     {
-        private const string LookupCacheKey = "Userlookup";
+        private const string _lookupCacheKey = "Userlookup";
 
         private readonly IAuthService _authService;
         private readonly ISmsMessaging _smsMessaging;
@@ -78,7 +59,7 @@ namespace AMP.Processors.Processors
         {
             var user = await Uow.Users.GetAsync(command.Id);
             await AssignFields(user, command);
-            Cache.Remove(LookupCacheKey);
+            Cache.Remove(_lookupCacheKey);
             await Uow.Users.UpdateAsync(user);
             await Uow.SaveChangesAsync();
             return user.Id;
@@ -97,7 +78,7 @@ namespace AMP.Processors.Processors
         {
             var user = await Uow.Users.GetAsync(id);
             user?.SetLastModified();
-            Cache.Remove(LookupCacheKey);
+            Cache.Remove(_lookupCacheKey);
             if (user != null) await Uow.Users.SoftDeleteAsync(user);
             await Uow.SaveChangesAsync();
         }

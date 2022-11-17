@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AMP.Domain.Enums;
-using AMP.Processors.Commands;
-using AMP.Processors.Repositories.UoW;
-using PhoneNumbers;
-
-namespace AMP.Processors.Messaging;
+﻿namespace AMP.Processors.Messaging;
 
 public class MessageGenerator
 {
     private readonly IUnitOfWork _uow;
+    private static string _baseAddress => "https://www.tukofix.com";
 
     public MessageGenerator(IUnitOfWork uow)
     {
@@ -21,7 +12,7 @@ public class MessageGenerator
     
     public async Task<(string, string)> AssignArtisan(string orderId, string artisanId)
     {
-        var url = new Uri("https://artisan-management-platform.com/artisans/requests");
+        var url = new Uri($"{_baseAddress}/artisans/requests");
         var builder = new StringBuilder();
         var artisan = await _uow.Artisans.GetAsync(artisanId);
         var customer = (await _uow.Orders.GetAsync(orderId)).Customer.User.DisplayName;
@@ -84,23 +75,21 @@ public class MessageGenerator
 
     public static (string, string) SendVerificationLink(string phone, string code)
     {
-        var url = new Uri($"https://artisan-management-platform.com/registration/{phone}/{code}");
+        var url = new Uri($"{_baseAddress}/registration/{phone}/{code}");
         var message = $"Use this link to activate your AMP user account. {url}";
-
         return (message, FormatNumber(new []{phone}));
     }
     
     public static (string, string) SendPasswordResetLink(string phone, string confirmCode, string name)
     {
-        var url = new Uri($"https://artisan-management-platform.com/reset-password/{phone}/{confirmCode}");
+        var url = new Uri($"{_baseAddress}/reset-password/{phone}/{confirmCode}");
         var message = $"Hello {name}, use this link to reset your password. {url}";
-
         return (message, FormatNumber(new []{phone}));
     }
 
     public static (string, string) SendInvite(InvitationCommand command, string userDisplayName)
     {
-        var url = new Uri("https://artisan-management-platform.com/");
+        var url = new Uri($"{_baseAddress}/");
         var message =
             $"{userDisplayName} invites you to join AMP{GetType(command.Type)}. Use this link {url} to go to the app.";
 
