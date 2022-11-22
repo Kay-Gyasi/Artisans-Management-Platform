@@ -1,27 +1,21 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Data;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Persistence.Database;
-using AMP.Persistence.Repositories.Base;
-using AMP.Processors.Commands;
 using AMP.Processors.Processors.Helpers;
-using AMP.Processors.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using AMP.Processors.QueryObjects;
+using AMP.Processors.Repositories.Base;
 
 namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class UserRepository : RepositoryBase<Users>, IUserRepository
     {
-        public UserRepository(AmpDbContext context, ILogger<Users> logger) : base(context, logger)
+        private readonly IDapperContext _dapperContext;
+
+        public UserRepository(AmpDbContext context, ILogger<Users> logger,
+            IDapperContext dapperContext) : base(context, logger)
         {
+            _dapperContext = dapperContext;
         }
 
         public async Task<string> GetIdByPhone(string phone)
@@ -58,14 +52,36 @@ namespace AMP.Persistence.Repositories
                 .Include(x => x.Image);
         }
 
-        public async Task<Users> Authenticate(SigninCommand command)
+        public async Task<LoginQueryObject> Authenticate(SigninCommand command)
         {
-            var user = await GetBaseQuery()
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == command.Phone && x.IsVerified);
+            var builder = new StringBuilder();
+            builder.Append(
+                $"select [Password], PasswordKey, Contact_PrimaryContact, DisplayName, Users.Id, FamilyName, ");
+            builder.Append($"[Images].ImageUrl, [Type], Contact_EmailAddress, Address_StreetAddress from dbo.[Users] ");
+            builder.Append(
+                $"LEFT JOIN Images on Users.ImageId = Images.Id where Contact_PrimaryContact = {command.Phone} ");
+            builder.Append("and IsVerified = 1");
+            var user = await Task.FromResult(_dapperContext.Get<LoginQueryObject>(
+                builder.ToString().AddToWhereClause(), null,
+                CommandType.Text));
+
             if (user?.PasswordKey == null || !MatchPasswordHash(command.Password, user.Password, user.PasswordKey))
                 return null;
+            return user;
+        }
 
+        public async Task<LoginQueryObject> GetUserInfoForRefreshToken(string id)
+        {
+            var builder = new StringBuilder();
+            builder.Append(
+                $"select [Password], PasswordKey, Contact_PrimaryContact, DisplayName, Users.Id, FamilyName, ");
+            builder.Append($"[Images].ImageUrl, [Type], Contact_EmailAddress, Address_StreetAddress from dbo.[Users] ");
+            builder.Append(
+                $"LEFT JOIN Images on Users.ImageId = Images.Id where Users.Id = {id} ");
+            builder.Append("and IsVerified = 1");
+            var user = await Task.FromResult(_dapperContext.Get<LoginQueryObject>(
+                builder.ToString().AddToWhereClause(), null,
+                CommandType.Text));
             return user;
         }
 

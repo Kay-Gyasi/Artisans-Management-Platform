@@ -12,6 +12,7 @@
           "AMP.Processors": "1.0.0",
           "AMP.Shared.Domain": "1.0.0",
           "AMP.Shared.Persistence": "1.0.0",
+          "Dapper": "2.0.123",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.EntityFrameworkCore.Design": "6.0.9",
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.9",
@@ -58,6 +59,14 @@
           "lib/netstandard2.0/CloudinaryDotNet.dll": {
             "assemblyVersion": "1.19.0.0",
             "fileVersion": "1.19.0.0"
+          }
+        }
+      },
+      "Dapper/2.0.123": {
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.123.33578"
           }
         }
       },
@@ -921,6 +930,7 @@
           "AutoMapper": "12.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "CloudinaryDotNet": "1.19.0",
+          "Dapper": "2.0.123",
           "Microsoft.EntityFrameworkCore": "6.0.9",
           "Microsoft.Extensions.Caching.Memory": "6.0.1",
           "Microsoft.Extensions.Hosting": "6.0.1",
@@ -976,6 +986,13 @@
       "sha512": "sha512-08KpDC43jnZpOlXDXBd2tCjexBnW144Sid6HtDLcgEz5U6ebU3osQMNcAH0vMOcwi4+OfslbZmE20W1DahQ6oQ==",
       "path": "cloudinarydotnet/1.19.0",
       "hashPath": "cloudinarydotnet.1.19.0.nupkg.sha512"
+    },
+    "Dapper/2.0.123": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "path": "dapper/2.0.123",
+      "hashPath": "dapper.2.0.123.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

@@ -24,7 +24,7 @@
 
         public async Task<SigninResponse> GetRefreshToken(string userId)
         {
-            var user = await Uow.Users.GetAsync(userId);
+            var user = await Uow.Users.GetUserInfoForRefreshToken(userId);
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 

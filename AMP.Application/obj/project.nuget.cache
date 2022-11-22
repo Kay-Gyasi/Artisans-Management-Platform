@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "t0JJkC1a0WB5vFVBg+fUCitHoLcRTg2GkCOyfJYqHE3lDyGSwQM5gvImV3spX8VLjZuF6QwgO4/5qfDNFyqSAQ==",
+  "dgSpecHash": "J7U3h/fmp7ov/CHZsvtS445vIEt5uULDqrfQIQy2SbkowPAp0d60HkN3DufBI/8xw7lkbfF+18ZYIhYKM99SsQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Application\\AMP.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\cloudinarydotnet\\1.19.0\\cloudinarydotnet.1.19.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\fluentvalidation\\11.2.2\\fluentvalidation.11.2.2.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.2\\fluentvalidation.dependencyinjectionextensions.11.2.2.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\libphonenumber-csharp\\8.12.56\\libphonenumber-csharp.8.12.56.nupkg.sha512",

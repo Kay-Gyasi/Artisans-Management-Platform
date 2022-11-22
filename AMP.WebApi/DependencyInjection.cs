@@ -49,9 +49,7 @@ public static class DependencyInjection
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
-        
         return services;
     }
 
@@ -107,7 +105,7 @@ public static class DependencyInjection
             {
                 opts.MapInboundClaims = true;
                 opts.SaveToken = true;
-                opts.RequireHttpsMetadata = false;
+                //opts.RequireHttpsMetadata = true;
                 opts.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,

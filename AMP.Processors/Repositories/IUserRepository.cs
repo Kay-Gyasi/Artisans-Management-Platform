@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AMP.Domain.Entities;
 using AMP.Processors.Commands;
+using AMP.Processors.QueryObjects;
 using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories
@@ -8,7 +9,8 @@ namespace AMP.Processors.Repositories
     public interface IUserRepository : IRepositoryBase<Users>
     {
         Task<string> GetIdByPhone(string phone);
-        Task<Users> Authenticate(SigninCommand command);
+        Task<LoginQueryObject> Authenticate(SigninCommand command);
+        Task<LoginQueryObject> GetUserInfoForRefreshToken(string id);
         (byte[], byte[]) Register(UserCommand command);
         (byte[], byte[]) Register(string password);
         Task<bool> Exists(string phone);

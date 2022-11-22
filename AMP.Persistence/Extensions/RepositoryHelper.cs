@@ -7,7 +7,7 @@ namespace AMP.Persistence.Extensions
             CancellationToken cancellationToken, bool orderbyDateCreated = false) where T : EntityBase
         {
             var pagedModel = whereQueryable.PageBy(x => paginated.Take, paginated);
-            if (orderbyDateCreated) pagedModel.OrderByDescending(a => a.DateCreated);
+            if (orderbyDateCreated) pagedModel = pagedModel.OrderByDescending(a => a.DateCreated);
 
             var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);
 
@@ -15,6 +15,12 @@ namespace AMP.Persistence.Extensions
                 totalCount: totalRecords,
                 currentPage: paginated.PageNumber,
                 pageSize: paginated.PageSize);
-        }   
+        }
+
+        public static string AddWhereClause(this string query) 
+            => string.Join(" ", query, "where Users.EntityStatus = 'Normal' and IsSuspended = 0");
+
+        public static string AddToWhereClause(this string query) 
+            => string.Join(" ", query, "and Users.EntityStatus = 'Normal' and IsSuspended = 0");
     }
 }

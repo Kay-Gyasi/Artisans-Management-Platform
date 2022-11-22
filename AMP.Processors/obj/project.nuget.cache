@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "i//NsC0gzyDArz/sx0j9kwwtDmxEA0sEQIN4GDPJD4bF6HHe/u9toNHza52H3hY7rhmv/cEQBSK5T/IstQ+ELg==",
+  "dgSpecHash": "ir1QAVpU8pYDxIS0zP4ZxqadJLn5w9vc9FCbTq0hDsH1dKV7AP9IUrf5RHUl3CO23Ga5iGG1CLILAma2FDrQ+Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\AMP.Processors.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\cloudinarydotnet\\1.19.0\\cloudinarydotnet.1.19.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\libphonenumber-csharp\\8.12.56\\libphonenumber-csharp.8.12.56.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

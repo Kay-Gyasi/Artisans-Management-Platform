@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using AMP.Persistence.Repositories.UoW;
 using AMP.Processors.ExceptionHandlers;
+using AMP.Processors.Repositories.Base;
 using AMP.Processors.Repositories.UoW;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,13 +14,13 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                // TODO:: switch db
-                options.UseSqlServer(configuration.GetConnectionString("AmpProdDb"), opt =>
+                options.UseSqlServer(configuration.GetConnectionString("AmpDevDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                     opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 });
             });
+            services.AddScoped<IDapperContext, DapperContext>();
             return services;
         }
 
