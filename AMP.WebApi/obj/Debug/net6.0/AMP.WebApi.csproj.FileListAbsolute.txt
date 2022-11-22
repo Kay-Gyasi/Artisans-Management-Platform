@@ -104,6 +104,11 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.csproj.CoreCompileInputs.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.AMP.WebApi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.build.AMP.WebApi.props
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AMP.WebApi.props
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AMP.WebApi.props
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\scopedcss\bundle\AMP.WebApi.styles.css
@@ -113,8 +118,5 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.genruntimeconfig.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\ref\AMP.WebApi.dll
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.AMP.WebApi.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.build.AMP.WebApi.props
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AMP.WebApi.props
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AMP.WebApi.props
-C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AMP.WebApi.xml
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.xml

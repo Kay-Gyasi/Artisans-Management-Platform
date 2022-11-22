@@ -1,22 +1,23 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Persistence.Database;
-using AMP.Persistence.Repositories.Base;
-using AMP.Processors.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
-namespace AMP.Persistence.Repositories
+﻿namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class DisputeRepository : RepositoryBase<Disputes>, IDisputeRepository
     {
+        private readonly AmpDbContext _context;
+
         public DisputeRepository(AmpDbContext context, ILogger<Disputes> logger) : base(context, logger)
         {
+            _context = context;
+        }
+
+        public async Task<PaginatedList<Disputes>> GetUserPage(PaginatedCommand paginated, string userId, CancellationToken cancellationToken)
+        {
+            var customerId = (await _context.Customers.FirstOrDefaultAsync(x => x.UserId == userId, 
+                cancellationToken: cancellationToken)).Id;
+            var whereQueryable = GetBaseQuery().Where(x => x.CustomerId == customerId)
+                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
+
+            return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
         public async Task<int> OpenDisputeCount(string userId) =>

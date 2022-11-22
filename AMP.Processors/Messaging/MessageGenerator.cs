@@ -12,7 +12,7 @@ public class MessageGenerator
     
     public async Task<(string, string)> AssignArtisan(string orderId, string artisanId)
     {
-        var url = new Uri($"{_baseAddress}/artisans/requests");
+        var url = new Uri($"{_baseAddress}/main/artisans/requests");
         var builder = new StringBuilder();
         var artisan = await _uow.Artisans.GetAsync(artisanId);
         var customer = (await _uow.Orders.GetAsync(orderId)).Customer.User.DisplayName;

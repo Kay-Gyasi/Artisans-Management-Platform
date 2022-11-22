@@ -1,23 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Domain.ViewModels;
-using AMP.Persistence.Database;
-using AMP.Persistence.Repositories.Base;
-using AMP.Processors.Commands;
-using AMP.Processors.Repositories;
-using AMP.Shared.Domain.Models;
-using AMP.Shared.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Persistence.Extensions;
-
-namespace AMP.Persistence.Repositories
+﻿namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class OrderRepository : RepositoryBase<Orders>, IOrderRepository

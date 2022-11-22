@@ -105,13 +105,13 @@ namespace AMP.Domain.Entities
         }
 
         /// <summary>
-        /// Sets the Energy Commission Certificate Number for electricians.
+        /// Sets the Energy Commission Certificate Number for the electrician.
         /// </summary>
         /// <param name="eccn"></param>
         /// <returns>This instance of Artisans.</returns>
         public Artisans HasEccn(string eccn)
         {
-            if (Services.All(x => x.Name != "Electrical Works")) return this;
+            if (_services.All(x => x.Name != "Electrical Works")) return this;
             ECCN = eccn;
             return this;
         }

@@ -12,7 +12,7 @@ namespace AMP.Processors.Commands
         /// <summary>
         /// Energy Commission Certification Number (for electricians only)
         /// </summary>
-        public string ECCN { get; set; }
+        public string Eccn { get; set; }
 
         public bool IsVerified { get; set; }
         public bool IsApproved { get; set; }

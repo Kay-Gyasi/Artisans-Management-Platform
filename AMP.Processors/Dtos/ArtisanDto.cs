@@ -12,7 +12,7 @@ namespace AMP.Processors.Dtos
         /// <summary>
         /// Energy Commission Certification Number (for electricians only)
         /// </summary>
-        public string ECCN { get; set; }
+        public string Eccn { get; set; }
 
         public string BusinessName { get; set; }
         public string Description { get; set; }

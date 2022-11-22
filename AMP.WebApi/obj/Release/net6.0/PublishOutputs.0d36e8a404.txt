@@ -94,4 +94,5 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.Processors.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.Shared.Domain.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.Shared.Persistence.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.xml
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\PubTmp\Out\AMP.WebApi.deps.json

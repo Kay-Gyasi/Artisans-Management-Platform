@@ -6,6 +6,11 @@
 	<UserSecretsId>bcbd57c0-2cb2-4f3f-a913-1cedc0c8ff38</UserSecretsId>
 	<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
+	
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
 
   <ItemGroup>
 	<Compile Remove="Payment\**" />

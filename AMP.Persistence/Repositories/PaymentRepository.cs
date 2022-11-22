@@ -1,19 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Persistence.Database;
-using AMP.Persistence.Extensions;
-using AMP.Persistence.Repositories.Base;
+﻿using System.Globalization;
 using AMP.Processors.ExceptionHandlers;
-using AMP.Processors.Repositories;
-using AMP.Shared.Domain.Models;
-using AMP.Shared.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace AMP.Persistence.Repositories
 {
@@ -35,7 +21,7 @@ namespace AMP.Persistence.Repositories
         {
             var payment = await GetBaseQuery().FirstOrDefaultAsync(x => x.Reference == reference);
             payment?.HasBeenVerified(true);
-            payment.SetLastModified();
+            payment?.SetLastModified();
             payment?.WithTransactionReference(trxRef);
         }
 
@@ -48,12 +34,10 @@ namespace AMP.Persistence.Repositories
                 ? GetBaseQuery()
                     .Where(x => x.Order.ArtisanId == typeId && x.IsVerified)
                     .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                    .OrderBy(x => x.DateCreated)
                 : GetBaseQuery().Where(x => x.Order.CustomerId == typeId && x.IsVerified)
-                    .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                    .OrderBy(x => x.DateCreated);
+                    .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
-            return await whereQueryable.BuildPage(paginated, cancellationToken);
+            return await whereQueryable.BuildPage(paginated, cancellationToken, true);
         }
 
         public async Task<Payments> GetByTrxRef(string trxRef) 

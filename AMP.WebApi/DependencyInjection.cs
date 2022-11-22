@@ -1,10 +1,10 @@
-﻿using AMP.Services;
+﻿using System.Reflection;
+using AMP.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Security.Claims;
 using System.Text;
 using ILogger = Serilog.ILogger;
 
@@ -22,6 +22,7 @@ public static class DependencyInjection
             .AddMediatr()
             .AddCaching()
             .AddDefaultConfig()
+            .AddSwaggerConfig()
             .AddMemoryCache()
             .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration)
@@ -31,9 +32,11 @@ public static class DependencyInjection
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.AllowAnyOrigin()
+                    policy.WithOrigins("http://localhost:4200", "https://www.tukofix.com", "https://tukofix.com")
+                        .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowAnyHeader()
+                        .AllowCredentials();
                 });
             });        
         return services;
@@ -48,14 +51,50 @@ public static class DependencyInjection
             });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
+        
+        return services;
+    }
+
+    private static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
+    {
         services.AddSwaggerGen(opt =>
         {
-            opt.SwaggerDoc("v1", new OpenApiInfo { Title = "AMP API", Version = "v1" });
+            opt.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Tukofix API",
+                Version = "1",
+                Contact = new OpenApiContact
+                {
+                    Name = "Kofi Gyasi",
+                    Email = "kofigyasidev@gmail.com",
+                    Url = new Uri("https://kaygyasi.vercel.app/")
+                }
+            });
             opt.CustomOperationIds(apiDescription => apiDescription.TryGetMethodInfo(out var methodInfo)
                 ? methodInfo.Name
                 : apiDescription.RelativePath);
-        });
+            opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "JWT Authorization using the bearer scheme",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey
+            });
+            opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {new OpenApiSecurityScheme{Reference = new OpenApiReference()
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }}, new List<string>()}
+            });
 
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            opt.IncludeXmlComments(xmlPath);
+            
+            // manipulate examples (requests and responses)
+        });
         return services;
     }
 
@@ -112,16 +151,6 @@ public static class DependencyInjection
 
         app.UseHttpsRedirection();
 
-        app.UseRouting();
-
-        app.UseCors();
-
-        app.UseAuthentication();
-
-        app.UseAuthorization();
-
-        app.UseSerilogRequestLogging();
-
         app.UseDefaultFiles();
 
         app.UseStaticFiles(new StaticFileOptions()
@@ -129,6 +158,16 @@ public static class DependencyInjection
             FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
             RequestPath = new PathString("/Files")
         });
+
+        app.UseSerilogRequestLogging();
+
+        app.UseRouting();
+
+        app.UseCors();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
 
         app.MapControllers();
 

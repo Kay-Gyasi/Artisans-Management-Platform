@@ -1,21 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.ViewModels;
-using AMP.Persistence.Database;
-using AMP.Persistence.Extensions;
-using AMP.Persistence.Repositories.Base;
-using AMP.Processors.Repositories;
-using AMP.Shared.Domain.Models;
-using AMP.Shared.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
-namespace AMP.Persistence.Repositories
+﻿namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class ArtisanRepository : RepositoryBase<Artisans>, IArtisanRepository

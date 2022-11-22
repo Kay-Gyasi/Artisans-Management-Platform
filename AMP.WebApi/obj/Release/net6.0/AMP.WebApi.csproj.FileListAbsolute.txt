@@ -118,3 +118,5 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\staticwebassets\msbuild.buildMultiTargeting.AMP.WebApi.props
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\staticwebassets\msbuild.buildTransitive.AMP.WebApi.props
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\staticwebassets.pack.json
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net6.0\AMP.WebApi.xml
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net6.0\AMP.WebApi.xml

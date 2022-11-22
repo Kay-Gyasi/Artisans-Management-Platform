@@ -47,9 +47,9 @@ namespace AMP.Processors.Processors
             return dispute.Id;
         }
 
-        public async Task<PaginatedList<DisputePageDto>> GetPage(PaginatedCommand command)
+        public async Task<PaginatedList<DisputePageDto>> GetPage(PaginatedCommand command, string userId)
         {
-            var page = await Uow.Disputes.GetPage(command, new CancellationToken());
+            var page = await Uow.Disputes.GetUserPage(command, userId, new CancellationToken());
             return Mapper.Map<PaginatedList<DisputePageDto>>(page);
         }
 

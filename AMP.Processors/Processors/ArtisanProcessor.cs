@@ -98,7 +98,7 @@
                 .IsApprovedd(command.IsApproved)
                 .Offers(services)
                 .OfType(command.Type)
-                .HasEccn(command.ECCN);
+                .HasEccn(command.Eccn);
             if (!isNew) artisan.ForUserId(command.UserId)
                 .SetLastModified();
         }

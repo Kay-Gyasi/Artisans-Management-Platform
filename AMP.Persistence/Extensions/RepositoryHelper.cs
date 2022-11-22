@@ -1,25 +1,17 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Shared.Domain.Models;
-using AMP.Shared.Persistence;
-using Microsoft.EntityFrameworkCore;
-
+﻿using AMP.Domain.Entities.Base;
 namespace AMP.Persistence.Extensions
 {
     public static class RepositoryHelper
     {
         public static async Task<PaginatedList<T>> BuildPage<T>(this IQueryable<T> whereQueryable, PaginatedCommand paginated,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken, bool orderbyDateCreated = false) where T : EntityBase
         {
-            var pagedModel = await whereQueryable.PageBy(x => paginated.Take, paginated)
-                .ToListAsync(cancellationToken);
+            var pagedModel = whereQueryable.PageBy(x => paginated.Take, paginated);
+            if (orderbyDateCreated) pagedModel.OrderByDescending(a => a.DateCreated);
 
             var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);
 
-
-            return new PaginatedList<T>(data: pagedModel,
+            return new PaginatedList<T>(data: await pagedModel.ToListAsync(cancellationToken),
                 totalCount: totalRecords,
                 currentPage: paginated.PageNumber,
                 pageSize: paginated.PageSize);

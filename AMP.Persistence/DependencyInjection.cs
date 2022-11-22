@@ -1,14 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using AMP.Persistence.Database;
+﻿using System.Reflection;
 using AMP.Persistence.Repositories.UoW;
 using AMP.Processors.ExceptionHandlers;
 using AMP.Processors.Repositories.UoW;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 
 namespace AMP.Persistence
 {
@@ -34,7 +29,7 @@ namespace AMP.Persistence
         /// <param name="services"></param>
         /// <returns></returns>
         /// <exception cref="RepositoryNotFoundException"></exception>
-        public static IServiceCollection AddRepositories(this IServiceCollection services, ILogger logger)
+        public static IServiceCollection AddRepositories(this IServiceCollection services, Serilog.ILogger logger)
         {
             var definedTypes = typeof(DependencyInjection).Assembly.DefinedTypes;
             var repositories = definedTypes

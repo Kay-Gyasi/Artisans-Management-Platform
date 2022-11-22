@@ -12,10 +12,12 @@ namespace AMP.Application.Features.Queries
         public class Query : IRequest<PaginatedList<DisputePageDto>>
         {
             public PaginatedCommand Command { get; }
+            public string UserId { get; }
 
-            public Query(PaginatedCommand command)
+            public Query(PaginatedCommand command, string userId)
             {
                 Command = command;
+                UserId = userId;
             }
         }
 
@@ -29,7 +31,7 @@ namespace AMP.Application.Features.Queries
             }
             public async Task<PaginatedList<DisputePageDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _processor.GetPage(request.Command);
+                return await _processor.GetPage(request.Command, request.UserId);
             }
         }
     }
