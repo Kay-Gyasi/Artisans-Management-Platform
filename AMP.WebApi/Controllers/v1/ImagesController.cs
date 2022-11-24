@@ -8,13 +8,12 @@ public class ImagesController : BaseControllerv1
     /// Updates user's profile image info
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(SigninResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Upload([FromForm(Name = "uploadedFile")] IFormFile file) //naming
+    public async Task<IActionResult> Upload([FromForm(Name = "file")] IFormFile file) //naming
     {
-        
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var result = await Mediator.Send(new UploadImage.Command(file, userId));
-        return result ? NoContent() : BadRequest();
+        var response = await Mediator.Send(new UploadImage.Command(file, userId));
+        return response is not null ? Ok(response) : BadRequest();
     }
 }

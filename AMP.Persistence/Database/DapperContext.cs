@@ -7,19 +7,23 @@ using Microsoft.Extensions.Configuration;
 
 namespace AMP.Persistence.Database;
 
-public class DapperContext : IDapperContext 
+public class DapperContext : IDapperContext
 {  
     private readonly IConfiguration _config;
+    private readonly SqlConnection _db;
+
     //private const string ConnectionString = "AmpDevDb";
     private const string ConnectionString = "AmpProdDb";
 
-    public  DapperContext(IConfiguration config)  
-    {  
-        _config = config;  
+    public  DapperContext(IConfiguration config)
+    {
+        _config = config;
+        _db = new SqlConnection(_config.GetConnectionString(ConnectionString));
     }  
+    
     public void Dispose()  
     {  
-         
+         _db.Dispose();
     }  
 
     public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
@@ -29,34 +33,28 @@ public class DapperContext : IDapperContext
 
     public async Task<T> GetAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)  
     {
-        using IDbConnection db = new SqlConnection(_config.GetConnectionString(ConnectionString));  
-        return (await db.QueryAsync<T>(sp, parms, commandType: commandType)).FirstOrDefault();  
+        return (await _db.QueryAsync<T>(sp, parms, commandType: commandType)).FirstOrDefault();  
     }  
 
     public async Task<List<T>> GetAllAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
     {  
-        using IDbConnection db = new SqlConnection(_config.GetConnectionString(ConnectionString));  
-        return (await db.QueryAsync<T>(sp, parms, commandType: commandType)).ToList();  
+        return (await _db.QueryAsync<T>(sp, parms, commandType: commandType)).ToList();  
     }  
 
-    public DbConnection GetDbconnection()  
-    {  
-        return new SqlConnection(_config.GetConnectionString(ConnectionString));  
-    }  
+    public DbConnection GetDbconnection() => _db;
 
     public T Insert<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
     {  
         T result;  
-        using IDbConnection db = new SqlConnection(_config.GetConnectionString(ConnectionString));  
         try  
         {  
-            if (db.State == ConnectionState.Closed)  
-                db.Open();  
+            if (_db.State == ConnectionState.Closed)  
+                _db.Open();  
 
-            using var tran = db.BeginTransaction();  
+            using var tran = _db.BeginTransaction();  
             try  
             {  
-                result = db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();  
+                result = _db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();  
                 tran.Commit();  
             }  
             catch (Exception ex)  
@@ -71,8 +69,8 @@ public class DapperContext : IDapperContext
         }  
         finally  
         {  
-            if (db.State == ConnectionState.Open)  
-                db.Close();  
+            if (_db.State == ConnectionState.Open)  
+                _db.Close();  
         }  
 
         return result;  
@@ -81,16 +79,15 @@ public class DapperContext : IDapperContext
     public T Update<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
     {  
         T result;  
-        using IDbConnection db = new SqlConnection(_config.GetConnectionString(ConnectionString));  
         try  
         {  
-            if (db.State == ConnectionState.Closed)  
-                db.Open();  
+            if (_db.State == ConnectionState.Closed)  
+                _db.Open();  
 
-            using var tran = db.BeginTransaction();  
+            using var tran = _db.BeginTransaction();  
             try  
             {  
-                result = db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();  
+                result = _db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();  
                 tran.Commit();  
             }  
             catch (Exception ex)  
@@ -105,8 +102,8 @@ public class DapperContext : IDapperContext
         }  
         finally  
         {  
-            if (db.State == ConnectionState.Open)  
-                db.Close();  
+            if (_db.State == ConnectionState.Open)  
+                _db.Close();  
         }  
 
         return result;  

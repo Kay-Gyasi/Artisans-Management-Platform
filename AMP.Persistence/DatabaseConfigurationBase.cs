@@ -1,4 +1,5 @@
 ﻿using AMP.Domain.Entities.Base;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -15,7 +16,10 @@ namespace AMP.Persistence
                 .IsUnique()
                 .IsClustered();
             builder.Property(a => a.RowId)
-                .UseIdentityColumn();
+                .UseIdentityColumn()
+                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            builder.Property(a => a.DateCreated)
+                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             builder.Property(a => a.DateModified).HasDefaultValue(DateTime.UtcNow);
             builder.Property(a => a.EntityStatus)
                 .HasDefaultValue(EntityStatus.Normal)

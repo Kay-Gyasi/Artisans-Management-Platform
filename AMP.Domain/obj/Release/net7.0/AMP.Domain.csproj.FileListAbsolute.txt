@@ -1,0 +1,12 @@
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\bin\Release\net7.0\AMP.Domain.deps.json
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\bin\Release\net7.0\AMP.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\bin\Release\net7.0\AMP.Domain.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.AssemblyInfoInputs.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.AssemblyInfo.cs
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\refint\AMP.Domain.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\AMP.Domain.pdb
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.Domain\obj\Release\net7.0\ref\AMP.Domain.dll

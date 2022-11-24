@@ -9,7 +9,7 @@ namespace AMP.Application.Features.Commands
 {
     public class UploadImage
     {
-        public class Command : IRequest<bool>
+        public class Command : IRequest<SigninResponse>
         {
             public string UserId { get; }
             public IFormFile File { get; }
@@ -21,7 +21,7 @@ namespace AMP.Application.Features.Commands
             }
         }
 
-        public class Handler : IRequestHandler<Command, bool>
+        public class Handler : IRequestHandler<Command, SigninResponse>
         {
             private readonly ImageProcessor _processor;
 
@@ -29,7 +29,7 @@ namespace AMP.Application.Features.Commands
             {
                 _processor = processor;
             }
-            public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<SigninResponse> Handle(Command request, CancellationToken cancellationToken)
             {
                 var command = new ImageCommand
                 {

@@ -17,21 +17,21 @@ namespace AMP.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("BusinessName")
                         .IsRequired()
                         .HasMaxLength(70)
-                        .HasColumnType("varchar(70)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -39,12 +39,12 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 380, DateTimeKind.Utc).AddTicks(4200));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 449, DateTimeKind.Utc).AddTicks(8301));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("ECCN")
                         .HasColumnType("nvarchar(max)");
@@ -53,7 +53,7 @@ namespace AMP.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<bool>("IsApproved")
@@ -70,19 +70,19 @@ namespace AMP.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(12)
-                        .HasColumnType("varchar(12)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Individual");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
@@ -108,7 +108,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -116,25 +116,25 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 382, DateTimeKind.Utc).AddTicks(2912));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 451, DateTimeKind.Utc).AddTicks(2896));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
@@ -154,12 +154,12 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -167,30 +167,30 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 383, DateTimeKind.Utc).AddTicks(1504));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 452, DateTimeKind.Utc).AddTicks(4271));
 
                     b.Property<string>("Details")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("OrderId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -221,7 +221,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -229,34 +229,34 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 383, DateTimeKind.Utc).AddTicks(9134));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 453, DateTimeKind.Utc).AddTicks(6838));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("PublicId")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("UserId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
@@ -278,7 +278,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -286,25 +286,25 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 384, DateTimeKind.Utc).AddTicks(5032));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 454, DateTimeKind.Utc).AddTicks(8264));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("InvitedPhone")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -331,7 +331,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -339,25 +339,25 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 385, DateTimeKind.Utc).AddTicks(261));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 456, DateTimeKind.Utc).AddTicks(223));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.HasKey("Id");
 
@@ -378,11 +378,11 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("ArtisanId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
@@ -390,7 +390,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -398,18 +398,18 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 385, DateTimeKind.Utc).AddTicks(7644));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 457, DateTimeKind.Utc).AddTicks(2736));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<bool>("IsArtisanComplete")
@@ -439,7 +439,7 @@ namespace AMP.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("Scope")
                         .IsRequired()
@@ -450,7 +450,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<string>("ServiceId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -499,7 +499,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<decimal>("AmountPaid")
                         .ValueGeneratedOnAdd()
@@ -515,13 +515,13 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 390, DateTimeKind.Utc).AddTicks(9031));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 465, DateTimeKind.Utc).AddTicks(4278));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<bool>("IsForwarded")
@@ -533,22 +533,22 @@ namespace AMP.Persistence.Migrations
                     b.Property<string>("OrderId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Reference")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("TransactionReference")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
@@ -580,17 +580,17 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("ArtisanId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -598,25 +598,25 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 392, DateTimeKind.Utc).AddTicks(3136));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 466, DateTimeKind.Utc).AddTicks(9499));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<int>("Votes")
                         .ValueGeneratedOnAdd()
@@ -648,7 +648,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -656,25 +656,25 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 393, DateTimeKind.Utc).AddTicks(1239));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 468, DateTimeKind.Utc).AddTicks(2722));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("VerificationCode")
                         .IsRequired()
@@ -706,17 +706,17 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("ArtisanId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -724,25 +724,25 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 393, DateTimeKind.Utc).AddTicks(8685));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 469, DateTimeKind.Utc).AddTicks(6548));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("OrderId")
                         .IsRequired()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.HasKey("Id");
 
@@ -766,7 +766,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -774,29 +774,29 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 395, DateTimeKind.Utc).AddTicks(7086));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 472, DateTimeKind.Utc).AddTicks(4290));
 
                     b.Property<string>("Description")
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.HasKey("Id");
 
@@ -820,7 +820,7 @@ namespace AMP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -828,32 +828,32 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 24, 0, 47, 12, 396, DateTimeKind.Utc).AddTicks(4235));
+                        .HasDefaultValue(new DateTime(2022, 11, 24, 22, 23, 52, 473, DateTimeKind.Utc).AddTicks(8092));
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
+                        .HasColumnType("varchar")
                         .HasDefaultValue("Normal");
 
                     b.Property<string>("FamilyName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("ImageId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar");
 
                     b.Property<bool>("IsRemoved")
                         .ValueGeneratedOnAdd()
@@ -876,11 +876,11 @@ namespace AMP.Persistence.Migrations
 
                     b.Property<string>("MomoNumber")
                         .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("OtherName")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar");
 
                     b.Property<byte[]>("Password")
                         .HasColumnType("varbinary(max)");
@@ -892,7 +892,7 @@ namespace AMP.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -1030,7 +1030,7 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("StreetAddress")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("varchar(100)");
+                                .HasColumnType("varchar");
 
                             b1.Property<string>("StreetAddress2")
                                 .HasColumnType("nvarchar(max)");
@@ -1132,7 +1132,7 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("StreetAddress")
                                 .IsRequired()
                                 .HasMaxLength(80)
-                                .HasColumnType("varchar(80)");
+                                .HasColumnType("varchar");
 
                             b1.Property<string>("StreetAddress2")
                                 .HasColumnType("nvarchar(max)");
@@ -1159,7 +1159,7 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("PrimaryContact")
                                 .IsRequired()
                                 .HasMaxLength(15)
-                                .HasColumnType("varchar(15)");
+                                .HasColumnType("varchar");
 
                             b1.Property<string>("PrimaryContact2")
                                 .HasColumnType("nvarchar(max)");
