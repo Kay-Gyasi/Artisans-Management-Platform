@@ -6,8 +6,8 @@ namespace AMP.Processors.Repositories.Base;
 public interface IDapperContext : IDisposable
 {
     DbConnection GetDbconnection();    
-    T Get<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
-    List<T> GetAll<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
+    Task<T> GetAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
+    Task<List<T>> GetAllAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
     int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
     T Insert<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
     T Update<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    

@@ -121,3 +121,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\AMP.WebApi.xml
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net6.0\AMP.WebApi.xml
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Dapper.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Diagnostics.HealthChecks.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll

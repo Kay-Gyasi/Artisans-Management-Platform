@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using AMP.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace AMP.Processors.Commands

@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AMP.Processors.Processors;
-using AMP.Processors.Repositories;
 using MediatR;
 
 namespace AMP.Application.Features.Queries;

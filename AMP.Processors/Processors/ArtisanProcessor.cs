@@ -58,7 +58,7 @@
         public async Task<ArtisanDto> Get(string id)
         {
             var artisan = Mapper.Map<ArtisanDto>(await Uow.Artisans.GetAsync(id));
-            artisan.NoOfOrders = Uow.Orders.GetCount(artisan.Id);
+            artisan.NoOfOrders = await Uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = Uow.Ratings.GetCount(artisan.Id);
             artisan.Rating = Uow.Ratings.GetRating(artisan.Id);
             return artisan;
@@ -67,7 +67,7 @@
         public async Task<ArtisanDto> GetByUserId(string userId)
         {
             var artisan = Mapper.Map<ArtisanDto>(await Uow.Artisans.GetArtisanByUserId(userId));
-            artisan.NoOfOrders = Uow.Orders.GetCount(artisan.Id);
+            artisan.NoOfOrders = await Uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = Uow.Ratings.GetCount(artisan.Id);
             artisan.Rating = Uow.Ratings.GetRating(artisan.Id);
             return artisan;

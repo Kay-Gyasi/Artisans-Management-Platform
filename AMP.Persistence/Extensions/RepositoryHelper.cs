@@ -4,11 +4,9 @@ namespace AMP.Persistence.Extensions
     public static class RepositoryHelper
     {
         public static async Task<PaginatedList<T>> BuildPage<T>(this IQueryable<T> whereQueryable, PaginatedCommand paginated,
-            CancellationToken cancellationToken, bool orderbyDateCreated = false) where T : EntityBase
+            CancellationToken cancellationToken) where T : EntityBase
         {
             var pagedModel = whereQueryable.PageBy(x => paginated.Take, paginated);
-            if (orderbyDateCreated) pagedModel = pagedModel.OrderByDescending(a => a.DateCreated);
-
             var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);
 
             return new PaginatedList<T>(data: await pagedModel.ToListAsync(cancellationToken),
@@ -17,10 +15,10 @@ namespace AMP.Persistence.Extensions
                 pageSize: paginated.PageSize);
         }
 
-        public static string AddWhereClause(this string query) 
-            => string.Join(" ", query, "where Users.EntityStatus = 'Normal' and IsSuspended = 0");
+        public static string AddBaseFilter(this string query) 
+            => string.Join(" ", query, "WHERE EntityStatus = 'Normal'");
 
-        public static string AddToWhereClause(this string query) 
-            => string.Join(" ", query, "and Users.EntityStatus = 'Normal' and IsSuspended = 0");
+        public static string AddBaseFilterToWhereClause(this string query) 
+            => string.Join(" ", query, "AND EntityStatus = 'Normal'");
     }
 }

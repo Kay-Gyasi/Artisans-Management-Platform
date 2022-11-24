@@ -1,10 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using AMP.Persistence.Database;
-using AMP.Processors.Commands;
-using AMP.Processors.Repositories;
-using AMP.Processors.Repositories.Administration;
-using AMP.Processors.Repositories.UoW;
+﻿using AMP.Processors.Repositories.UoW;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace AMP.Persistence.Repositories.UoW

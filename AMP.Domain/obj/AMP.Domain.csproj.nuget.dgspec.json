@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +26,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -38,8 +38,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
@@ -47,7 +47,7 @@
             },
             "System.Collections.Immutable": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",

@@ -14,7 +14,7 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("AmpDevDb"), opt =>
+                options.UseSqlServer(configuration.GetConnectionString("AmpProdDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                     opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
@@ -53,6 +53,13 @@ namespace AMP.Persistence
                 throw;
             }
 
+            return services;
+        }
+        
+        public static IServiceCollection AddDbHealthChecks(this IServiceCollection services)
+        {
+            services.AddHealthChecks()
+                .AddDbContextCheck<AmpDbContext>();
             return services;
         }
     }

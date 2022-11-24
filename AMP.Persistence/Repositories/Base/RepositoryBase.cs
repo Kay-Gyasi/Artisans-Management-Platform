@@ -1,19 +1,5 @@
 ﻿using AMP.Domain.Entities.Base;
-using AMP.Domain.Enums;
-using AMP.Domain.ViewModels;
-using AMP.Persistence.Database;
 using AMP.Processors.ExceptionHandlers;
-using AMP.Shared.Domain.Models;
-using AMP.Shared.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
 using AMP.Processors.Repositories.Base;
 
 namespace AMP.Persistence.Repositories.Base

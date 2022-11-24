@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +26,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\AMP.Processors.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Processors\\AMP.Processors.csproj"
@@ -42,8 +42,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -55,15 +55,15 @@
             },
             "FluentValidation": {
               "target": "Package",
-              "version": "[11.2.2, )"
+              "version": "[11.4.0, )"
             },
             "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
-              "version": "[11.2.2, )"
+              "version": "[11.4.0, )"
             },
             "MediatR": {
               "target": "Package",
-              "version": "[11.0.0, )"
+              "version": "[11.1.0, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
@@ -104,7 +104,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -112,8 +112,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -124,8 +124,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
@@ -133,7 +133,7 @@
             },
             "System.Collections.Immutable": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",
@@ -174,7 +174,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -182,8 +182,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi\\AMP.WebApi.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.WebApi\\AMP.WebApi.csproj"
@@ -198,8 +198,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "AutoFixture": {
               "target": "Package",
@@ -207,19 +207,19 @@
             },
             "FluentAssertions": {
               "target": "Package",
-              "version": "[6.7.0, )"
+              "version": "[6.8.0, )"
             },
             "Microsoft.AspNetCore.Mvc.Testing": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
@@ -229,17 +229,17 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.2, )"
+              "version": "[3.2.0, )"
             },
             "xunit": {
               "target": "Package",
-              "version": "[2.4.1, )"
+              "version": "[2.4.2, )"
             },
             "xunit.runner.visualstudio": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.4.3, )"
+              "version": "[2.4.5, )"
             }
           },
           "imports": [
@@ -279,7 +279,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -287,8 +287,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj"
@@ -312,8 +312,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -327,29 +327,29 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Serilog": {
               "target": "Package",
@@ -390,7 +390,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -398,8 +398,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj"
@@ -417,8 +417,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -430,31 +430,39 @@
             },
             "CloudinaryDotNet": {
               "target": "Package",
-              "version": "[1.19.0, )"
+              "version": "[1.20.0, )"
             },
             "Dapper": {
               "target": "Package",
               "version": "[2.0.123, )"
             },
+            "Microsoft.AspNetCore.Diagnostics.HealthChecks": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Caching.Memory": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "libphonenumber-csharp": {
               "target": "Package",
-              "version": "[8.12.56, )"
+              "version": "[8.13.0, )"
             }
           },
           "imports": [
@@ -491,7 +499,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -499,8 +507,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj"
@@ -518,36 +526,36 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "CloudinaryDotNet": {
               "target": "Package",
-              "version": "[1.19.0, )"
+              "version": "[1.20.0, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
-              "version": "[6.22.0, )"
+              "version": "[6.25.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[6.22.0, )"
+              "version": "[6.25.0, )"
             }
           },
           "imports": [
@@ -650,7 +658,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netstandard2.1"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -658,9 +666,12 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "netstandard2.1": {
-            "targetAlias": "netstandard2.1",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
+              "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
+                "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj"
+              },
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Shared.Domain\\AMP.Shared.Domain.csproj"
               }
@@ -674,8 +685,8 @@
         }
       },
       "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "imports": [
             "net461",
             "net462",
@@ -688,7 +699,7 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "NETStandard.Library": {
+            "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
@@ -710,7 +721,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -718,8 +729,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Application\\AMP.Application.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Application\\AMP.Application.csproj"
@@ -740,8 +751,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -753,41 +764,37 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Caching.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Caching.Memory": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.FileProviders.Physical": {
               "target": "Package",
-              "version": "[6.0.0, )"
-            },
-            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
-              "target": "Package",
-              "version": "[1.15.1, )"
+              "version": "[7.0.0, )"
             },
             "RestClient": {
               "target": "Package",
-              "version": "[3.860.28084, )"
+              "version": "[3.1024.23771, )"
             },
             "Seq.Extensions.Logging": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.1.0, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -811,7 +818,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.4.0, )"
             }
           },
           "imports": [

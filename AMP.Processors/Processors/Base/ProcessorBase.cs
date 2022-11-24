@@ -1,8 +1,4 @@
-﻿using AMP.Processors.Repositories.UoW;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace AMP.Processors.Processors.Base
+﻿namespace AMP.Processors.Processors.Base
 {
     public class ProcessorBase
     {

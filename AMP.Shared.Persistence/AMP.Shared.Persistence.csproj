@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
     <ProjectReference Include="..\AMP.Shared.Domain\AMP.Shared.Domain.csproj" />
   </ItemGroup>
 

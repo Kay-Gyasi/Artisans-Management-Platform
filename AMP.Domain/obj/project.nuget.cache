@@ -1,15 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "AtbCX6XXfrSto+cLs8fm/fYL5Uk7Nc6dNqhKlS/nkSSCjHE9Mp7QTW1P+nVMw9TT8eRIw212TN2XJoKFlnVkQA==",
+  "dgSpecHash": "R5mtwudxBjYpGQAHtwE4y6O5ZGEoT5Sp6fN39vijeA67YzL+YtLI//Xik/axr91CN5wIjKcvWq1tZe99xnU1xw==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\admin\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }

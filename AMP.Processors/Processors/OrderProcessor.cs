@@ -1,19 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Domain.ValueObjects;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.PageDtos;
-using AMP.Processors.Processors.Base;
-using AMP.Processors.Responses;
-using AMP.Shared.Domain.Models;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Processors.Helpers;
-using AMP.Processors.Repositories.UoW;
+﻿using AMP.Processors.Responses;
 using AMP.Processors.Workers;
 using AMP.Processors.Workers.Enums;
 

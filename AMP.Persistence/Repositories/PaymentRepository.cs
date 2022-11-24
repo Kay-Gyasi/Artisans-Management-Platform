@@ -37,7 +37,7 @@ namespace AMP.Persistence.Repositories
                 : GetBaseQuery().Where(x => x.Order.CustomerId == typeId && x.IsVerified)
                     .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
-            return await whereQueryable.BuildPage(paginated, cancellationToken, true);
+            return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
         public async Task<Payments> GetByTrxRef(string trxRef) 

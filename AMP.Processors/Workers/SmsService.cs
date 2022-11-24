@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Messaging;
-using AMP.Processors.Workers.Enums;
+﻿using AMP.Processors.Workers.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PhoneNumbers;
 
 namespace AMP.Processors.Workers;
 

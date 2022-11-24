@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AMP.Processors.Dtos
+﻿namespace AMP.Processors.Dtos
 {
     public class ServiceDto
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AMP.Processors.ExceptionHandlers
+﻿namespace AMP.Processors.ExceptionHandlers
 {
     public class RepositoryNotFoundException : Exception
     {

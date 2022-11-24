@@ -1,5 +1,4 @@
-﻿using System;
-using AMP.Application.Features.Commands;
+﻿using AMP.Application.Features.Commands;
 using AMP.Domain.Enums;
 using FluentValidation;
 

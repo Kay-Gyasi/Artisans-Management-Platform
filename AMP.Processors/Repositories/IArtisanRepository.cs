@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.ViewModels;
-using AMP.Processors.Repositories.Base;
-using AMP.Shared.Domain.Models;
+﻿using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories
 {

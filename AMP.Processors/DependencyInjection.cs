@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-using AMP.Processors.Messaging;
+﻿using System.Reflection;
 using AMP.Processors.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +26,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -38,8 +38,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
@@ -47,7 +47,7 @@
             },
             "System.Collections.Immutable": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",
@@ -88,7 +88,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -96,8 +96,8 @@
           "https://qfacegroupgh.pkgs.visualstudio.com/_packaging/qface/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Domain\\AMP.Domain.csproj"
@@ -115,8 +115,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -128,31 +128,39 @@
             },
             "CloudinaryDotNet": {
               "target": "Package",
-              "version": "[1.19.0, )"
+              "version": "[1.20.0, )"
             },
             "Dapper": {
               "target": "Package",
               "version": "[2.0.123, )"
             },
+            "Microsoft.AspNetCore.Diagnostics.HealthChecks": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Caching.Memory": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "libphonenumber-csharp": {
               "target": "Package",
-              "version": "[8.12.56, )"
+              "version": "[8.13.0, )"
             }
           },
           "imports": [

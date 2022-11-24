@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AMP.Processors
+﻿namespace AMP.Processors
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ProcessorAttribute : Attribute

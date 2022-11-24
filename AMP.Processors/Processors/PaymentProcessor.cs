@@ -1,16 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.PageDtos;
-using AMP.Processors.Processors.Base;
-using AMP.Shared.Domain.Models;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Repositories.UoW;
-using AMP.Processors.Workers;
+﻿using AMP.Processors.Workers;
 using AMP.Processors.Workers.Enums;
 
 namespace AMP.Processors.Processors

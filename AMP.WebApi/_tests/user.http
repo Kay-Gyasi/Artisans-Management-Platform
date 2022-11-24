@@ -1,7 +1,7 @@
-﻿GET {{baseUrl}}user/get/7
+﻿GET {{baseUrl}}users/get/7
 
 ###
-POST {{baseUrl}}user/save
+POST {{baseUrl}}users/save
 Content-Type: application/json
 
 {
@@ -44,10 +44,10 @@ Content-Type: application/json
 }
 
 ###
-POST {{baseUrl}}user/login
+POST {{baseUrl}}users/login
 Content-Type: application/json
 
 {
     "phone": "0557833216",
-    "password": "pass"
+    "password": "kofi"
 }

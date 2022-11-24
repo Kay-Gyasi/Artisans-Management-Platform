@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AMP.Processors.Commands;
 using AMP.Processors.Processors;
 using AMP.Processors.Responses;
-using AutoMapper.Configuration;
 using MediatR;
 
 namespace AMP.Application.Features.Queries

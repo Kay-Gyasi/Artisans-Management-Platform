@@ -1,8 +1,4 @@
-﻿using System;
-using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
-
-namespace AMP.Processors.PageDtos
+﻿namespace AMP.Processors.PageDtos
 {
     public class OrderPageDto
     {

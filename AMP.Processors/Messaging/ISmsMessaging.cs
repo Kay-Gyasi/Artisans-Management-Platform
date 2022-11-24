@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace AMP.Processors.Messaging;
+﻿namespace AMP.Processors.Messaging;
 
 public interface ISmsMessaging
 {

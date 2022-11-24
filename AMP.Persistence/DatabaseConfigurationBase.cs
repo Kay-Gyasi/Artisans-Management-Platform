@@ -1,7 +1,4 @@
-﻿using System;
-using AMP.Domain.Entities.Base;
-using AMP.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using AMP.Domain.Entities.Base;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,6 +9,13 @@ namespace AMP.Persistence
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.ToTable(typeof(T).Name);
+            builder.HasKey(a => a.Id)
+                .IsClustered(false);
+            builder.HasIndex(a => a.RowId)
+                .IsUnique()
+                .IsClustered();
+            builder.Property(a => a.RowId)
+                .UseIdentityColumn();
             builder.Property(a => a.DateModified).HasDefaultValue(DateTime.UtcNow);
             builder.Property(a => a.EntityStatus)
                 .HasDefaultValue(EntityStatus.Normal)

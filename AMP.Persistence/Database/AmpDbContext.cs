@@ -1,6 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Persistence.Configurations;
-using Microsoft.EntityFrameworkCore;
+﻿using AMP.Persistence.Configurations;
 using Languages = AMP.Domain.Entities.Languages;
 
 namespace AMP.Persistence.Database
@@ -32,6 +30,8 @@ namespace AMP.Persistence.Database
             {
                 optionsBuilder.UseSqlServer("Data Source=YOGA-X1;Integrated Security=True;Initial Catalog=AmpDevDb;");
             }
+
+            //optionsBuilder.LogTo(Console.WriteLine, new[] {DbLoggerCategory.Query.Name});
             optionsBuilder.EnableSensitiveDataLogging();
         }
 

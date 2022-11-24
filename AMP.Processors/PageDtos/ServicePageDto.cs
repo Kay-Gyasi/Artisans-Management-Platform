@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AMP.Processors.PageDtos
+﻿namespace AMP.Processors.PageDtos
 {
     public class ServicePageDto
     {

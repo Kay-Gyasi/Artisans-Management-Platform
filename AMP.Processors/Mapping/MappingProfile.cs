@@ -1,12 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Domain.ValueObjects;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.PageDtos;
-using AMP.Shared.Domain.Models;
-using AutoMapper;
-
-namespace AMP.Processors.Mapping
+﻿namespace AMP.Processors.Mapping
 {
     public class MappingProfile : Profile
     {

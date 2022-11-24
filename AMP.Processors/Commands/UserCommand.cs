@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using AMP.Domain.Enums;
-
-namespace AMP.Processors.Commands
+﻿namespace AMP.Processors.Commands
 {
     public class UserCommand
     {

@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage;
-
-namespace AMP.Processors.Repositories.UoW
+﻿namespace AMP.Processors.Repositories.UoW
 {
     public interface IUnitOfWork
     {

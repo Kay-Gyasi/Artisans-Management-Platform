@@ -1,6 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Processors.Commands;
-using AMP.Processors.QueryObjects;
+﻿using AMP.Processors.QueryObjects;
 
 namespace AMP.Processors.Authentication
 {

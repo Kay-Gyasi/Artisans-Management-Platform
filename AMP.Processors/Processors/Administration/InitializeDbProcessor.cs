@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
-using AMP.Processors.Processors.Base;
-using AMP.Processors.Repositories.UoW;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace AMP.Processors.Processors.Administration
+﻿namespace AMP.Processors.Processors.Administration
 {
     public static class InitIds
     {

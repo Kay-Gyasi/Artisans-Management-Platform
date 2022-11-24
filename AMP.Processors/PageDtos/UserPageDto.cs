@@ -1,9 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
-using AMP.Processors.Commands;
-
-namespace AMP.Processors.PageDtos
+﻿namespace AMP.Processors.PageDtos
 {
     public class UserPageDto
     {

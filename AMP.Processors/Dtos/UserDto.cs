@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
-
-namespace AMP.Processors.Dtos
+﻿namespace AMP.Processors.Dtos
 {
     public class UserDto
     {

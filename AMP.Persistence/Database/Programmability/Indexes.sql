@@ -1,0 +1,1 @@
+﻿-- CREATE INDEX IX_PrimaryContact ON Users (Contact_PrimaryContact);

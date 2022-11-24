@@ -1,5 +1,3 @@
-using System;
-
 namespace AMP.Processors.ExceptionHandlers
 {
     public class UserTypeIdNotFoundException : Exception

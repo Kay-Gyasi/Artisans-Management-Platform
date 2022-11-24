@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AMP.Persistence
+﻿namespace AMP.Persistence
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class RepositoryAttribute : Attribute

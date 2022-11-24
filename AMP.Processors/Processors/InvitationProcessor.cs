@@ -1,16 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Processors.Commands;
-using AMP.Processors.Dtos;
-using AMP.Processors.Messaging;
-using AMP.Processors.Processors.Base;
-using AMP.Processors.Repositories.UoW;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace AMP.Processors.Processors;
+﻿namespace AMP.Processors.Processors;
 
 [Processor]
 public class InvitationProcessor : ProcessorBase

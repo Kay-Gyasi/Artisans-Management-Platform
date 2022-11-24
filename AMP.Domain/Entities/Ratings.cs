@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities

@@ -1,7 +1,4 @@
-﻿using AMP.Application.Features.Commands;
-using Microsoft.AspNetCore.Authorization;
-
-namespace AMP.WebApi.Controllers.v1
+﻿namespace AMP.WebApi.Controllers.v1
 {
     public class AdministrationsControllerv1 : BaseControllerv1
     {

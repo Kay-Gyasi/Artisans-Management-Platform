@@ -1,8 +1,4 @@
-﻿using System;
-using AMP.Domain.Enums;
-using AMP.Domain.ValueObjects;
-
-namespace AMP.Processors.Commands
+﻿namespace AMP.Processors.Commands
 {
     public class OrderCommand
     {

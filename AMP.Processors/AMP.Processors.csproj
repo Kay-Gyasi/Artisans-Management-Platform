@@ -1,20 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
+	<TargetFramework>net7.0</TargetFramework>
 	<LangVersion>10</LangVersion>
   </PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
 		<PackageReference Include="AutoMapper" Version="12.0.0" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-		<PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.12.56" />
+		<PackageReference Include="CloudinaryDotNet" Version="1.20.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.0" />
 	</ItemGroup>
 
   <ItemGroup>

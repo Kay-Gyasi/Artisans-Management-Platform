@@ -27,16 +27,16 @@ public class DapperContext : IDapperContext
         throw new NotImplementedException();  
     }  
 
-    public T Get<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)  
+    public async Task<T> GetAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)  
     {
         using IDbConnection db = new SqlConnection(_config.GetConnectionString(ConnectionString));  
-        return db.Query<T>(sp, parms, commandType: commandType).FirstOrDefault();  
+        return (await db.QueryAsync<T>(sp, parms, commandType: commandType)).FirstOrDefault();  
     }  
 
-    public List<T> GetAll<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
+    public async Task<List<T>> GetAllAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
     {  
         using IDbConnection db = new SqlConnection(_config.GetConnectionString(ConnectionString));  
-        return db.Query<T>(sp, parms, commandType: commandType).ToList();  
+        return (await db.QueryAsync<T>(sp, parms, commandType: commandType)).ToList();  
     }  
 
     public DbConnection GetDbconnection()  
@@ -62,12 +62,12 @@ public class DapperContext : IDapperContext
             catch (Exception ex)  
             {  
                 tran.Rollback();  
-                throw ex;  
+                throw;  
             }  
         }  
         catch (Exception ex)  
         {  
-            throw ex;  
+            throw;  
         }  
         finally  
         {  
@@ -96,12 +96,12 @@ public class DapperContext : IDapperContext
             catch (Exception ex)  
             {  
                 tran.Rollback();  
-                throw ex;  
+                throw;  
             }  
         }  
         catch (Exception ex)  
         {  
-            throw ex;  
+            throw;  
         }  
         finally  
         {  

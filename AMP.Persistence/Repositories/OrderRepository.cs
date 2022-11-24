@@ -73,8 +73,7 @@
             string userId, CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Status != OrderStatus.Completed && x.Customer.UserId == userId)
-                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                .OrderBy(x => x.DateCreated);
+                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
             var orders = await whereQueryable.BuildPage(paginated, cancellationToken);
             return orders;
         }
@@ -106,8 +105,7 @@
             var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId 
                                                            && x.Status != OrderStatus.Completed
                                                            && !x.IsRequestAccepted)
-                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                .OrderBy(x => x.PreferredStartDate);
+                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
@@ -116,17 +114,16 @@
             , CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery().Where(x => x.Artisan.UserId == userId && x.Status == OrderStatus.Completed)
-                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
-                .OrderBy(x => x.PreferredStartDate);
+                .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 
             return await whereQueryable.BuildPage(paginated, cancellationToken);
         }
 
-        public int GetCount(string artisanId)
+        public async Task<int> GetCount(string artisanId)
         {
-            return GetBaseQuery()
+            return await Context.Set<Orders>()
                 .AsNoTracking()
-                .Count(x => x.ArtisanId == artisanId);
+                .CountAsync(x => x.ArtisanId == artisanId);
         }
 
         public override IQueryable<Orders> GetBaseQuery()

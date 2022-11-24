@@ -1,16 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Persistence.Database;
-using AMP.Persistence.Repositories.Base;
-using AMP.Processors.Repositories;
-using AMP.Shared.Domain.Models;
-using AMP.Shared.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
-namespace AMP.Persistence.Repositories
+﻿namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class RatingRepository : RepositoryBase<Ratings>, IRatingRepository

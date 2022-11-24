@@ -1,11 +1,8 @@
-﻿using System;
-using AMP.Processors.Authentication;
-using AMP.Processors.Messaging;
+﻿using AMP.Processors.Messaging;
 using AMP.Processors.Repositories;
 using AMP.Services.Authentication;
 using AMP.Services.Images;
 using AMP.Services.Messaging;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AMP.Services

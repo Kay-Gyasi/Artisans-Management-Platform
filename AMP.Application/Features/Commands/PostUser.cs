@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using AMP.Processors.Commands;
 using AMP.Processors.Processors;
-using AMP.Processors.Responses;
 using MediatR;
 
 namespace AMP.Application.Features.Commands

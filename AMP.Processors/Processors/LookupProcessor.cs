@@ -1,13 +1,4 @@
-﻿using System;
-using AMP.Domain.ViewModels;
-using AMP.Processors.Processors.Base;
-using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AMP.Processors.Repositories.UoW;
-
-namespace AMP.Processors.Processors
+﻿namespace AMP.Processors.Processors
 {
     public enum LookupType
     {

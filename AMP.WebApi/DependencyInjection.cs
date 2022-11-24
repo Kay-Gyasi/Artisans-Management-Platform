@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
+using AMP.Processors.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using ILogger = Serilog.ILogger;
 
 namespace AMP.WebApi;
@@ -19,6 +21,7 @@ public static class DependencyInjection
             .AddRepositories(logger)
             .AddProcessors()
             .RegisterAutoMapper()
+            .AddDbHealthChecks()
             .AddMediatr()
             .AddCaching()
             .AddDefaultConfig()
@@ -145,6 +148,15 @@ public static class DependencyInjection
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "AMP API V1");
             c.RoutePrefix = string.Empty;
+        });
+
+        app.UseHealthChecks("/health", new HealthCheckOptions()
+        {
+            ResponseWriter = async (context, report) =>
+            {
+                context.Response.ContentType = "application/json";
+                await context.Response.BuildHealthCheckResponse(report);
+            }
         });
 
         app.UseHttpsRedirection();

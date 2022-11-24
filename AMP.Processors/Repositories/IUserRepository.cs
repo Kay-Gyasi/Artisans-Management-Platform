@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using AMP.Domain.Entities;
-using AMP.Processors.Commands;
-using AMP.Processors.QueryObjects;
+﻿using AMP.Processors.QueryObjects;
 using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories

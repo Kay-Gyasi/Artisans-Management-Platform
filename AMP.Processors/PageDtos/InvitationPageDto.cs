@@ -1,7 +1,4 @@
-﻿using System;
-using AMP.Domain.Enums;
-
-namespace AMP.Processors.PageDtos;
+﻿namespace AMP.Processors.PageDtos;
 
 public class InvitationPageDto
 {

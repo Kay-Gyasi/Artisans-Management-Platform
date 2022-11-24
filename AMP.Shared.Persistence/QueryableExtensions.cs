@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.InteropServices;
+using AMP.Domain.Entities.Base;
 using AMP.Shared.Domain.Models;
 
 namespace AMP.Shared.Persistence
@@ -52,7 +52,7 @@ namespace AMP.Shared.Persistence
 		}
 
 		public static IQueryable<T> PageBy<T, TKey>(this IQueryable<T> query, Expression<Func<T, TKey>> orderBy,
-			PaginatedCommand paginated)
+			PaginatedCommand paginated) where T : EntityBase
 		{
 			const int defaultPageNumber = 1;
 
@@ -76,7 +76,9 @@ namespace AMP.Shared.Persistence
 			//}
 
 			//int skip = (page - 1) * pageSize;
-			return query.Skip(paginated.Skip).Take(paginated.PageSize);
+			return query.OrderByDescending(x => x.RowId)
+				.Skip(paginated.Skip)
+				.Take(paginated.PageSize);
 		}
 	}
 

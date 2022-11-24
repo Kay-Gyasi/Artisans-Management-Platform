@@ -1,7 +1,4 @@
-﻿using AMP.Domain.Entities;
-using AMP.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations

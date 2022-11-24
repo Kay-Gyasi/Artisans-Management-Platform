@@ -4,7 +4,6 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using AMP.Processors.Processors;
-using FluentValidation;
 
 namespace AMP.Application.Features.Queries
 {

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using AMP.Domain.Enums;
-
-namespace AMP.Processors.PageDtos
+﻿namespace AMP.Processors.PageDtos
 {
     public class ArtisanPageDto
     {
