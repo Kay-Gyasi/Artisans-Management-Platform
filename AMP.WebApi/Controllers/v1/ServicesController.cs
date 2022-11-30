@@ -1,4 +1,6 @@
-﻿namespace AMP.WebApi.Controllers.v1;
+﻿using AMP.WebApi.Controllers.v1.Base;
+
+namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class ServicesController : BaseControllerv1

@@ -1,9 +1,10 @@
-﻿namespace AMP.WebApi.Controllers.v1;
+﻿using AMP.WebApi.Controllers.v1.Base;
+
+namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class RatingsController : BaseControllerv1
 {
-    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
     /// <summary>
     /// Returns a page of reviews made by requesting customer

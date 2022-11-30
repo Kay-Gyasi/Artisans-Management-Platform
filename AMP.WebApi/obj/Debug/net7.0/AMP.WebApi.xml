@@ -268,16 +268,22 @@
             <summary>
             Adds a new unverified account to the system
             </summary>
+            <response code="201">User has been created and added to system successfully</response>
+            <response code="409">A user with the contact provided already exists in the system</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.RegistrationsController.Verify(System.String,System.String)">
             <summary>
             Verifies an account
             </summary>
+            <response code="200">User has been verified successfully</response>
+            <response code="404">The phone/verification code provided was invalid</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.RegistrationsController.SendCode(System.String)">
             <summary>
             Sends a verification link by sms to requesting user
             </summary>
+            <response code="200">Verification link has been sent successfully</response>
+            <response code="404">The phone provided was invalid</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.ServicesController.GetPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
@@ -316,32 +322,36 @@
             <summary>
             Updates a user's info
             </summary>
+            <response code="200">User has been updated successfully</response>
+            <response code="404">User being considered does not exist</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Delete(System.String)">
             <summary>
             Removes a user from the system
             </summary>
+            <response code="204">User has been deleted successfully</response>
+            <response code="404">User with id provided does not exist</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Login(AMP.Processors.Commands.SigninCommand)">
             <summary>
             Returns an authorization token which a user can use to access resources on the system 
             </summary>
-        </member>
-        <member name="M:AMP.WebApi.Controllers.v1.UsersController.GetRefreshToken">
-            <summary>
-            Returns a refresh token for user
-            </summary>
-            <returns></returns>
+            <response code="200">Log in was successful</response>
+            <response code="204">Log in was not successful because of invalid credentials</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.SendPasswordResetLink(System.String)">
             <summary>
             Sends a link by which user can reset their password
             </summary>
+            <response code="200">Password reset link has been sent successfully</response>
+            <response code="404">User with phone provided does not exist</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.ResetPassword(System.String,System.String,System.String)">
             <summary>
             Resets requesting user's password
             </summary>
+            <response code="200">Password has been reset successfully</response>
+            <response code="404">Invalid phone/code</response>
         </member>
     </members>
 </doc>

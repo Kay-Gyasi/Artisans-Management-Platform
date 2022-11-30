@@ -1,5 +1,5 @@
 ﻿using AMP.Domain.Entities.Base;
-using AMP.Processors.ExceptionHandlers;
+using AMP.Processors.Exceptions;
 using AMP.Processors.Repositories.Base;
 
 namespace AMP.Persistence.Repositories.Base

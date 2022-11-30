@@ -4,6 +4,6 @@ namespace AMP.Processors.Repositories
 {
     public interface ILanguageRepository : IRepositoryBase<Languages>
     {
-        Task<List<Languages>> BuildLanguages(List<string> languages);
+        Task<List<Languages>> BuildLanguages(IEnumerable<string> languages);
     }
 }

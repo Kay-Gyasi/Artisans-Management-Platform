@@ -1,7 +1,8 @@
-﻿using AMP.Processors.Repositories.UoW;
+﻿using System.Data.Common;
+using AMP.Processors.Repositories.UoW;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace AMP.Persistence.Repositories.UoW
+namespace AMP.Persistence.Repositories.Uow
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -64,6 +65,8 @@ namespace AMP.Persistence.Repositories.UoW
 
         public IDbContextTransaction BeginTransaction() => _dbContext.Database.BeginTransaction();
         public IExecutionStrategy GetExecutionStrategy() => _dbContext.Database.CreateExecutionStrategy();
+        public DbConnection GetDbConnection() => _dbContext.Database.GetDbConnection();
+        public AmpDbContext GetDbContext() => _dbContext;
 
         public async Task<bool> SaveChangesAsync() 
             => await _dbContext.SaveChangesAsync() > 0;

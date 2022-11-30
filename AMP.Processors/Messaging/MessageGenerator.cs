@@ -1,13 +1,17 @@
-﻿namespace AMP.Processors.Messaging;
+﻿using Microsoft.Extensions.Logging;
+
+namespace AMP.Processors.Messaging;
 
 public class MessageGenerator
 {
     private readonly IUnitOfWork _uow;
+    private static ILogger<MessageGenerator> _logger;
     private static string _baseAddress => "https://www.tukofix.com";
 
-    public MessageGenerator(IUnitOfWork uow)
+    public MessageGenerator(IUnitOfWork uow, ILogger<MessageGenerator> logger)
     {
         _uow = uow;
+        _logger = logger;
     }
     
     public async Task<(string, string)> AssignArtisan(string orderId, string artisanId)
@@ -98,9 +102,18 @@ public class MessageGenerator
     
     private static string FormatNumber(IEnumerable<string> recipients)
     {
-        var pn = PhoneNumberUtil.GetInstance().Parse(recipients.First(), "GH");
-        var internationalNumber = PhoneNumberUtil.GetInstance().Format(pn, PhoneNumberFormat.INTERNATIONAL);
-        return internationalNumber;
+        var enumerable = recipients.ToList();
+        try
+        {
+            var pn = PhoneNumberUtil.GetInstance().Parse(enumerable.First(), "GH");
+            var internationalNumber = PhoneNumberUtil.GetInstance().Format(pn, PhoneNumberFormat.INTERNATIONAL);
+            return internationalNumber;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Phone number formatting for {FirstOrDefault} failed", enumerable.FirstOrDefault());
+            throw;
+        }
     }
 
     private static string GetType(UserType type)

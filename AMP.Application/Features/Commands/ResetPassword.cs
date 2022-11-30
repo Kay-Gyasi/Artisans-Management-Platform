@@ -8,7 +8,7 @@ namespace AMP.Application.Features.Commands;
 
 public class ResetPassword
 {
-    public class Command : IRequest<bool>
+    public class Command : IRequest
     {
         public ResetPasswordCommand ResetCommand { get; }
 
@@ -18,7 +18,7 @@ public class ResetPassword
         }
     }
 
-    public class Handler : IRequestHandler<Command, bool>
+    public class Handler : IRequestHandler<Command>
     {
         private readonly UserProcessor _processor;
 
@@ -26,9 +26,10 @@ public class ResetPassword
         {
             _processor = processor;
         }
-        public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            return await _processor.ResetPassword(request.ResetCommand);
+            await _processor.ResetPassword(request.ResetCommand);
+            return Unit.Value;
         }
     }
 }

@@ -11,19 +11,21 @@ namespace AMP.Application.Validation
             RuleFor(x => x.UserCommand.FirstName)
                 .NotEmpty()
                 .NotNull()
-                .Must(x => x != "string");
+                .NotEqual("string");
             RuleFor(x => x.UserCommand.FamilyName)
                 .NotEmpty()
                 .NotNull()
-                .Must(x => x != "string");
+                .NotEqual("string");
             RuleFor(x => x.UserCommand.Contact.PrimaryContact)
                 .NotEmpty()
                 .NotNull()
-                .Must(x => x != "string");
+                .NotEqual("string");
+            RuleFor(x => x.UserCommand.Contact)
+                .NotNull();
             RuleFor(x => x.UserCommand.Password)
                 .NotEmpty()
                 .NotNull()
-                .Must(x => x != "string");
+                .NotEqual("string");
             RuleFor(x => x.UserCommand.Type)
                 .Must(x => x is UserType.Artisan or UserType.Customer);
         }

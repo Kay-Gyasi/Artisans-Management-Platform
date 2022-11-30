@@ -60,11 +60,11 @@ namespace AMP.Domain.Entities
 
         public Users SetDisplayName()
         {
-            DisplayName = FirstName.Trim() + " " + FamilyName.Trim();
+            DisplayName = string.Join(" ", FirstName.Trim(), FamilyName.Trim());
             return this;
         }
 
-        public Users WithImageId(string? id)
+        public Users WithImageId(string id)
         {
             ImageId = id;
             return this;

@@ -1,8 +1,11 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using AMP.Processors.Exceptions;
 using AMP.Processors.Messaging;
+using Microsoft.Extensions.Logging;
 
 namespace AMP.Services.Messaging
 {
@@ -22,10 +25,9 @@ namespace AMP.Services.Messaging
             {
                 await _client.PostAsJsonAsync("sms/send", command, new CancellationToken());
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
-                throw;
+                throw new SmsException($"An error occurred while sending sms to phone: {command.Recipients.First()}");
             }
         }
     }

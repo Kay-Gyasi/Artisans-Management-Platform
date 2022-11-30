@@ -1,10 +1,10 @@
-﻿namespace AMP.WebApi.Controllers.v1;
+﻿using AMP.WebApi.Controllers.v1.Base;
+
+namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class PaymentsController : BaseControllerv1
 {
-    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    private string Role => HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
 
     /// <summary>
     /// Returns a page of payments made or received by requesting user

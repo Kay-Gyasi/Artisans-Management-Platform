@@ -9,7 +9,7 @@
         
         public Task<List<Lookup>> GetOpenOrdersLookup(string userId)
         {
-            return GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete).Select(x => new Lookup()
+            return base.GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete).Select(x => new Lookup()
                 {
                     Id = x.Id,
                     Name = x.Description
@@ -19,7 +19,7 @@
       
         public async Task Complete(string orderId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId && x.IsArtisanComplete);
+            var order = await base.GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId && x.IsArtisanComplete);
             if (order is null) return;
             order?.WithStatus(OrderStatus.Completed)
                 .IsCompleted(true);

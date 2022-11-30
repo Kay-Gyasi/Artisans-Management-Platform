@@ -1,9 +1,10 @@
-﻿namespace AMP.WebApi.Controllers.v1;
+﻿using AMP.WebApi.Controllers.v1.Base;
+
+namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class InvitationsController : BaseControllerv1
 {
-    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     
     /// <summary>
     /// Sends a membership invite to provided contact in name of requesting user

@@ -1,10 +1,11 @@
 ﻿namespace Amp.IntegrationTests.Tests;
 
+//[TestCaseOrderer("Amp.IntegrationTests.Helpers.PriorityOrderer", "Amp.IntegrationTests")]
 public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly Fixture _fixture = new();
-    private const string BaseUrl = "api/v1/user";
+    private const string BaseUrl = "api/v1/users";
     public UserControllerTests(CustomWebApplicationFactory<Program> factory)
     {
         _factory = factory;
@@ -26,7 +27,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         var response = await request.Content.ReadFromJsonAsync<SigninResponse>();
 
         // Assert
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         response.Should().NotBeNull();
         response?.Token.Should().NotBeNullOrEmpty();
     }
@@ -45,7 +46,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         timer.Stop();
         
         // Assert
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         request.StatusCode.Should().HaveFlag(HttpStatusCode.NoContent);
     }
     
@@ -63,7 +64,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         timer.Stop();
         
         // Assert
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         request.StatusCode.Should().HaveFlag(HttpStatusCode.NoContent);
     }
     #endregion
@@ -115,7 +116,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         response.Should().NotBeNull();
         response?.Data.Should().NotBeNull();
         response?.PageSize.Should().Be(command.PageSize);
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
     [Theory]
@@ -138,7 +139,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         response.Should().NotBeNull();
         response?.Data.Should().NotBeNull();
         response?.Data.Count.Should().BeGreaterThan(0);
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
     [Fact]
@@ -165,7 +166,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         response.Should().NotBeNull();
         response?.Data.Should().NotBeNull();
         response?.Data.Count.Should().Be(0);
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
 
     #endregion
@@ -194,11 +195,11 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         response.Should().NotBeNull();
         response?.Contact.Should().NotBeNull();
         response?.Contact.PrimaryContact.Should().NotBeNullOrEmpty();
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
     [Fact]
-    public async Task Get_WithInvalidId_ReturnsNoContent()
+    public async Task Get_WithInvalidId_ReturnsNotFound()
     {
         // Arrange
         using var client = _factory.CreateClient();
@@ -212,16 +213,16 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         timer.Stop();
 
         // Assert
-        request.StatusCode.Should().Be(HttpStatusCode.NoContent);
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
+    //[Fact, TestPriority(0)]
     [Fact]
     public async Task Get_WithUnauthorizedUser_ReturnsUnauthorized()
     {
         // Arrange
         using var client = _factory.CreateClient();
-        //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", "unauthorized");
         var timer = new Stopwatch();
         var id = _fixture.Build<string>().Create();
 
@@ -232,9 +233,8 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
 
         // Assert
         request.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        timer.ElapsedMilliseconds.Should().BeLessThan(1000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
-    
 
     #endregion
 
@@ -247,7 +247,7 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         using var client = _factory.CreateClient();
         var timer = new Stopwatch();
         await _factory.AuthenticateAsync(client, UserType.Artisan);
-        var postUser = await client.PostAsJsonAsync($"api/v1/registration/post", new UserCommand()
+        var postUser = await client.PostAsJsonAsync($"api/v1/registrations/post", new UserCommand()
         {
             FirstName = "Yet To",
             FamilyName = "Update",
@@ -293,8 +293,33 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         userAfter?.MomoNumber.Should().Be(command.MomoNumber);
         userAfter?.LevelOfEducation.Should().Be(LevelOfEducation.PhD);
         userAfter?.Address.Should().NotBeNull();
-        userAfter?.DateModified.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMinutes(-1));
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        userAfter?.DateModified.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMinutes(1));
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+        #endregion
+    }
+    
+    [Fact]
+    public async Task Update_WithInvalidUser_ReturnsNotFound()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        await _factory.AuthenticateAsync(client, UserType.Artisan);
+
+        var command = _fixture.Build<UserCommand>()
+            .With(x => x.Id, Guid.NewGuid().ToString())
+            .Without(x => x.Image)
+            .Create();
+
+        // Act
+        timer.Start();
+        var response = await client.PutAsJsonAsync($"{BaseUrl}/update", command, new CancellationToken());
+        timer.Stop();
+        
+        // Assert
+        #region Assertions
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         #endregion
     }
     
@@ -303,7 +328,6 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     {
         // Arrange
         using var client = _factory.CreateClient();
-        //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", "unauthorized");
         var timer = new Stopwatch();
         var user = _fixture.Build<UserCommand>()
             .Without(x => x.Image)
@@ -316,7 +340,337 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
 
         // Assert
         request.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        timer.ElapsedMilliseconds.Should().BeLessThan(1000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+
+    #endregion
+
+    #region Delete
+
+    [Fact]
+    public async Task Delete_Unauthorized_ReturnsUnauthorized()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        var id = Guid.NewGuid().ToString();
+
+        // Act
+        timer.Start();
+        var request = await client.DeleteAsync($"{BaseUrl}/delete/{id}", new CancellationToken());
+        timer.Stop();
+
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+
+    [Fact]
+    public async Task DeleteArtisan_InvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        await _factory.AuthenticateAsync(client, UserType.Artisan);
+        var id = Guid.NewGuid().ToString();
+
+        // Act
+        timer.Start();
+        var request = await client.DeleteAsync($"{BaseUrl}/delete/{id}", new CancellationToken());
+        timer.Stop();
+
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task DeleteArtisan_ValidId_ReturnsNoContent()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        await _factory.AuthenticateAsync(client, UserType.Artisan);
+        const string phone = "0255463452";
+        var user = _fixture.Build<UserCommand>()
+            .With(x => x.FirstName, "Delete")
+            .With(x => x.FamilyName, "Artisan")
+            .With(x => x.Type, UserType.Artisan)
+            .With(x => x.Contact, new ContactCommand {PrimaryContact = phone})
+            .With(x => x.Password, "pass")
+            .Without(x => x.Id)
+            .Without(x => x.Image)
+            .Without(x => x.Address)
+            .Without(x => x.ImageId)
+            .Without(x => x.Languages)
+            .Without(x => x.IsRemoved)
+            .Without(x => x.IsSuspended)
+            .Without(x => x.MomoNumber)
+            .Without(x => x.OtherName)
+            .Without(x => x.LevelOfEducation)
+            .Create();
+        var initialRequest = await client.PostAsJsonAsync($"api/v1/registrations/post", user);
+        var id = await _factory.UnitOfWork.Users.GetIdByPhone(phone);
+        
+        // Act
+        timer.Start();
+        var request = await client.DeleteAsync($"{BaseUrl}/delete/{id}", new CancellationToken());
+        timer.Stop();
+
+        // Assert
+        var userInDb = await _factory.UnitOfWork.Users.GetIdByPhone(phone);
+        userInDb.Should().BeNullOrEmpty();
+        initialRequest.StatusCode.Should().Be(HttpStatusCode.Created);
+        request.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task DeleteCustomer_ValidId_ReturnsNoContent()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        await _factory.AuthenticateAsync(client, UserType.Customer);
+        const string phone = "0255637252";
+        var user = _fixture.Build<UserCommand>()
+            .With(x => x.FirstName, "Delete")
+            .With(x => x.FamilyName, "Customer")
+            .With(x => x.Type, UserType.Customer)
+            .With(x => x.Contact, new ContactCommand {PrimaryContact = phone})
+            .With(x => x.Password, "pass")
+            .Without(x => x.Id)
+            .Without(x => x.Image)
+            .Without(x => x.Address)
+            .Without(x => x.ImageId)
+            .Without(x => x.Languages)
+            .Without(x => x.IsRemoved)
+            .Without(x => x.IsSuspended)
+            .Without(x => x.MomoNumber)
+            .Without(x => x.OtherName)
+            .Without(x => x.LevelOfEducation)
+            .Create();
+        var initialRequest = await client.PostAsJsonAsync($"api/v1/registrations/post", user);
+        var id = await _factory.UnitOfWork.Users.GetIdByPhone(phone);
+        
+        // Act
+        timer.Start();
+        var request = await client.DeleteAsync($"{BaseUrl}/delete/{id}", new CancellationToken());
+        timer.Stop();
+
+        // Assert
+        var userInDb = await _factory.UnitOfWork.Users.GetIdByPhone(phone);
+        userInDb.Should().BeNullOrEmpty();
+        initialRequest.StatusCode.Should().Be(HttpStatusCode.Created);
+        request.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task DeleteCustomer_InvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        await _factory.AuthenticateAsync(client, UserType.Customer);
+        var id = Guid.NewGuid().ToString();
+
+        // Act
+        timer.Start();
+        var request = await client.DeleteAsync($"{BaseUrl}/delete/{id}", new CancellationToken());
+        timer.Stop();
+
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+
+    #endregion
+
+    #region SendPasswordResetLink
+
+    [Fact]
+    public async Task SendPasswordResetLink_InvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        const string phone = "0345625435";
+        
+        // Act
+        timer.Start();
+        var request = await client.GetAsync($"{BaseUrl}/SendPasswordResetLink/{phone}");
+        timer.Stop();
+
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task SendPasswordResetLink_ValidId_ReturnsOK()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        const string phone = "0335463783";
+        var user = _fixture.Build<UserCommand>()
+            .With(x => x.FirstName, "RESET")
+            .With(x => x.FamilyName, "Password")
+            .With(x => x.Type, UserType.Customer)
+            .With(x => x.Contact, new ContactCommand {PrimaryContact = phone})
+            .With(x => x.Password, "pass")
+            .Without(x => x.Id)
+            .Without(x => x.Image)
+            .Without(x => x.Address)
+            .Without(x => x.ImageId)
+            .Without(x => x.Languages)
+            .Without(x => x.IsRemoved)
+            .Without(x => x.IsSuspended)
+            .Without(x => x.MomoNumber)
+            .Without(x => x.OtherName)
+            .Without(x => x.LevelOfEducation)
+            .Create();
+        var initialRequest = await client.PostAsJsonAsync($"api/v1/registrations/post", user);
+
+        // Act
+        timer.Start();
+        var request = await client.GetAsync($"{BaseUrl}/SendPasswordResetLink/{phone}");
+        timer.Stop();
+
+        // Assert
+        initialRequest.StatusCode.Should().Be(HttpStatusCode.Created);
+        request.StatusCode.Should().Be(HttpStatusCode.OK);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+
+    #endregion
+
+    #region ResetPassword
+
+    [Fact]
+    public async Task ResetPassword_ValidCredentials_ReturnsOK()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        const string phone = "0774566352";
+        var user = _fixture.Build<UserCommand>()
+            .With(x => x.FirstName, "RESET")
+            .With(x => x.FamilyName, "Password2")
+            .With(x => x.Type, UserType.Customer)
+            .With(x => x.Contact, new ContactCommand {PrimaryContact = phone})
+            .With(x => x.Password, "pass")
+            .Without(x => x.Id)
+            .Without(x => x.Image)
+            .Without(x => x.Address)
+            .Without(x => x.ImageId)
+            .Without(x => x.Languages)
+            .Without(x => x.IsRemoved)
+            .Without(x => x.IsSuspended)
+            .Without(x => x.MomoNumber)
+            .Without(x => x.OtherName)
+            .Without(x => x.LevelOfEducation)
+            .Create();
+        var initialRequest = await client.PostAsJsonAsync($"api/v1/registrations/post", user);
+        var userInDb = await _factory.UnitOfWork.Users.GetByPhone(phone);
+        var code = Encoding.UTF8.GetString(userInDb.PasswordKey)
+            .RemoveSpecialCharacters();
+        var command = new SigninCommand()
+        {
+            Phone = phone,
+            Password = "kofi"
+        };
+        var verifyUser =
+            await _factory.Dapper.Execute(
+                $"UPDATE Users SET IsVerified = '1' WHERE Contact_PrimaryContact = '{phone}'",
+                null, CommandType.Text);
+        var initialLogin = await client.PostAsJsonAsync($"{BaseUrl}/Login", command, new CancellationToken());
+
+        // Act
+        timer.Start();
+        var request = await client.GetAsync($"{BaseUrl}/ResetPassword/{phone}/{code}/kofi");
+        timer.Stop();
+
+        // Assert
+        var subsequentLogin = await client.PostAsJsonAsync($"{BaseUrl}/Login", command, new CancellationToken());
+        var response = await subsequentLogin.Content.ReadFromJsonAsync<SigninResponse>();
+
+        initialRequest.StatusCode.Should().Be(HttpStatusCode.Created);
+        verifyUser.Should().Be(1);
+        initialLogin.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        subsequentLogin.StatusCode.Should().Be(HttpStatusCode.OK);
+        response?.Token.Should().NotBeNullOrEmpty();
+        request.StatusCode.Should().Be(HttpStatusCode.OK);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task ResetPassword_InvalidCode_ReturnsNotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        const string phone = "0334526635";
+        var user = _fixture.Build<UserCommand>()
+            .With(x => x.FirstName, "RESET")
+            .With(x => x.FamilyName, "Password2")
+            .With(x => x.Type, UserType.Customer)
+            .With(x => x.Contact, new ContactCommand {PrimaryContact = phone})
+            .With(x => x.Password, "pass")
+            .Without(x => x.Id)
+            .Without(x => x.Image)
+            .Without(x => x.Address)
+            .Without(x => x.ImageId)
+            .Without(x => x.Languages)
+            .Without(x => x.IsRemoved)
+            .Without(x => x.IsSuspended)
+            .Without(x => x.MomoNumber)
+            .Without(x => x.OtherName)
+            .Without(x => x.LevelOfEducation)
+            .Create();
+        var initialRequest = await client.PostAsJsonAsync($"api/v1/registrations/post", user);
+        var userInDb = await _factory.UnitOfWork.Users.GetByPhone(phone);
+        var code = _fixture.Build<string>().Create();
+        var command = new SigninCommand()
+        {
+            Phone = phone,
+            Password = "kofi"
+        };
+        var verifyUser =
+            await _factory.Dapper.Execute(
+                $"UPDATE Users SET IsVerified = '1' WHERE Contact_PrimaryContact = '{phone}'",
+                null, CommandType.Text);
+        
+        // Act
+        timer.Start();
+        var request = await client.GetAsync($"{BaseUrl}/ResetPassword/{phone}/{code}/kofi");
+        timer.Stop();
+
+        // Assert
+        initialRequest.StatusCode.Should().Be(HttpStatusCode.Created);
+        verifyUser.Should().Be(1);
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task ResetPassword_InvalidPhone_ReturnsNotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var timer = new Stopwatch();
+        const string phone = "0234514256";
+        var code = _fixture.Build<string>().Create();
+
+        // Act
+        timer.Start();
+        var request = await client.GetAsync($"{BaseUrl}/ResetPassword/{phone}/{code}/kofi");
+        timer.Stop();
+
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
 
     #endregion
@@ -349,5 +703,4 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
             }
         };
     }
-
 }

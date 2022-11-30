@@ -7,7 +7,7 @@
         {
         }
 
-        public async Task<List<Languages>> BuildLanguages(List<string> languages)
+        public async Task<List<Languages>> BuildLanguages(IEnumerable<string> languages)
         {
             var results = new List<Languages>();
             foreach (var language in languages)

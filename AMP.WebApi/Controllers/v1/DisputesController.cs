@@ -1,9 +1,10 @@
-﻿namespace AMP.WebApi.Controllers.v1;
+﻿using AMP.WebApi.Controllers.v1.Base;
+
+namespace AMP.WebApi.Controllers.v1;
 
 [Authorize(Roles = "Customer")]
 public class DisputesController : BaseControllerv1
 {
-    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
     /// <summary>
     /// Returns a page of disputes filed by requesting customer

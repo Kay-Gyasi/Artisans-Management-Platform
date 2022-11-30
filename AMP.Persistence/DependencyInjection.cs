@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using AMP.Persistence.Repositories.UoW;
-using AMP.Processors.ExceptionHandlers;
+using AMP.Persistence.Repositories.Uow;
+using AMP.Processors.Exceptions;
 using AMP.Processors.Repositories.Base;
 using AMP.Processors.Repositories.UoW;
 using Microsoft.Extensions.Configuration;

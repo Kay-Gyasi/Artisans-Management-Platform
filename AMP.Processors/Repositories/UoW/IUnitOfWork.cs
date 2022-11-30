@@ -1,4 +1,6 @@
-﻿namespace AMP.Processors.Repositories.UoW
+﻿using System.Data.Common;
+
+namespace AMP.Processors.Repositories.UoW
 {
     public interface IUnitOfWork
     {
@@ -19,5 +21,6 @@
         Task<bool> SaveChangesAsync();
         IDbContextTransaction BeginTransaction();
         IExecutionStrategy GetExecutionStrategy();
+        DbConnection GetDbConnection();
     }
 }

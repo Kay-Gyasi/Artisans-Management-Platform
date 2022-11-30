@@ -14,7 +14,7 @@
         public string Password { get; set; }
         public UserType Type { get; set; }
         public LevelOfEducation LevelOfEducation { get; set; }
-        public ContactCommand Contact { get; set; }
+        public ContactCommand Contact { get; set; } = new();
         public AddressCommand Address { get; set; }
         public ImageCommand? Image { get; set; }
         public List<LanguagesCommand> Languages { get; set; }

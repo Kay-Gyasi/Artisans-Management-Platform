@@ -7,7 +7,7 @@ namespace AMP.Application.Features.Commands;
 
 public class SendPassResetLink
 {
-    public class Command : IRequest<bool>
+    public class Command : IRequest
     {
         public string Phone { get; }
 
@@ -17,7 +17,7 @@ public class SendPassResetLink
         }
     }
 
-    public class Handler : IRequestHandler<Command, bool>
+    public class Handler : IRequestHandler<Command>
     {
         private readonly UserProcessor _processor;
 
@@ -25,9 +25,10 @@ public class SendPassResetLink
         {
             _processor = processor;
         }
-        public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            return await _processor.SendPasswordResetLink(request.Phone);
+            await _processor.SendPasswordResetLink(request.Phone);
+            return Unit.Value;
         }
     }
 }

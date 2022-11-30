@@ -29,7 +29,7 @@
         }
 
 
-        public async Task<List<Services>> BuildServices(List<string> services)
+        public async Task<List<Services>> BuildServices(IEnumerable<string> services)
         {
             var results = new List<Services>();
             foreach (var service in services)

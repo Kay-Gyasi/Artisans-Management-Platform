@@ -1,10 +1,12 @@
-﻿namespace Amp.IntegrationTests.Tests;
+﻿using AMP.WebApi;
+
+namespace Amp.IntegrationTests.Tests;
 
 public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly Fixture _fixture = new();
-    private const string BaseUrl = "api/v1/registration";
+    private const string BaseUrl = "api/v1/registrations";
 
     public RegistrationControllerTests(CustomWebApplicationFactory<Program> factory)
     {
@@ -13,7 +15,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
 
     #region PostUser
     [Fact]
-    public async Task PostCustomer_WithValidInput_ReturnsOkObjectResult()
+    public async Task PostCustomer_WithValidInput_ReturnsCreated()
     {
         // Arrange
         using var client = _factory.CreateClient();
@@ -40,13 +42,51 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         registration.Should().NotBeNull();
         registration.Phone.Should().NotBeNullOrEmpty();
         registration.VerificationCode.Should().NotBeNullOrEmpty();
-        request.StatusCode.Should().HaveFlag(HttpStatusCode.OK);
+        request.StatusCode.Should().Be(HttpStatusCode.Created);
         timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        #endregion
+    }
+
+    [Fact]
+    public async Task PostExistingCustomer_WithValidInput_ReturnsConflict()
+    {
+        // Arrange
+        using var client = _factory.CreateClient();
+        var user = _fixture.Build<UserCommand>()
+            .With(x => x.FirstName, "Conflict")
+            .With(x => x.FamilyName, "Customer")
+            .With(x => x.Type, UserType.Customer)
+            .With(x => x.Contact, new ContactCommand {PrimaryContact = "0255463452"})
+            .With(x => x.Password, "pass")
+            .Without(x => x.Id)
+            .Without(x => x.Image)
+            .Without(x => x.Address)
+            .Without(x => x.ImageId)
+            .Without(x => x.Languages)
+            .Without(x => x.IsRemoved)
+            .Without(x => x.IsSuspended)
+            .Without(x => x.MomoNumber)
+            .Without(x => x.OtherName)
+            .Without(x => x.LevelOfEducation)
+            .Create();
+        var timer = new Stopwatch();
+        var initialRequest = await client.PostAsJsonAsync($"{BaseUrl}/post", user);
+
+        // Act
+        timer.Start();
+        var request = await client.PostAsJsonAsync($"{BaseUrl}/post", user);
+        timer.Stop();
+        
+        //Assert
+        #region Assertions
+        request.StatusCode.Should().Be(HttpStatusCode.Conflict);
+        initialRequest.StatusCode.Should().Be(HttpStatusCode.Created);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         #endregion
     }
     
     [Fact]
-    public async Task PostArtisan_WithValidInput_ReturnsOkObjectResult()
+    public async Task PostArtisan_WithValidInput_ReturnsCreated()
     {
         // Arrange
         using var client = _factory.CreateClient();
@@ -74,14 +114,14 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         registration.Should().NotBeNull();
         registration.Phone.Should().NotBeNullOrEmpty();
         registration.VerificationCode.Should().NotBeNullOrEmpty();
-        request.StatusCode.Should().HaveFlag(HttpStatusCode.OK);
+        request.StatusCode.Should().Be(HttpStatusCode.Created);
         timer.ElapsedMilliseconds.Should().BeLessThan(5000);
         #endregion
     }
     
     [Theory]
     [MemberData(nameof(GetPostMissingValuesUsers))]
-    public async Task PostUser_WithMissingInputs_ReturnsInternalServerError(UserCommand user)
+    public async Task PostUser_WithMissingInputs_ReturnsPreconditionFailed(UserCommand user)
     {
         // Arrange
         using var client = _factory.CreateClient();
@@ -93,10 +133,10 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         timer.Stop();
 
         //Assert
+        request.StatusCode.Should().Be(HttpStatusCode.PreconditionFailed);
         timer.ElapsedMilliseconds.Should().BeLessThan(1250);
-        request.IsSuccessStatusCode.Should().BeFalse();
-        request.StatusCode.Should().HaveFlag(HttpStatusCode.InternalServerError);
     }
+    
     #endregion
 
 
@@ -132,7 +172,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         isRegistrationDeleted.Should().BeNull();
         userInDb.Should().NotBeNull();
         userInDb.IsVerified.Should().BeTrue();
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         #endregion
     }
     
@@ -166,7 +206,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         isRegistrationDeleted.Should().NotBeNull();
         userInDb.Should().NotBeNull();
         userInDb.IsVerified.Should().BeFalse();
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         #endregion
     }
 
@@ -187,11 +227,11 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         
         // Assert
         request.StatusCode.Should().Be(HttpStatusCode.NotFound);
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
     [Fact]
-    public async Task Verify_WithInvalidCodeLength_ReturnsInternalServerError()
+    public async Task Verify_WithInvalidCodeLength_ReturnsPreconditionFailed()
     {
         // Arrange
         using var client = _factory.CreateClient();
@@ -206,9 +246,10 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         timer.Stop();
         
         // Assert
-        request.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
-        timer.ElapsedMilliseconds.Should().BeLessThan(1000);
+        request.StatusCode.Should().Be(HttpStatusCode.PreconditionFailed);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
+    
     #endregion
 
 
@@ -244,7 +285,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         registration.Should().NotBeNull();
         registration.Phone.Should().Be(user.Contact.PrimaryContact);
         request.StatusCode.Should().Be(HttpStatusCode.OK);
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
     [Fact]
@@ -252,20 +293,18 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
     {
         // Arrange
         using var client = _factory.CreateClient();
-        var phone = _fixture.Build<string>().Create();
         var timer = new Stopwatch();
         
         // Act
         timer.Start();
-        var request = await client.GetAsync($"{BaseUrl}/SendCode/phone");
+        var request = await client.GetAsync($"{BaseUrl}/SendCode/0455367245");
         timer.Stop();
         
         // Assert
-        request.IsSuccessStatusCode.Should().BeFalse();
-        timer.ElapsedMilliseconds.Should().BeLessThan(5000);
+        request.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
     
-
     #endregion
     
     
@@ -275,7 +314,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                FirstName = "Test",
+                FirstName = "Test1",
                 Type = UserType.Customer,
                 Contact = new ContactCommand
                 {
@@ -288,7 +327,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                FamilyName = "User",
+                FamilyName = "User2",
                 Type = UserType.Customer,
                 Contact = new ContactCommand
                 {
@@ -301,7 +340,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                FirstName = "Test",
+                FirstName = "Test3",
                 FamilyName = "User",
                 Contact = new ContactCommand
                 {
@@ -314,7 +353,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                FirstName = "Test",
+                FirstName = "Test4",
                 FamilyName = "User",
                 Type = UserType.Customer,
                 Password = "pass"
@@ -324,7 +363,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                FirstName = "Test",
+                FirstName = "Test5",
                 FamilyName = "User",
                 Type = UserType.Customer,
                 Contact = new ContactCommand
@@ -337,7 +376,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                FirstName = "Test",
+                FirstName = "Test6",
                 FamilyName = "User",
                 Type = UserType.Developer,
                 Contact = new ContactCommand
@@ -351,8 +390,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         {
             new UserCommand
             {
-                //FirstName = "Test",
-                FamilyName = "User",
+                FamilyName = "User7",
                 Type = UserType.Administrator,
                 Contact = new ContactCommand
                 {

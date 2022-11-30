@@ -146,7 +146,7 @@ public static class DependencyInjection
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "AMP API V1");
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tukofix API v1");
             c.RoutePrefix = string.Empty;
         });
 
@@ -160,7 +160,7 @@ public static class DependencyInjection
         });
 
         app.UseHttpsRedirection();
-
+        app.UseExceptionHandler("/error");
         app.UseDefaultFiles();
 
         app.UseStaticFiles(new StaticFileOptions()

@@ -1,10 +1,13 @@
-﻿namespace AMP.Processors.Processors;
+﻿using System.Data.Common;
+using AMP.Processors.Exceptions;
+
+namespace AMP.Processors.Processors;
 
 [Processor]
 public class RegistrationProcessor : ProcessorBase
 {
     private readonly ISmsMessaging _smsMessaging;
-    private const string _lookupCacheKey = "Userlookup";
+    private const string LookupCacheKey = "Userlookup";
 
     public RegistrationProcessor(IUnitOfWork uow, IMapper mapper, 
         IMemoryCache cache,
@@ -16,7 +19,7 @@ public class RegistrationProcessor : ProcessorBase
     public async Task<string> Save(UserCommand command)
     {
         var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);
-        if (userExists) return default;
+        if (userExists) throw new UserAlreadyExistsException($"User with contact {command.Contact.PrimaryContact} already exists.");
 
         // decide on isolation level
         var userId = "";
@@ -26,10 +29,14 @@ public class RegistrationProcessor : ProcessorBase
             await using var transaction = Uow.BeginTransaction();
             try
             {
-                var user = await SaveUser(command);
-                var code = await SaveRegistration(command.Contact.PrimaryContact);
+                var saveUserTask = SaveUser(command);
+                var saveRegistrationTask = SaveRegistration(command.Contact.PrimaryContact);
+                await Task.WhenAll(saveUserTask, saveRegistrationTask);
+                var user = await saveUserTask;
+                var code = await saveRegistrationTask;
                 await Uow.SaveChangesAsync();
-                await Task.WhenAll(SendVerificationLink(user.Contact.PrimaryContact, code), PostAsType(user));
+                await Task.WhenAll(SendVerificationLink(user.Contact.PrimaryContact, code),
+                    PostAsType(user, transaction.GetDbTransaction(), Uow.GetDbConnection()));
                 await transaction.CommitAsync();
                 userId = user.Id;
             }
@@ -42,14 +49,13 @@ public class RegistrationProcessor : ProcessorBase
         return userId;
     }
 
-    public async Task<bool> VerifyUser(string phone, string code)
+    public async Task VerifyUser(string phone, string code)
     {
         var isMatch = await Uow.Registrations.Crosscheck(phone, code);
-        if (!isMatch) return false;
+        if (!isMatch) throw new UserVerificationFailedException("Invalid phone/verification code");
 
         await Uow.Registrations.Verify(phone, code);
-        Cache.Remove(_lookupCacheKey);
-        return true;
+        Cache.Remove(LookupCacheKey);
     }
 
     public async Task SendVerificationLink(string phone, string code)
@@ -58,6 +64,7 @@ public class RegistrationProcessor : ProcessorBase
         {
             code = RandomStringHelper.Generate(20, true);
             var registration = await Uow.Registrations.GetByPhone(phone);
+            if (registration is null) throw new NullRegistrationException($"Registration for phone {phone} does not exist");
             registration.HasVerificationCode(code);
             await Uow.SaveChangesAsync();
         }
@@ -65,20 +72,22 @@ public class RegistrationProcessor : ProcessorBase
         await _smsMessaging.Send(new SmsCommand {Message = message.Item1, Recipients = new [] {message.Item2}});
     }
 
-    private async Task PostAsType(Users user)
+    private async Task PostAsType(Users user, DbTransaction transaction, DbConnection connection)
     {
         switch (user.Type)
         {
             case UserType.Artisan:
-                await PostArtisan(user);
+                await PostArtisan(user, transaction, connection);
                 break;
             case UserType.Customer:
-                await PostCustomer(user);
+                await PostCustomer(user, transaction, connection);
                 break;
             case UserType.Developer:
                 break;
             case UserType.Administrator:
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -86,7 +95,7 @@ public class RegistrationProcessor : ProcessorBase
     {
         var user = Users.Create()
             .CreatedOn();
-        var passes = Uow.Users.Register(command);
+        var passes = await Task.FromResult(Uow.Users.Register(command));
         await AssignFields(user, command);
         user.HasPassword(passes.Item1)
             .HasPasswordKey(passes.Item2);
@@ -102,20 +111,20 @@ public class RegistrationProcessor : ProcessorBase
         return verificationCode;
     }
     
-    private async Task PostArtisan(Users user)
+    private async Task PostArtisan(Users user, DbTransaction transaction, DbConnection connection)
     {
-        var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+        var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact, transaction, connection);
         var artisan = Artisans.Create(userId)
             .WithBusinessName(user.DisplayName)
-            .WithDescription(string.Empty)
+            .WithDescription("")
             .CreatedOn();
         await Uow.Artisans.InsertAsync(artisan);
         await Uow.SaveChangesAsync();
     }
     
-    private async Task PostCustomer(Users user)
+    private async Task PostCustomer(Users user, DbTransaction transaction, DbConnection connection)
     {
-        var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact);
+        var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact, transaction, connection);
         var customer = Customers.Create(userId)
             .CreatedOn();
         await Uow.Customers.InsertAsync(customer);
@@ -127,6 +136,7 @@ public class RegistrationProcessor : ProcessorBase
         command.Languages ??= new List<LanguagesCommand>();
         command.Address ??= new AddressCommand();
         command.Contact ??= new ContactCommand();
+        
         var list = command.Languages.Select(lang => lang.Name).ToList();
         var languages = await Uow.Languages.BuildLanguages(list);
         user.WithFirstName(command.FirstName ?? "")

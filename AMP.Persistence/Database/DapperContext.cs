@@ -10,12 +10,12 @@ namespace AMP.Persistence.Database;
 public class DapperContext : IDapperContext
 {  
     private readonly IConfiguration _config;
-    private readonly SqlConnection _db;
+    private readonly IDbConnection _db;
 
     //private const string ConnectionString = "AmpDevDb";
     private const string ConnectionString = "AmpProdDb";
 
-    public  DapperContext(IConfiguration config)
+    public DapperContext(IConfiguration config)
     {
         _config = config;
         _db = new SqlConnection(_config.GetConnectionString(ConnectionString));
@@ -26,14 +26,21 @@ public class DapperContext : IDapperContext
          _db.Dispose();
     }  
 
-    public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
-    {  
-        throw new NotImplementedException();  
+    public async Task<int> Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+    {
+        return await _db.ExecuteAsync(sp, parms, commandType: commandType);
     }  
 
-    public async Task<T> GetAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)  
+    public async Task<T> GetAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
     {
         return (await _db.QueryAsync<T>(sp, parms, commandType: commandType)).FirstOrDefault();  
+    }
+    
+    public async Task<T> GetAsync<T>(string sp, DynamicParameters parms,
+        DbTransaction transaction, DbConnection connection, CommandType commandType = CommandType.StoredProcedure)
+    {
+        return (await connection.QueryAsync<T>(sp, parms, commandType: commandType,
+            transaction: transaction)).FirstOrDefault();  
     }  
 
     public async Task<List<T>> GetAllAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
@@ -41,7 +48,7 @@ public class DapperContext : IDapperContext
         return (await _db.QueryAsync<T>(sp, parms, commandType: commandType)).ToList();  
     }  
 
-    public DbConnection GetDbconnection() => _db;
+    public DbConnection GetDbconnection() => new SqlConnection(_config.GetConnectionString(ConnectionString));
 
     public T Insert<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
     {  

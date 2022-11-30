@@ -1,9 +1,10 @@
-﻿namespace AMP.WebApi.Controllers.v1;
+﻿using AMP.WebApi.Controllers.v1.Base;
+
+namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class OrdersController : BaseControllerv1
 {
-    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     
     /// <summary>
     /// Returns a page of all orders placed in the system (For use by administrators only)

@@ -89,8 +89,7 @@
 
         private async Task AssignFields(Artisans artisan, ArtisanCommand command, bool isNew = false)
         {
-            var names = command.Services.Select(service => service.Name).ToList();
-
+            var names = command.Services.Select(service => service.Name);
             var services = await Uow.Services.BuildServices(names);
             artisan.WithBusinessName(command.BusinessName)
                 .WithDescription(command.Description)

@@ -13,4 +13,9 @@ global using Microsoft.EntityFrameworkCore;
 global using AMP.Processors.Dtos;
 global using AMP.Processors.PageDtos;
 global using AMP.Shared.Domain.Models;
+global using System.Data;
+global using System.Text;
+global using AMP.Processors.Processors.Helpers;
+global using AMP.WebApi;
+
 

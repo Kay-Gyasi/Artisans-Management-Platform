@@ -7,8 +7,8 @@ public class RegistrationRepository : RepositoryBase<Registrations>, IRegistrati
     {
     }
 
-    public async Task<bool> Crosscheck(string phone, string code) 
-        => await GetBaseQuery().AnyAsync(x => x.VerificationCode == code && x.Phone == phone);
+    public Task<bool> Crosscheck(string phone, string code) 
+        => GetBaseQuery().AnyAsync(x => x.VerificationCode == code && x.Phone == phone);
 
     public async Task<Registrations> GetByPhone(string phone) 
         => await GetBaseQuery().FirstOrDefaultAsync(x => x.Phone == phone);

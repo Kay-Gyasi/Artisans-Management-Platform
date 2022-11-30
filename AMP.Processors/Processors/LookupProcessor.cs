@@ -42,7 +42,7 @@
 
         private async Task<List<Lookup>> Get(LookupType type, Func<Task<List<Lookup>>> getter)
         {
-            var cacheKey = string.Join("", new[] { type.ToString(), "lookup" });
+            var cacheKey = string.Join("", type.ToString(), "lookup");
             var cache = Cache.Get<List<Lookup>>(cacheKey);
             if (cache != null) return cache;
             var lookup = await getter.Invoke();

@@ -1,5 +1,8 @@
-﻿using System.Security.Cryptography;
+﻿using System.Data;
+using System.Data.Common;
+using System.Security.Cryptography;
 using System.Text;
+using AMP.Processors.Exceptions;
 using AMP.Processors.Processors.Helpers;
 using AMP.Processors.QueryObjects;
 using AMP.Processors.Repositories.Base;
@@ -18,31 +21,42 @@ namespace AMP.Persistence.Repositories
             _dapperContext = dapperContext;
         }
 
-        public async Task<string> GetIdByPhone(string phone)
+        /// <summary>
+        /// Returns user id.
+        /// </summary>
+        /// <param name="phone">Phone number of user being queried for</param>
+        /// <param name="transaction">The underlying transaction being used for this operation</param>
+        /// <param name="connection">The underlying database connection being used for this operation</param>
+        /// <remarks>
+        /// Using dapper for this operation to prevent irrelevant querying
+        /// </remarks>
+        public async Task<string> GetIdByPhone(string phone, DbTransaction transaction = null, DbConnection connection = null)
         {
-            var user = await GetBaseQuery()
-                .FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
-            return user?.Id;
+            if(connection is not null) return await _dapperContext.GetAsync<string>($"SELECT Id FROM Users WHERE Contact_PrimaryContact = '{phone}'"
+                    .AddBaseFilterToWhereClause(),
+                null, transaction, connection, CommandType.Text);
+            return await _dapperContext.GetAsync<string>($"SELECT Id FROM Users WHERE Contact_PrimaryContact = '{phone}'"
+                    .AddBaseFilterToWhereClause(),
+                null, CommandType.Text);
         }
 
-        public async Task<bool> Exists(string phone)
-        {
-            return await Task.Run(() => GetBaseQuery()
-                .AsNoTracking()
-                .Any(x => x.Contact.PrimaryContact == phone));
-        }
+        // NB: Not doing async/await here cause I don't want to switch threads here and I want the
+        // calling method to do the execution of the task. And because it is safe to do so here because 
+        // I am not trying to catch any exceptions here and also I am not using a using statement
+        public Task<bool> Exists(string phone) 
+            => base.GetBaseQuery().AnyAsync(x => x.Contact.PrimaryContact == phone);
 
-        public async Task<Users> GetByPhone(string phone) 
-            => await GetBaseQuery().FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
+        public Task<Users> GetByPhone(string phone) 
+            => GetBaseQuery().FirstOrDefaultAsync(x => x.Contact.PrimaryContact == phone);
 
         public async Task<Users> GetByPhoneAndConfirmCode(string phone, string confirmCode)
         {
             var user = await GetBaseQuery().FirstOrDefaultAsync(x =>
                 x.Contact.PrimaryContact == phone);
-            if (user is null) return null;
+            if (user is null) throw new InvalidIdException($"Invalid phone");
             var passKeyString = Encoding.UTF8.GetString(user.PasswordKey)
                 .RemoveSpecialCharacters();
-            return passKeyString != confirmCode ? null : user;
+            return passKeyString != confirmCode ? throw new InvalidIdException($"Invalid code") : user;
         }
 
         public override IQueryable<Users> GetBaseQuery()

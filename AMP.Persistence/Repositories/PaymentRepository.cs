@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using AMP.Processors.ExceptionHandlers;
+using AMP.Processors.Exceptions;
 
 namespace AMP.Persistence.Repositories
 {

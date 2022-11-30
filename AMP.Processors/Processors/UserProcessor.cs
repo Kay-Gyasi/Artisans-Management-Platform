@@ -1,9 +1,11 @@
-﻿namespace AMP.Processors.Processors
+﻿using AMP.Processors.Exceptions;
+
+namespace AMP.Processors.Processors
 {
     [Processor]
     public class UserProcessor : ProcessorBase
     {
-        private const string _lookupCacheKey = "Userlookup";
+        private const string LookupCacheKey = "Userlookup";
 
         private readonly IAuthService _authService;
         private readonly ISmsMessaging _smsMessaging;
@@ -22,44 +24,35 @@
             return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
         }
 
-        public async Task<SigninResponse> GetRefreshToken(string userId)
-        {
-            var user = await Uow.Users.GetUserInfoForRefreshToken(userId);
-            return user is null ? null : new SigninResponse { Token = _authService.GenerateToken(user) };
-        }
-
-        public async Task<bool> SendPasswordResetLink(string phone)
+        public async Task SendPasswordResetLink(string phone)
         {
             var user = await Uow.Users.GetByPhone(phone);
-            if (user is null) return false;
+            if (user is null) throw new InvalidIdException($"User with phone: {phone} does not exist.");
 
             var confirmCode = Encoding.UTF8.GetString(user.PasswordKey)
                 .RemoveSpecialCharacters();
             var message = MessageGenerator.SendPasswordResetLink(phone, 
                 confirmCode, user.DisplayName);
             await _smsMessaging.Send(new SmsCommand {Message = message.Item1, Recipients = new[] {message.Item2}});
-            return true;
         }
 
-        public async Task<bool> ResetPassword(ResetPasswordCommand command)
+        public async Task ResetPassword(ResetPasswordCommand command)
         {
             var user = await Uow.Users.GetByPhoneAndConfirmCode(command.Phone, command.ConfirmCode);
-            if (user is null) return false;
-
             var passes = Uow.Users.Register(command.NewPassword);
             user.HasPassword(passes.Item1)
                 .HasPasswordKey(passes.Item2)
                 .SetLastModified();
             await Uow.Users.UpdateAsync(user);
             await Uow.SaveChangesAsync();
-            return true;
         }
 
         public async Task<string> Update(UserCommand command)
         {
             var user = await Uow.Users.GetAsync(command.Id);
+            if (user is null) throw new InvalidIdException($"User with id: {command.Id} does not exist.");
             await AssignFields(user, command);
-            Cache.Remove(_lookupCacheKey);
+            Cache.Remove(LookupCacheKey);
             await Uow.Users.UpdateAsync(user);
             await Uow.SaveChangesAsync();
             return user.Id;
@@ -71,15 +64,20 @@
             return Mapper.Map<PaginatedList<UserPageDto>>(page);
         }
 
-        public async Task<UserDto> Get(string id) 
-            => Mapper.Map<UserDto>(await Uow.Users.GetAsync(id));
+        public async Task<UserDto> Get(string id)
+        {
+            var user = Mapper.Map<UserDto>(await Uow.Users.GetAsync(id));
+            if (user is null) throw new InvalidIdException($"User with id: {id} does not exist.");
+            return user;
+        }
 
         public async Task Delete(string id)
         {
             var user = await Uow.Users.GetAsync(id);
-            user?.SetLastModified();
-            Cache.Remove(_lookupCacheKey);
-            if (user != null) await Uow.Users.SoftDeleteAsync(user);
+            if (user is null) throw new InvalidIdException($"User with id: {id} does not exist.");
+            user.SetLastModified();
+            Cache.Remove(LookupCacheKey);
+            await Uow.Users.SoftDeleteAsync(user);
             await Uow.SaveChangesAsync();
         }
 

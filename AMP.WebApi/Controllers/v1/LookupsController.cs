@@ -1,11 +1,11 @@
 ﻿using AMP.Processors.Processors;
+using AMP.WebApi.Controllers.v1.Base;
 
 namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class LookupsController : BaseControllerv1
 {
-    private string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
     /// <summary>
     /// Returns a lookup of requested type

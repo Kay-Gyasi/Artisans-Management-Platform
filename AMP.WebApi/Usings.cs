@@ -6,7 +6,6 @@ global using Serilog;
 global using AMP.Application;
 global using AMP.Persistence;
 global using AMP.Processors;
-global using AMP.WebApi.Controllers.Base;
 global using System.Security.Claims;
 global using AMP.Application.Features.Commands;
 global using AMP.Application.Features.Queries;

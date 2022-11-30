@@ -34,4 +34,7 @@ finally
 
 app.ConfigurePipeline();
 
-public partial class Program { }
+namespace AMP.WebApi
+{
+    public partial class Program { }
+}
