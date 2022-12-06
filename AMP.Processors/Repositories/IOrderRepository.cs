@@ -31,5 +31,7 @@ namespace AMP.Processors.Repositories
         Task AcceptRequest(string orderId);
         Task CancelRequest(string orderId);
         Task SetCost(SetCostCommand costCommand);
+        DbContext GetDbContext();
+        Task DeleteAsync(string id);
     }
 }

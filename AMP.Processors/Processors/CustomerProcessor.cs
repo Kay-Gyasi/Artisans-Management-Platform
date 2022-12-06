@@ -1,4 +1,6 @@
-﻿namespace AMP.Processors.Processors
+﻿using AMP.Processors.Exceptions;
+
+namespace AMP.Processors.Processors
 {
 
     [Processor]
@@ -42,21 +44,22 @@
 
         public async Task<CustomerDto> Get(string id)
         {
-            return Mapper.Map<CustomerDto>(await Uow.Customers.GetAsync(id));
+            var customerDto = Mapper.Map<CustomerDto>(await Uow.Customers.GetAsync(id));
+            if (customerDto is null) throw new InvalidIdException($"Customer with id: {id} does not exist");
+            return customerDto;
         }
 
         public async Task<CustomerDto> GetByUserId(string userId)
         {
-            return Mapper.Map<CustomerDto>(await Uow.Customers.GetByUserIdAsync(userId));
+            var customer = Mapper.Map<CustomerDto>(await Uow.Customers.GetByUserIdAsync(userId));
+            if (customer is null) throw new InvalidIdException($"Customer with userId: {userId} does not exist");
+            return customer;
         }
 
         public async Task Delete(string id)
         {
-            var customer = await Uow.Customers.GetAsync(id);
-            customer?.SetLastModified();
+            await Uow.Customers.DeleteAsync(id);
             Cache.Remove(LookupCacheKey);
-            if (customer != null) await Uow.Customers.SoftDeleteAsync(customer);
-            await Uow.SaveChangesAsync();
         }
 
     }

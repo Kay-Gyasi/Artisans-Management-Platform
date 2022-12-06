@@ -10,10 +10,10 @@ public class SaveArtisanValidator : AbstractValidator<SaveArtisan.Command>
         RuleFor(x => x.ArtisanCommand.UserId)
             .NotNull()
             .NotEmpty()
-            .Must(x => x != "string");
+            .NotEqual("string");
         RuleFor(x => x.ArtisanCommand.BusinessName)
             .NotNull()
             .NotEmpty()
-            .Must(x => x != "string");
+            .NotEqual("string");
     }
 }

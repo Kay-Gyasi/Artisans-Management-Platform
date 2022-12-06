@@ -1,4 +1,6 @@
-﻿namespace AMP.Processors.Processors
+﻿using AMP.Processors.Exceptions;
+
+namespace AMP.Processors.Processors
 {
     [Processor]
     public class ArtisanProcessor : ProcessorBase
@@ -58,6 +60,7 @@
         public async Task<ArtisanDto> Get(string id)
         {
             var artisan = Mapper.Map<ArtisanDto>(await Uow.Artisans.GetAsync(id));
+            if (artisan is null) throw new InvalidIdException($"Artisan with id: {id} does not exist");
             artisan.NoOfOrders = await Uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = Uow.Ratings.GetCount(artisan.Id);
             artisan.Rating = Uow.Ratings.GetRating(artisan.Id);
@@ -67,24 +70,20 @@
         public async Task<ArtisanDto> GetByUserId(string userId)
         {
             var artisan = Mapper.Map<ArtisanDto>(await Uow.Artisans.GetArtisanByUserId(userId));
+            if (artisan is null) throw new InvalidIdException($"Artisan with userId: {userId} does not exist");
             artisan.NoOfOrders = await Uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = Uow.Ratings.GetCount(artisan.Id);
             artisan.Rating = Uow.Ratings.GetRating(artisan.Id);
             return artisan;
         }
 
-        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(string userId)
-        {
-            return await Task.Run(() => Uow.Artisans.GetArtisansWhoHaveWorkedForCustomer(userId));
-        }
+        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(string userId) 
+            => await Uow.Artisans.GetArtisansWhoHaveWorkedForCustomer(userId);
 
         public async Task Delete(string id)
         {
-            var artisan = await Uow.Artisans.GetAsync(id);
-            artisan?.SetLastModified();
+            await Uow.Artisans.DeleteAsync(id);
             Cache.Remove(LookupCacheKey);
-            if (artisan != null) await Uow.Artisans.SoftDeleteAsync(artisan);
-            await Uow.SaveChangesAsync();
         }
 
         private async Task AssignFields(Artisans artisan, ArtisanCommand command, bool isNew = false)

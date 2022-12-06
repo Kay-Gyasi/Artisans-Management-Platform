@@ -1,6 +1,4 @@
-﻿using AMP.WebApi.Controllers.v1.Base;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize(Roles = "Customer")]
 public class DisputesController : BaseControllerv1

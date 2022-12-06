@@ -1,6 +1,4 @@
-﻿using AMP.WebApi.Controllers.v1.Base;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class UsersController : BaseControllerv1
@@ -9,15 +7,22 @@ public class UsersController : BaseControllerv1
     /// <summary>
     /// Returns a page of users on the system
     /// </summary>
+    /// <response code="200">Operation completed successfully</response>
+    /// <response code="404">Operation failed</response>
+    /// <response code="403">You do not have permission to access this resource</response>
+    [Authorize(Roles = "Administrator, Developer")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<PaginatedList<UserPageDto>> GetPage(PaginatedCommand command)
         => await Mediator.Send(new GetUserPage.Query(command));
 
     /// <summary>
     /// Returns details of a user
     /// </summary>
+    /// <response code="200">User found and returned successfully</response>
+    /// <response code="404">User with provided id was not found</response>
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -58,6 +63,7 @@ public class UsersController : BaseControllerv1
     /// <response code="200">Log in was successful</response>
     /// <response code="204">Log in was not successful because of invalid credentials</response>
     [AllowAnonymous]
+    [EnableRateLimiting("Unauthorized")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

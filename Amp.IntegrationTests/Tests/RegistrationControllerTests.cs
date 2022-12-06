@@ -1,6 +1,4 @@
-﻿using AMP.WebApi;
-
-namespace Amp.IntegrationTests.Tests;
+﻿namespace Amp.IntegrationTests.Tests;
 
 public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
@@ -28,9 +26,9 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         timer.Stop();
         
         //Assert
-        var userInDb = await _factory.UnitOfWork.Users.GetByPhone(user?.Contact.PrimaryContact);
-        var userInCustomersDb = await _factory.UnitOfWork.Customers.GetByUserIdAsync(userInDb?.Id);
-        var registration = await _factory.UnitOfWork.Registrations.GetByPhone(user?.Contact.PrimaryContact);
+        var userInDb =await _factory.UnitOfWork.Users.GetByPhone(user.Contact.PrimaryContact);
+        var userInCustomersDb = await _factory.UnitOfWork.Customers.GetByUserIdAsync(userInDb.Id);
+        var registration = await _factory.UnitOfWork.Registrations.GetByPhone(user.Contact.PrimaryContact);
 
         #region Assertions
         userInDb.Should().NotBeNull();
@@ -40,8 +38,8 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         userInDb?.Type.Should().Be(UserType.Customer);
         userInCustomersDb.Should().NotBeNull();
         registration.Should().NotBeNull();
-        registration.Phone.Should().NotBeNullOrEmpty();
-        registration.VerificationCode.Should().NotBeNullOrEmpty();
+        registration?.Phone.Should().NotBeNullOrEmpty();
+        registration?.VerificationCode.Should().NotBeNullOrEmpty();
         request.StatusCode.Should().Be(HttpStatusCode.Created);
         timer.ElapsedMilliseconds.Should().BeLessThan(5000);
         #endregion
@@ -99,9 +97,9 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         timer.Stop();
         
         //Assert
-        var userInDb = await _factory.UnitOfWork.Users.GetByPhone(user?.Contact.PrimaryContact);
-        var userInArtisansDb = await _factory.UnitOfWork.Artisans.GetArtisanByUserId(userInDb?.Id);
-        var registration = await _factory.UnitOfWork.Registrations.GetByPhone(user?.Contact.PrimaryContact);
+        var userInDb = await _factory.UnitOfWork.Users.GetByPhone(user.Contact.PrimaryContact);
+        var userInArtisansDb = await _factory.UnitOfWork.Artisans.GetArtisanByUserId(userInDb.Id);
+        var registration = await _factory.UnitOfWork.Registrations.GetByPhone(user.Contact.PrimaryContact);
 
         #region Assertions
         userInDb.Should().NotBeNull();
@@ -110,10 +108,10 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         userInDb?.Contact.PrimaryContact.Should().NotBeNullOrEmpty();
         userInDb?.Type.Should().Be(UserType.Artisan);
         userInArtisansDb.Should().NotBeNull();
-        userInArtisansDb.BusinessName.Should().NotBeNullOrEmpty();
+        userInArtisansDb?.BusinessName.Should().NotBeNullOrEmpty();
         registration.Should().NotBeNull();
-        registration.Phone.Should().NotBeNullOrEmpty();
-        registration.VerificationCode.Should().NotBeNullOrEmpty();
+        registration?.Phone.Should().NotBeNullOrEmpty();
+        registration?.VerificationCode.Should().NotBeNullOrEmpty();
         request.StatusCode.Should().Be(HttpStatusCode.Created);
         timer.ElapsedMilliseconds.Should().BeLessThan(5000);
         #endregion
@@ -156,7 +154,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         timer.Start();
         var request =
             await client.GetAsync(
-                $"{BaseUrl}/verify/{user.Contact.PrimaryContact}/{registration.VerificationCode}",
+                $"{BaseUrl}/verify/{user.Contact.PrimaryContact}/{registration?.VerificationCode}",
                 new CancellationToken());
         timer.Stop();
 
@@ -171,7 +169,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         request.StatusCode.Should().Be(HttpStatusCode.OK);
         isRegistrationDeleted.Should().BeNull();
         userInDb.Should().NotBeNull();
-        userInDb.IsVerified.Should().BeTrue();
+        userInDb?.IsVerified.Should().BeTrue();
         timer.ElapsedMilliseconds.Should().BeLessThan(2000);
         #endregion
     }
@@ -283,7 +281,7 @@ public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFac
         // Assert
         postUser.IsSuccessStatusCode.Should().BeTrue();
         registration.Should().NotBeNull();
-        registration.Phone.Should().Be(user.Contact.PrimaryContact);
+        registration?.Phone.Should().Be(user.Contact.PrimaryContact);
         request.StatusCode.Should().Be(HttpStatusCode.OK);
         timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }

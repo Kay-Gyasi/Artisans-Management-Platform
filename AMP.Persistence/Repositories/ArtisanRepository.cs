@@ -1,20 +1,39 @@
-﻿namespace AMP.Persistence.Repositories
+﻿using System.Data;
+using AMP.Processors.Exceptions;
+using AMP.Processors.Repositories.Base;
+
+namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class ArtisanRepository : RepositoryBase<Artisans>, IArtisanRepository
     {
-        public ArtisanRepository(AmpDbContext context, ILogger<Artisans> logger) : base(context, logger)
+        private readonly IDapperContext _dapperContext;
+
+        public ArtisanRepository(AmpDbContext context, ILogger<Artisans> logger,
+            IDapperContext dapperContext) : base(context, logger)
         {
+            _dapperContext = dapperContext;
+        }
+        
+        public async Task DeleteAsync(string id)
+        {
+            var rows = await _dapperContext.Execute(
+                "UPDATE Artisans SET EntityStatus = 'Deleted', DateModified = GETDATE() " +
+                $"WHERE Id = '{id}'",
+                null,
+                CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Artisan with id: {id} does not exist");
         }
 
-        public List<Lookup> GetArtisansWhoHaveWorkedForCustomer(string userId)
+        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(string userId)
         {
-            var artisans = GetBaseQuery().Where(x => x.Orders.Any(a => a.Customer.UserId == userId));
-            return artisans.Select(x => new Lookup
+            var artisans = GetBaseQuery()
+                .Where(x => x.Orders.Any(a => a.Customer.UserId == userId));
+            return await artisans.Select(x => new Lookup
             {
                 Id = x.Id,
                 Name = x.BusinessName
-            }).ToList();
+            }).ToListAsync();
         }
 
         public async Task<Artisans> GetArtisanByUserId(string userId) 

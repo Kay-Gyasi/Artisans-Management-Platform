@@ -1,10 +1,28 @@
-﻿namespace AMP.Persistence.Repositories
+﻿using System.Data;
+using AMP.Processors.Exceptions;
+using AMP.Processors.Repositories.Base;
+
+namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class CustomerRepository : RepositoryBase<Customers>, ICustomerRepository
     {
-        public CustomerRepository(AmpDbContext context, ILogger<Customers> logger) : base(context, logger)
+        private readonly IDapperContext _dapperContext;
+
+        public CustomerRepository(AmpDbContext context, ILogger<Customers> logger,
+            IDapperContext dapperContext) : base(context, logger)
         {
+            _dapperContext = dapperContext;
+        }
+        
+        public async Task DeleteAsync(string id)
+        {
+            var rows = await _dapperContext.Execute(
+                "UPDATE Customers SET EntityStatus = 'Deleted', DateModified = GETDATE() " +
+                $"WHERE Id = '{id}'",
+                null,
+                CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Customer with id: {id} does not exist");
         }
 
         public override IQueryable<Customers> GetBaseQuery()

@@ -1,6 +1,4 @@
-﻿using AMP.WebApi.Controllers.v1.Base;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 [Authorize]
 public class PaymentsController : BaseControllerv1

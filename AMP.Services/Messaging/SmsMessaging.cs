@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AMP.Processors.Exceptions;
 using AMP.Processors.Messaging;
-using Microsoft.Extensions.Logging;
 
 namespace AMP.Services.Messaging
 {

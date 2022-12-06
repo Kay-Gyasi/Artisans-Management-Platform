@@ -1,6 +1,4 @@
-﻿using AMP.WebApi.Controllers.v1.Base;
-
-namespace AMP.WebApi.Controllers.v1
+﻿namespace AMP.WebApi.Controllers.v1
 {
     public class AdministrationsControllerv1 : BaseControllerv1
     {

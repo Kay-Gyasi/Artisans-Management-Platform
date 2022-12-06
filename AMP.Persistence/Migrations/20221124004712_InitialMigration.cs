@@ -1,8 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿
 
 #nullable disable
 
+using System;
+using System.Text;
+using Microsoft.EntityFrameworkCore.Migrations;
 namespace AMP.Persistence.Migrations
 {
     public partial class InitialMigration : Migration

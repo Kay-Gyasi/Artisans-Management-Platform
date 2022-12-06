@@ -12,5 +12,5 @@ public interface IDapperContext : IDisposable
     Task<List<T>> GetAllAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
     Task<int> Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
     T Insert<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
-    T Update<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
+    Task<int> Update(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);    
 }

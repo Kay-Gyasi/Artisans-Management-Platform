@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects.Base;
 
@@ -13,8 +14,7 @@ namespace AMP.Domain.ValueObjects
         public string StreetAddress { get; private set; }
         public string StreetAddress2 { get; private set; }
 
-        private Address(){}
-
+        public Address(){}
         private Address(string city, string address)
         {
             StreetAddress = address;

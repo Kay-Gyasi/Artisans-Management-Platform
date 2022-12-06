@@ -11,7 +11,7 @@
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.ArtisansController.GetPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
-            Returns a page of all active artisans (For use by administrators only)
+            Returns a page of all available artisans for a specific service
             </summary>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.ArtisansController.Get(System.String)">
@@ -124,6 +124,9 @@
             <summary>
             Returns a page of all orders placed in the system (For use by administrators only)
             </summary>
+            <response code="200">Operation completed successfully</response>
+            <response code="404">Operation failed</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.GetSchedulePage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
@@ -131,34 +134,44 @@
             </summary>
             <response code="200">Request execution was successful and appropriate response has been returned</response>
             <response code="404">Request execution was successful but no data was found</response>
-            <response code="500">A server or command validation error has occurred</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.GetRequestPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
             Returns a page of order requests made to requesting artisan
             </summary>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="404">Request execution was successful but no data was found</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.GetHistoryPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
-            Returns a page of completed orders worked on by requesting artisan (For use by artisans only)
+            Returns a page of completed orders worked on by requesting artisan
             </summary>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="404">Request execution was successful but no data was found</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.GetOrderHistoryPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
-            Returns a page of completed orders which were placed by requesting customer (For use by customers only)
+            Returns a page of completed orders which were placed by requesting customer
             </summary>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="404">Request execution was successful but no data was found</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.GetCustomerOrderPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
             Returns a page of active orders which were placed by requesting customer
             </summary>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="404">Request execution was successful but no data was found</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.Get(System.String)">
             <summary>
             Returns details about an order
             </summary>
-            <param name="id"></param>
-            <returns></returns>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.OrdersController.Insert(AMP.Processors.Commands.OrderCommand)">
             <summary>
@@ -268,16 +281,22 @@
             <summary>
             Adds a new unverified account to the system
             </summary>
+            <response code="201">User has been created and added to system successfully</response>
+            <response code="409">A user with the contact provided already exists in the system</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.RegistrationsController.Verify(System.String,System.String)">
             <summary>
             Verifies an account
             </summary>
+            <response code="200">User has been verified successfully</response>
+            <response code="404">The phone/verification code provided was invalid</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.RegistrationsController.SendCode(System.String)">
             <summary>
             Sends a verification link by sms to requesting user
             </summary>
+            <response code="200">Verification link has been sent successfully</response>
+            <response code="404">The phone provided was invalid</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.ServicesController.GetPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
@@ -306,42 +325,51 @@
             <summary>
             Returns a page of users on the system
             </summary>
+            <response code="200">Operation completed successfully</response>
+            <response code="404">Operation failed</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Get(System.String)">
             <summary>
             Returns details of a user
             </summary>
+            <response code="200">User found and returned successfully</response>
+            <response code="404">User with provided id was not found</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Update(AMP.Processors.Commands.UserCommand)">
             <summary>
             Updates a user's info
             </summary>
+            <response code="200">User has been updated successfully</response>
+            <response code="404">User being considered does not exist</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Delete(System.String)">
             <summary>
             Removes a user from the system
             </summary>
+            <response code="204">User has been deleted successfully</response>
+            <response code="404">User with id provided does not exist</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Login(AMP.Processors.Commands.SigninCommand)">
             <summary>
             Returns an authorization token which a user can use to access resources on the system 
             </summary>
-        </member>
-        <member name="M:AMP.WebApi.Controllers.v1.UsersController.GetRefreshToken">
-            <summary>
-            Returns a refresh token for user
-            </summary>
-            <returns></returns>
+            <response code="200">Log in was successful</response>
+            <response code="204">Log in was not successful because of invalid credentials</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.SendPasswordResetLink(System.String)">
             <summary>
             Sends a link by which user can reset their password
             </summary>
+            <response code="200">Password reset link has been sent successfully</response>
+            <response code="404">User with phone provided does not exist</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.ResetPassword(System.String,System.String,System.String)">
             <summary>
             Resets requesting user's password
             </summary>
+            <response code="200">Password has been reset successfully</response>
+            <response code="404">Invalid phone/code</response>
         </member>
     </members>
 </doc>

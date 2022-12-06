@@ -1,15 +1,34 @@
-﻿namespace AMP.Persistence.Repositories
+﻿using System.Data;
+using AMP.Processors.Exceptions;
+using AMP.Processors.Repositories.Base;
+
+namespace AMP.Persistence.Repositories
 {
     [Repository]
     public class OrderRepository : RepositoryBase<Orders>, IOrderRepository
     {
-        public OrderRepository(AmpDbContext context, ILogger<Orders> logger) : base(context, logger)
+        private readonly IDapperContext _dapperContext;
+
+        public OrderRepository(AmpDbContext context, ILogger<Orders> logger,
+            IDapperContext dapperContext) : base(context, logger)
         {
+            _dapperContext = dapperContext;
         }
-        
+
+        public async Task DeleteAsync(string id)
+        {
+            var rows = await _dapperContext.Execute(
+                "UPDATE Orders SET EntityStatus = 'Deleted', DateModified = GETDATE() " +
+                $"WHERE Id = '{id}'",
+                null,
+                CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {id} does not exist");
+        }
+
         public Task<List<Lookup>> GetOpenOrdersLookup(string userId)
         {
-            return base.GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete).Select(x => new Lookup()
+            return base.GetBaseQuery().Where(x => x.Customer.UserId == userId && !x.IsComplete)
+                .Select(x => new Lookup()
                 {
                     Id = x.Id,
                     Name = x.Description
@@ -19,51 +38,51 @@
       
         public async Task Complete(string orderId)
         {
-            var order = await base.GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId && x.IsArtisanComplete);
-            if (order is null) return;
-            order?.WithStatus(OrderStatus.Completed)
-                .IsCompleted(true);
-            order?.SetLastModified();
-            await UpdateAsync(order);
+            var rows = await _dapperContext.Execute(
+                $"UPDATE Orders SET Status = 'Completed', IsComplete = 1, DateModified = GETDATE() " +
+                $"WHERE Id = '{orderId}' AND IsArtisanComplete = 1",
+                null, CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
         }
         
         public async Task ArtisanComplete(string orderId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order?.IsArtisanCompleted(true);
-            order?.SetLastModified();
-            await UpdateAsync(order);
+            var rows = await _dapperContext.Execute(
+                $"UPDATE Orders SET IsArtisanComplete = 1, DateModified = GETDATE() WHERE Id = '{orderId}'",
+                null, CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
         }
 
         public async Task AcceptRequest(string orderId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order?.RequestAccepted(true);
-            order?.SetLastModified();
-            await UpdateAsync(order);
+            var rows = await _dapperContext.Execute(
+                $"UPDATE Orders SET IsRequestAccepted = 1, DateModified = GETDATE() WHERE Id = '{orderId}'",
+                null, CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
         }
         
         public async Task CancelRequest(string orderId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order?.RequestAccepted(false);
-            order?.SetLastModified();
-            await UpdateAsync(order);
+            var rows = await _dapperContext.Execute(
+                $"UPDATE Orders SET IsRequestAccepted = 0, DateModified = GETDATE() WHERE Id = '{orderId}'",
+                null, CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
         }
 
         public async Task UnassignArtisan(string orderId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order?.ForArtisanWithId(null);
-            order?.SetLastModified();
-            await UpdateAsync(order);
+            var rows = await _dapperContext.Execute(
+                $"UPDATE Orders SET ArtisanId = NULL, DateModified = GETDATE() WHERE Id = '{orderId}'",
+             null, CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
         }
 
         public async Task AssignArtisan(string orderId, string artisanId)
         {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
-            order?.ForArtisanWithId(artisanId);
-            order?.SetLastModified();
+            var order = await base.GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
+            if (order is null) throw new InvalidIdException($"Order with id: {orderId} does not exist");
+            order.ForArtisanWithId(artisanId);
+            order.SetLastModified();
             await UpdateAsync(order);
 
             await Context.Requests.AddAsync(Requests.Create(order?.CustomerId, artisanId, orderId));
@@ -126,6 +145,8 @@
                 .CountAsync(x => x.ArtisanId == artisanId);
         }
 
+        public DbContext GetDbContext() => Context;
+
         public override IQueryable<Orders> GetBaseQuery()
         {
             return base.GetBaseQuery()
@@ -135,7 +156,26 @@
                 .Include(x => x.Customer)
                 .ThenInclude(a => a.User);
         }
-
+        
+        public override Task<List<Lookup>> GetLookupAsync()
+        {
+            return GetBaseQuery()
+                .AsNoTracking()
+                .Select(x => new Lookup()
+                {
+                    Id = x.Id,
+                    Name = x.Description
+                }).OrderBy(x => x.Name)
+                .ToListAsync();
+        }
+        public async Task SetCost(SetCostCommand costCommand)
+        {
+            var rows = await _dapperContext.Execute(
+                $"UPDATE Orders SET Cost = {costCommand.Cost}, DateModified = GETDATE() WHERE Id = '{costCommand.OrderId}'",
+                null, CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Order with id: {costCommand.OrderId} does not exist");
+        }
+        
         // NOTE:: .StartsWith() => search%, .Contains() => %search%
         protected override Expression<Func<Orders, bool>> GetSearchCondition(string search)
         {
@@ -146,24 +186,6 @@
                         || x.WorkAddress.StreetAddress.ToLower().Contains(search.ToLower())
                         || x.WorkAddress.StreetAddress2.ToLower().Contains(search.ToLower());
             
-        }
-
-        public override Task<List<Lookup>> GetLookupAsync()
-        {
-            return GetBaseQuery()
-                .AsNoTracking()
-                .Select(x => new Lookup()
-            {
-                Id = x.Id,
-                Name = x.Description
-            }).OrderBy(x => x.Name)
-                .ToListAsync();
-        }
-        public async Task SetCost(SetCostCommand costCommand)
-        {
-            var order = await GetBaseQuery().FirstOrDefaultAsync(x => x.Id == costCommand.OrderId);
-            order?.WithCost(costCommand.Cost);
-            order?.SetLastModified();
         }
     }
 }

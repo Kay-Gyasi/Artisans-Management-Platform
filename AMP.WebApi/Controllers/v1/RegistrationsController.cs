@@ -1,6 +1,4 @@
-﻿using AMP.WebApi.Controllers.v1.Base;
-
-namespace AMP.WebApi.Controllers.v1;
+﻿namespace AMP.WebApi.Controllers.v1;
 
 public class RegistrationsController : BaseControllerv1
 {
@@ -9,6 +7,7 @@ public class RegistrationsController : BaseControllerv1
     /// </summary>
     /// <response code="201">User has been created and added to system successfully</response>
     /// <response code="409">A user with the contact provided already exists in the system</response>
+    [EnableRateLimiting("Unauthorized")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -23,6 +22,7 @@ public class RegistrationsController : BaseControllerv1
     /// </summary>
     /// <response code="200">User has been verified successfully</response>
     /// <response code="404">The phone/verification code provided was invalid</response>
+    [EnableRateLimiting("Messaging")]
     [HttpGet("{phone}/{code}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -37,6 +37,7 @@ public class RegistrationsController : BaseControllerv1
     /// </summary>
     /// <response code="200">Verification link has been sent successfully</response>
     /// <response code="404">The phone provided was invalid</response>
+    [EnableRateLimiting("Messaging")]
     [HttpGet("{phone}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

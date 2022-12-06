@@ -11,6 +11,10 @@ public class SaveOrderValidator : AbstractValidator<SaveOrder.Command>
             .NotNull()
             .NotEmpty()
             .Must(x => x != "string");
+        RuleFor(x => x.OrderCommand.Id)
+            .NotNull()
+            .NotEmpty()
+            .Must(x => x != "string");
         RuleFor(x => x.OrderCommand.Description)
             .NotNull()
             .NotEmpty();

@@ -1,12 +1,7 @@
-﻿using System.Reflection;
-using AMP.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AMP.Services;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Text;
 using AMP.Processors.HealthChecks;
+using AMP.WebApi.Installers;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using ILogger = Serilog.ILogger;
 
@@ -14,7 +9,7 @@ namespace AMP.WebApi;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddAmp(this IServiceCollection services, IConfiguration configuration,
+    public static void AddAmp(this IServiceCollection services, IConfiguration configuration,
         ILogger logger)
     {
         services.AddPersistence(configuration)
@@ -30,19 +25,9 @@ public static class DependencyInjection
             .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration)
             .AddSmsMessaging()
+            .AddRateLimiting()
             .AddWorkers()
-            .AddCors(options =>
-            {
-                options.AddDefaultPolicy(policy =>
-                {
-                    policy.WithOrigins("http://localhost:4200", "https://www.tukofix.com", "https://tukofix.com")
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials();
-                });
-            });        
-        return services;
+            .InstallCors();
     }
 
     private static IServiceCollection AddDefaultConfig(this IServiceCollection services)
@@ -55,75 +40,7 @@ public static class DependencyInjection
         services.AddEndpointsApiExplorer();
         return services;
     }
-
-    private static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
-    {
-        services.AddSwaggerGen(opt =>
-        {
-            opt.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "Tukofix API",
-                Version = "1",
-                Contact = new OpenApiContact
-                {
-                    Name = "Kofi Gyasi",
-                    Email = "kofigyasidev@gmail.com",
-                    Url = new Uri("https://kaygyasi.vercel.app/")
-                }
-            });
-            opt.CustomOperationIds(apiDescription => apiDescription.TryGetMethodInfo(out var methodInfo)
-                ? methodInfo.Name
-                : apiDescription.RelativePath);
-            opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Description = "JWT Authorization using the bearer scheme",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey
-            });
-            opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {new OpenApiSecurityScheme{Reference = new OpenApiReference()
-                {
-                    Id = "Bearer",
-                    Type = ReferenceType.SecurityScheme
-                }}, new List<string>()}
-            });
-
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            opt.IncludeXmlComments(xmlPath);
-            
-            // manipulate examples (requests and responses)
-        });
-        return services;
-    }
-
-    private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
-    {
-        var secretKey = configuration["Jwt:Key"];
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(opts =>
-            {
-                opts.MapInboundClaims = true;
-                opts.SaveToken = true;
-                //opts.RequireHttpsMetadata = true;
-                opts.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = configuration["Jwt:Issuer"],
-                    ValidAudience = configuration["Jwt:Audience"],
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    IssuerSigningKey = key,
-                    RoleClaimType = ClaimTypes.Role,
-                    NameClaimType = ClaimTypes.Name
-                };
-            });
-       return services;
-    }
-
+    
     public static WebApplication AddApplicationBuilder(this WebApplicationBuilder builder, ILogger logger)
     {
         builder.Host.UseSerilog(logger);
@@ -179,8 +96,10 @@ public static class DependencyInjection
 
         app.UseAuthorization();
 
-        app.MapControllers();
+        app.UseRateLimiter();
 
+        app.MapControllers();
+        
         app.Run();
     }
 }

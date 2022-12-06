@@ -1,5 +1,9 @@
-﻿using Amp.IntegrationTests.Stubs;
+﻿using Amp.IntegrationTests.Helpers;
+using Amp.IntegrationTests.Stubs;
+using AMP.Processors.Exceptions;
+using AMP.Processors.Messaging;
 using AMP.Processors.Repositories.Base;
+using AMP.Processors.Workers.BackgroundWorker;
 
 namespace Amp.IntegrationTests;
 
@@ -33,15 +37,19 @@ public class CustomWebApplicationFactory<TStartup>
             services.Remove(descriptor);
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=YOGA-X1;Integrated Security=True;Initial Catalog=AmpTestDb;Encrypt=False;");
+                options.UseSqlServer(StartupHelper.ConnectionString);
             });
+            services.Remove(services.SingleOrDefault(d => 
+                d.ServiceType.FullName == StartupHelper.RateLimiterName));
+            services.AddRateLimitingStub();
             services.Remove(services.SingleOrDefault(d => d.ServiceType == typeof(IDapperContext)));
-            services.AddScoped<IDapperContext, DapperTestContext>();
+            services.AddScoped<IDapperContext, DapperContextStub>();
+            services.Remove(services.SingleOrDefault(d => d.ServiceType == typeof(IBackgroundWorker)));
+            services.AddScoped<IBackgroundWorker, BackgroundWorkerStub>();
             
             var sp = services.BuildServiceProvider();
             _scope = sp.CreateScope();
             var scopedServices = _scope.ServiceProvider;
-            var configuration = scopedServices.GetRequiredService<IConfiguration>();
 
             sp = services.BuildServiceProvider();
             _scope = sp.CreateScope();
@@ -56,8 +64,12 @@ public class CustomWebApplicationFactory<TStartup>
 
             try
             {
-                var sql = configuration["SeedScripts"]?.Replace("\n", "");
-                if(sql is not null) _db.Database.ExecuteSqlRaw(sql.Replace("GO", " "));
+                if (!File.Exists(StartupHelper.StartupScriptsPath)) return;
+                var scripts = File.ReadAllText(StartupHelper.StartupScriptsPath);
+                _db.Database.ExecuteSqlRaw(scripts
+                    .Replace("\n", Environment.NewLine)
+                    .Replace("\r", "")
+                    .Replace("GO", ""));
             }
             catch (Exception ex)
             {
@@ -90,9 +102,9 @@ public class CustomWebApplicationFactory<TStartup>
         var request = await testClient.PostAsJsonAsync("api/v1/users/login", new SigninCommand
         {
             Phone = "0557833216",
-            Password = "pass"
+            Password = "kofi"
         }, new CancellationToken());
-        return (await request.Content.ReadFromJsonAsync<SigninResponse>())?.Token ?? "";
+        return (await request.Content.ReadFromJsonAsync<SigninResponse>())?.Token ?? throw new InvalidIdException();
     }
     
     private static async Task<string> GetTokenForCustomerTestClient(HttpClient testClient)
@@ -102,7 +114,7 @@ public class CustomWebApplicationFactory<TStartup>
             Phone = "0207733247",
             Password = "pass"
         }, new CancellationToken());
-        return (await request.Content.ReadFromJsonAsync<SigninResponse>())?.Token ?? "";
+        return (await request.Content.ReadFromJsonAsync<SigninResponse>())?.Token ?? throw new InvalidIdException();
     }
 
     protected override void Dispose(bool disposing)

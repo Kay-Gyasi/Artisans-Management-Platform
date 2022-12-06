@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using AMP.Processors.Workers;
+using AMP.Processors.Workers.BackgroundWorker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -39,6 +40,7 @@ namespace AMP.Processors
         {
             services.AddHostedService<SmsService>();
             services.AddScoped<MessageGenerator>();
+            services.AddScoped<IBackgroundWorker, BackgroundWorker>();
             services.Configure<HostOptions>(options =>
             {
                 options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.StopHost;

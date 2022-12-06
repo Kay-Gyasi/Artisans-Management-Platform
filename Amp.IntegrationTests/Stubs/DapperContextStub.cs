@@ -1,19 +1,19 @@
-﻿using System.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Amp.IntegrationTests.Helpers;
 using AMP.Processors.Repositories.Base;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace Amp.IntegrationTests.Stubs;
 
-public class DapperTestContext : IDapperContext
+public class DapperContextStub : IDapperContext
 {  
     private readonly IDbConnection _db;
     private readonly string _connectionString;
 
-    public DapperTestContext(IConfiguration configuration)
+    public DapperContextStub()
     {
-        _connectionString = configuration.GetConnectionString("AmpTestDb");
+        _connectionString = StartupHelper.ConnectionString;
         _db = new SqlConnection(_connectionString);
     }  
     
@@ -79,9 +79,10 @@ public class DapperTestContext : IDapperContext
         return result;  
     }  
 
-    public T Update<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)  
+    public async Task<int> Update(string sp, DynamicParameters parms, 
+        CommandType commandType = CommandType.StoredProcedure)  
     {  
-        T result;  
+        int result;  
         try  
         {  
             if (_db.State == ConnectionState.Closed)  
@@ -90,7 +91,7 @@ public class DapperTestContext : IDapperContext
             using var tran = _db.BeginTransaction();  
             try  
             {  
-                result = _db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();  
+                result = await _db.ExecuteAsync(sp, parms, commandType: commandType);
                 tran.Commit();  
             }  
             catch (Exception ex)  
@@ -101,6 +102,7 @@ public class DapperTestContext : IDapperContext
         }  
         catch (Exception ex)  
         {  
+            Console.WriteLine();
             throw;  
         }  
         finally  
@@ -111,4 +113,16 @@ public class DapperTestContext : IDapperContext
 
         return result;  
     }
-}  
+
+    /// <summary>
+    /// Set DateModified field
+    /// </summary>
+    /// <param name="table">Table being worked on</param>
+    /// <param name="whereField">Field for writing WHERE clause (TSql)</param>
+    /// <param name="whereResult">Value for WHERE clause field</param>
+    /// <returns></returns>
+    private async Task<int> SetLastModified(string table, string whereField, string whereResult)
+    {
+        return await _db.ExecuteAsync($"UPDATE {table} SET DateModified = GETDATE() WHERE {whereField} = '{whereResult}'",
+            null, commandType: CommandType.Text);
+    }}  

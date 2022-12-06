@@ -9,22 +9,26 @@
 
         public Task<List<Lookup>> GetAvailableServices()
         {
-            return GetBaseQuery().Where(x => x.Artisans.Any())
+            return GetBaseQuery()
+                .Where(x => x.Artisans.Any())
                 .Select(x => new Lookup()
                 {
                     Id = x.Id,
                     Name = x.Name
                 }).OrderBy(x => x.Name)
-                    .ToListAsync();
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public override Task<List<Lookup>> GetLookupAsync()
         {
-            return GetBaseQuery().Select(x => new Lookup()
+            return GetBaseQuery()
+                .Select(x => new Lookup()
             {
                 Id = x.Id,
                 Name = x.Name
             }).OrderBy(x => x.Name)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -34,7 +38,8 @@
             var results = new List<Services>();
             foreach (var service in services)
             {
-                var build = await GetBaseQuery().FirstOrDefaultAsync(x => x.Name == service);
+                var build = await GetBaseQuery()
+                    .FirstOrDefaultAsync(x => x.Name == service);
                 results.Add(build);
             }
             return results;

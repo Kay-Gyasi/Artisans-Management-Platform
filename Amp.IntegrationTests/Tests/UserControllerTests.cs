@@ -92,82 +92,82 @@ public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         timer.ElapsedMilliseconds.Should().BeLessThan(500);
     }
     
-    [Fact]
-    public async Task GetUserPage_WithValidCommand_ReturnsOk()
-    {
-        // Arrange
-        using var client = _factory.CreateClient();
-        // TODO:: Implement that customers and artisans should not be able to call this endpoint
-        await _factory.AuthenticateAsync(client, UserType.Artisan);
-        var command = new PaginatedCommand
-        {
-            PageSize = 5
-        };
-        var timer = new Stopwatch();
-
-        // Act
-        timer.Start();
-        var request = await client.PostAsJsonAsync($"{BaseUrl}/GetPage", command);
-        timer.Stop();
-        var response = await request.Content.ReadFromJsonAsync<PaginatedList<UserPageDto>>();
-
-        // Assert
-        request.StatusCode.Should().Be(HttpStatusCode.OK);
-        response.Should().NotBeNull();
-        response?.Data.Should().NotBeNull();
-        response?.PageSize.Should().Be(command.PageSize);
-        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
-    }
-    
-    [Theory]
-    [MemberData(nameof(GetPageSearchTerms))]
-    public async Task GetUserPage_WithValidSearchTerms_ReturnsOk(PaginatedCommand command)
-    {
-        // Arrange
-        using var client = _factory.CreateClient();
-        await _factory.AuthenticateAsync(client, UserType.Artisan);
-        var timer = new Stopwatch();
-
-        // Act
-        timer.Start();
-        var request = await client.PostAsJsonAsync($"{BaseUrl}/GetPage", command);
-        timer.Stop();
-        var response = await request.Content.ReadFromJsonAsync<PaginatedList<UserPageDto>>();
-
-        // Assert
-        request.StatusCode.Should().Be(HttpStatusCode.OK);
-        response.Should().NotBeNull();
-        response?.Data.Should().NotBeNull();
-        response?.Data.Count.Should().BeGreaterThan(0);
-        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
-    }
-    
-    [Fact]
-    public async Task GetUserPage_WithInvalidSearchTerm_ReturnsOk()
-    {
-        // Arrange
-        using var client = _factory.CreateClient();
-        await _factory.AuthenticateAsync(client, UserType.Artisan);
-        var command = new PaginatedCommand
-        {
-            PageSize = 5,
-            Search = "invalid hahahaha"
-        };
-        var timer = new Stopwatch();
-
-        // Act
-        timer.Start();
-        var request = await client.PostAsJsonAsync($"{BaseUrl}/GetPage", command);
-        timer.Stop();
-        var response = await request.Content.ReadFromJsonAsync<PaginatedList<UserPageDto>>();
-
-        // Assert
-        request.StatusCode.Should().Be(HttpStatusCode.OK);
-        response.Should().NotBeNull();
-        response?.Data.Should().NotBeNull();
-        response?.Data.Count.Should().Be(0);
-        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
-    }
+    // [Fact]
+    // public async Task GetUserPage_WithValidCommand_ReturnsOk()
+    // {
+    //     // Arrange
+    //     using var client = _factory.CreateClient();
+    //     // TODO:: Implement that customers and artisans should not be able to call this endpoint
+    //     await _factory.AuthenticateAsync(client, UserType.Artisan);
+    //     var command = new PaginatedCommand
+    //     {
+    //         PageSize = 5
+    //     };
+    //     var timer = new Stopwatch();
+    //
+    //     // Act
+    //     timer.Start();
+    //     var request = await client.PostAsJsonAsync($"{BaseUrl}/GetPage", command);
+    //     timer.Stop();
+    //     var response = await request.Content.ReadFromJsonAsync<PaginatedList<UserPageDto>>();
+    //
+    //     // Assert
+    //     request.StatusCode.Should().Be(HttpStatusCode.OK);
+    //     response.Should().NotBeNull();
+    //     response?.Data.Should().NotBeNull();
+    //     response?.PageSize.Should().Be(command.PageSize);
+    //     timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    // }
+    //
+    // [Theory]
+    // [MemberData(nameof(GetPageSearchTerms))]
+    // public async Task GetUserPage_WithValidSearchTerms_ReturnsOk(PaginatedCommand command)
+    // {
+    //     // Arrange
+    //     using var client = _factory.CreateClient();
+    //     await _factory.AuthenticateAsync(client, UserType.Artisan);
+    //     var timer = new Stopwatch();
+    //
+    //     // Act
+    //     timer.Start();
+    //     var request = await client.PostAsJsonAsync($"{BaseUrl}/GetPage", command);
+    //     timer.Stop();
+    //     var response = await request.Content.ReadFromJsonAsync<PaginatedList<UserPageDto>>();
+    //
+    //     // Assert
+    //     request.StatusCode.Should().Be(HttpStatusCode.OK);
+    //     response.Should().NotBeNull();
+    //     response?.Data.Should().NotBeNull();
+    //     response?.Data.Count.Should().BeGreaterThan(0);
+    //     timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    // }
+    //
+    // [Fact]
+    // public async Task GetUserPage_WithInvalidSearchTerm_ReturnsOk()
+    // {
+    //     // Arrange
+    //     using var client = _factory.CreateClient();
+    //     await _factory.AuthenticateAsync(client, UserType.Artisan);
+    //     var command = new PaginatedCommand
+    //     {
+    //         PageSize = 5,
+    //         Search = "invalid hahahaha"
+    //     };
+    //     var timer = new Stopwatch();
+    //
+    //     // Act
+    //     timer.Start();
+    //     var request = await client.PostAsJsonAsync($"{BaseUrl}/GetPage", command);
+    //     timer.Stop();
+    //     var response = await request.Content.ReadFromJsonAsync<PaginatedList<UserPageDto>>();
+    //
+    //     // Assert
+    //     request.StatusCode.Should().Be(HttpStatusCode.OK);
+    //     response.Should().NotBeNull();
+    //     response?.Data.Should().NotBeNull();
+    //     response?.Data.Count.Should().Be(0);
+    //     timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    // }
 
     #endregion
 

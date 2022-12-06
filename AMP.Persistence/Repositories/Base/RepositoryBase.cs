@@ -26,20 +26,23 @@ namespace AMP.Persistence.Repositories.Base
 
         public async Task<T> GetAsync(string id)
         {
-            //if (id <= 0) throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
-            if (string.IsNullOrEmpty(id)) throw new InvalidIdException($"{nameof(id)} cannot be empty!");
+            if (string.IsNullOrEmpty(id)) throw new InvalidIdException($"{id} cannot be empty!");
             var keyProperty = Context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties[0];
             return await GetBaseQuery().FirstOrDefaultAsync(e => EF.Property<string>(e, keyProperty.Name) == id);
         }
 
         public virtual IQueryable<T> GetBaseQuery() 
-            => Entities.Where(x => x.EntityStatus == EntityStatus.Normal);
+            => Entities;
 
         public virtual IQueryable<T> GetDeletedBaseQuery() 
-            => Entities.Where(x => x.EntityStatus == EntityStatus.Deleted);
+            => Entities
+                .Where(x => x.EntityStatus == EntityStatus.Deleted)
+                .IgnoreQueryFilters();
 
         public virtual IQueryable<T> GetArchivedBaseQuery() 
-            => Entities.Where(x => x.EntityStatus == EntityStatus.Archived);
+            => Entities
+                .Where(x => x.EntityStatus == EntityStatus.Archived)
+                .IgnoreQueryFilters();
 
         public async Task<List<T>> GetAllAsync() 
             => await GetBaseQuery().ToListAsync();
@@ -83,9 +86,6 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
                 await Entities.AddAsync(entity);
-                //if (autoCommit)
-                    //await _context.SaveChangesAsync();
-
             }
             catch (Exception ex)
             {
@@ -98,13 +98,11 @@ namespace AMP.Persistence.Repositories.Base
         {
             try
             {
-                if (entities == null)
+                if (entities is null)
                     throw new InvalidEntityException($"{nameof(entities)} cannot be null");
 
                 foreach (var entity in entities)
                     await Entities.AddAsync(entity);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -116,12 +114,10 @@ namespace AMP.Persistence.Repositories.Base
         {
             try
             {
-                if (entities == null)
+                if (entities is null)
                     throw new InvalidEntityException($"{nameof(entities)} cannot be null");
 
                 await Entities.AddRangeAsync(entities, cancellationToken);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
@@ -134,13 +130,10 @@ namespace AMP.Persistence.Repositories.Base
         {
             try
             {
-                if (entity == null)
+                if (entity is null)
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
-                Entities.Update(entity);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync();
-                await Task.CompletedTask;
+                await Task.Run(() => Entities.Update(entity));
             }
             catch (Exception ex)
             {
@@ -153,13 +146,10 @@ namespace AMP.Persistence.Repositories.Base
         {
             try
             {
-                if (entity == null)
+                if (entity is null)
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
-                Entities.Remove(entity);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync(cancellationToken);
-                await Task.CompletedTask;
+                await Task.Run(() => Entities.Remove(entity), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -173,18 +163,15 @@ namespace AMP.Persistence.Repositories.Base
             try
             {
                 if (string.IsNullOrEmpty(id))
-                    throw new InvalidIdException($"{nameof(id)} cannot be less than or equal to 0");
+                    throw new InvalidIdException($"Id cannot be empty");
 
-                var keyProperty = Context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
+                var keyProperty = Context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties[0];
                 var entity = await GetBaseQuery()
                     .FirstOrDefaultAsync(e => EF.Property<string>(e, keyProperty.Name) == id, cancellationToken);
-                if (entity == null)
-                    throw new InvalidEntityException($"{nameof(entity)} cannot be null");
+                if (entity is null)
+                    throw new InvalidIdException($"{nameof(T)} with id: {id} does not exist");
 
-                Entities.Remove(entity);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync(cancellationToken);
-                await Task.CompletedTask;
+                await Task.Run(() => Entities.Remove(entity), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -200,10 +187,7 @@ namespace AMP.Persistence.Repositories.Base
                 if (entities == null)
                     throw new InvalidEntityException($"{nameof(entities)} cannot be null");
 
-                Entities.RemoveRange(entities);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync(cancellationToken);
-                await Task.CompletedTask;
+                await Task.Run(() => Entities.RemoveRange(entities), cancellationToken);
             }
             catch (Exception ex)
             {
@@ -220,14 +204,11 @@ namespace AMP.Persistence.Repositories.Base
                     throw new InvalidEntityException($"{nameof(entity)} cannot be null");
 
                 entity.EntityStatus = EntityStatus.Deleted;
-                await UpdateAsync(entity);
-                //if (autoCommit)
-                //    await _context.SaveChangesAsync();
-                //await Task.CompletedTask;
+                await Task.Run(() => Entities.Update(entity));
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error occurred at SoftDeleteAsync for {nameof(T)}: " + ex.Message);
+                _logger.LogError($"Error occurred while deleting {nameof(T)}: " + ex.Message);
                 throw;
             }
         }

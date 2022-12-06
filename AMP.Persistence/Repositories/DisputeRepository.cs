@@ -17,7 +17,7 @@ namespace AMP.Persistence.Repositories
         public async Task<PaginatedList<Disputes>> GetUserPage(PaginatedCommand paginated, string userId, CancellationToken cancellationToken)
         {
             var customerId = await _dapperContext.GetAsync<string>
-            ($"SELECT Id FROM Customers WHERE (UserId = '{userId}')"
+            ($"SELECT Id FROM Customers WHERE UserId = '{userId}'"
                     .AddBaseFilterToWhereClause(), null,
                 CommandType.Text);
 

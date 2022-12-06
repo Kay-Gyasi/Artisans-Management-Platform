@@ -66,7 +66,6 @@ namespace AMP.Persistence.Repositories.Uow
         public IDbContextTransaction BeginTransaction() => _dbContext.Database.BeginTransaction();
         public IExecutionStrategy GetExecutionStrategy() => _dbContext.Database.CreateExecutionStrategy();
         public DbConnection GetDbConnection() => _dbContext.Database.GetDbConnection();
-        public AmpDbContext GetDbContext() => _dbContext;
 
         public async Task<bool> SaveChangesAsync() 
             => await _dbContext.SaveChangesAsync() > 0;

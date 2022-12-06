@@ -6,12 +6,12 @@
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\admin\AppData\Local\JetBrains\Rider2022.1\resharper-host\temp\Rider\vAny\CoverageData\_Artisans Management Platform.-1694627014\Snapshot\snapshot.utdcvr</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=59a6d007_002D1eff_002D4dfe_002Db599_002D6ea230c355a1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsLocked="True" Name="All tests from &amp;lt;Tests&amp;gt;\&amp;lt;Amp.IntegrationTests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\admin\source\repos\Artisans Management Platform\Amp.IntegrationTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;Amp.IntegrationTests&amp;gt;" /&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8b98d88b_002Def2e_002D4879_002D8780_002D6694912aca45/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
