@@ -1,5 +1,4 @@
-﻿using AMP.Processors.Exceptions.Extensions;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 
 namespace AMP.WebApi.Controllers;
 
@@ -11,6 +10,6 @@ public class ErrorsController : ControllerBase
     public IActionResult Error()
     {
         var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-        return Problem(title: exception?.Message, statusCode: exception?.GetStatusCode());
+        return Problem(title: exception?.Message, statusCode: (int)HttpStatusCode.PreconditionFailed);
     }
 }

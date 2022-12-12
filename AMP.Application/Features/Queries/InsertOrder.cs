@@ -9,7 +9,7 @@ namespace AMP.Application.Features.Queries
 {
     public class InsertOrder
     {
-        public class Command : IRequest<InsertOrderResponse>
+        public class Command : IRequest<Result<InsertOrderResponse>>
         {
             public OrderCommand Payload { get; }
 
@@ -19,7 +19,7 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        public class Handler : IRequestHandler<Command, InsertOrderResponse>
+        public class Handler : IRequestHandler<Command, Result<InsertOrderResponse>>
         {
             private readonly OrderProcessor _processor;
 
@@ -27,7 +27,7 @@ namespace AMP.Application.Features.Queries
             {
                 _processor = processor;
             }
-            public async Task<InsertOrderResponse> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<InsertOrderResponse>> Handle(Command request, CancellationToken cancellationToken)
             {
                 return await _processor.Insert(request.Payload);
             }

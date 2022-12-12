@@ -61,6 +61,10 @@
               "target": "Package",
               "version": "[11.4.0, )"
             },
+            "LanguageExt.Core": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[11.1.0, )"
@@ -436,7 +440,19 @@
               "target": "Package",
               "version": "[2.0.123, )"
             },
+            "LanguageExt.Core": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.HealthChecks": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
@@ -761,6 +777,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "LanguageExt.Core": {
+              "target": "Package",
+              "version": "[4.4.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

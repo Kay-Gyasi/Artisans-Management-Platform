@@ -45,17 +45,5 @@ namespace AMP.Domain.Entities
             User = user;
             return this;
         }
-
-        public Customers CreatedOn()
-        {
-            DateCreated = DateTime.UtcNow; 
-            return this;
-        }
-        
-        public Customers SetLastModified()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

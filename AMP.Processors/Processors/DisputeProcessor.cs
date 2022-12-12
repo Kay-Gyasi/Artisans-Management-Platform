@@ -9,7 +9,7 @@
         {
         }
 
-        public async Task<string> Save(DisputeCommand command, string userId)
+        public async Task<Result<string>> Save(DisputeCommand command, string userId)
         {
             var isNew = string.IsNullOrEmpty(command.Id);
             command.CustomerId = await Uow.Customers.GetCustomerId(userId);
@@ -23,15 +23,17 @@
                 Cache.Remove(LookupCacheKey);
                 await Uow.Disputes.InsertAsync(dispute);
                 await Uow.SaveChangesAsync();
-                return dispute.Id;
+                return new Result<string>(dispute.Id);
             }
 
             dispute = await Uow.Disputes.GetAsync(command.Id);
+            if (dispute is null)
+                return new Result<string>(new InvalidIdException($"Dispute with id: {command.Id} does not exist"));
             AssignFields(dispute, command);
             Cache.Remove(LookupCacheKey);
             await Uow.Disputes.UpdateAsync(dispute);
             await Uow.SaveChangesAsync();
-            return dispute.Id;
+            return new Result<string>(dispute.Id);
         }
 
         public async Task<PaginatedList<DisputePageDto>> GetPage(PaginatedCommand command, string userId)
@@ -40,24 +42,41 @@
             return Mapper.Map<PaginatedList<DisputePageDto>>(page);
         }
 
-        public async Task<DisputeDto> Get(string id)
+        public async Task<Result<DisputeDto>> Get(string id)
         {
-            return Mapper.Map<DisputeDto>(await Uow.Disputes.GetAsync(id));
+            var dispute = Mapper.Map<DisputeDto>(await Uow.Disputes.GetAsync(id));
+            return dispute is null ?
+                new Result<DisputeDto>(new InvalidIdException($"Dispute with id: {id} does not exist")) 
+                : new Result<DisputeDto>(dispute);
         }
         
-        public async Task<DisputeCount> GetOpenDisputeCount(string userId)
+        public async Task<Result<DisputeCount>> GetOpenDisputeCount(string userId)
         {
-            return new DisputeCount
+            try
             {
-                Count = await Uow.Disputes.OpenDisputeCount(userId)
-            };
+                return new Result<DisputeCount>(new DisputeCount
+                {
+                    Count = await Uow.Disputes.OpenDisputeCount(userId)
+                });
+            }
+            catch (Exception e)
+            {
+                return new Result<DisputeCount>(e);
+            }
         }
 
-        public async Task Delete(string id)
+        public async Task<Result<bool>> Delete(string id)
         {
-            var dispute = await Uow.Disputes.GetAsync(id);
-            Cache.Remove(LookupCacheKey);
-            if (dispute != null) await Uow.Disputes.SoftDeleteAsync(dispute);
+            try
+            {
+                await Uow.Disputes.DeleteAsync(id);
+                Cache.Remove(LookupCacheKey);
+                return new Result<bool>(true);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
         }
 
         private static void AssignFields(Disputes dispute, DisputeCommand command, bool isNew = false)
@@ -67,8 +86,7 @@
 
             if (!isNew)
                 dispute.ByCustomerWithId(command.CustomerId)
-                    .AgainstOrderWithId(command.OrderId)
-                    .SetLastModified();
+                    .AgainstOrderWithId(command.OrderId);
         }
     }
 }

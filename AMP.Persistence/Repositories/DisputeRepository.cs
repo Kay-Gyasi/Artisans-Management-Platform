@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using AMP.Processors.Exceptions;
 using AMP.Processors.Repositories.Base;
 
 namespace AMP.Persistence.Repositories
@@ -12,6 +13,16 @@ namespace AMP.Persistence.Repositories
             IDapperContext dapperContext) : base(context, logger)
         {
             _dapperContext = dapperContext;
+        }
+        
+        public async Task DeleteAsync(string id)
+        {
+            var rows = await _dapperContext.Execute(
+                "UPDATE Disputes SET EntityStatus = 'Deleted', DateModified = GETDATE() " +
+                $"WHERE Id = '{id}'",
+                null,
+                CommandType.Text);
+            if (rows == 0) throw new InvalidIdException($"Dispute with id: {id} does not exist");
         }
 
         public async Task<PaginatedList<Disputes>> GetUserPage(PaginatedCommand paginated, string userId, CancellationToken cancellationToken)
@@ -37,6 +48,8 @@ namespace AMP.Persistence.Repositories
                 .Include(x => x.Order)
                 .Include(x => x.Customer);
         }
+
+        public DbContext GetDbContext() => Context;
 
         protected override Expression<Func<Disputes, bool>> GetSearchCondition(string search)
         {

@@ -1,6 +1,4 @@
-﻿using AMP.Processors.Exceptions;
-using AMP.Processors.Responses;
-using AMP.Processors.Workers;
+﻿using AMP.Processors.Responses;
 using AMP.Processors.Workers.BackgroundWorker;
 using AMP.Processors.Workers.Enums;
 
@@ -18,10 +16,9 @@ namespace AMP.Processors.Processors
             _worker = worker;
         }
 
-        public async Task<InsertOrderResponse> Insert(OrderCommand command)
+        public async Task<Result<InsertOrderResponse>> Insert(OrderCommand command)
         {
             var order = Orders.Create(command.CustomerId, command.ServiceId)
-                .CreatedOn(DateTime.UtcNow)
                 .WithReferenceNo(await Task.Run(() => RandomStringHelper.Generate(12)));
             await AssignFields(order, command, true);
             Cache.Remove(LookupCacheKey);
@@ -30,57 +27,120 @@ namespace AMP.Processors.Processors
 
             var service = await Uow.Services.GetNameAsync(order.ServiceId);
             return string.IsNullOrEmpty(service) 
-                ? throw new InvalidIdException($"Service with id: {order.ServiceId} does not exist")
-                : new InsertOrderResponse { OrderId = order.Id, Service = service };
+                ? new Result<InsertOrderResponse>(new InvalidIdException($"Service with id: {order.ServiceId} does not exist"))
+                : new Result<InsertOrderResponse>(new InsertOrderResponse { OrderId = order.Id, Service = service });
         }
 
-        public Task SetCost(SetCostCommand costCommand)
+        public async Task<Result<bool>> SetCost(SetCostCommand costCommand)
         {
-            return Uow.Orders.SetCost(costCommand);
+            try
+            {
+                await Uow.Orders.SetCost(costCommand);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+            return new Result<bool>(true);
         }
 
-        public async Task<string> Save(OrderCommand command)
+        public async Task<Result<string>> Save(OrderCommand command)
         {
             var order = await Uow.Orders.GetAsync(command.Id);
-            if (order is null) throw new InvalidIdException($"Order with id: {command.Id} does not exist");
+            if (order is null)
+                return new Result<string>(new InvalidIdException($"Order with id: {command.Id} does not exist"));
             await AssignFields(order, command);
             Cache.Remove(LookupCacheKey);
             await Uow.Orders.UpdateAsync(order);
             await Uow.SaveChangesAsync();
-            return order.Id;
+            return new Result<string>(order.Id);
         }
 
-        public Task UnassignArtisan(string orderId)
+        public async Task<Result<bool>> UnassignArtisan(string orderId)
         {
-            return Uow.Orders.UnassignArtisan(orderId);
+            try
+            {
+                await Uow.Orders.UnassignArtisan(orderId);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
 
-        public async Task AssignArtisan(string orderId, string artisanId)
+        public async Task<Result<bool>> AssignArtisan(string orderId, string artisanId)
         {
-            await Uow.Orders.AssignArtisan(orderId, artisanId);
-            var success = await Uow.SaveChangesAsync();
-            if(success) _worker.SendSms(SmsType.AssignArtisan, orderId, artisanId);
+            try
+            {
+                await Uow.Orders.AssignArtisan(orderId, artisanId);
+                var success = await Uow.SaveChangesAsync();
+                if(success) _worker.SendSms(SmsType.AssignArtisan, orderId, artisanId);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
 
-        public async Task AcceptRequest(string orderId)
+        public async Task<Result<bool>> AcceptRequest(string orderId)
         {
-            await Uow.Orders.AcceptRequest(orderId);
-            _worker.SendSms(SmsType.AcceptRequest, orderId);
+            try
+            {
+                await Uow.Orders.AcceptRequest(orderId);
+                _worker.SendSms(SmsType.AcceptRequest, orderId);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
 
-        public Task CancelRequest(string orderId)
+        public async Task<Result<bool>> CancelRequest(string orderId)
         {
-            return Uow.Orders.CancelRequest(orderId);
+            try
+            {
+                await Uow.Orders.CancelRequest(orderId);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
 
-        public Task Complete(string orderId)
+        public async Task<Result<bool>> Complete(string orderId)
         {
-            return Uow.Orders.Complete(orderId);
+            try
+            {
+                await Uow.Orders.Complete(orderId);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
         
-        public Task ArtisanComplete(string orderId)
+        public async Task<Result<bool>> ArtisanComplete(string orderId)
         {
-            return Uow.Orders.ArtisanComplete(orderId);
+            try
+            {
+                await Uow.Orders.ArtisanComplete(orderId);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
 
         public async Task<PaginatedList<OrderPageDto>> GetPage(PaginatedCommand command)
@@ -89,12 +149,13 @@ namespace AMP.Processors.Processors
             return Mapper.Map<PaginatedList<OrderPageDto>>(page);
         }
 
-        public async Task<OrderDto> Get(string id)
+        public async Task<Result<OrderDto>> Get(string id)
         {
             var order = Mapper.Map<OrderDto>(await Uow.Orders.GetAsync(id));
-            if (order is null) throw new InvalidIdException($"Order with id: {id} does not exist");
+            if (order is null)
+                return new Result<OrderDto>(new InvalidIdException($"Order with id: {id} does not exist"));
             order.PaymentMade = await Uow.Payments.AmountPaid(id);
-            return order;
+            return new Result<OrderDto>(order);
         }
 
         public async Task<PaginatedList<OrderPageDto>> GetSchedule(PaginatedCommand command, string userId)
@@ -127,10 +188,19 @@ namespace AMP.Processors.Processors
                 await Uow.Orders.GetCustomerOrderPage(command, userId, new CancellationToken()));
         }
 
-        public async Task Delete(string id)
+        public async Task<Result<bool>> Delete(string id)
         {
-            await Uow.Orders.DeleteAsync(id);
-            Cache.Remove(LookupCacheKey);
+            try
+            {
+                await Uow.Orders.DeleteAsync(id);
+                Cache.Remove(LookupCacheKey);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return new Result<bool>(true);
         }
 
         private async Task AssignFields(Orders order, OrderCommand command, bool isNew = false)
@@ -148,8 +218,7 @@ namespace AMP.Processors.Processors
                 .ForCustomerWithId(customerId)
                 .WithScope(command.Scope);
 
-            if (!isNew) order.ForServiceWithId(command.ServiceId)
-                .SetLastModified();
+            if (!isNew) order.ForServiceWithId(command.ServiceId);
         }
     }
 }

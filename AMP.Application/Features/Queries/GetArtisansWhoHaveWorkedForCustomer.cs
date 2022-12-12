@@ -9,7 +9,7 @@ namespace AMP.Application.Features.Queries
 {
     public class GetArtisansWhoHaveWorkedForCustomer
     {
-        public class Query : IRequest<List<Lookup>>
+        public class Query : IRequest<Result<List<Lookup>>>
         {
             public string Id { get; }
 
@@ -19,7 +19,7 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        public class Handler : IRequestHandler<Query, List<Lookup>>
+        public class Handler : IRequestHandler<Query, Result<List<Lookup>>>
         {
             private readonly ArtisanProcessor _processor;
 
@@ -27,7 +27,7 @@ namespace AMP.Application.Features.Queries
             {
                 _processor = processor;
             }
-            public async Task<List<Lookup>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Lookup>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _processor.GetArtisansWhoHaveWorkedForCustomer(request.Id);
             }

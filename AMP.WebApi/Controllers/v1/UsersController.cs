@@ -10,7 +10,7 @@ public class UsersController : BaseControllerv1
     /// <response code="200">Operation completed successfully</response>
     /// <response code="404">Operation failed</response>
     /// <response code="403">You do not have permission to access this resource</response>
-    [Authorize(Roles = "Administrator, Developer")]
+    [Authorize("AdminDevResource")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -26,8 +26,11 @@ public class UsersController : BaseControllerv1
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<UserDto> Get(string id)
-        => await Mediator.Send(new GetUser.Query(id));
+    public async Task<IActionResult> Get(string id)
+    {
+        var result = await Mediator.Send(new GetUser.Query(id)).ConfigureAwait(false);
+        return await OkResult(result);
+    }
 
     /// <summary>
     /// Updates a user's info
@@ -39,8 +42,8 @@ public class UsersController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(UserCommand command)
     {
-        var id = await Mediator.Send(new UpdateUser.Command(command));
-        return CreatedAtAction(nameof(Get), new {id}, id);
+        var result = await Mediator.Send(new UpdateUser.Command(command)).ConfigureAwait(false);
+        return await CreatedAtActionResult(result, nameof(Get));
     }
 
     /// <summary>
@@ -53,8 +56,8 @@ public class UsersController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)
     {
-        await Mediator.Send(new DeleteUser.Command(id));
-        return NoContent();
+        var result = await Mediator.Send(new DeleteUser.Command(id)).ConfigureAwait(false);
+        return await NoContentResult(result);
     }
 
     /// <summary>
@@ -67,8 +70,11 @@ public class UsersController : BaseControllerv1
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<SigninResponse> Login(SigninCommand command)
-        => await Mediator.Send(new AuthenticateUser.Command(command));
+    public async Task<IActionResult> Login(SigninCommand command)
+    {
+        var result = await Mediator.Send(new AuthenticateUser.Command(command)).ConfigureAwait(false);
+        return result.Match<IActionResult>(Ok, NoContent);
+    }
 
     /// <summary>
     /// Sends a link by which user can reset their password
@@ -79,8 +85,11 @@ public class UsersController : BaseControllerv1
     [HttpGet("{phone}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task SendPasswordResetLink(string phone) 
-        => await Mediator.Send(new SendPassResetLink.Command(phone));
+    public async Task<IActionResult> SendPasswordResetLink(string phone)
+    {
+        var result = await Mediator.Send(new SendPassResetLink.Command(phone)).ConfigureAwait(false);
+        return await OkResult(result);
+    }
 
     /// <summary>
     /// Resets requesting user's password
@@ -91,13 +100,14 @@ public class UsersController : BaseControllerv1
     [HttpGet("{phone}/{confirmCode}/{newPassword}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task ResetPassword(string phone, string confirmCode, string newPassword) 
+    public async Task<IActionResult> ResetPassword(string phone, string confirmCode, string newPassword) 
     {
-        await Mediator.Send(new ResetPassword.Command(new ResetPasswordCommand
+        var result = await Mediator.Send(new ResetPassword.Command(new ResetPasswordCommand
         {
             Phone = phone,
             ConfirmCode = confirmCode,
             NewPassword = newPassword
-        }));
+        })).ConfigureAwait(false);
+        return await OkResult(result);
     }
 }

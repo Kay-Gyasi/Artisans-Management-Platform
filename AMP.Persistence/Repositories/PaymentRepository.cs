@@ -21,7 +21,6 @@ namespace AMP.Persistence.Repositories
         {
             var payment = await GetBaseQuery().FirstOrDefaultAsync(x => x.Reference == reference);
             payment?.HasBeenVerified(true);
-            payment?.SetLastModified();
             payment?.WithTransactionReference(trxRef);
         }
 

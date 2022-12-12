@@ -22,6 +22,7 @@ public static class DependencyInjection
             .AddDefaultConfig()
             .AddSwaggerConfig()
             .AddMemoryCache()
+            .AddHttpContextAccessor()
             .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration)
             .AddSmsMessaging()

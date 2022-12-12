@@ -15,6 +15,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Dapper.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\FluentValidation.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\LanguageExt.Core.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\PhoneNumbers.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\MediatR.Contracts.dll
@@ -22,7 +23,12 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.CodeAnalysis.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll

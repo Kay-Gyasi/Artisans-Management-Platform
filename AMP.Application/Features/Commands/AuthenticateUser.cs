@@ -1,14 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Commands;
-using AMP.Processors.Processors;
-using MediatR;
+﻿using LanguageExt;
 
 namespace AMP.Application.Features.Commands
 {
     public class AuthenticateUser
     {
-        public class Command : IRequest<SigninResponse>
+        public class Command : IRequest<Option<SigninResponse>>
         {
             public SigninCommand Signin { get; }
 
@@ -18,7 +14,7 @@ namespace AMP.Application.Features.Commands
             }
         }
 
-        public class Handler : IRequestHandler<Command, SigninResponse>
+        public class Handler : IRequestHandler<Command, Option<SigninResponse>>
         {
             private readonly UserProcessor _processor;
 
@@ -26,7 +22,7 @@ namespace AMP.Application.Features.Commands
             {
                 _processor = processor;
             }
-            public async Task<SigninResponse> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Option<SigninResponse>> Handle(Command request, CancellationToken cancellationToken)
             {
                 return await _processor.Login(request.Signin);
             }

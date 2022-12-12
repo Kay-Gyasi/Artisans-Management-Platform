@@ -2,7 +2,7 @@
 
 namespace Amp.IntegrationTests.Tests;
 
-public class ArtisanControllerTests: IClassFixture<CustomWebApplicationFactory<Program>>
+public class ArtisanControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private static readonly Fixture _fixture = new();
@@ -398,13 +398,14 @@ public class ArtisanControllerTests: IClassFixture<CustomWebApplicationFactory<P
     }
     
     [Fact]
-    public async Task Save_ByArtisan_ReturnsForbidden()
+    public async Task Save_ByArtisan_ReturnsCreated()
     {
         // Arrange
         var client = _factory.CreateClient();
         await _factory.AuthenticateAsync(client, UserType.Artisan);
         var timer = new Stopwatch();
-        var order = _fixture.Build<ArtisanCommand>()
+        var artisan = _fixture.Build<ArtisanCommand>()
+            .Without(x => x.Id)
             .Without(x => x.Services)
             .Without(x => x.Eccn)
             .Without(x => x.IsVerified)
@@ -413,12 +414,38 @@ public class ArtisanControllerTests: IClassFixture<CustomWebApplicationFactory<P
 
         // Act
         timer.Start();
-        var request = await client.PostAsJsonAsync($"{BaseUrl}/Save", order);
+        var request = await client.PostAsJsonAsync($"{BaseUrl}/Save", artisan);
         timer.Start();
 
         // Assert
-        request.StatusCode.Should().Be(HttpStatusCode.Forbidden);
-        timer.ElapsedMilliseconds.Should().BeLessThan(1000);
+        request.StatusCode.Should().Be(HttpStatusCode.Created);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
+    }
+    
+    [Fact]
+    public async Task Update_ByArtisan_ReturnsCreated()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        await _factory.AuthenticateAsync(client, UserType.Artisan);
+        var timer = new Stopwatch();
+        var id = (await _factory.UnitOfWork.Artisans.GetBaseQuery().FirstOrDefaultAsync())?.Id;
+        var artisan = _fixture.Build<ArtisanCommand>()
+            .With(x => x.Id, id)
+            .Without(x => x.Services)
+            .Without(x => x.Eccn)
+            .Without(x => x.IsVerified)
+            .Without(x => x.IsApproved)
+            .Create();
+
+        // Act
+        timer.Start();
+        var request = await client.PostAsJsonAsync($"{BaseUrl}/Save", artisan);
+        timer.Start();
+
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.Created);
+        timer.ElapsedMilliseconds.Should().BeLessThan(2000);
     }
 
     [Fact]

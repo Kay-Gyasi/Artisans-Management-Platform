@@ -9,7 +9,7 @@ public class ArtisansController : BaseControllerv1
     /// </summary>
     /// <response code="200">Operation completed successfully</response>
     /// <response code="403">You do not have permission to access this resource</response>
-    [Authorize(Roles = "Customer, Administrator, Developer")]
+    [Authorize("CustomerAdminDevResource")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -24,8 +24,11 @@ public class ArtisansController : BaseControllerv1
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ArtisanDto> Get(string id)
-        => await Mediator.Send(new GetArtisan.Query(id));
+    public async Task<IActionResult> Get(string id)
+    {
+        var result = await Mediator.Send(new GetArtisan.Query(id)).ConfigureAwait(false);
+        return await OkResult(result);
+    }
 
     /// <summary>
     /// Returns info about an artisan
@@ -35,10 +38,11 @@ public class ArtisansController : BaseControllerv1
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ArtisanDto> GetByUser()
+    public async Task<IActionResult> GetByUser()
     {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return await Mediator.Send(new GetArtisanByUser.Query(userId));
+        var result = await Mediator.Send(new GetArtisanByUser.Query(userId)).ConfigureAwait(false);
+        return await OkResult(result);
     }
     
     /// <summary>
@@ -46,14 +50,15 @@ public class ArtisansController : BaseControllerv1
     /// </summary>
     /// <response code="200">Request execution was successful and appropriate response has been returned</response>
     /// <response code="403">You do not have permission to access this resource</response>
-    [Authorize(Roles = "Customer, Administrator, Developer")]
+    [Authorize("CustomerAdminDevResource")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<List<Lookup>> GetArtisansWorkedForCustomer()
+    public async Task<IActionResult> GetArtisansWorkedForCustomer()
     {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return await Mediator.Send(new GetArtisansWhoHaveWorkedForCustomer.Query(userId));
+        var result = await Mediator.Send(new GetArtisansWhoHaveWorkedForCustomer.Query(userId)).ConfigureAwait(false);
+        return await OkResult(result);
     }
 
     /// <summary>
@@ -61,14 +66,14 @@ public class ArtisansController : BaseControllerv1
     /// </summary>
     /// <response code="201">Artisan has been created successfully</response>
     /// <response code="403">You do not have permission to access this resource</response>
-    [Authorize(Roles = "Administrator, Developer")]
+    [Authorize("ArtisanAdminDevResource")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Save(ArtisanCommand command)
     {
-        var id = await Mediator.Send(new SaveArtisan.Command(command));
-        return CreatedAtAction(nameof(Get), new { id }, id);
+        var result = await Mediator.Send(new SaveArtisan.Command(command)).ConfigureAwait(false);
+        return await CreatedAtActionResult(result, nameof(Get));
     }
 
     /// <summary>
@@ -77,14 +82,14 @@ public class ArtisansController : BaseControllerv1
     /// <response code="204">Artisan has been deleted successfully</response>
     /// <response code="404">Artisan with id provided does not exist</response>
     /// <response code="403">You do not have permission to access this resource</response>
-    [Authorize(Roles = "Artisan, Administrator, Developer")]
+    [Authorize("ArtisanAdminDevResource")]
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Delete(string id)
     {
-        await Mediator.Send(new DeleteArtisan.Command(id));
-        return NoContent();
+        var result = await Mediator.Send(new DeleteArtisan.Command(id)).ConfigureAwait(false);
+        return await NoContentResult(result);
     }
 }

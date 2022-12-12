@@ -85,12 +85,6 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Artisans SetLastModified()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
-
         public Artisans Offers(IEnumerable<Services> services)
         {
             _services.Clear();

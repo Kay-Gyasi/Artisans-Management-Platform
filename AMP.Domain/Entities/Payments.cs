@@ -64,17 +64,5 @@ namespace AMP.Domain.Entities
             Order = order;
             return this;
         }
-
-        public Payments CreatedOn(DateTime date)
-        {
-            DateCreated = date;
-            return this;
-        }
-        
-        public Payments SetLastModified()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

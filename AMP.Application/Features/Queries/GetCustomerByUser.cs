@@ -1,14 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Dtos;
-using AMP.Processors.Processors;
-using MediatR;
+﻿using AMP.Processors.Dtos;
 
 namespace AMP.Application.Features.Queries
 {
     public class GetCustomerByUser
     {
-        public class Query : IRequest<CustomerDto>
+        public class Query : IRequest<Result<CustomerDto>>
         {
             public string Id { get; }
 
@@ -18,7 +14,7 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        public class Handler : IRequestHandler<Query, CustomerDto>
+        public class Handler : IRequestHandler<Query, Result<CustomerDto>>
         {
             private readonly CustomerProcessor _processor;
 
@@ -26,7 +22,7 @@ namespace AMP.Application.Features.Queries
             {
                 _processor = processor;
             }
-            public async Task<CustomerDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<CustomerDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _processor.GetByUserId(request.Id);
             }

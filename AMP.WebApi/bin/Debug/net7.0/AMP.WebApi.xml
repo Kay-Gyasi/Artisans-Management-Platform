@@ -92,23 +92,31 @@
             <summary>
             Returns a page of disputes filed by requesting customer
             </summary>
+            <response code="201">Dispute has been filed successfully</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.DisputesController.Get(System.String)">
             <summary>
             Returns details of a filed dispute
             </summary>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="404">Request execution was successful but no data was found</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.DisputesController.GetOpenDisputeCount">
             <summary>
             Returns info on all open disputes
             </summary>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.DisputesController.Save(AMP.Processors.Commands.DisputeCommand)">
             <summary>
             Adds or updates a dispute on an order
             </summary>
-            <param name="command"></param>
-            <returns></returns>
+            <response code="200">Request execution was successful and appropriate response has been returned</response>
+            <response code="404">Request execution was successful but no data was found</response>
+            <response code="403">You do not have permission to access this resource</response>
         </member>
         <member name="M:AMP.WebApi.Controllers.v1.DisputesController.Delete(System.String)">
             <summary>

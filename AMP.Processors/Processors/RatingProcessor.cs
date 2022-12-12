@@ -18,8 +18,7 @@
             {
                 var customer = await Uow.Customers.GetCustomerId(command.UserId);
                 await Uow.Ratings.DeletePreviousRatingForSameArtisan(customer, command.ArtisanId);
-                rating = Ratings.Create(customer, command.ArtisanId)
-                    .CreatedOn(DateTime.UtcNow);
+                rating = Ratings.Create(customer, command.ArtisanId);
                 await AssignFields(rating, command, true);
                 Cache.Remove(LookupCacheKey);
                 await Uow.Ratings.InsertAsync(rating);
@@ -78,8 +77,7 @@
             {
                 var customer = await Uow.Customers.GetCustomerId(command.UserId);
                 rating.ForCustomerWithId(customer)
-                        .ForArtisanWithId(command.ArtisanId)
-                        .SetLastModified();
+                    .ForArtisanWithId(command.ArtisanId);
             }
         }
     }

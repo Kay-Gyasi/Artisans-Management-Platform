@@ -7,7 +7,7 @@ namespace AMP.Application.Features.Commands;
 
 public class SendVerificationCode
 {
-    public class Command : IRequest
+    public class Command : IRequest<Result<bool>>
     {
         public string Phone { get; }
 
@@ -17,7 +17,7 @@ public class SendVerificationCode
         }
     }
 
-    public class Handler : IRequestHandler<Command>
+    public class Handler : IRequestHandler<Command, Result<bool>>
     {
         private readonly RegistrationProcessor _processor;
 
@@ -25,10 +25,9 @@ public class SendVerificationCode
         {
             _processor = processor;
         }
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<bool>> Handle(Command request, CancellationToken cancellationToken)
         {
-            await _processor.SendVerificationLink(request.Phone, null);
-            return Unit.Value;
+            return await _processor.SendVerificationLink(request.Phone, null);
         }
     }
 }

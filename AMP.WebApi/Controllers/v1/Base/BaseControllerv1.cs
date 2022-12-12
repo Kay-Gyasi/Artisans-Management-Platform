@@ -12,5 +12,33 @@
         protected static string ApiUrl => "https://artisan-management-platform";
         protected string UserId => HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         protected string Role => HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+
+        protected Task<IActionResult> OkResult<T>(Result<T> result)
+        {
+            return Task.Run(() => result.Match<IActionResult>(b => Ok(b),
+                BuildProblemDetails));
+        }
+        
+        protected Task<IActionResult> NoContentResult<T>(Result<T> result)
+        {
+            return Task.Run(() => result.Match(b => NoContent(),
+                BuildProblemDetails));
+        }
+        
+        protected Task<IActionResult> CreatedResult(Result<string> result, string route)
+        {
+            return Task.Run(() => result.Match(b => Created(route, b),
+                BuildProblemDetails));
+        }
+        
+        protected Task<IActionResult> CreatedAtActionResult(Result<string> result, string actionName)
+        {
+            return Task.Run(() => result.Match(b => 
+                    CreatedAtAction(actionName, new {id = b}, b),
+                BuildProblemDetails));
+        }
+
+        private IActionResult BuildProblemDetails(Exception ex)
+            => Problem(title: ex.Message, statusCode: ex.GetStatusCode());
     }
 }

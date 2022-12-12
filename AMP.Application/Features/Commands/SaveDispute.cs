@@ -8,7 +8,7 @@ namespace AMP.Application.Features.Commands
 {
     public class SaveDispute
     {
-        public class Command : IRequest<string>
+        public class Command : IRequest<Result<string>>
         {
             public DisputeCommand DisputeCommand { get; }
             public string UserId { get; }
@@ -20,7 +20,7 @@ namespace AMP.Application.Features.Commands
             }
         }
 
-        public class Handler : IRequestHandler<Command, string>
+        public class Handler : IRequestHandler<Command, Result<string>>
         {
             private readonly DisputeProcessor _processor;
 
@@ -28,7 +28,7 @@ namespace AMP.Application.Features.Commands
             {
                 _processor = processor;
             }
-            public async Task<string> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
             {
                 return await _processor.Save(request.DisputeCommand, request.UserId);
             }

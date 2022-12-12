@@ -10,11 +10,11 @@ public class SaveDisputeValidator : AbstractValidator<SaveDispute.Command>
         RuleFor(x => x.UserId)
             .NotNull()
             .NotEmpty()
-            .Must(x => x != "string");
+            .NotEqual("string");
         RuleFor(x => x.DisputeCommand.OrderId)
             .NotNull()
             .NotEmpty()
-            .Must(x => x != "string");
+            .NotEqual("string");
         RuleFor(x => x.DisputeCommand.Details)
             .NotNull()
             .NotEmpty();

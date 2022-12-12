@@ -1,21 +1,27 @@
-﻿using AMP.Processors.Exceptions;
+﻿using System.Security.Claims;
+using AMP.Processors.Exceptions;
+using Microsoft.AspNetCore.Http;
 
 namespace AMP.Processors.Processors
 {
     [Processor]
     public class ArtisanProcessor : ProcessorBase
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private const string LookupCacheKey = "Artisanlookup";
 
         public ArtisanProcessor(IUnitOfWork uow, 
             IMapper mapper, 
-            IMemoryCache cache) : base(uow, mapper, cache)
+            IMemoryCache cache,
+            IHttpContextAccessor httpContextAccessor) : base(uow, mapper, cache)
         {
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> Save(ArtisanCommand command)
+        public async Task<Result<string>> Save(ArtisanCommand command)
         {
             var isNew = string.IsNullOrEmpty(command.Id);
+            command.UserId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             Artisans artisan;
 
             if (isNew)
@@ -26,15 +32,18 @@ namespace AMP.Processors.Processors
                 Cache.Remove(LookupCacheKey);
                 await Uow.Artisans.InsertAsync(artisan);
                 await Uow.SaveChangesAsync();
-                return artisan.Id;
+                return new Result<string>(artisan.Id);
             }
 
             artisan = await Uow.Artisans.GetAsync(command.Id);
+            if (artisan is null)
+                return new Result<string>(
+                    new InvalidIdException($"Artisan with id: {artisan.Id} does not exist"));
             await AssignFields(artisan, command);
             Cache.Remove(LookupCacheKey);
             await Uow.Artisans.UpdateAsync(artisan);
             await Uow.SaveChangesAsync();
-            return artisan.Id;
+            return new Result<string>(artisan.Id);
         }
 
         public async Task<PaginatedList<ArtisanPageDto>> GetPage(PaginatedCommand command)
@@ -57,48 +66,71 @@ namespace AMP.Processors.Processors
                 paginated.PageSize);
         }
 
-        public async Task<ArtisanDto> Get(string id)
+        public async Task<Result<ArtisanDto>> Get(string id)
         {
             var artisan = Mapper.Map<ArtisanDto>(await Uow.Artisans.GetAsync(id));
-            if (artisan is null) throw new InvalidIdException($"Artisan with id: {id} does not exist");
+            if (artisan is null)
+                return new Result<ArtisanDto>(
+                    new InvalidIdException($"Artisan with id: {id} does not exist"));
             artisan.NoOfOrders = await Uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = Uow.Ratings.GetCount(artisan.Id);
             artisan.Rating = Uow.Ratings.GetRating(artisan.Id);
-            return artisan;
+            return new Result<ArtisanDto>(artisan);
         }
 
-        public async Task<ArtisanDto> GetByUserId(string userId)
+        public async Task<Result<ArtisanDto>> GetByUserId(string userId)
         {
             var artisan = Mapper.Map<ArtisanDto>(await Uow.Artisans.GetArtisanByUserId(userId));
-            if (artisan is null) throw new InvalidIdException($"Artisan with userId: {userId} does not exist");
+            if (artisan is null)
+                return new Result<ArtisanDto>(
+                    new InvalidIdException($"Artisan with userId: {userId} does not exist"));
             artisan.NoOfOrders = await Uow.Orders.GetCount(artisan.Id);
             artisan.NoOfReviews = Uow.Ratings.GetCount(artisan.Id);
             artisan.Rating = Uow.Ratings.GetRating(artisan.Id);
-            return artisan;
+            return new Result<ArtisanDto>(artisan);
         }
 
-        public async Task<List<Lookup>> GetArtisansWhoHaveWorkedForCustomer(string userId) 
-            => await Uow.Artisans.GetArtisansWhoHaveWorkedForCustomer(userId);
-
-        public async Task Delete(string id)
+        public async Task<Result<List<Lookup>>> GetArtisansWhoHaveWorkedForCustomer(string userId)
         {
-            await Uow.Artisans.DeleteAsync(id);
-            Cache.Remove(LookupCacheKey);
+            try
+            {
+                return new Result<List<Lookup>>(await Uow.Artisans.GetArtisansWhoHaveWorkedForCustomer(userId));
+            }
+            catch (Exception e)
+            {
+                return new Result<List<Lookup>>(e);
+            }
+        }
+
+        public async Task<Result<bool>> Delete(string id)
+        {
+            try
+            {
+                await Uow.Artisans.DeleteAsync(id);
+                Cache.Remove(LookupCacheKey);
+                return new Result<bool>(true);
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
         }
 
         private async Task AssignFields(Artisans artisan, ArtisanCommand command, bool isNew = false)
         {
-            var names = command.Services.Select(service => service.Name);
-            var services = await Uow.Services.BuildServices(names);
-            artisan.WithBusinessName(command.BusinessName)
-                .WithDescription(command.Description)
+            artisan.WithBusinessName(command.BusinessName ?? "")
+                .WithDescription(command.Description ?? "")
                 .IsVerifiedd(command.IsVerified)
                 .IsApprovedd(command.IsApproved)
-                .Offers(services)
                 .OfType(command.Type)
                 .HasEccn(command.Eccn);
-            if (!isNew) artisan.ForUserId(command.UserId)
-                .SetLastModified();
+            if (!isNew) artisan.ForUserId(command.UserId);
+            if (command.Services is not null)
+            {
+                var names = command.Services?.Select(service => service.Name);
+                var services = await Uow.Services.BuildServices(names);
+                artisan.Offers(services);
+            }
         }
     }
 }

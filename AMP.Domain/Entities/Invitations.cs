@@ -37,10 +37,4 @@ public class Invitations : EntityBase
         Type = type;
         return this;
     }
-
-    public Invitations CreatedOn()
-    {
-        DateCreated = DateTime.UtcNow;
-        return this;
-    }
 }

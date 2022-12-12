@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AMP.Processors.Exceptions.Extensions;
 

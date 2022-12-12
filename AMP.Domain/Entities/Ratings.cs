@@ -64,17 +64,5 @@ namespace AMP.Domain.Entities
             Customer = customer;
             return this;
         }
-
-        public Ratings CreatedOn(DateTime date)
-        {
-            DateCreated = date;
-            return this;
-        }
-        
-        public Ratings SetLastModified()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

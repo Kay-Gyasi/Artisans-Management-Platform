@@ -1,4 +1,11 @@
-﻿global using AMP.Domain.Entities;
+﻿global using System.Security.Cryptography;
+global using System.Text;
+global using AMP.Processors.Exceptions;
+global using AMP.Processors.Processors.Helpers;
+global using AMP.Processors.QueryObjects;
+global using AMP.Processors.Repositories.Base;
+global using Dapper;
+global using AMP.Domain.Entities;
 global using AMP.Domain.Enums;
 global using AMP.Domain.ViewModels;
 global using AMP.Persistence.Database;

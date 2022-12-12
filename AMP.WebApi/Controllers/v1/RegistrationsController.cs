@@ -13,8 +13,8 @@ public class RegistrationsController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> Post(UserCommand command)
     {
-        var id = await Mediator.Send(new PostUser.Command(command));
-        return Created($"{ApiUrl}/registrations/Get/{0}", id);
+        var result = await Mediator.Send(new PostUser.Command(command)).ConfigureAwait(false);
+        return await CreatedResult(result, $"{ApiUrl}/registrations/Get/{0}");
     }
     
     /// <summary>
@@ -28,8 +28,8 @@ public class RegistrationsController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Verify(string phone, string code) 
     {
-        await Mediator.Send(new VerifyUser.Query(phone, code));
-        return Ok();
+        var result = await Mediator.Send(new VerifyUser.Query(phone, code)).ConfigureAwait(false);
+        return await OkResult(result);
     }
     
     /// <summary>
@@ -43,7 +43,7 @@ public class RegistrationsController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> SendCode(string phone) 
     {
-        await Mediator.Send(new SendVerificationCode.Command(phone));
-        return Ok();
+        var result = await Mediator.Send(new SendVerificationCode.Command(phone)).ConfigureAwait(false);
+        return await OkResult(result);
     }
 }

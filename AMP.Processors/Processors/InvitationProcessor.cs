@@ -19,7 +19,7 @@ public class InvitationProcessor : ProcessorBase
         if (invitedUserExists) return false;
 
         var invitation = Invitations.Create(userId, command.InvitedPhone, command.Type);
-        await Uow.Invitations.InsertAsync(invitation.CreatedOn());
+        await Uow.Invitations.InsertAsync(invitation);
         await Uow.SaveChangesAsync();
         await SendInvite(command, user);
         return true;

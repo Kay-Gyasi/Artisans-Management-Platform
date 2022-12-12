@@ -37,11 +37,5 @@ namespace AMP.Domain.Entities
             Description = description;
             return this;
         }
-
-        public Services CreatedOn()
-        {
-            DateCreated = DateTime.UtcNow;
-            return this;
-        }
     }
 }

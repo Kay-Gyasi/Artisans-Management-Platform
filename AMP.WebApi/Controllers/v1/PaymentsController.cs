@@ -27,7 +27,7 @@ public class PaymentsController : BaseControllerv1
     /// <summary>
     /// Adds a new payment on an order
     /// </summary>
-    [Authorize(Roles = "Customer")]
+    [Authorize("CustomerOnlyResource")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -40,7 +40,7 @@ public class PaymentsController : BaseControllerv1
     /// <summary>
     /// Sets transaction reference of a payment made on an order
     /// </summary>
-    [Authorize(Roles = "Customer")]
+    [Authorize("CustomerOnlyResource")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

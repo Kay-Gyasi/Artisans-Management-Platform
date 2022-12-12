@@ -5,7 +5,7 @@
         /// <summary>
         /// Sets up all required resources the API needs to run (Including the database)
         /// </summary>
-        [Authorize(Roles = "Developer")]
+        [Authorize("AdminDevResource")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

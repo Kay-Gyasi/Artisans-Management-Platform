@@ -8,7 +8,7 @@ namespace AMP.Application.Features.Queries
 {
     public class GetOpenDisputeCount
     {
-        public class Query : IRequest<DisputeCount>
+        public class Query : IRequest<Result<DisputeCount>>
         {
             public string UserId { get; }
 
@@ -18,7 +18,7 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        public class Handler : IRequestHandler<Query, DisputeCount>
+        public class Handler : IRequestHandler<Query, Result<DisputeCount>>
         {
             private readonly DisputeProcessor _processor;
 
@@ -26,7 +26,7 @@ namespace AMP.Application.Features.Queries
             {
                 _processor = processor;
             }
-            public async Task<DisputeCount> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<DisputeCount>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _processor.GetOpenDisputeCount(request.UserId);
             }

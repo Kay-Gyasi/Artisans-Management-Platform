@@ -8,7 +8,7 @@ namespace AMP.Application.Features.Queries
 {
     public class GetUser
     {
-        public class Query : IRequest<UserDto>
+        public class Query : IRequest<Result<UserDto>>
         {
             public string Id { get; }
 
@@ -18,7 +18,7 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        public class Handler : IRequestHandler<Query, UserDto>
+        public class Handler : IRequestHandler<Query, Result<UserDto>>
         {
             private readonly UserProcessor _processor;
 
@@ -26,7 +26,7 @@ namespace AMP.Application.Features.Queries
             {
                 _processor = processor;
             }
-            public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<UserDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _processor.Get(request.Id);
             }

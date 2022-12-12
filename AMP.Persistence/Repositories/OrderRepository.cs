@@ -82,7 +82,6 @@ namespace AMP.Persistence.Repositories
             var order = await base.GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             if (order is null) throw new InvalidIdException($"Order with id: {orderId} does not exist");
             order.ForArtisanWithId(artisanId);
-            order.SetLastModified();
             await UpdateAsync(order);
 
             await Context.Requests.AddAsync(Requests.Create(order?.CustomerId, artisanId, orderId));

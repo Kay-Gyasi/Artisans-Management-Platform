@@ -8,7 +8,7 @@ namespace AMP.Application.Features.Queries
 {
     public class GetArtisan
     {
-        public class Query : IRequest<ArtisanDto>
+        public class Query : IRequest<Result<ArtisanDto>>
         {
             public string Id { get; }
 
@@ -18,7 +18,7 @@ namespace AMP.Application.Features.Queries
             }
         }
 
-        public class Handler : IRequestHandler<Query, ArtisanDto>
+        public class Handler : IRequestHandler<Query, Result<ArtisanDto>>
         {
             private readonly ArtisanProcessor _processor;
 
@@ -26,7 +26,7 @@ namespace AMP.Application.Features.Queries
             {
                 _processor = processor;
             }
-            public async Task<ArtisanDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<ArtisanDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _processor.Get(request.Id);
             }

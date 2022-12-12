@@ -160,17 +160,5 @@ namespace AMP.Domain.Entities
             IsRequestAccepted = isRequestAccepted;
             return this;
         }
-
-        public Orders CreatedOn(DateTime date)
-        {
-            DateCreated = date;
-            return this;
-        }
-        
-        public Orders SetLastModified()
-        {
-            DateModified = DateTime.UtcNow;
-            return this;
-        }
     }
 }

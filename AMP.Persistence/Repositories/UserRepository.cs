@@ -1,12 +1,5 @@
 ﻿using System.Data;
 using System.Data.Common;
-using System.Security.Cryptography;
-using System.Text;
-using AMP.Processors.Exceptions;
-using AMP.Processors.Processors.Helpers;
-using AMP.Processors.QueryObjects;
-using AMP.Processors.Repositories.Base;
-using Dapper;
 
 namespace AMP.Persistence.Repositories
 {
@@ -53,10 +46,11 @@ namespace AMP.Persistence.Repositories
         {
             var user = await GetBaseQuery().FirstOrDefaultAsync(x =>
                 x.Contact.PrimaryContact == phone);
-            if (user is null) throw new InvalidIdException($"Invalid phone");
+            if (user is null) return null;
             var passKeyString = Encoding.UTF8.GetString(user.PasswordKey)
                 .RemoveSpecialCharacters();
-            return passKeyString != confirmCode ? throw new InvalidIdException($"Invalid code") : user;
+            return passKeyString != confirmCode ? 
+                null : user;
         }
 
         public override IQueryable<Users> GetBaseQuery()

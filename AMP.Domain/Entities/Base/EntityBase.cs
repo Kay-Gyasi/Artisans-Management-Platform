@@ -7,7 +7,7 @@ namespace AMP.Domain.Entities.Base
     {
         public string Id { get; protected set; } = Guid.NewGuid().ToString();
         public int RowId { get; }
-        public DateTime DateCreated { get; protected set; }
+        public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public EntityStatus EntityStatus { get; set; }
     }

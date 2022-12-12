@@ -7,7 +7,7 @@ namespace AMP.Application.Features.Commands
 {
     public class DeleteUser
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<bool>>
         {
             public string Id { get; }
 
@@ -17,7 +17,7 @@ namespace AMP.Application.Features.Commands
             }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<bool>>
         {
             private readonly UserProcessor _processor;
 
@@ -25,10 +25,9 @@ namespace AMP.Application.Features.Commands
             {
                 _processor = processor;
             }
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<bool>> Handle(Command request, CancellationToken cancellationToken)
             {
-                await _processor.Delete(request.Id);
-                return Unit.Value;
+                return await _processor.Delete(request.Id);
             }
         }
     }

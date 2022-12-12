@@ -35,18 +35,12 @@
         {
             var services = new List<Services>
             {
-                Services.Create("Masonry")
-                    .CreatedOn(),
-                Services.Create("Electrical Works")
-                    .CreatedOn(),
-                Services.Create("Plumbing")
-                    .CreatedOn(),
-                Services.Create("Mechanics")
-                    .CreatedOn(),
-                Services.Create("Carpentry")
-                    .CreatedOn(),
-                Services.Create("Painting")
-                    .CreatedOn()
+                Services.Create("Masonry"),
+                Services.Create("Electrical Works"),
+                Services.Create("Plumbing"),
+                Services.Create("Mechanics"),
+                Services.Create("Carpentry"),
+                Services.Create("Painting"),
             };
 
             await Uow.Services.InsertAsync(services);
@@ -93,7 +87,6 @@
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.KayAdmin),
                 Users.Create()
                     .WithFirstName("Kofi")
@@ -115,7 +108,6 @@
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.KayArtisan),
                 Users.Create()
                     .WithFirstName("Samuel")
@@ -136,7 +128,6 @@
                     .WithMomoNumber("0556455344")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.Woode),
                 Users.Create()
                     .WithFirstName("Samuel")
@@ -158,7 +149,6 @@
                     .WithMomoNumber("0557511677")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.Awate),
                 Users.Create()
                     .WithFirstName("Gloria")
@@ -179,7 +169,6 @@
                     .WithMomoNumber("0204377833")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.Gloria),
                 Users.Create()
                     .WithFirstName("Emmanuel")
@@ -200,7 +189,6 @@
                     .WithMomoNumber("0545366277")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.Abolo),
                 Users.Create()
                     .WithFirstName("Kofi")
@@ -220,7 +208,6 @@
                     .WithMomoNumber("0206744299")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.Addae),
                 Users.Create()
                     .WithFirstName("Kay")
@@ -241,7 +228,6 @@
                     .WithMomoNumber("0557833216")
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.KayDeveloper),
                 Users.Create()
                     .WithFirstName("Kay")
@@ -264,7 +250,6 @@
                     .IsSuspendedd(true)
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
-                    .CreatedOn()
                     .WithId(InitIds.KaySuspended),
             };
 
@@ -327,12 +312,9 @@
         {
             var customers = new List<Customers>
             {
-                Customers.Create(InitIds.Awate)
-                    .CreatedOn(),
-                Customers.Create(InitIds.Abolo)
-                    .CreatedOn(),
+                Customers.Create(InitIds.Awate),
+                Customers.Create(InitIds.Abolo),
                 Customers.Create(InitIds.Gloria)
-                    .CreatedOn(),
             };
             await Uow.Customers.InsertAsync(customers);
         }

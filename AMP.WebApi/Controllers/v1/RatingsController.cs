@@ -7,7 +7,7 @@ public class RatingsController : BaseControllerv1
     /// <summary>
     /// Returns a page of reviews made by requesting customer
     /// </summary>
-    [Authorize(Roles = "Customer")]
+    [Authorize("CustomerOnlyResource")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -17,7 +17,7 @@ public class RatingsController : BaseControllerv1
     /// <summary>
     /// Returns a page of reviews made on an artisan
     /// </summary>
-    [Authorize(Roles = "Artisan")]
+    [Authorize("ArtisanOnlyResource")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

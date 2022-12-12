@@ -125,12 +125,6 @@ namespace AMP.Domain.Entities
             return this;
         }
 
-        public Users CreatedOn()
-        {
-            DateCreated = DateTime.UtcNow;
-            return this;
-        }
-
         public Users HasPassword(byte[] hash)
         {
             Password = hash;
@@ -152,12 +146,6 @@ namespace AMP.Domain.Entities
         public Users Verify()
         {
             IsVerified = true;
-            return this;
-        }
-        
-        public Users SetLastModified()
-        {
-            DateModified = DateTime.UtcNow;
             return this;
         }
     }

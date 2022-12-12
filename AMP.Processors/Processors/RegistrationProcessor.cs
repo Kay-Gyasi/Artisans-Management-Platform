@@ -1,5 +1,4 @@
 ﻿using System.Data.Common;
-using AMP.Processors.Exceptions;
 
 namespace AMP.Processors.Processors;
 
@@ -16,10 +15,12 @@ public class RegistrationProcessor : ProcessorBase
         _smsMessaging = smsMessaging;
     }
 
-    public async Task<string> Save(UserCommand command)
+    public async Task<Result<string>> Save(UserCommand command)
     {
         var userExists = await Uow.Users.Exists(command.Contact.PrimaryContact);
-        if (userExists) throw new UserAlreadyExistsException($"User with contact {command.Contact.PrimaryContact} already exists.");
+        if (userExists)
+            return new Result<string>(
+                new UserAlreadyExistsException($"User with contact {command.Contact.PrimaryContact} already exists."));
 
         // decide on isolation level
         var userId = "";
@@ -46,30 +47,34 @@ public class RegistrationProcessor : ProcessorBase
                 throw;
             }
         });
-        return userId;
+        return new Result<string>(userId);
     }
 
-    public async Task VerifyUser(string phone, string code)
+    public async Task<Result<bool>> VerifyUser(string phone, string code)
     {
         var isMatch = await Uow.Registrations.Crosscheck(phone, code);
-        if (!isMatch) throw new UserVerificationFailedException("Invalid phone/verification code");
+        if (!isMatch) return new 
+            Result<bool>(new UserVerificationFailedException("Invalid phone/verification code"));
 
         await Uow.Registrations.Verify(phone, code);
         Cache.Remove(LookupCacheKey);
+        return new Result<bool>(true);
     }
 
-    public async Task SendVerificationLink(string phone, string code)
+    public async Task<Result<bool>> SendVerificationLink(string phone, string code)
     {
         if (string.IsNullOrEmpty(code))
         {
             code = RandomStringHelper.Generate(20, true);
             var registration = await Uow.Registrations.GetByPhone(phone);
-            if (registration is null) throw new NullRegistrationException($"Registration for phone {phone} does not exist");
+            if (registration is null) return new Result<bool>(new 
+                NullRegistrationException($"Registration for phone {phone} does not exist"));
             registration.HasVerificationCode(code);
             await Uow.SaveChangesAsync();
         }
         var message = MessageGenerator.SendVerificationLink(phone, code);
         await _smsMessaging.Send(new SmsCommand {Message = message.Item1, Recipients = new [] {message.Item2}});
+        return new Result<bool>(true);
     }
 
     private async Task PostAsType(Users user, DbTransaction transaction, DbConnection connection)
@@ -93,9 +98,8 @@ public class RegistrationProcessor : ProcessorBase
 
     private async Task<Users> SaveUser(UserCommand command)
     {
-        var user = Users.Create()
-            .CreatedOn();
-        var passes = await Task.FromResult(Uow.Users.Register(command));
+        var user = Users.Create();
+        var passes = await Task.Run(() => Uow.Users.Register(command));
         await AssignFields(user, command);
         user.HasPassword(passes.Item1)
             .HasPasswordKey(passes.Item2);
@@ -125,8 +129,7 @@ public class RegistrationProcessor : ProcessorBase
     private async Task PostCustomer(Users user, DbTransaction transaction, DbConnection connection)
     {
         var userId = await Uow.Users.GetIdByPhone(user.Contact.PrimaryContact, transaction, connection);
-        var customer = Customers.Create(userId)
-            .CreatedOn();
+        var customer = Customers.Create(userId);
         await Uow.Customers.InsertAsync(customer);
         await Uow.SaveChangesAsync();
     }

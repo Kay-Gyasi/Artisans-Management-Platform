@@ -1,13 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Processors;
-using MediatR;
-
-namespace AMP.Application.Features.Commands
+﻿namespace AMP.Application.Features.Commands
 {
     public class ArtisanCompleteOrder
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<bool>>
         {
             public string OrderId { get; }
 
@@ -17,7 +12,7 @@ namespace AMP.Application.Features.Commands
             }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<bool>>
         {
             private readonly OrderProcessor _processor;
 
@@ -25,10 +20,9 @@ namespace AMP.Application.Features.Commands
             {
                 _processor = processor;
             }
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<bool>> Handle(Command request, CancellationToken cancellationToken)
             {
-                await _processor.ArtisanComplete(request.OrderId);
-                return Unit.Value;
+                return await _processor.ArtisanComplete(request.OrderId);
             }
         }
     }

@@ -16,8 +16,7 @@
             Services service;
             if (isNew)
             {
-                service = Services.Create(command.Name, command.Description)
-                    .CreatedOn();
+                service = Services.Create(command.Name, command.Description);
                 Cache.Remove(LookupCacheKey);
                 await Uow.Services.InsertAsync(service);
                 await Uow.SaveChangesAsync();

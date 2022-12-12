@@ -14,7 +14,7 @@ public static class AuthenticationInstaller
             .AddJwtBearer(opts =>
             {
                 opts.MapInboundClaims = true;
-                opts.SaveToken = true;
+                opts.SaveToken = false;
                 //opts.RequireHttpsMetadata = true;
                 opts.TokenValidationParameters = new TokenValidationParameters()
                 {
@@ -28,6 +28,48 @@ public static class AuthenticationInstaller
                     NameClaimType = ClaimTypes.Name
                 };
             });
+        return services.AddAuthorizationPolicies();
+    }
+
+    private static IServiceCollection AddAuthorizationPolicies(this IServiceCollection services)
+    {
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("CustomerOnlyResource", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireAssertion(context => context.User.IsInRole("Customer"));
+            });    
+            
+            options.AddPolicy("ArtisanOnlyResource", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireAssertion(context => context.User.IsInRole("Artisan"));
+            });    
+            
+            options.AddPolicy("CustomerAdminDevResource", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireAssertion(context => context.User.IsInRole("Customer")
+                                                   || context.User.IsInRole("Administrator") 
+                                                   || context.User.IsInRole("Developer"));
+            });   
+            
+            options.AddPolicy("ArtisanAdminDevResource", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireAssertion(context => context.User.IsInRole("Artisan")
+                                                    || context.User.IsInRole("Administrator") 
+                                                    || context.User.IsInRole("Developer"));
+            });   
+            
+            options.AddPolicy("AdminDevResource", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireAssertion(context => context.User.IsInRole("Administrator") 
+                                                   || context.User.IsInRole("Developer"));
+            });
+        });
         return services;
     }
 

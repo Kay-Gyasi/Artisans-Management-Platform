@@ -1,4 +1,5 @@
-﻿using AMP.Persistence.Configurations;
+﻿using AMP.Domain.Entities.Base;
+using AMP.Persistence.Configurations;
 using Languages = AMP.Domain.Entities.Languages;
 
 namespace AMP.Persistence.Database
@@ -40,6 +41,34 @@ namespace AMP.Persistence.Database
             var assembly = typeof(ArtisansConfiguration).Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
             base.OnModelCreating(modelBuilder);
+        }
+        
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entity in this.ChangeTracker.Entries()
+                         .Where(e => e.Entity is EntityBase 
+                                     && e.State is EntityState.Added or EntityState.Modified)
+                         .Select(e => e.Entity as EntityBase)
+                    )
+            {
+                if (entity != null)
+                {
+                    entity.DateModified = DateTime.Now;
+                }
+            }
+            
+            foreach (var entity in this.ChangeTracker.Entries()
+                         .Where(e => e.Entity is EntityBase 
+                                     && e.State is EntityState.Added)
+                         .Select(e => e.Entity as EntityBase)
+                    )
+            {
+                if (entity != null)
+                {
+                    entity.DateCreated = DateTime.Now;
+                }
+            }
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace AMP.Application.Features.Commands
 {
     public class UpdateUser
     {
-        public class Command : IRequest<string>
+        public class Command : IRequest<Result<string>>
         {
             public UserCommand UserCommand { get; }
 
@@ -18,7 +18,7 @@ namespace AMP.Application.Features.Commands
             }
         }
 
-        public class Handler : IRequestHandler<Command, string>
+        public class Handler : IRequestHandler<Command, Result<string>>
         {
             private readonly UserProcessor _processor;
 
@@ -26,7 +26,7 @@ namespace AMP.Application.Features.Commands
             {
                 _processor = processor;
             }
-            public async Task<string> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
             {
                 return await _processor.Update(request.UserCommand);
             }

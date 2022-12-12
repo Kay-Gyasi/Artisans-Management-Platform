@@ -7,7 +7,7 @@ namespace AMP.Application.Features.Queries;
 
 public class VerifyUser
 {
-    public class Query : IRequest
+    public class Query : IRequest<Result<bool>>
     {
         public string Code { get; }
         public string Phone { get; }
@@ -19,7 +19,7 @@ public class VerifyUser
         }
     }
 
-    public class Handler : IRequestHandler<Query>
+    public class Handler : IRequestHandler<Query, Result<bool>>
     {
         private readonly RegistrationProcessor _registrationProcessor;
 
@@ -28,10 +28,9 @@ public class VerifyUser
             _registrationProcessor = registrationProcessor;
         }
         
-        public async Task<Unit> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<bool>> Handle(Query request, CancellationToken cancellationToken)
         {
-            await _registrationProcessor.VerifyUser(request.Phone, request.Code);
-            return Unit.Value;
+            return await _registrationProcessor.VerifyUser(request.Phone, request.Code);
         }
     }
 }
