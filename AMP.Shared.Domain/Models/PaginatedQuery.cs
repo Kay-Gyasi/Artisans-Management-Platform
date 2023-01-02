@@ -42,7 +42,16 @@ namespace AMP.Shared.Domain.Models
 
 	}
 
-	// TODO:: Include LastId
+	// TODO:: Implement keyset pagination (add console project to tests for benchmarking) 
+	// public class ApiCommand
+	// {
+	// 	public int PageNumber { get; set; }
+	// 	public int PageSize { get; set; }
+	// 	public string SortBy { get; set; }
+	// 	public string SortDirection { get; set; }
+	// 	public string LastSeenKey { get; set; }
+	// }
+	
 	public class PaginatedQuery
 	{
 		public IQueryCollection FormQuery { get; }
@@ -75,7 +84,7 @@ namespace AMP.Shared.Domain.Models
 
 	public enum Direction
 	{
-		Forward,
-		Backward
+		Forward = 1,
+		Backward = 0
 	}
 }

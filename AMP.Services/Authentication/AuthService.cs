@@ -12,6 +12,7 @@
         public string GenerateToken(LoginQueryObject user)
         {
             var secretKey = _configuration["Jwt:Key"];
+            if (secretKey is null) throw new NullReferenceException();
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var claims = new Claim[]
             {
@@ -28,7 +29,7 @@
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims),
+                Subject = new ClaimsIdentity(claims, "pwd", ClaimTypes.Name, ClaimTypes.Role),
                 Expires = user.Type == "Customer" ? DateTime.UtcNow.AddMinutes(20) : DateTime.UtcNow.AddHours(1),
                 IssuedAt = DateTime.UtcNow,
                 Issuer = _configuration["Jwt:Issuer"],

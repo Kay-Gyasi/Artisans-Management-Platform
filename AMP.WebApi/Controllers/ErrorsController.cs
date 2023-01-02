@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace AMP.WebApi.Controllers;
 
@@ -10,6 +11,9 @@ public class ErrorsController : ControllerBase
     public IActionResult Error()
     {
         var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-        return Problem(title: exception?.Message, statusCode: (int)HttpStatusCode.PreconditionFailed);
+        var statusCode = exception is ValidationException
+            ? (int) HttpStatusCode.PreconditionFailed
+            : (int) HttpStatusCode.InternalServerError;
+        return Problem(title: exception?.Message, statusCode: statusCode);
     }
 }

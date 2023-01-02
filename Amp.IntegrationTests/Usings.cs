@@ -1,3 +1,4 @@
+global using AMP.Processors.Responses;
 global using Xunit;
 global using System.Diagnostics;
 global using System.Net;
