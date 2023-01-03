@@ -4,6 +4,7 @@ namespace AMP.Processors.Repositories
 {
     public interface IOrderRepository : IRepositoryBase<Orders>
     {
+        Task<int> GetScheduleCount(string userId);
         Task<int> GetCount(string artisanId);
         Task<List<Lookup>> GetOpenOrdersLookup(string userId);
 

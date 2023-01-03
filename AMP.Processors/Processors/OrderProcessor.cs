@@ -16,6 +16,12 @@ namespace AMP.Processors.Processors
             _worker = worker;
         }
 
+        public async Task<int> GetScheduleCount(string userId)
+        {
+            return await Uow.Orders.GetScheduleCount(userId);
+        }
+        
+
         public async Task<Result<InsertOrderResponse>> Insert(OrderCommand command)
         {
             var order = Orders.Create(command.CustomerId, command.ServiceId)

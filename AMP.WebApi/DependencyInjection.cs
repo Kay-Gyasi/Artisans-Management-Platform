@@ -1,6 +1,7 @@
 ﻿using AMP.Services;
 using Microsoft.Extensions.FileProviders;
 using AMP.Processors.HealthChecks;
+using AMP.WebApi.Hubs;
 using AMP.WebApi.Installers;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using ILogger = Serilog.ILogger;
@@ -12,23 +13,17 @@ public static class DependencyInjection
     public static void AddAmp(this IServiceCollection services, IConfiguration configuration,
         ILogger logger)
     {
-        services.AddPersistence(configuration)
-            .AddRepositories(logger)
+        services.AddPersistence(configuration, logger)
             .AddProcessors()
-            .RegisterAutoMapper()
-            .AddDbHealthChecks()
+            .RegisterServices(configuration)
             .AddMediatr()
-            .AddCaching()
             .AddDefaultConfig()
             .AddSwaggerConfig()
-            .AddMemoryCache()
             .AddHttpContextAccessor()
-            .RegisterInfrastructure(configuration)
             .AddAuthentication(configuration)
-            .AddSmsMessaging()
             .AddRateLimiting()
-            .AddWorkers()
             .InstallCors();
+        services.AddSignalR();
     }
 
     private static IServiceCollection AddDefaultConfig(this IServiceCollection services)
@@ -92,6 +87,8 @@ public static class DependencyInjection
         app.UseRouting();
 
         app.UseCors();
+
+        app.MapHub<DataCountHub>("/data-count");
 
         app.UseAuthentication();
 

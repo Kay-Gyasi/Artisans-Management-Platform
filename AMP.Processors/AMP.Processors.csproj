@@ -23,6 +23,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+	<Folder Include="Hubs\Commands" />
 	<Folder Include="Mapping\" />
 	<Folder Include="Authentication\" />
 	<Folder Include="PageDtos\" />
@@ -33,6 +34,11 @@
   <ItemGroup>
 	<ProjectReference Include="..\AMP.Domain\AMP.Domain.csproj" />
 	<ProjectReference Include="..\AMP.Shared.Domain\AMP.Shared.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Installers\InstallProjectBase.cs" />
+    <Compile Remove="Installers\InstallBackgroundWorkers.cs" />
   </ItemGroup>
 
 </Project>

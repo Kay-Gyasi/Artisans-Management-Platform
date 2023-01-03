@@ -14,15 +14,20 @@ namespace AMP.Processors
             var assembly = attribute.Assembly;
             var definedTypes = assembly.DefinedTypes;
 
-            var processors = definedTypes.Where(x => x.IsClass && x.GetCustomAttribute(attribute) != null);
+            var processors = definedTypes.Where(x => 
+                x.IsClass && x.GetCustomAttribute(attribute) != null);
             foreach (var processor in processors)
             {
                 services.AddScoped(processor.AsType());
             }
+
+            services.RegisterAutoMapper()
+                .AddCaching()
+                .AddWorkers();
             return services;
         }
 
-        public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
+        private static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
         {
             
             var assemblies = Assembly.GetExecutingAssembly();
@@ -30,13 +35,13 @@ namespace AMP.Processors
             return services;
         }
 
-        public static IServiceCollection AddCaching(this IServiceCollection services)
+        private static IServiceCollection AddCaching(this IServiceCollection services)
         {
             services.AddMemoryCache();
             return services;
         }
         
-        public static IServiceCollection AddWorkers(this IServiceCollection services)
+        private static IServiceCollection AddWorkers(this IServiceCollection services)
         {
             services.AddHostedService<SmsService>();
             services.AddScoped<MessageGenerator>();

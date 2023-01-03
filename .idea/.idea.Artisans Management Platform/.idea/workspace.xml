@@ -12,40 +12,632 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5f159e4-3203-4332-a4db-887f6f77bfe1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Amp.IntegrationTests/Tests/OrdersController/OrderTests_2.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AMP.Application/Features/Hubs/GetScheduleCount.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AMP.Processors/Hubs/Enums/DataCountType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AMP.Processors/Hubs/Messages/Base/MessageBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AMP.WebApi/Hubs/DataCountHub.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Artisans Management Platform/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Application/Validation/AcceptOrderValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/Validation/AcceptOrderValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Services/Authentication/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/Authentication/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/bin/Debug/net7.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/ref/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/ref/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/refint/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Application/obj/Debug/net7.0/refint/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/Repositories/OrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/Repositories/OrderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/AMP.Persistence.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/AMP.Persistence.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/ref/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/ref/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/refint/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Persistence/obj/Debug/net7.0/refint/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/AMP.Processors.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/AMP.Processors.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Processors/OrderProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Processors/OrderProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/Repositories/IOrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/Repositories/IOrderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/bin/Debug/net7.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/AMP.Processors.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/ref/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/ref/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/refint/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Processors/obj/Debug/net7.0/refint/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Processors.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Services.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/bin/Debug/net7.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/AMP.Services.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/AMP.Services.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/AMP.Services.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/Models/PaginatedQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/Models/PaginatedQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AMP.WebApi/Controllers/ErrorsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/Controllers/ErrorsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/ref/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/ref/AMP.Services.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/refint/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Services/obj/Debug/net7.0/refint/AMP.Services.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Debug/netstandard2.1/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Debug/netstandard2.1/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Debug/netstandard2.1/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/bin/Debug/netstandard2.1/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Debug/netstandard2.1/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Debug/netstandard2.1/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Debug/netstandard2.1/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Domain/obj/Debug/netstandard2.1/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/net7.0/AMP.Shared.Persistence.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/net7.0/AMP.Shared.Persistence.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/net7.0/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/net7.0/AMP.Shared.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/net7.0/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.Shared.Persistence/obj/Debug/net7.0/AMP.Shared.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/AMP.WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/AMP.WebApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Application.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Processors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Processors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Processors.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Services.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Services.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Persistence.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Persistence.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.WebApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.WebApi.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/AMP.WebApi.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/bin/Debug/net7.0/logs/kessewa.log.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/logs/kessewa.log.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/AMP.WebApi.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/AMP.WebApi.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/Tests/OrderControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/Tests/OrdersController/OrderControllerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/Usings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/Usings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Services.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Services.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Services.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Services.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/logs/kessewa.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/logs/kessewa.log.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/ref/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/ref/Amp.IntegrationTests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/refint/Amp.IntegrationTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/refint/Amp.IntegrationTests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/ref/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/ref/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/refint/AMP.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/Debug/net7.0/refint/AMP.WebApi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMP.WebApi/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/AMP.WebApi/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Application.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Application.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Domain.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Domain.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Persistence.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Persistence.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Processors.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Processors.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Services.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Services.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Shared.Domain.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Shared.Domain.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Shared.Persistence.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.Shared.Persistence.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.deps.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.runtimeconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AMP.WebApi.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.deps.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Amp.IntegrationTests.runtimeconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AutoFixture.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/AutoMapper.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Azure.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Azure.Identity.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/CloudinaryDotNet.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/CoverletSourceRootsMapping" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Dapper.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Fare.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Files/json.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/FluentAssertions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/FluentValidation.DependencyInjectionExtensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/FluentValidation.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/LanguageExt.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/MediatR.Contracts.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/MediatR.Extensions.Microsoft.DependencyInjection.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/MediatR.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.Testing.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.Razor.Language.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.AspNetCore.TestHost.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.CodeAnalysis.CSharp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.CodeAnalysis.Razor.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.CodeAnalysis.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Data.SqlClient.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.InMemory.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.SqlServer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Identity.Client.Extensions.Msal.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Identity.Client.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.OpenApi.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.SqlServer.Server.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.TestPlatform.CommunicationUtilities.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.TestPlatform.CoreUtilities.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.TestPlatform.CrossPlatEngine.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.TestPlatform.PlatformAbstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.TestPlatform.Utilities.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.VisualStudio.TestPlatform.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/MvcTestingAppManifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Newtonsoft.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/NuGet.Frameworks.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/PhoneNumbers.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/RestClient.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Seq.Extensions.Logging.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.AspNetCore.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Enrichers.Environment.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Enrichers.Process.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Enrichers.Thread.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Extensions.Hosting.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Extensions.Logging.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Formatting.Compact.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Settings.Configuration.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Sinks.Console.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Sinks.Debug.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Sinks.File.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Sinks.PeriodicBatching.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.Sinks.Seq.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Serilog.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Drawing.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Memory.Data.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Runtime.Caching.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Security.Permissions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/System.Windows.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/_tests/http-client.private.env.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/logs/kessewa.log.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Antiforgery.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authentication.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authentication.Cookies.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authentication.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authentication.OAuth.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authentication.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authorization.Policy.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Authorization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Components.Authorization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Components.Forms.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Components.Server.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Components.Web.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Components.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Connections.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.CookiePolicy.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Cors.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Cryptography.Internal.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.DataProtection.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.DataProtection.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.DataProtection.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Diagnostics.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Diagnostics.HealthChecks.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Diagnostics.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.HostFiltering.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Hosting.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Hosting.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Html.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.Connections.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.Connections.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.Features.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.Results.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Http.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.HttpLogging.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.HttpOverrides.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.HttpsPolicy.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Identity.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Localization.Routing.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Localization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Metadata.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.ApiExplorer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Cors.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.DataAnnotations.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Formatters.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Formatters.Xml.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Localization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.Razor.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.RazorPages.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.TagHelpers.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.ViewFeatures.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Mvc.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.OutputCaching.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.RateLimiting.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Razor.Runtime.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Razor.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.RequestDecompression.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.ResponseCaching.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.ResponseCaching.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.ResponseCompression.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Rewrite.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Routing.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Routing.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.HttpSys.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.IIS.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.IISIntegration.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.Kestrel.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Server.Kestrel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.Session.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.SignalR.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.SignalR.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.SignalR.Protocols.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.SignalR.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.StaticFiles.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.WebSockets.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.WebUtilities.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.AspNetCore.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.CSharp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Caching.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Caching.Memory.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.Binder.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.CommandLine.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.EnvironmentVariables.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.FileExtensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.Ini.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.KeyPerFile.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.UserSecrets.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.Xml.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Configuration.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.DependencyInjection.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.DependencyInjection.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Diagnostics.HealthChecks.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Features.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.FileProviders.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.FileProviders.Composite.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.FileProviders.Embedded.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.FileProviders.Physical.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.FileSystemGlobbing.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Hosting.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Hosting.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Http.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Identity.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Identity.Stores.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Localization.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Localization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.Abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.Configuration.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.Console.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.Debug.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.EventLog.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.EventSource.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.TraceSource.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Logging.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.ObjectPool.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Options.ConfigurationExtensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Options.DataAnnotations.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Options.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Extensions.WebEncoders.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.JSInterop.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Net.Http.Headers.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.VisualBasic.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.VisualBasic.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Win32.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/Microsoft.Win32.Registry.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.AppContext.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Buffers.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Collections.Concurrent.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Collections.Immutable.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Collections.NonGeneric.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Collections.Specialized.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Collections.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ComponentModel.Annotations.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ComponentModel.DataAnnotations.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ComponentModel.EventBasedAsync.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ComponentModel.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ComponentModel.TypeConverter.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ComponentModel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Configuration.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Console.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Data.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Data.DataSetExtensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Data.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.Contracts.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.Debug.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.DiagnosticSource.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.EventLog.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.FileVersionInfo.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.Process.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.StackTrace.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.TextWriterTraceListener.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.Tools.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.TraceSource.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Diagnostics.Tracing.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Drawing.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Drawing.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Dynamic.Runtime.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Formats.Asn1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Formats.Tar.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Globalization.Calendars.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Globalization.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Globalization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Compression.Brotli.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Compression.FileSystem.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Compression.ZipFile.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Compression.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.FileSystem.AccessControl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.FileSystem.DriveInfo.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.FileSystem.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.FileSystem.Watcher.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.FileSystem.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.IsolatedStorage.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.MemoryMappedFiles.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Pipelines.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Pipes.AccessControl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.Pipes.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.UnmanagedMemoryStream.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.IO.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Linq.Expressions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Linq.Parallel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Linq.Queryable.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Linq.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Memory.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Http.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Http.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.HttpListener.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Mail.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.NameResolution.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.NetworkInformation.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Ping.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Quic.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Requests.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Security.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.ServicePoint.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.Sockets.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.WebClient.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.WebHeaderCollection.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.WebProxy.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.WebSockets.Client.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.WebSockets.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Net.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Numerics.Vectors.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Numerics.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ObjectModel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.DispatchProxy.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.Emit.ILGeneration.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.Emit.Lightweight.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.Emit.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.Metadata.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.TypeExtensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Reflection.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Resources.Reader.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Resources.ResourceManager.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Resources.Writer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.CompilerServices.Unsafe.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.CompilerServices.VisualC.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Handles.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.InteropServices.JavaScript.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.InteropServices.RuntimeInformation.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.InteropServices.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Intrinsics.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Loader.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Numerics.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Serialization.Formatters.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Serialization.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Serialization.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Serialization.Xml.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.Serialization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Runtime.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.AccessControl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Claims.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.Algorithms.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.Cng.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.Csp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.Encoding.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.OpenSsl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.Primitives.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.X509Certificates.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.Xml.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Cryptography.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Principal.Windows.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.Principal.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.SecureString.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Security.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ServiceModel.Web.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ServiceProcess.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Text.Encoding.CodePages.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Text.Encoding.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Text.Encoding.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Text.Encodings.Web.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Text.Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Text.RegularExpressions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Channels.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Overlapped.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.RateLimiting.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Tasks.Dataflow.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Tasks.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Tasks.Parallel.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Tasks.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Thread.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.ThreadPool.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.Timer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Threading.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Transactions.Local.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Transactions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.ValueTuple.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Web.HttpUtility.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Web.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Windows.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.Linq.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.ReaderWriter.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.Serialization.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.XDocument.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.XPath.XDocument.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.XPath.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.XmlDocument.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.XmlSerializer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.Xml.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/System.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/WindowsBase.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/mscorlib.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/refs/netstandard.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/testhost.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/testhost.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.abstractions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.assert.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.execution.dotnet.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.runner.reporters.netcoreapp10.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.runner.utility.netcoreapp10.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/bin/Debug/net7.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Amp.IntegrationTests.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.AssemblyInfoInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.MvcApplicationPartsAssemblyInfo.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.AssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.CopyComplete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.CoreCompileInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.genruntimeconfig.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/Amp.IntegrationTests.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/MvcTestingAppManifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/ref/Amp.IntegrationTests.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/refint/Amp.IntegrationTests.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/staticwebassets.build.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/staticwebassets/msbuild.build.Amp.IntegrationTests.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Amp.IntegrationTests.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Amp.IntegrationTests.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Amp.IntegrationTests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Amp.IntegrationTests/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,32 +660,39 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/013d46d433d3451399e21829dd89afc370880/95/00d0b480/0200002Fpdb.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/377b61b613ea444f826f377d9474ffca3c9a8/b5/3e1114a1/TestInvoker`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/587366ab77594e3982e8c8c4f1fcdcbd66ac00/e8/eff8e1f5/Result`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fdda811eb0c24809a57c2c15c15446ed10df8/5e/7de8ad0c/SqlConnection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2656e3487208acb3487490904326ac4e1fdc62459bbaf6dc682863a3c37a/ParameterExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3444aea72fd552a5be14e6c6d1bb43569412a5547ca7f0b93136753e44471e5c/CallSiteRuntimeResolver.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/345ffc59b2c77361a1fecb8945d2a68e32e73bf5e9a1545e3a4fb832c1e28/HubCallerClients.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/35e7e538796eca19115e7f3c2f459e1951ae177d47eb48ebbf393bff3ac/Select.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d5e20dc7b749f164cd549a6514a4d797382445b8189d0a085ff20cbeee542/ConflictObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4b95b9936aceaca7b7986abdecd044bd5135c35a492a08b2c3bb2f907882/HostBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4dc731a2825b3b282c3a7fc5adbea47e8720eadf5445558010f8488ec05eb64f/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f163f34e362d1592b89048e9bc4b2d2d7363aaf828a813a9f723ab447bb94f/Hub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/59a49a354f3a53bfac82d059788f3fa1f46d379da646dd78cb48bb8bcaf8c58d/HttpHeaders.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/66efbec125c33fdfb3a1bec1ed20a19604e9735174ac7196e96ed9476726/Mediator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/67bb63a91f3b19bf33dbf3ebc44aa8eca863d47938841995a59daf14c507e/IHubClients`T.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/686ecdf55b0afec278130ed1d8e7aaac77b377dfa7a6a67da3ce328916e4b8c/DynamicServiceProviderEngine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/80d129b962f1305236dad74bbe67184bc9e315ffa77287b351ba7ab194f5767/ProducesResponseTypeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81a3bcf4bb6aa5e62a9839f9cfeeba6126496f4fa07d1e57b27a5176e42525/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/82ab3cd3c91b4a3c944dfb683c0c3b102e08a0/_e53a8/IDbConnection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/835e918f865081a17f4db4eb792436785ecdfa3faa383eb94defdf7a7484e/WebApplicationFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8c54972f91e9f1369a47cbb0a8a950e5e423d1e344b06b2fe0849c2f6189f0/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8f69a418371b27ad203a6493a1f53360a2ddf31d4e2c142d99e21ef4220811e/MemoryCacheServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/913c5ed74449106f45d28daf48cffcc2b23e16c48f42fdc13757cabb7bfadc8/HttpClientJsonExtensions.Put.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9a22345af3778e6d675cfffd869c9619291a38b3e0b87e8cd28c4cc8f480db21/DefaultInterpolatedStringHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9cae5ff81748492eac6d1617177b7c57b33500e05b397d4694ec34c5ad183/ParameterLocation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a1a59674744830c52bb8ec2c75c1a5b1b21ec7b871acd25d24a346472da73b/DbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cb55330f5a7af6713835495a2fd9ff9a772cc3466b74601dbd4113128d1e4a/HubClients.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cea8f116d46ddf4be845bdf1d46ab3bb5bc4f06bc533db822f2d7999187e56f/Controller.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/admin/source/repos/Artisans Management Platform/AMP.Application/Validation/AcceptOrderValidator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/AMP.WebApi/DependencyInjection.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="HttpClientSelectedEnvironments">

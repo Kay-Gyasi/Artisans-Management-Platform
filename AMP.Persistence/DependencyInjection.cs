@@ -1,16 +1,17 @@
 ﻿using System.Reflection;
 using AMP.Persistence.Repositories.Uow;
-using AMP.Processors.Exceptions;
-using AMP.Processors.Repositories.Base;
 using AMP.Processors.Repositories.UoW;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ILogger = Serilog.ILogger;
 
 namespace AMP.Persistence
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPersistence(this IServiceCollection services,
+            IConfiguration configuration,
+            ILogger logger)
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
@@ -21,6 +22,9 @@ namespace AMP.Persistence
                 });
             });
             services.AddScoped<IDapperContext, DapperContext>();
+
+            services.AddRepositories(logger)
+                .AddDbHealthChecks();
             return services;
         }
 
@@ -30,7 +34,7 @@ namespace AMP.Persistence
         /// <param name="services"></param>
         /// <returns></returns>
         /// <exception cref="RepositoryNotFoundException"></exception>
-        public static IServiceCollection AddRepositories(this IServiceCollection services, Serilog.ILogger logger)
+        private static IServiceCollection AddRepositories(this IServiceCollection services, Serilog.ILogger logger)
         {
             var definedTypes = typeof(DependencyInjection).Assembly.DefinedTypes;
             var repositories = definedTypes
@@ -56,7 +60,7 @@ namespace AMP.Persistence
             return services;
         }
         
-        public static IServiceCollection AddDbHealthChecks(this IServiceCollection services)
+        private static IServiceCollection AddDbHealthChecks(this IServiceCollection services)
         {
             services.AddHealthChecks()
                 .AddDbContextCheck<AmpDbContext>();

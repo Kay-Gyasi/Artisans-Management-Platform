@@ -139,8 +139,7 @@ namespace AMP.Persistence.Repositories
 
         public async Task<int> GetCount(string artisanId)
         {
-            return await Context.Set<Orders>()
-                .AsNoTracking()
+            return await GetBaseQuery()
                 .CountAsync(x => x.ArtisanId == artisanId);
         }
 
@@ -167,12 +166,20 @@ namespace AMP.Persistence.Repositories
                 }).OrderBy(x => x.Name)
                 .ToListAsync();
         }
+        
         public async Task SetCost(SetCostCommand costCommand)
         {
             var rows = await _dapperContext.Execute(
                 $"UPDATE Orders SET Cost = {costCommand.Cost}, DateModified = GETDATE() WHERE Id = '{costCommand.OrderId}'",
                 null, CommandType.Text);
             if (rows == 0) throw new InvalidIdException($"Order with id: {costCommand.OrderId} does not exist");
+        }
+
+        public async Task<int> GetScheduleCount(string userId)
+        {
+            return await GetBaseQuery()
+                .Where(x => x.Artisan.UserId == userId && x.IsRequestAccepted && !x.IsArtisanComplete)
+                .CountAsync();
         }
         
         // NOTE:: .StartsWith() => search%, .Contains() => %search%
