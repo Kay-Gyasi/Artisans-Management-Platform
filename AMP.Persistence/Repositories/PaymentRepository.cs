@@ -50,7 +50,9 @@ namespace AMP.Persistence.Repositories
         public async Task<int> GetArtisanPaymentCount(string userId)
         {
             return await GetBaseQuery()
-                .Where(x => x.Order.Artisan.UserId == userId && !x.IsForwarded)
+                .Where(x => x.Order.Artisan.UserId == userId &&
+                            !x.IsForwarded &&
+                            x.IsVerified)
                 .CountAsync();
         }
         

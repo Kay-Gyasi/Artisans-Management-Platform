@@ -7,6 +7,7 @@
         public string CustomerId { get; set; }
         public string? ArtisanId { get; set; }
         public bool IsRequestAccepted { get; set; }
+        public bool IsArtisanComplete { get; set; }
         public string Description { get; set; }
         public Address WorkAddress { get; set; }
         public ServicePageDto Service { get; set; }
