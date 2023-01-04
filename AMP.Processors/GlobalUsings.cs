@@ -1,4 +1,12 @@
-﻿global using AMP.Processors.Exceptions;
+﻿global using AMP.Processors.Hubs.Enums;
+global using AMP.Processors.Workers.Enums;
+global using AMP.Processors.Hubs;
+global using AMP.Processors.Hubs.Helpers;
+global using AMP.Processors.Processors;
+global using System.Security.Claims;
+global using AMP.Processors.Hubs.Messages;
+global using Microsoft.AspNetCore.Authorization;
+global using AMP.Processors.Exceptions;
 global using LanguageExt.Common;
 global using LanguageExt;
 global using System;

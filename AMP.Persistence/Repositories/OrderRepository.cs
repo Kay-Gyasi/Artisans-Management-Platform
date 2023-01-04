@@ -45,39 +45,62 @@ namespace AMP.Persistence.Repositories
             if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
         }
         
-        public async Task ArtisanComplete(string orderId)
+        public async Task<string> ArtisanComplete(string orderId)
         {
             var rows = await _dapperContext.Execute(
                 $"UPDATE Orders SET IsArtisanComplete = 1, DateModified = GETDATE() WHERE Id = '{orderId}'",
                 null, CommandType.Text);
             if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
+            
+            var artisanId = await _dapperContext.GetAsync<string>
+                ($"SELECT ArtisanId FROM Orders WHERE Id = '{orderId}'", null, CommandType.Text);
+
+            return await _dapperContext.GetAsync<string>
+                ($"SELECT UserId From Artisans WHERE Id = '{artisanId}'", null, CommandType.Text);
         }
 
-        public async Task AcceptRequest(string orderId)
+        public async Task<string> AcceptRequest(string orderId)
         {
             var rows = await _dapperContext.Execute(
                 $"UPDATE Orders SET IsRequestAccepted = 1, DateModified = GETDATE() WHERE Id = '{orderId}'",
                 null, CommandType.Text);
             if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
+            
+            var artisanId = await _dapperContext.GetAsync<string>
+                ($"SELECT ArtisanId FROM Orders WHERE Id = '{orderId}'", null, CommandType.Text);
+
+            return await _dapperContext.GetAsync<string>
+                ($"SELECT UserId From Artisans WHERE Id = '{artisanId}'", null, CommandType.Text);;
         }
         
-        public async Task CancelRequest(string orderId)
+        public async Task<string> CancelRequest(string orderId)
         {
             var rows = await _dapperContext.Execute(
-                $"UPDATE Orders SET IsRequestAccepted = 0, DateModified = GETDATE() WHERE Id = '{orderId}'",
+                $"UPDATE Orders SET ArtisanId = NULL, IsRequestAccepted = 0, DateModified = GETDATE() WHERE Id = '{orderId}'",
                 null, CommandType.Text);
             if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
+            
+            var artisanId = await _dapperContext.GetAsync<string>
+                ($"SELECT ArtisanId FROM Orders WHERE Id = '{orderId}'", null, CommandType.Text);
+
+            return await _dapperContext.GetAsync<string>
+                ($"SELECT UserId From Artisans WHERE Id = '{artisanId}'", null, CommandType.Text);
         }
 
-        public async Task UnassignArtisan(string orderId)
+        public async Task<string> UnassignArtisan(string orderId)
         {
+            var artisanId = await _dapperContext.GetAsync<string>
+                ($"SELECT ArtisanId FROM Orders WHERE Id = '{orderId}'", null, CommandType.Text);
             var rows = await _dapperContext.Execute(
                 $"UPDATE Orders SET ArtisanId = NULL, DateModified = GETDATE() WHERE Id = '{orderId}'",
              null, CommandType.Text);
             if (rows == 0) throw new InvalidIdException($"Order with id: {orderId} does not exist");
+            
+            return await _dapperContext.GetAsync<string>
+                ($"SELECT UserId From Artisans WHERE Id = '{artisanId}'", null, CommandType.Text);;
         }
 
-        public async Task AssignArtisan(string orderId, string artisanId)
+        public async Task<string> AssignArtisan(string orderId, string artisanId)
         {
             var order = await base.GetBaseQuery().FirstOrDefaultAsync(x => x.Id == orderId);
             if (order is null) throw new InvalidIdException($"Order with id: {orderId} does not exist");
@@ -85,6 +108,9 @@ namespace AMP.Persistence.Repositories
             await UpdateAsync(order);
 
             await Context.Requests.AddAsync(Requests.Create(order?.CustomerId, artisanId, orderId));
+            
+            return await _dapperContext.GetAsync<string>
+                ($"SELECT UserId FROM Artisans WHERE Id = '{artisanId}'", null, CommandType.Text);
         }
 
         public async Task<PaginatedList<Orders>> GetCustomerOrderPage(PaginatedCommand paginated,
@@ -182,6 +208,13 @@ namespace AMP.Persistence.Repositories
                 .CountAsync();
         }
         
+        public async Task<int> GetJobRequestsCount(string userId)
+        {
+            return await GetBaseQuery()
+                .Where(x => x.Artisan.UserId == userId && !x.IsRequestAccepted)
+                .CountAsync();
+        }
+
         // NOTE:: .StartsWith() => search%, .Contains() => %search%
         protected override Expression<Func<Orders, bool>> GetSearchCondition(string search)
         {

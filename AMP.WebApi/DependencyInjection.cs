@@ -1,7 +1,7 @@
 ﻿using AMP.Services;
 using Microsoft.Extensions.FileProviders;
 using AMP.Processors.HealthChecks;
-using AMP.WebApi.Hubs;
+using AMP.Processors.Hubs;
 using AMP.WebApi.Installers;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using ILogger = Serilog.ILogger;
@@ -49,14 +49,14 @@ public static class DependencyInjection
 
     public static void ConfigurePipeline(this WebApplication app)
     {
+        app.UseSwagger();
+
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
             app.UseSwaggerUI();
             app.UseDeveloperExceptionPage();
         }
 
-        app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tukofix API v1");
@@ -76,7 +76,7 @@ public static class DependencyInjection
         app.UseExceptionHandler("/error");
         app.UseDefaultFiles();
 
-        app.UseStaticFiles(new StaticFileOptions()
+        app.UseStaticFiles(new StaticFileOptions
         {
             FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
             RequestPath = new PathString("/Files")

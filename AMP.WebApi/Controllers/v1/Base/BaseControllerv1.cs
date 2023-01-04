@@ -1,4 +1,7 @@
-﻿namespace AMP.WebApi.Controllers.v1.Base
+﻿using AMP.Processors.Hubs;
+using Microsoft.AspNet.SignalR;
+
+namespace AMP.WebApi.Controllers.v1.Base
 {
     
     [Route("api/v1/[controller]/[action]")]
@@ -15,7 +18,7 @@
 
         protected Task<IActionResult> OkResult<T>(Result<T> result)
         {
-            return Task.Run(() => result.Match<IActionResult>(b => Ok(b),
+            return Task.Run(() => result.Match(b => Ok(b),
                 BuildProblemDetails));
         }
         

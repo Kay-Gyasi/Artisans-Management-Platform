@@ -1,6 +1,5 @@
 ﻿using AMP.Processors.Responses;
 using AMP.Processors.Workers.BackgroundWorker;
-using AMP.Processors.Workers.Enums;
 
 namespace AMP.Processors.Processors
 {
@@ -21,6 +20,10 @@ namespace AMP.Processors.Processors
             return await Uow.Orders.GetScheduleCount(userId);
         }
         
+        public async Task<int> GetJobRequestsCount(string userId)
+        {
+            return await Uow.Orders.GetJobRequestsCount(userId);
+        }
 
         public async Task<Result<InsertOrderResponse>> Insert(OrderCommand command)
         {
@@ -54,7 +57,8 @@ namespace AMP.Processors.Processors
         {
             var order = await Uow.Orders.GetAsync(command.Id);
             if (order is null)
-                return new Result<string>(new InvalidIdException($"Order with id: {command.Id} does not exist"));
+                return new Result<string>(
+                    new InvalidIdException($"Order with id: {command.Id} does not exist"));
             await AssignFields(order, command);
             Cache.Remove(LookupCacheKey);
             await Uow.Orders.UpdateAsync(order);
@@ -66,7 +70,9 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                await Uow.Orders.UnassignArtisan(orderId);
+                var userId = await Uow.Orders.UnassignArtisan(orderId);
+                _worker.ServeLiveCount(DataCountType.Schedule, userId);
+                _worker.ServeLiveCount(DataCountType.JobRequests, userId);
             }
             catch (Exception e)
             {
@@ -80,9 +86,12 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                await Uow.Orders.AssignArtisan(orderId, artisanId);
-                var success = await Uow.SaveChangesAsync();
-                if(success) _worker.SendSms(SmsType.AssignArtisan, orderId, artisanId);
+                var artisanUserId = await Uow.Orders.AssignArtisan(orderId, artisanId);
+                if (await Uow.SaveChangesAsync())
+                {
+                    _worker.SendSms(SmsType.AssignArtisan, orderId, artisanId);
+                    _worker.ServeLiveCount(DataCountType.JobRequests, artisanUserId);
+                }
             }
             catch (Exception e)
             {
@@ -96,8 +105,10 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                await Uow.Orders.AcceptRequest(orderId);
+                var artisanUserId = await Uow.Orders.AcceptRequest(orderId);
                 _worker.SendSms(SmsType.AcceptRequest, orderId);
+                _worker.ServeLiveCount(DataCountType.Schedule, artisanUserId);
+                _worker.ServeLiveCount(DataCountType.JobRequests, artisanUserId);
             }
             catch (Exception e)
             {
@@ -111,7 +122,9 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                await Uow.Orders.CancelRequest(orderId);
+                var artisanUserId = await Uow.Orders.CancelRequest(orderId);
+                _worker.ServeLiveCount(DataCountType.Schedule, artisanUserId);
+                _worker.ServeLiveCount(DataCountType.JobRequests, artisanUserId);
             }
             catch (Exception e)
             {
@@ -139,7 +152,8 @@ namespace AMP.Processors.Processors
         {
             try
             {
-                await Uow.Orders.ArtisanComplete(orderId);
+                var artisanUserId = await Uow.Orders.ArtisanComplete(orderId);
+                _worker.ServeLiveCount(DataCountType.Schedule, artisanUserId);
             }
             catch (Exception e)
             {

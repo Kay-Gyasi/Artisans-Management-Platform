@@ -60,6 +60,8 @@ public class SmsService : BackgroundService
                 await ArtisanPaymentVerified(messageGenerator, smsMessaging);
                 FinishTask();
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
     

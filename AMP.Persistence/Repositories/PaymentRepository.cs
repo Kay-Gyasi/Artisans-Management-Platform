@@ -17,11 +17,14 @@ namespace AMP.Persistence.Repositories
             await Task.Run(() => GetBaseQuery().Where(x => x.OrderId == orderId && x.IsVerified)
                 .Sum(x => x.AmountPaid));
 
-        public async Task Verify(string reference, string trxRef)
+        public async Task<string> Verify(string reference, string trxRef)
         {
-            var payment = await GetBaseQuery().FirstOrDefaultAsync(x => x.Reference == reference);
+            var payment = await GetBaseQuery()
+                .FirstOrDefaultAsync(x => x.Reference == reference);
             payment?.HasBeenVerified(true);
             payment?.WithTransactionReference(trxRef);
+
+            return payment?.Order.Artisan.UserId;
         }
 
         public async Task<PaginatedList<Payments>> GetUserPage(PaginatedCommand paginated, 
@@ -44,9 +47,17 @@ namespace AMP.Persistence.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(a => a.TransactionReference == trxRef);
 
+        public async Task<int> GetArtisanPaymentCount(string userId)
+        {
+            return await GetBaseQuery()
+                .Where(x => x.Order.Artisan.UserId == userId && !x.IsForwarded)
+                .CountAsync();
+        }
+        
         public override IQueryable<Payments> GetBaseQuery() =>
             base.GetBaseQuery()
-                .Include(x => x.Order);
+                .Include(x => x.Order)
+                .ThenInclude(x => x.Artisan);
 
         protected override Expression<Func<Payments, bool>> GetSearchCondition(string search)
         {

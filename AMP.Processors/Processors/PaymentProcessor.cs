@@ -1,4 +1,5 @@
 ﻿using AMP.Processors.Workers;
+using AMP.Processors.Workers.BackgroundWorker;
 using AMP.Processors.Workers.Enums;
 
 namespace AMP.Processors.Processors
@@ -6,10 +7,19 @@ namespace AMP.Processors.Processors
     [Processor]
     public class PaymentProcessor : ProcessorBase
     {
+        private readonly IBackgroundWorker _worker;
         private const string LookupCacheKey = "Paymentlookup";
 
-        public PaymentProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
+        public PaymentProcessor(IUnitOfWork uow, IMapper mapper, 
+            IMemoryCache cache,
+            IBackgroundWorker worker) : base(uow, mapper, cache)
         {
+            _worker = worker;
+        }
+        
+        public async Task<int> GetArtisanPaymentsCount(string userId)
+        {
+            return await Uow.Payments.GetArtisanPaymentCount(userId);
         }
 
         public async Task<string> Save(PaymentCommand command)
@@ -25,9 +35,13 @@ namespace AMP.Processors.Processors
 
         public async Task Verify(VerifyPaymentCommand command)
         {
-            await Uow.Payments.Verify(command.Reference, command.TransactionReference);
+            var artisanUserId = await Uow.Payments.Verify(command.Reference, command.TransactionReference);
             var success = await Uow.SaveChangesAsync();
-            if(success) SmsService.DoTask(SmsType.PaymentVerified, command.TransactionReference);
+            if (success)
+            {
+                _worker.SendSms(SmsType.PaymentVerified, command.TransactionReference);
+                _worker.ServeLiveCount(DataCountType.Payments, artisanUserId);
+            }
         }
 
         public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)

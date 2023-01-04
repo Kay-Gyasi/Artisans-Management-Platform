@@ -44,6 +44,7 @@ namespace AMP.Processors
         private static IServiceCollection AddWorkers(this IServiceCollection services)
         {
             services.AddHostedService<SmsService>();
+            services.AddHostedService<HubService>();
             services.AddScoped<MessageGenerator>();
             services.AddScoped<IBackgroundWorker, BackgroundWorker>();
             services.Configure<HostOptions>(options =>
