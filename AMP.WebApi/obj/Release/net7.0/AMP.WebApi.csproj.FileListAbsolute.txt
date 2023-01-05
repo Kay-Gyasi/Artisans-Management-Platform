@@ -131,3 +131,10 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.CodeAnalysis.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.Owin.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.Owin.Security.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Owin.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\System.Net.WebSockets.WebSocketProtocol.dll

@@ -22,8 +22,8 @@ public static class DependencyInjection
             .AddHttpContextAccessor()
             .AddAuthentication(configuration)
             .AddRateLimiting()
-            .InstallCors();
-        services.AddSignalR();
+            .InstallCors()
+            .InstallSignalR();
     }
 
     private static IServiceCollection AddDefaultConfig(this IServiceCollection services)

@@ -20,6 +20,8 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\MediatR.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\MediatR.Contracts.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNet.SignalR.SystemWeb.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
@@ -46,10 +48,14 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.Owin.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.Owin.Security.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.SqlServer.Server.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Owin.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\RestClient.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Seq.Extensions.Logging.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\Serilog.dll
@@ -73,6 +79,7 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.Drawing.Common.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.Memory.Data.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.Net.WebSockets.WebSocketProtocol.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.Runtime.Caching.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\System.Security.Permissions.dll
