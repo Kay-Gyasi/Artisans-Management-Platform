@@ -1,4 +1,7 @@
 ﻿using System.Data.Common;
+using AMP.Processors.Repositories.BusinessManagement;
+using AMP.Processors.Repositories.Messaging;
+using AMP.Processors.Repositories.UserManagement;
 
 namespace AMP.Processors.Repositories.UoW
 {
@@ -17,6 +20,10 @@ namespace AMP.Processors.Repositories.UoW
         public IRequestRepository Requests { get; }
         public IRegistrationRepository Registrations { get; }
         public IInvitationRepository Invitations { get; }
+        public IChatMessageRepository ChatMessages { get; }
+        public IConnectRequestRepository ConnectRequests { get; }
+        public INotificationRepository Notifications { get; }
+        public IConversationRepository Conversations { get; }
 
         Task<bool> SaveChangesAsync();
         IDbContextTransaction BeginTransaction();

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AMP.Processors.Commands.UserManagement;
+using Microsoft.Extensions.Logging;
 
 namespace AMP.Processors.Messaging;
 

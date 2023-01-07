@@ -1,4 +1,7 @@
-﻿namespace AMP.Processors.Processors.Administration
+﻿using AMP.Domain.Entities.BusinessManagement;
+using AMP.Domain.Entities.UserManagement;
+
+namespace AMP.Processors.Processors.Administration
 {
     public static class InitIds
     {
@@ -33,14 +36,14 @@
 
         private async Task InitializeServices()
         {
-            var services = new List<Services>
+            var services = new List<Service>
             {
-                Services.Create("Masonry"),
-                Services.Create("Electrical Works"),
-                Services.Create("Plumbing"),
-                Services.Create("Mechanics"),
-                Services.Create("Carpentry"),
-                Services.Create("Painting"),
+                Service.Create("Masonry"),
+                Service.Create("Electrical Works"),
+                Service.Create("Plumbing"),
+                Service.Create("Mechanics"),
+                Service.Create("Carpentry"),
+                Service.Create("Painting"),
             };
 
             await Uow.Services.InsertAsync(services);
@@ -48,13 +51,13 @@
 
         private async Task InitializeLanguages()
         {
-            var languages = new List<Languages>
+            var languages = new List<Language>
             {
-                Languages.Create("English"),
-                Languages.Create("Fante"),
-                Languages.Create("Twi"),
-                Languages.Create("Ewe"),
-                Languages.Create("French"),
+                Language.Create("English"),
+                Language.Create("Fante"),
+                Language.Create("Twi"),
+                Language.Create("Ewe"),
+                Language.Create("French"),
             };
 
             await Uow.Languages.InsertAsync(languages);
@@ -65,9 +68,9 @@
         {
             var password = Uow.Users.Register("pass");
 
-            var users = new List<Users>()
+            var users = new List<User>()
             {
-                Users.Create()
+                User.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
@@ -88,7 +91,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.KayAdmin),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Jeremiah")
@@ -109,7 +112,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.KayArtisan),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Woode")
                     .WithOtherName("Aquaman")
@@ -129,7 +132,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.Woode),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Samuel")
                     .WithFamilyName("Awate")
                     .WithOtherName("Mumuni")
@@ -150,7 +153,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.Awate),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Gloria")
                     .WithFamilyName("Mensah")
                     .WithOtherName("Reddington")
@@ -170,7 +173,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.Gloria),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Emmanuel")
                     .WithFamilyName("Abolo")
                     .WithOtherName("Financial Abolo")
@@ -190,7 +193,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.Abolo),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Kofi")
                     .WithFamilyName("Addae")
                     .SetDisplayName()
@@ -209,7 +212,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.Addae),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .SetDisplayName()
@@ -229,7 +232,7 @@
                     .HasPassword(password.Item1)
                     .HasPasswordKey(password.Item2)
                     .WithId(InitIds.KayDeveloper),
-                Users.Create()
+                User.Create()
                     .WithFirstName("Kay")
                     .WithFamilyName("Gyasi")
                     .WithOtherName("Suspended")
@@ -269,9 +272,9 @@
             builder.Append("into your work environment. Our main services include Software ");
             builder.Append("Development, Interactive Multimedia and Website Design.");
 
-            var artisans = new List<Artisans>
+            var artisans = new List<Artisan>
             {
-                Artisans.Create(InitIds.KayArtisan)
+                Artisan.Create(InitIds.KayArtisan)
                     .WithBusinessName("Qface Group Ghana")
                     .WithDescription(builder.ToString())
                     .CreatedOn()
@@ -281,7 +284,7 @@
                         {
                             "Electrical Works"
                         })),
-                Artisans.Create(InitIds.Woode)
+                Artisan.Create(InitIds.Woode)
                     .WithBusinessName("Aquaman Painting Works")
                     .WithDescription("")
                     .CreatedOn()
@@ -292,7 +295,7 @@
                         "Plumbing",
                         "Painting"
                     })),
-                Artisans.Create(InitIds.Addae)
+                Artisan.Create(InitIds.Addae)
                     .WithBusinessName("Addae Uber Solutions")
                     .WithDescription("")
                     .CreatedOn()
@@ -310,22 +313,22 @@
 
         private async Task InitializeCustomers()
         {
-            var customers = new List<Customers>
+            var customers = new List<Customer>
             {
-                Customers.Create(InitIds.Awate),
-                Customers.Create(InitIds.Abolo),
-                Customers.Create(InitIds.Gloria)
+                Customer.Create(InitIds.Awate),
+                Customer.Create(InitIds.Abolo),
+                Customer.Create(InitIds.Gloria)
             };
             await Uow.Customers.InsertAsync(customers);
         }
 
 
-        private async Task<List<Languages>> BuildLanguage(List<string> languages)
+        private async Task<List<Language>> BuildLanguage(List<string> languages)
         {
             return await Uow.Languages.BuildLanguages(languages);
         }
 
-        private async Task<List<Services>> BuildService(List<string> services)
+        private async Task<List<Service>> BuildService(List<string> services)
         {
             return await Uow.Services.BuildServices(services);
         }

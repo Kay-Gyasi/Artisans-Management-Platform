@@ -1,4 +1,4 @@
-﻿namespace Amp.IntegrationTests.Helpers;
+﻿namespace Amp.IntegrationTests.Helpers.TestRunOrdering;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 public class TestPriorityAttribute : Attribute

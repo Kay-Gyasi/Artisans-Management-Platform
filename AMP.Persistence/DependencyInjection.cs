@@ -15,7 +15,7 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("AmpProdDb"), opt =>
+                options.UseSqlServer(configuration.GetConnectionString("AmpDevDb"), opt =>
                 {
                     opt.EnableRetryOnFailure();
                     opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
@@ -45,8 +45,9 @@ namespace AMP.Persistence
             {
                 foreach (var repository in repositories)
                 {
-                    var iRepository = repository.GetInterfaces().FirstOrDefault(i => i.Name == $"I{repository.Name}") ??
-                                      throw new RepositoryNotFoundException(
+                    var iRepository = repository.GetInterfaces()
+                                          .FirstOrDefault(i => i.Name == $"I{repository.Name}") 
+                                      ?? throw new RepositoryNotFoundException(
                                           $"{repository.Name} has no interface with name I{repository.Name}");
                     services.AddScoped(iRepository, repository);
                 }

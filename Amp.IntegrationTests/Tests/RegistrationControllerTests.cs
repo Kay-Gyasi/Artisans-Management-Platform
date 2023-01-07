@@ -1,4 +1,6 @@
-﻿namespace Amp.IntegrationTests.Tests;
+﻿using AMP.Processors.Commands.UserManagement;
+
+namespace Amp.IntegrationTests.Tests;
 
 public class RegistrationControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {

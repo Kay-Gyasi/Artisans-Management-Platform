@@ -22,135 +22,7 @@ namespace AMP.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("BusinessName")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 943, DateTimeKind.Utc).AddTicks(5148));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("ECCN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<bool>("IsApproved")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("IsVerified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Individual");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("BusinessName")
-                        .HasDatabaseName("Index_Artisan_BusinessName");
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.HasIndex("Type")
-                        .HasDatabaseName("Index_Artisan_Type");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Artisans", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Customers", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 946, DateTimeKind.Utc).AddTicks(4661));
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Customers", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Disputes", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Dispute", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -167,7 +39,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 949, DateTimeKind.Utc).AddTicks(1792));
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 922, DateTimeKind.Utc).AddTicks(320));
 
                     b.Property<string>("Details")
                         .IsRequired()
@@ -217,164 +89,7 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Disputes", (string)null);
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Images", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 952, DateTimeKind.Utc).AddTicks(2440));
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar");
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.Property<string>("UserId")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("Images", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Invitations", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 954, DateTimeKind.Utc).AddTicks(4472));
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<string>("InvitedPhone")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("InvitedPhone")
-                        .HasDatabaseName("Index_Phone");
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.ToTable("Invitations", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Languages", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 957, DateTimeKind.Utc).AddTicks(143));
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar");
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("Name")
-                        .HasDatabaseName("Index_Lang_Name");
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.ToTable("Languages", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Order", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -398,7 +113,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 960, DateTimeKind.Utc).AddTicks(1855));
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 987, DateTimeKind.Utc).AddTicks(3397));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -495,7 +210,7 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Orders", (string)null);
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Payments", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Payment", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -506,7 +221,7 @@ namespace AMP.Persistence.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<string>("CustomersId")
+                    b.Property<string>("CustomerId")
                         .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("DateCreated")
@@ -515,7 +230,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 980, DateTimeKind.Utc).AddTicks(9923));
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 47, 5, DateTimeKind.Utc).AddTicks(1615));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -554,7 +269,7 @@ namespace AMP.Persistence.Migrations
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
 
-                    b.HasIndex("CustomersId");
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("IsVerified")
                         .HasDatabaseName("IX_Artisan_Verified");
@@ -576,7 +291,7 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Payments", (string)null);
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Ratings", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Rating", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -598,7 +313,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 984, DateTimeKind.Utc).AddTicks(2932));
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 47, 8, DateTimeKind.Utc).AddTicks(5995));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -644,7 +359,67 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Ratings", (string)null);
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Registrations", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Request", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("ArtisanId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 47, 15, DateTimeKind.Utc).AddTicks(2107));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("ArtisanId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.ToTable("Requests", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Service", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -656,7 +431,566 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 986, DateTimeKind.Utc).AddTicks(8122));
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 47, 21, DateTimeKind.Utc).AddTicks(8977));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("Description")
+                        .HasDatabaseName("IX_Services_Desc");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("IX_Services_Name");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.ToTable("Services", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.ChatMessage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("ConversationId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 932, DateTimeKind.Utc).AddTicks(188));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("Message")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("ChatMessages", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.ConnectRequest", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 943, DateTimeKind.Utc).AddTicks(1668));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("InviteeId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("InviterId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("InviteeId");
+
+                    b.HasIndex("InviterId");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.ToTable("ConnectRequests", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.Conversation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 953, DateTimeKind.Utc).AddTicks(2373));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("FirstParticipantId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<string>("SecondParticipantId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("FirstParticipantId");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.HasIndex("SecondParticipantId");
+
+                    b.ToTable("Conversations", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.Notification", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 983, DateTimeKind.Utc).AddTicks(1702));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Artisan", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("BusinessName")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 914, DateTimeKind.Utc).AddTicks(9497));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<string>("ECCN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<bool>("IsApproved")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsVerified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Individual");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("BusinessName")
+                        .HasDatabaseName("Index_Artisan_BusinessName");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.HasIndex("Type")
+                        .HasDatabaseName("Index_Artisan_Type");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Artisans", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Customer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 918, DateTimeKind.Utc).AddTicks(9895));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Customers", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 925, DateTimeKind.Utc).AddTicks(136));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Images", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Invitation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 926, DateTimeKind.Utc).AddTicks(9582));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("InvitedPhone")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("InvitedPhone")
+                        .HasDatabaseName("Index_Phone");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.ToTable("Invitations", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Language", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 46, 929, DateTimeKind.Utc).AddTicks(4329));
+
+                    b.Property<string>("EntityStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar")
+                        .HasDefaultValue("Normal");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("Index_Lang_Name");
+
+                    b.HasIndex("RowId")
+                        .IsUnique();
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
+
+                    b.ToTable("Languages", (string)null);
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Registration", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 47, 10, DateTimeKind.Utc).AddTicks(8410));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -702,67 +1036,7 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("Registrations", (string)null);
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Requests", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("ArtisanId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 989, DateTimeKind.Utc).AddTicks(3568));
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<string>("OrderId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("ArtisanId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.ToTable("Requests", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Services", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -774,61 +1048,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 995, DateTimeKind.Utc).AddTicks(3932));
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("EntityStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar")
-                        .HasDefaultValue("Normal");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("varchar");
-
-                    b.Property<int>("RowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RowId"));
-
-                    b.HasKey("Id");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
-
-                    b.HasIndex("Description")
-                        .HasDatabaseName("IX_Services_Desc");
-
-                    b.HasIndex("Name")
-                        .HasDatabaseName("IX_Services_Name");
-
-                    b.HasIndex("RowId")
-                        .IsUnique();
-
-                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("RowId"));
-
-                    b.ToTable("Services", (string)null);
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Users", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 30, 12, 13, 38, 998, DateTimeKind.Utc).AddTicks(5219));
+                        .HasDefaultValue(new DateTime(2023, 1, 6, 19, 39, 47, 25, DateTimeKind.Utc).AddTicks(9187));
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(100)
@@ -945,37 +1165,15 @@ namespace AMP.Persistence.Migrations
                     b.ToTable("LanguagesUsers");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Dispute", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Users", "User")
-                        .WithMany("Artisans")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Customers", b =>
-                {
-                    b.HasOne("AMP.Domain.Entities.Users", "User")
-                        .WithMany("Customers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Disputes", b =>
-                {
-                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Customer", "Customer")
                         .WithMany("Disputes")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Orders", "Order")
+                    b.HasOne("AMP.Domain.Entities.BusinessManagement.Order", "Order")
                         .WithMany("Disputes")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -986,28 +1184,19 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Images", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Order", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Users", "User")
-                        .WithOne("Image")
-                        .HasForeignKey("AMP.Domain.Entities.Images", "UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
-                {
-                    b.HasOne("AMP.Domain.Entities.Artisans", "Artisan")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Artisan", "Artisan")
                         .WithMany("Orders")
                         .HasForeignKey("ArtisanId");
 
-                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Services", "Service")
+                    b.HasOne("AMP.Domain.Entities.BusinessManagement.Service", "Service")
                         .WithMany("Orders")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1015,7 +1204,7 @@ namespace AMP.Persistence.Migrations
 
                     b.OwnsOne("AMP.Domain.ValueObjects.Address", "WorkAddress", b1 =>
                         {
-                            b1.Property<string>("OrdersId")
+                            b1.Property<string>("OrderId")
                                 .HasColumnType("varchar(36)");
 
                             b1.Property<string>("City")
@@ -1038,12 +1227,12 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("Town")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("OrdersId");
+                            b1.HasKey("OrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrdersId");
+                                .HasForeignKey("OrderId");
                         });
 
                     b.Navigation("Artisan");
@@ -1055,13 +1244,13 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("WorkAddress");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Payments", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Payment", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Customers", null)
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Customer", null)
                         .WithMany("Payments")
-                        .HasForeignKey("CustomersId");
+                        .HasForeignKey("CustomerId");
 
-                    b.HasOne("AMP.Domain.Entities.Orders", "Order")
+                    b.HasOne("AMP.Domain.Entities.BusinessManagement.Order", "Order")
                         .WithMany("Payments")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1070,15 +1259,15 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Ratings", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Rating", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Artisans", "Artisan")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Artisan", "Artisan")
                         .WithMany("Ratings")
                         .HasForeignKey("ArtisanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Customer", "Customer")
                         .WithMany("Ratings")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1089,21 +1278,21 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Requests", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Request", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Artisans", "Artisan")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Artisan", "Artisan")
                         .WithMany("Requests")
                         .HasForeignKey("ArtisanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Customers", "Customer")
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Customer", "Customer")
                         .WithMany("Requests")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Orders", "Order")
+                    b.HasOne("AMP.Domain.Entities.BusinessManagement.Order", "Order")
                         .WithMany("Requests")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1116,11 +1305,116 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Users", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.ChatMessage", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.Messaging.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "Receiver")
+                        .WithMany("ReceivedMessages")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "Sender")
+                        .WithMany("SentMessages")
+                        .HasForeignKey("SenderId");
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.ConnectRequest", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "Invitee")
+                        .WithMany("InviteeConnectRequests")
+                        .HasForeignKey("InviteeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "Inviter")
+                        .WithMany("InviterConnectRequests")
+                        .HasForeignKey("InviterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invitee");
+
+                    b.Navigation("Inviter");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.Conversation", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "FirstParticipant")
+                        .WithMany("FirstParticipantConvos")
+                        .HasForeignKey("FirstParticipantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "SecondParticipant")
+                        .WithMany("SecondParticipantConvos")
+                        .HasForeignKey("SecondParticipantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FirstParticipant");
+
+                    b.Navigation("SecondParticipant");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.Notification", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Artisan", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "User")
+                        .WithMany("Artisans")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Customer", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "User")
+                        .WithMany("Customers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Image", b =>
+                {
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", "User")
+                        .WithOne("Image")
+                        .HasForeignKey("AMP.Domain.Entities.UserManagement.Image", "UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.User", b =>
                 {
                     b.OwnsOne("AMP.Domain.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<string>("UsersId")
+                            b1.Property<string>("UserId")
                                 .HasColumnType("varchar(36)");
 
                             b1.Property<string>("City")
@@ -1140,17 +1434,17 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("Town")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("UsersId");
+                            b1.HasKey("UserId");
 
                             b1.ToTable("Users");
 
                             b1.WithOwner()
-                                .HasForeignKey("UsersId");
+                                .HasForeignKey("UserId");
                         });
 
                     b.OwnsOne("AMP.Domain.ValueObjects.Contact", "Contact", b1 =>
                         {
-                            b1.Property<string>("UsersId")
+                            b1.Property<string>("UserId")
                                 .HasColumnType("varchar(36)");
 
                             b1.Property<string>("EmailAddress")
@@ -1167,12 +1461,12 @@ namespace AMP.Persistence.Migrations
                             b1.Property<string>("PrimaryContact3")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("UsersId");
+                            b1.HasKey("UserId");
 
                             b1.ToTable("Users");
 
                             b1.WithOwner()
-                                .HasForeignKey("UsersId");
+                                .HasForeignKey("UserId");
                         });
 
                     b.Navigation("Address");
@@ -1182,13 +1476,13 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("ArtisansServices", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Artisans", null)
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Artisan", null)
                         .WithMany()
                         .HasForeignKey("ArtisansId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Services", null)
+                    b.HasOne("AMP.Domain.Entities.BusinessManagement.Service", null)
                         .WithMany()
                         .HasForeignKey("ServicesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1197,20 +1491,39 @@ namespace AMP.Persistence.Migrations
 
             modelBuilder.Entity("LanguagesUsers", b =>
                 {
-                    b.HasOne("AMP.Domain.Entities.Languages", null)
+                    b.HasOne("AMP.Domain.Entities.UserManagement.Language", null)
                         .WithMany()
                         .HasForeignKey("LanguagesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AMP.Domain.Entities.Users", null)
+                    b.HasOne("AMP.Domain.Entities.UserManagement.User", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Artisans", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Order", b =>
+                {
+                    b.Navigation("Disputes");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("Requests");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.BusinessManagement.Service", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.Messaging.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Artisan", b =>
                 {
                     b.Navigation("Orders");
 
@@ -1219,7 +1532,7 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Requests");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Customers", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.Customer", b =>
                 {
                     b.Navigation("Disputes");
 
@@ -1232,27 +1545,27 @@ namespace AMP.Persistence.Migrations
                     b.Navigation("Requests");
                 });
 
-            modelBuilder.Entity("AMP.Domain.Entities.Orders", b =>
-                {
-                    b.Navigation("Disputes");
-
-                    b.Navigation("Payments");
-
-                    b.Navigation("Requests");
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Services", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("AMP.Domain.Entities.Users", b =>
+            modelBuilder.Entity("AMP.Domain.Entities.UserManagement.User", b =>
                 {
                     b.Navigation("Artisans");
 
                     b.Navigation("Customers");
 
+                    b.Navigation("FirstParticipantConvos");
+
                     b.Navigation("Image");
+
+                    b.Navigation("InviteeConnectRequests");
+
+                    b.Navigation("InviterConnectRequests");
+
+                    b.Navigation("Notifications");
+
+                    b.Navigation("ReceivedMessages");
+
+                    b.Navigation("SecondParticipantConvos");
+
+                    b.Navigation("SentMessages");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,8 @@
-﻿namespace Amp.IntegrationTests.Tests.OrdersController;
+﻿using AMP.Processors.Commands.BusinessManagement;
+using AMP.Processors.Dtos.BusinessManagement;
+using AMP.Processors.PageDtos.BusinessManagement;
+
+namespace Amp.IntegrationTests.Tests.OrdersController;
 
 public partial class OrderControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {

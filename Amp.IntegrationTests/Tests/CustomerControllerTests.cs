@@ -1,4 +1,7 @@
-﻿namespace Amp.IntegrationTests.Tests;
+﻿using AMP.Processors.Commands.UserManagement;
+using AMP.Processors.Dtos.UserManagement;
+
+namespace Amp.IntegrationTests.Tests;
 
 public class CustomerControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {

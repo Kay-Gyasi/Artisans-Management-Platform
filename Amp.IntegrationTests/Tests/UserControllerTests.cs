@@ -1,4 +1,7 @@
-﻿namespace Amp.IntegrationTests.Tests;
+﻿using AMP.Processors.Commands.UserManagement;
+using AMP.Processors.Dtos.UserManagement;
+
+namespace Amp.IntegrationTests.Tests;
 
 //[TestCaseOrderer("Amp.IntegrationTests.Helpers.PriorityOrderer", "Amp.IntegrationTests")]
 public class UserControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>

@@ -1,6 +1,9 @@
 ﻿using AMP.Domain.Entities.Base;
+using AMP.Domain.Entities.BusinessManagement;
+using AMP.Domain.Entities.Messaging;
+using AMP.Domain.Entities.UserManagement;
 using AMP.Persistence.Configurations;
-using Languages = AMP.Domain.Entities.Languages;
+using AMP.Persistence.Configurations.UserManagement;
 
 namespace AMP.Persistence.Database
 {
@@ -11,19 +14,23 @@ namespace AMP.Persistence.Database
         public AmpDbContext(DbContextOptions<AmpDbContext> options)
             : base(options) { }
 
-        public DbSet<Artisans> Artisans { get; set; }
-        public DbSet<Customers> Customers { get; set; }
-        public DbSet<Disputes> Disputes { get; set; }
-        public DbSet<Orders> Orders { get; set; }
-        public DbSet<Payments> Payments { get; set; }
-        public DbSet<Ratings> Ratings { get; set; }
-        public DbSet<Services> Services { get; set; }
-        public DbSet<Users> Users { get; set; }
-        public DbSet<Languages> Languages { get; set; }
-        public DbSet<Images> Images { get; set; }
-        public DbSet<Requests> Requests { get; set; }
-        public DbSet<Registrations> Registrations { get; set; }
-        public DbSet<Invitations> Invitations { get; set; }
+        public DbSet<Artisan> Artisans { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Dispute> Disputes { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Registration> Registrations { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<ConnectRequest> ConnectRequests { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,25 +50,25 @@ namespace AMP.Persistence.Database
             base.OnModelCreating(modelBuilder);
         }
         
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
-            foreach (var entity in this.ChangeTracker.Entries()
-                         .Where(e => e.Entity is EntityBase 
-                                     && e.State is EntityState.Added or EntityState.Modified)
-                         .Select(e => e.Entity as EntityBase)
-                    )
+            var modified = ChangeTracker.Entries()
+                .Where(e => e.Entity is EntityBase
+                            && e.State is EntityState.Added or EntityState.Modified)
+                .Select(e => e.Entity as EntityBase);
+            foreach (var entity in modified)
             {
                 if (entity != null)
                 {
                     entity.DateModified = DateTime.Now;
                 }
             }
-            
-            foreach (var entity in this.ChangeTracker.Entries()
-                         .Where(e => e.Entity is EntityBase 
-                                     && e.State is EntityState.Added)
-                         .Select(e => e.Entity as EntityBase)
-                    )
+
+            var added = ChangeTracker.Entries()
+                .Where(e => e.Entity is EntityBase
+                            && e.State is EntityState.Added)
+                .Select(e => e.Entity as EntityBase);
+            foreach (var entity in added)
             {
                 if (entity != null)
                 {

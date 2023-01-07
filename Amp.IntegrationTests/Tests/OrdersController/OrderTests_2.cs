@@ -1,4 +1,6 @@
-﻿namespace Amp.IntegrationTests.Tests.OrdersController;
+﻿using AMP.Processors.Commands.BusinessManagement;
+
+namespace Amp.IntegrationTests.Tests.OrdersController;
 
 public partial class OrderControllerTests
 {

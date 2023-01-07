@@ -1,4 +1,8 @@
-﻿namespace Amp.IntegrationTests.Tests;
+﻿using AMP.Processors.Commands.BusinessManagement;
+using AMP.Processors.Dtos.BusinessManagement;
+using AMP.Processors.PageDtos.BusinessManagement;
+
+namespace Amp.IntegrationTests.Tests;
 
 public class DisputeControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {

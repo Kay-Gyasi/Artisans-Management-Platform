@@ -1,7 +1,7 @@
 ﻿using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Amp.IntegrationTests.Helpers;
+namespace Amp.IntegrationTests.Helpers.TestRunOrdering;
 
 public class PriorityOrderer : ITestCaseOrderer
 {

@@ -1,4 +1,4 @@
-﻿namespace AMP.Processors.Hubs;
+﻿namespace AMP.Processors.Hubs.Helpers;
 
 public static class Connections
 {

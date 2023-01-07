@@ -10,7 +10,7 @@
         Rating,
         Service,
         User,
-        ArtisanServices
+        ArtisansServicess
     }
 
     [Processor]
@@ -32,7 +32,7 @@
                 LookupType.Rating => await Get(LookupType.Rating, Uow.Ratings.GetLookupAsync),
                 LookupType.Service => await Get(LookupType.Service, Uow.Services.GetLookupAsync),
                 LookupType.User => await Get(LookupType.User, Uow.Users.GetLookupAsync),
-                LookupType.ArtisanServices => await Get(LookupType.ArtisanServices, Uow.Services.GetAvailableServices),
+                LookupType.ArtisansServicess => await Get(LookupType.ArtisansServicess, Uow.Services.GetAvailableServices),
                 _ => new List<Lookup>()
             };
         }

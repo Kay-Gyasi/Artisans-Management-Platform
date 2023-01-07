@@ -61,8 +61,6 @@ namespace AMP.Persistence.Repositories.Base
 
         public virtual async Task<PaginatedList<T>> GetPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
-
-
             var whereQueryable = GetBaseQuery()
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search));
 

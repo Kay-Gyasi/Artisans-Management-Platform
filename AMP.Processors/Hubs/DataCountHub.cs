@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using AMP.Processors.Processors.BusinessManagement;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AMP.Processors.Hubs;
 

@@ -1,5 +1,8 @@
 ﻿using System.Data.Common;
+using AMP.Processors.Repositories.BusinessManagement;
+using AMP.Processors.Repositories.Messaging;
 using AMP.Processors.Repositories.UoW;
+using AMP.Processors.Repositories.UserManagement;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace AMP.Persistence.Repositories.Uow
@@ -21,7 +24,11 @@ namespace AMP.Persistence.Repositories.Uow
             IImageRepository imageRepository,
             IRequestRepository requestRepository,
             IRegistrationRepository registrationRepository,
-            IInvitationRepository invitationRepository)
+            IInvitationRepository invitationRepository,
+            IChatMessageRepository chatMessageRepository,
+            IConversationRepository conversationRepository,
+            IConnectRequestRepository connectRequestRepository,
+            INotificationRepository notificationRepository)
         {
             _dbContext = dbContext;
             Artisans = artisanRepository;
@@ -37,6 +44,10 @@ namespace AMP.Persistence.Repositories.Uow
             Requests = requestRepository;
             Registrations = registrationRepository;
             Invitations = invitationRepository;
+            ChatMessages = chatMessageRepository;
+            Conversations = conversationRepository;
+            ConnectRequests = connectRequestRepository;
+            Notifications = notificationRepository;
         }
         
         public IArtisanRepository Artisans { get; }
@@ -62,6 +73,10 @@ namespace AMP.Persistence.Repositories.Uow
         public IRequestRepository Requests { get; }
         public IRegistrationRepository Registrations { get; }
         public IInvitationRepository Invitations { get; }
+        public IChatMessageRepository ChatMessages { get; }
+        public IConnectRequestRepository ConnectRequests { get; }
+        public INotificationRepository Notifications { get; }
+        public IConversationRepository Conversations { get; }
 
         public IDbContextTransaction BeginTransaction() => _dbContext.Database.BeginTransaction();
         public IExecutionStrategy GetExecutionStrategy() => _dbContext.Database.CreateExecutionStrategy();

@@ -1,4 +1,7 @@
 ﻿using AMP.Domain.ViewModels;
+using AMP.Processors.Commands.UserManagement;
+using AMP.Processors.Dtos.UserManagement;
+using AMP.Processors.PageDtos.UserManagement;
 
 namespace Amp.IntegrationTests.Tests;
 

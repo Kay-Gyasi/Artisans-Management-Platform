@@ -1,5 +1,6 @@
 ﻿using Amp.IntegrationTests.Helpers;
 using Amp.IntegrationTests.Stubs;
+using AMP.Processors.Commands.UserManagement;
 using AMP.Processors.Exceptions;
 using AMP.Processors.Messaging;
 using AMP.Processors.Repositories.Base;
