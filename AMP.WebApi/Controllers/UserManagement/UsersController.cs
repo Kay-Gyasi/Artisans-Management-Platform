@@ -1,4 +1,5 @@
 ﻿using AMP.Application.Features.Commands.UserManagement;
+using AMP.Application.Features.Queries.UserManagement;
 using AMP.Processors.Commands.UserManagement;
 using AMP.Processors.PageDtos.UserManagement;
 
@@ -59,6 +60,20 @@ public class UsersController : BaseControllerv1
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)
+    {
+        var result = await Mediator.Send(new SoftDeleteUser.Command(id)).ConfigureAwait(false);
+        return await NoContentResult(result);
+    }
+
+    /// <summary>
+    /// Removes a user from the system
+    /// </summary>
+    /// <response code="204">User has been deleted successfully</response>
+    /// <response code="404">User with id provided does not exist</response>
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> HardDelete(string id)
     {
         var result = await Mediator.Send(new DeleteUser.Command(id)).ConfigureAwait(false);
         return await NoContentResult(result);

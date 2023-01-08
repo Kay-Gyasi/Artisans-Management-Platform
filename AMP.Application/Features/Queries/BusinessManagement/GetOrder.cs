@@ -1,8 +1,7 @@
-﻿using AMP.Processors.Dtos;
-using AMP.Processors.Dtos.BusinessManagement;
+﻿using AMP.Processors.Dtos.BusinessManagement;
 using AMP.Processors.Processors.BusinessManagement;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.BusinessManagement
 {
     public class GetOrder
     {

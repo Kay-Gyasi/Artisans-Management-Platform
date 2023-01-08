@@ -1,9 +1,8 @@
-﻿using AMP.Application.Features.Commands;
-using AMP.Application.Features.Commands.UserManagement;
+﻿using AMP.Application.Features.Commands.UserManagement;
 using AMP.Domain.Enums;
 using FluentValidation;
 
-namespace AMP.Application.Validation
+namespace AMP.Application.Validation.UserManagement
 {
     public class PostUserValidator : AbstractValidator<PostUser.Command>
     {

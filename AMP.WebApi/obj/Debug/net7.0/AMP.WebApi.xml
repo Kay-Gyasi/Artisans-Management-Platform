@@ -415,6 +415,13 @@
             <response code="204">User has been deleted successfully</response>
             <response code="404">User with id provided does not exist</response>
         </member>
+        <member name="M:AMP.WebApi.Controllers.v1.UsersController.HardDelete(System.String)">
+            <summary>
+            Removes a user from the system
+            </summary>
+            <response code="204">User has been deleted successfully</response>
+            <response code="404">User with id provided does not exist</response>
+        </member>
         <member name="M:AMP.WebApi.Controllers.v1.UsersController.Login(AMP.Processors.Commands.UserManagement.SigninCommand)">
             <summary>
             Returns an authorization token which a user can use to access resources on the system 

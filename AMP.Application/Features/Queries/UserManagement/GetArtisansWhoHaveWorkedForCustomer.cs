@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using AMP.Domain.ViewModels;
-using AMP.Processors.Processors;
 using AMP.Processors.Processors.UserManagement;
-using MediatR;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.UserManagement
 {
     public class GetArtisansWhoHaveWorkedForCustomer
     {

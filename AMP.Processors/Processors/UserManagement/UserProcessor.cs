@@ -75,13 +75,24 @@ namespace AMP.Processors.Processors.UserManagement
             return new Result<UserDto>(user);
         }
 
-        public async Task<Result<bool>> Delete(string id)
+        public async Task<Result<bool>> SoftDelete(string id)
         {
             var user = await Uow.Users.GetAsync(id);
             if (user is null) return new Result<bool>(
                 new InvalidIdException($"User with id: {id} does not exist."));
             Cache.Remove(LookupCacheKey);
             await Uow.Users.SoftDeleteAsync(user);
+            await Uow.SaveChangesAsync();
+            return new Result<bool>(true);
+        }
+        
+        public async Task<Result<bool>> Delete(string id)
+        {
+            var user = await Uow.Users.GetAsync(id);
+            if (user is null) return new Result<bool>(
+                new InvalidIdException($"User with id: {id} does not exist."));
+            Cache.Remove(LookupCacheKey);
+            await Uow.Users.DeleteAsync(user, new CancellationToken());
             await Uow.SaveChangesAsync();
             return new Result<bool>(true);
         }

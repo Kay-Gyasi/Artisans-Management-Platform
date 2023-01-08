@@ -1,7 +1,7 @@
-﻿using AMP.Application.Features.Queries;
+﻿using AMP.Application.Features.Queries.BusinessManagement;
 using FluentValidation;
 
-namespace AMP.Application.Validation;
+namespace AMP.Application.Validation.BusinessManagement;
 
 public class InsertOrderValidator : AbstractValidator<InsertOrder.Command>
 {

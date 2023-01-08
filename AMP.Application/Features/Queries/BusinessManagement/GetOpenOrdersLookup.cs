@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using AMP.Domain.ViewModels;
-using AMP.Processors.Processors;
-using MediatR;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.BusinessManagement
 {
     public class GetOpenOrdersLookup
     {

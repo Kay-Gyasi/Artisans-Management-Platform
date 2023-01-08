@@ -1,13 +1,8 @@
-﻿using AMP.Processors.PageDtos;
-using AMP.Shared.Domain.Models;
-using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.PageDtos.UserManagement;
-using AMP.Processors.Processors;
+﻿using AMP.Processors.PageDtos.UserManagement;
 using AMP.Processors.Processors.UserManagement;
+using AMP.Shared.Domain.Models;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.UserManagement
 {
     public class GetArtisanPage
     {

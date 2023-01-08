@@ -1,8 +1,7 @@
-﻿using AMP.Processors.Dtos;
-using AMP.Processors.Dtos.UserManagement;
+﻿using AMP.Processors.Dtos.UserManagement;
 using AMP.Processors.Processors.UserManagement;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.UserManagement
 {
     public class GetCustomerByUser
     {

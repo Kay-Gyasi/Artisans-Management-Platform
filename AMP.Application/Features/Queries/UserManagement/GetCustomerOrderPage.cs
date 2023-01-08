@@ -1,13 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.PageDtos;
-using AMP.Processors.PageDtos.BusinessManagement;
-using AMP.Processors.Processors;
+﻿using AMP.Processors.PageDtos.BusinessManagement;
 using AMP.Processors.Processors.BusinessManagement;
 using AMP.Shared.Domain.Models;
-using MediatR;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.UserManagement
 {
     public class GetCustomerOrderPage
     {

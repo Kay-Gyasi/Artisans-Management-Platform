@@ -1,12 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Dtos;
-using AMP.Processors.Dtos.BusinessManagement;
-using AMP.Processors.Processors;
+﻿using AMP.Processors.Dtos.BusinessManagement;
 using AMP.Processors.Processors.BusinessManagement;
-using MediatR;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.BusinessManagement
 {
     public class GetService
     {

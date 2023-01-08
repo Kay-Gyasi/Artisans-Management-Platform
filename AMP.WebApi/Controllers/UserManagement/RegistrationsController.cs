@@ -1,4 +1,5 @@
 ﻿using AMP.Application.Features.Commands.UserManagement;
+using AMP.Application.Features.Queries.UserManagement;
 using AMP.Processors.Commands.UserManagement;
 
 namespace AMP.WebApi.Controllers.v1;

@@ -1,8 +1,7 @@
-﻿using AMP.Application.Features.Commands;
-using AMP.Application.Features.Commands.BusinessManagement;
+﻿using AMP.Application.Features.Commands.BusinessManagement;
 using FluentValidation;
 
-namespace AMP.Application.Validation;
+namespace AMP.Application.Validation.BusinessManagement;
 
 public class CompleteOrderValidator : AbstractValidator<CompleteOrder.Command>
 {

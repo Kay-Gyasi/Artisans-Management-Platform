@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Dtos;
 using AMP.Processors.Dtos.UserManagement;
-using AMP.Processors.Processors;
 using AMP.Processors.Processors.UserManagement;
-using MediatR;
 
-namespace AMP.Application.Features.Queries;
+namespace AMP.Application.Features.Queries.UserManagement;
 
 public class GetUserInvites
 {

@@ -1,13 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AMP.Processors.Commands;
-using AMP.Processors.Commands.BusinessManagement;
-using AMP.Processors.Processors;
+﻿using AMP.Processors.Commands.BusinessManagement;
 using AMP.Processors.Processors.BusinessManagement;
 using AMP.Processors.Responses;
-using MediatR;
 
-namespace AMP.Application.Features.Queries
+namespace AMP.Application.Features.Queries.BusinessManagement
 {
     public class InsertOrder
     {

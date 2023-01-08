@@ -1,4 +1,5 @@
 ﻿using AMP.Application.Features.Commands.BusinessManagement;
+using AMP.Application.Features.Queries.BusinessManagement;
 using AMP.Processors.Commands.BusinessManagement;
 using AMP.Processors.PageDtos.BusinessManagement;
 

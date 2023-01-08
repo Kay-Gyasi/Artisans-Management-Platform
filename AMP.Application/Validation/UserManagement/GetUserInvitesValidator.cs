@@ -1,7 +1,7 @@
-﻿using AMP.Application.Features.Queries;
+﻿using AMP.Application.Features.Queries.UserManagement;
 using FluentValidation;
 
-namespace AMP.Application.Validation;
+namespace AMP.Application.Validation.UserManagement;
 
 public class GetUserInvitesValidator : AbstractValidator<GetUserInvites.Query>
 {

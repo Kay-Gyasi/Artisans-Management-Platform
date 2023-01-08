@@ -4,7 +4,7 @@ using AMP.Processors.PageDtos.UserManagement;
 namespace AMP.Processors.Dtos.Messaging;
 
 public record ChatMessageDto(string Id, string SenderId, string ReceiverId, string Message, string ConversationId,
-    UserPageDto Sender, UserPageDto Receiver, ConversationDto Conversation);
+    UserPageDto Sender, UserPageDto Receiver, DateTime DateModified, ConversationDto Conversation);
 
 public class ConversationDto
 {
@@ -13,6 +13,7 @@ public class ConversationDto
     public string SecondParticipantId { get; set; }
     public UserPageDto FirstParticipant { get; set; }
     public UserPageDto SecondParticipant { get; set; }
+    public DateTime DateModified { get; set; }
     public List<ChatMessageDto> Messages { get; set; }
 }
 
