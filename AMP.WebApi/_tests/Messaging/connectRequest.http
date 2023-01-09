@@ -1,0 +1,36 @@
+﻿POST {{baseUrl}}/connectRequest/save
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": null,
+  "inviterId": null,
+  "inviteeId": "774a6d79-f46b-4049-bb42-24d4165d1f70"
+}
+
+###
+GET {{baseUrl}}/ConnectRequest/Get/bb9515b6-4bff-4f2a-9c13-bd3eedf8773a
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/ConnectRequest/GetPage
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "pageSize": 10,
+  "pageNumber": 0
+}
+
+###
+PUT {{baseUrl}}/ConnectRequest/Accept/bb9515b6-4bff-4f2a-9c13-bd3eedf8773a
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  
+}
+
+###
+DELETE {{baseUrl}}/ConnectRequest/Delete/bb9515b6-4bff-4f2a-9c13-bd3eedf8773a
+Authorization: Bearer {{token}}

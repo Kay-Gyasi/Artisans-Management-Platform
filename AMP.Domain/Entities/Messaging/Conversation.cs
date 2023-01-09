@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AMP.Domain.Entities.Base;
 using AMP.Domain.Entities.UserManagement;
 
@@ -14,12 +15,12 @@ public class Conversation : EntityBase
     }
     public string FirstParticipantId { get; private set; }
     public string SecondParticipantId { get; private set; }
-    
     public User FirstParticipant { get; private set; }
     public User SecondParticipant { get; private set; }
     
     private readonly List<ChatMessage> _messages = new();
     public IReadOnlyList<ChatMessage> Messages => _messages.AsReadOnly();
+    public int UnreadMessages => _messages.Count(x => !x.IsSeen);
 
     public static Conversation Create(string firstParticipantId, string secondParticipantId)
     {

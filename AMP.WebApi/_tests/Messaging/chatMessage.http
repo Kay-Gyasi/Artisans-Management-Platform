@@ -1,0 +1,26 @@
+﻿POST {{baseUrl}}/ChatMessage/Save
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "senderId": "58a45f6a-3513-4489-a59b-89b922ee5303",
+  "receiverId": "774a6d79-f46b-4049-bb42-24d4165d1f70",
+  "message": "Brooooo",
+  "conversationId": "329062ad-90d0-4e7e-9aa7-16aa00e6946b"
+}
+
+###
+POST {{baseUrl}}/ChatMessage/Save
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "senderId": "774a6d79-f46b-4049-bb42-24d4165d1f70",
+  "receiverId": "58a45f6a-3513-4489-a59b-89b922ee5303",
+  "message": "My guyyyyy hahaha",
+  "conversationId": "329062ad-90d0-4e7e-9aa7-16aa00e6946b"
+}
+
+###
+DELETE {{baseUrl}}/ChatMessage/Delete/34fa988d-e2d2-485f-b048-78587ad02a39
+Authorization: Bearer {{token}}

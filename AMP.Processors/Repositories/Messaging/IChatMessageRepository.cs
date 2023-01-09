@@ -5,5 +5,4 @@ namespace AMP.Processors.Repositories.Messaging;
 
 public interface IChatMessageRepository : IRepositoryBase<ChatMessage>
 {
-    Task<bool> IsConnected(string firstId, string secondId);
 }

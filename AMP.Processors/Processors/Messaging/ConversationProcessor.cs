@@ -25,7 +25,8 @@ public class ConversationProcessor : ProcessorBase
     public async Task<Result<string>> Save(ConversationCommand command)
     {
         var convo = Conversation.Create(command.FirstParticipantId ??
-                                        _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+                                        _httpContextAccessor.HttpContext.User
+                                            .FindFirst(ClaimTypes.NameIdentifier)?.Value,
             command.SecondParticipantId);
         await _uow.Conversations.InsertAsync(convo);
         await _uow.SaveChangesAsync();

@@ -23,7 +23,7 @@ public class ChatMessageProcessor : ProcessorBase
     public async Task<Result<string>> Save(ChatMessageCommand command)
     {
         command.SenderId ??= _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (!await _uow.ChatMessages.IsConnected(command.SenderId, command.ReceiverId))
+        if (!await _uow.Conversations.IsConnected(command.SenderId, command.ReceiverId, command.ConversationId))
             return new Result<string>(new InvalidIdException());
         var message = ChatMessage
             .Create(command.ConversationId, command.Message)

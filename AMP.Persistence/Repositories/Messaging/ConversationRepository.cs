@@ -20,6 +20,14 @@ public class ConversationRepository : RepositoryBase<Conversation>, IConversatio
             .OrderByDescending(x => x.DateModified)
             .BuildPage(paginated, cancellationToken);
     }
+    
+    public async Task<bool> IsConnected(string firstId, string secondId, string conversationId)
+    {
+        return await base.GetBaseQuery()
+            .AnyAsync(x => x.Id == conversationId 
+                           && (x.FirstParticipantId == firstId || x.FirstParticipantId == secondId)
+                           && (x.SecondParticipantId == firstId || x.SecondParticipantId == secondId));
+    }
 
     public async Task<Conversation> GetWithoutMessages(string id)
     {
@@ -31,6 +39,8 @@ public class ConversationRepository : RepositoryBase<Conversation>, IConversatio
         return base.GetBaseQuery()
             .Include(x => x.Messages)
             .Include(x => x.FirstParticipant)
-            .Include(x => x.SecondParticipant);
+            .ThenInclude(x => x.Image)
+            .Include(x => x.SecondParticipant)
+            .ThenInclude(x => x.Image);
     }
 }

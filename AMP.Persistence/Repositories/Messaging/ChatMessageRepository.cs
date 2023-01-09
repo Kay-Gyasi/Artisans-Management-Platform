@@ -10,12 +10,12 @@ public class ChatMessageRepository : RepositoryBase<ChatMessage>, IChatMessageRe
     {
     }
 
-    public async Task<bool> IsConnected(string firstId, string secondId)
+    public override IQueryable<ChatMessage> GetBaseQuery()
     {
-        return await base.GetBaseQuery()
-            .AnyAsync(x => (x.Conversation.FirstParticipantId == firstId &&
-                           x.Conversation.SecondParticipantId == secondId) ||
-                      (x.Conversation.FirstParticipantId == secondId &&
-                      x.Conversation.SecondParticipantId == firstId));
+        return base.GetBaseQuery()
+            .Include(x => x.Sender)
+            .ThenInclude(x => x.Image)
+            .Include(x => x.Receiver)
+            .ThenInclude(x => x.Image);
     }
 }

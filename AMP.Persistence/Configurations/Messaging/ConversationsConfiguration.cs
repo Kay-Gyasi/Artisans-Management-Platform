@@ -9,6 +9,7 @@ public class ConversationsConfiguration : DatabaseConfigurationBase<Conversation
     {
         base.Configure(builder);
         builder.ToTable("Conversations");
+        builder.Ignore(x => x.UnreadMessages);
         builder.Property(a => a.FirstParticipantId)
             .IsRequired()
             .HasColumnType("varchar")

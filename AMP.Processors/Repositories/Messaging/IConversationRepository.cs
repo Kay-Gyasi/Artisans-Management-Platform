@@ -9,4 +9,5 @@ public interface IConversationRepository : IRepositoryBase<Conversation>
         string userId, CancellationToken cancellationToken);
 
     Task<Conversation> GetWithoutMessages(string id);
+    Task<bool> IsConnected(string firstId, string secondId, string conversationId);
 }

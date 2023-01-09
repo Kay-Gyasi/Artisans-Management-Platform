@@ -1,0 +1,29 @@
+﻿POST {{baseUrl}}/Conversation/Save
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": null,
+  "firstParticipantId": null,
+  "secondParticipantId": "774a6d79-f46b-4049-bb42-24d4165d1f70"
+}
+
+###
+GET {{baseUrl}}/Conversation/Get/e70101e2-a3f7-4e68-97fc-66a65ecdd406
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/Conversation/GetPage
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "pageSize": 10,
+  "pageNumber": 0
+}
+
+###
+DELETE {{baseUrl}}/Conversation/Delete/e70101e2-a3f7-4e68-97fc-66a65ecdd406
+Authorization: Bearer {{token}}
+
+
