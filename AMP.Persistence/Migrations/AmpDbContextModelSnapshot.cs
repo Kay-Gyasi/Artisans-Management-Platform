@@ -39,7 +39,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 157, DateTimeKind.Utc).AddTicks(7741));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 587, DateTimeKind.Utc).AddTicks(4903));
 
                     b.Property<string>("Details")
                         .IsRequired()
@@ -113,7 +113,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 159, DateTimeKind.Utc).AddTicks(5064));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 595, DateTimeKind.Utc).AddTicks(6784));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -230,7 +230,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 170, DateTimeKind.Utc).AddTicks(6707));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 622, DateTimeKind.Utc).AddTicks(2695));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -313,7 +313,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 172, DateTimeKind.Utc).AddTicks(4983));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 626, DateTimeKind.Utc).AddTicks(1966));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -381,7 +381,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 174, DateTimeKind.Utc).AddTicks(5));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 630, DateTimeKind.Utc).AddTicks(5555));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -431,7 +431,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 194, DateTimeKind.Utc).AddTicks(6384));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 637, DateTimeKind.Utc).AddTicks(9766));
 
                     b.Property<string>("Description")
                         .HasMaxLength(150)
@@ -490,7 +490,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 198, DateTimeKind.Utc).AddTicks(8071));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 641, DateTimeKind.Utc).AddTicks(2379));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -550,7 +550,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 211, DateTimeKind.Utc).AddTicks(4494));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 656, DateTimeKind.Utc).AddTicks(4260));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -568,6 +568,9 @@ namespace AMP.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(36)
                         .HasColumnType("varchar");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("RowId")
                         .ValueGeneratedOnAdd()
@@ -603,7 +606,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 219, DateTimeKind.Utc).AddTicks(4222));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 672, DateTimeKind.Utc).AddTicks(3238));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -656,7 +659,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 230, DateTimeKind.Utc).AddTicks(3656));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 686, DateTimeKind.Utc).AddTicks(6592));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -713,7 +716,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 233, DateTimeKind.Utc).AddTicks(3896));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 690, DateTimeKind.Utc).AddTicks(3213));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -790,7 +793,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 237, DateTimeKind.Utc).AddTicks(4254));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 695, DateTimeKind.Utc).AddTicks(2444));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -836,7 +839,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 239, DateTimeKind.Utc).AddTicks(3447));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 699, DateTimeKind.Utc).AddTicks(5559));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -893,7 +896,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 241, DateTimeKind.Utc).AddTicks(4369));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 702, DateTimeKind.Utc).AddTicks(1455));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -946,7 +949,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 243, DateTimeKind.Utc).AddTicks(3621));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 705, DateTimeKind.Utc).AddTicks(3071));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -993,7 +996,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 245, DateTimeKind.Utc).AddTicks(2857));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 708, DateTimeKind.Utc).AddTicks(1487));
 
                     b.Property<string>("EntityStatus")
                         .IsRequired()
@@ -1051,7 +1054,7 @@ namespace AMP.Persistence.Migrations
                     b.Property<DateTime>("DateModified")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 1, 8, 13, 39, 27, 248, DateTimeKind.Utc).AddTicks(136));
+                        .HasDefaultValue(new DateTime(2023, 1, 11, 15, 44, 36, 714, DateTimeKind.Utc).AddTicks(5081));
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(100)

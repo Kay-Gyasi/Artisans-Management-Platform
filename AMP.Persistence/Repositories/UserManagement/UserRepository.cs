@@ -75,6 +75,33 @@ namespace AMP.Persistence.Repositories.UserManagement
             return user;
         }
 
+        public async Task<List<UserLookup>> GetLookupAsync(string term, string type)
+        {
+            if (type == "Username")
+            {
+                return await Task.Run(() => base.GetBaseQuery()
+                    .Where(x => x.DisplayName.Contains(term))
+                    .Select(x => new UserLookup
+                    {
+                        Id = x.Id,
+                        Name = x.DisplayName,
+                        Pic = _dapperContext.GetAsync<string>($"SELECT ImageUrl FROM Images WHERE Id = '{x.ImageId}'", 
+                            null, CommandType.Text).GetAwaiter().GetResult()
+                    }).ToList());
+            }
+            
+            return await Task.Run(() => Context.Artisans
+                .Include(x => x.User)
+                .Where(x => x.BusinessName.Contains(term))
+                .Select(x => new UserLookup
+                {
+                    Id = x.UserId,
+                    Name = x.BusinessName,
+                    Pic = _dapperContext.GetAsync<string>($"SELECT ImageUrl FROM Images WHERE Id = '{x.User.ImageId}'", 
+                        null, CommandType.Text).GetAwaiter().GetResult()
+                }).ToList());
+        }
+
         public async Task<LoginQueryObject> GetUserInfoForRefreshToken(string id)
         {
             var param = new DynamicParameters();

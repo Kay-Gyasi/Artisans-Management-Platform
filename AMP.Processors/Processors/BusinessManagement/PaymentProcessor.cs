@@ -42,7 +42,7 @@ namespace AMP.Processors.Processors.BusinessManagement
             if (success)
             {
                 _worker.SendSms(SmsType.PaymentVerified, command.TransactionReference);
-                _worker.ServeLiveCount(DataCountType.Payments, artisanUserId);
+                _worker.ServeHub(DataCountType.Payments, artisanUserId);
             }
         }
 

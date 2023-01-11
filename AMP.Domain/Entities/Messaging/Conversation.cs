@@ -20,7 +20,7 @@ public class Conversation : EntityBase
     
     private readonly List<ChatMessage> _messages = new();
     public IReadOnlyList<ChatMessage> Messages => _messages.AsReadOnly();
-    public int UnreadMessages => _messages.Count(x => !x.IsSeen);
+    public int UnreadMessages { get; private set; }
 
     public static Conversation Create(string firstParticipantId, string secondParticipantId)
     {
@@ -37,6 +37,12 @@ public class Conversation : EntityBase
     public Conversation IsModified()
     {
         DateModified = DateTime.UtcNow;
+        return this;
+    }
+
+    public Conversation SetUnreadMessages(string userId)
+    {
+        UnreadMessages = _messages.Count(x => x.ReceiverId == userId && !x.IsSeen);
         return this;
     }
 }

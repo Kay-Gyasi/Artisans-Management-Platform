@@ -1,3 +1,5 @@
-﻿namespace AMP.Processors.Hubs.Messages;
+﻿using AMP.Processors.Dtos.Messaging;
 
-public record CountMessage(DataCountType Type, int Value);
+namespace AMP.Processors.Hubs.Messages;
+
+public record CountMessage(DataCountType Type, int Value, string ConversationId = null);

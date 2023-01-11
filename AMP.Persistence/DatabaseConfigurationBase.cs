@@ -10,6 +10,7 @@ namespace AMP.Persistence
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.ToTable(typeof(T).Name);
+            builder.Ignore(x => x.IgnoreDateModified);
             builder.HasKey(a => a.Id)
                 .IsClustered(false);
             builder.HasIndex(a => a.RowId)

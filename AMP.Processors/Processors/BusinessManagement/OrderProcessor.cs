@@ -75,8 +75,8 @@ namespace AMP.Processors.Processors.BusinessManagement
             try
             {
                 var userId = await Uow.Orders.UnassignArtisan(orderId);
-                _worker.ServeLiveCount(DataCountType.Schedule, userId);
-                _worker.ServeLiveCount(DataCountType.JobRequests, userId);
+                _worker.ServeHub(DataCountType.Schedule, userId);
+                _worker.ServeHub(DataCountType.JobRequests, userId);
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace AMP.Processors.Processors.BusinessManagement
                 if (await Uow.SaveChangesAsync())
                 {
                     _worker.SendSms(SmsType.AssignArtisan, orderId, artisanId);
-                    _worker.ServeLiveCount(DataCountType.JobRequests, artisanUserId);
+                    _worker.ServeHub(DataCountType.JobRequests, artisanUserId);
                 }
             }
             catch (Exception e)
@@ -111,8 +111,8 @@ namespace AMP.Processors.Processors.BusinessManagement
             {
                 var artisanUserId = await Uow.Orders.AcceptRequest(orderId);
                 _worker.SendSms(SmsType.AcceptRequest, orderId);
-                _worker.ServeLiveCount(DataCountType.Schedule, artisanUserId);
-                _worker.ServeLiveCount(DataCountType.JobRequests, artisanUserId);
+                _worker.ServeHub(DataCountType.Schedule, artisanUserId);
+                _worker.ServeHub(DataCountType.JobRequests, artisanUserId);
             }
             catch (Exception e)
             {
@@ -127,8 +127,8 @@ namespace AMP.Processors.Processors.BusinessManagement
             try
             {
                 var artisanUserId = await Uow.Orders.CancelRequest(orderId);
-                _worker.ServeLiveCount(DataCountType.Schedule, artisanUserId);
-                _worker.ServeLiveCount(DataCountType.JobRequests, artisanUserId);
+                _worker.ServeHub(DataCountType.Schedule, artisanUserId);
+                _worker.ServeHub(DataCountType.JobRequests, artisanUserId);
             }
             catch (Exception e)
             {
@@ -157,7 +157,7 @@ namespace AMP.Processors.Processors.BusinessManagement
             try
             {
                 var artisanUserId = await Uow.Orders.ArtisanComplete(orderId);
-                _worker.ServeLiveCount(DataCountType.Schedule, artisanUserId);
+                _worker.ServeHub(DataCountType.Schedule, artisanUserId);
             }
             catch (Exception e)
             {

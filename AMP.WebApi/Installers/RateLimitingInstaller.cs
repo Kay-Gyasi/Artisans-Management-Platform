@@ -12,7 +12,7 @@ public static class RateLimitingInstaller
                     factory: partition => new FixedWindowRateLimiterOptions
                     {
                         AutoReplenishment = true,
-                        PermitLimit = 30,
+                        PermitLimit = 50,
                         QueueLimit = 0,
                         Window = TimeSpan.FromMinutes(1)
                     }));

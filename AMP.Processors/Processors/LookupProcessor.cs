@@ -32,13 +32,17 @@
                 LookupType.Rating => await Get(LookupType.Rating, Uow.Ratings.GetLookupAsync),
                 LookupType.Service => await Get(LookupType.Service, Uow.Services.GetLookupAsync),
                 LookupType.User => await Get(LookupType.User, Uow.Users.GetLookupAsync),
-                LookupType.ArtisansServicess => await Get(LookupType.ArtisansServicess, Uow.Services.GetAvailableServices),
+                LookupType.ArtisansServicess => await Get(LookupType.ArtisansServicess, 
+                    Uow.Services.GetAvailableServices),
                 _ => new List<Lookup>()
             };
         }
 
         public async Task<List<Lookup>> GetOpenOrdersLookup(string userId) 
             => await Uow.Orders.GetOpenOrdersLookup(userId);
+
+        public async Task<List<UserLookup>> GetUsersLookup(string term, string type)
+            => await Uow.Users.GetLookupAsync(term, type);
 
         private async Task<List<Lookup>> Get(LookupType type, Func<Task<List<Lookup>>> getter)
         {

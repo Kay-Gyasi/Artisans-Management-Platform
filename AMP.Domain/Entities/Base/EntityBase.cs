@@ -9,6 +9,7 @@ namespace AMP.Domain.Entities.Base
         public int RowId { get; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
+        public bool IgnoreDateModified { get; set; }
         public EntityStatus EntityStatus { get; set; }
     }
 }

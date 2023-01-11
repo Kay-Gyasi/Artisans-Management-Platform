@@ -13,6 +13,7 @@ public class ConnectRequest : EntityBase
     
     public string InviterId { get; private set; }
     public string InviteeId { get; private set; }
+    public bool IsAccepted { get; set; }
     public User Inviter { get; set; }
     public User Invitee { get; set; }
 
@@ -30,6 +31,12 @@ public class ConnectRequest : EntityBase
     public ConnectRequest To(string inviteeId)
     {
         InviteeId = inviteeId;
+        return this;
+    }
+
+    public ConnectRequest IsAcceptedd()
+    {
+        IsAccepted = true;
         return this;
     }
 }

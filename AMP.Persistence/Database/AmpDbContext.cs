@@ -58,10 +58,9 @@ namespace AMP.Persistence.Database
                 .Select(e => e.Entity as EntityBase);
             foreach (var entity in modified)
             {
-                if (entity != null)
-                {
-                    entity.DateModified = DateTime.Now;
-                }
+                if (entity == null) continue;
+                if(entity.IgnoreDateModified) continue;
+                entity.DateModified = DateTime.Now;
             }
 
             var added = ChangeTracker.Entries()
@@ -70,10 +69,9 @@ namespace AMP.Persistence.Database
                 .Select(e => e.Entity as EntityBase);
             foreach (var entity in added)
             {
-                if (entity != null)
-                {
-                    entity.DateCreated = DateTime.Now;
-                }
+                if (entity == null) continue;
+                if(entity.IgnoreDateModified) continue;
+                entity.DateCreated = DateTime.Now;
             }
             return await base.SaveChangesAsync(cancellationToken);
         }

@@ -1,4 +1,6 @@
-﻿using AMP.Processors.Processors.BusinessManagement;
+﻿using AMP.Processors.Dtos.Messaging;
+using AMP.Processors.Processors.BusinessManagement;
+using AMP.Processors.Processors.Messaging;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,20 +30,41 @@ public class HubService : BackgroundService
         {
             await Task.Delay(1000, stoppingToken);
             if (_events.Count == 0) continue;
-            
-            var eventUnderConsideration = _events.First();
-            await _countHubContext.Clients.Client(Connections.DataCount[eventUnderConsideration.UserId])
-                .SendAsync(ClientMethods.ReceiveCount, 
-                    new CountMessage(eventUnderConsideration.Type, 
-                        await GetCount(eventUnderConsideration.Type, eventUnderConsideration.UserId))
-                    , stoppingToken);
-            _events.Remove(eventUnderConsideration);
+
+            try
+            {
+                var eventUnderConsideration = _events.First();
+                if (!Connections.DataCount.ContainsKey(eventUnderConsideration.UserId)) return;
+
+                if (eventUnderConsideration.Type == DataCountType.RefreshChat)
+                {
+                    await _countHubContext.Clients.Client(Connections.DataCount[eventUnderConsideration.UserId])
+                        .SendAsync(ClientMethods.RefreshChat, 
+                            new CountMessage(eventUnderConsideration.Type, 
+                                0, eventUnderConsideration.ConversationId)
+                            , stoppingToken);
+                    _events.Remove(eventUnderConsideration);
+                    return;
+                }
+                
+                await _countHubContext.Clients.Client(Connections.DataCount[eventUnderConsideration.UserId])
+                    .SendAsync(ClientMethods.ReceiveCount, 
+                        new CountMessage(eventUnderConsideration.Type, 
+                            await GetCount(eventUnderConsideration.Type, eventUnderConsideration.UserId))
+                        , stoppingToken);
+                _events.Remove(eventUnderConsideration);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Hub service request failed");
+                throw;
+            }
         }
     }
 
-    public static void DoCountHubTask(DataCountType type, string userId)
+    public static void DoCountHubTask(DataCountType type, string userId, string conversationId = null)
     {
-        _events.Add(new OutgoingCountHubEvents(type, userId));
+        _events.Add(new OutgoingCountHubEvents(type, userId, conversationId));
     }
     
     private async Task<int> GetCount(DataCountType type, string userId)
@@ -49,11 +72,15 @@ public class HubService : BackgroundService
         using var scope = _serviceProvider.CreateScope();
         var orderProcessor = scope.ServiceProvider.GetRequiredService<OrderProcessor>();
         var paymentProcessor = scope.ServiceProvider.GetRequiredService<PaymentProcessor>();
+        var chatMessageProcessor = scope.ServiceProvider.GetRequiredService<ChatMessageProcessor>();
+        var connectRequestProcessor = scope.ServiceProvider.GetRequiredService<ConnectRequestProcessor>();
         return type switch
         {
             DataCountType.Schedule => await orderProcessor.GetScheduleCount(userId),
             DataCountType.JobRequests => await orderProcessor.GetJobRequestsCount(userId),
             DataCountType.Payments => await paymentProcessor.GetArtisanPaymentsCount(userId),
+            DataCountType.Chats => await chatMessageProcessor.GetUnreadMessages(userId),
+            DataCountType.ConnectRequests => await connectRequestProcessor.GetConnectRequestsCount(userId),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -61,12 +88,14 @@ public class HubService : BackgroundService
 
 public class OutgoingCountHubEvents
 {
-    public OutgoingCountHubEvents(DataCountType type, string userId)
+    public OutgoingCountHubEvents(DataCountType type, string userId, string conversationId = null)
     {
         Type = type;
         UserId = userId;
+        ConversationId = conversationId;
     }
     
     public DataCountType Type { get; }
     public string UserId { get; }
+    public string ConversationId { get; }
 }

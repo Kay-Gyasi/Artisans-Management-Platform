@@ -17,4 +17,4 @@ public class ConversationPageDto
 }
 
 public record NotificationPageDto(string Id, string Message, string UserId, bool IsRead, UserPageDto User);
-public record ConnectRequestPageDto(string Id, string InviterId, string InviteeId, UserPageDto Inviter, UserPageDto Invitee);
+public record ConnectRequestPageDto(string Id, string InviterId, string InviteeId, UserPageDto Inviter);

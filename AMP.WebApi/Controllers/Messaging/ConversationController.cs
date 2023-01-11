@@ -73,5 +73,21 @@ public class ConversationController : BaseControllerv1
         var result = await Mediator.Send(new DeleteConversation.Command(id)).ConfigureAwait(false);
         return await NoContentResult(result);
     }
-
+    
+    /// <summary>
+    /// Marks conversation messages as read by receiver
+    /// </summary>
+    /// <response code="204">Conversation has been updated successfully</response>
+    /// <response code="404">Conversation with id provided does not exist</response>
+    /// <response code="403">You do not have permission to read the conversation</response>
+    [Authorize]
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> MarkAsRead(string id)
+    {
+        var result = await Mediator.Send(new MarkConvoAsReadConversation.Command(id)).ConfigureAwait(false);
+        return await NoContentResult(result);
+    }
 }

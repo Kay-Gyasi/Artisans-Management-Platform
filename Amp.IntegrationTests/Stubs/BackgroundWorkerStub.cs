@@ -1,4 +1,5 @@
-﻿using AMP.Processors.Hubs.Enums;
+﻿using AMP.Processors.Dtos.Messaging;
+using AMP.Processors.Hubs.Enums;
 using AMP.Processors.Workers.BackgroundWorker;
 using AMP.Processors.Workers.Enums;
 
@@ -11,7 +12,7 @@ public class BackgroundWorkerStub : IBackgroundWorker
         Console.WriteLine("Sms sent");
     }
 
-    public void ServeLiveCount(DataCountType type, string userId)
+    public void ServeHub(DataCountType type, string userId, string conversationId = null)
     {
         Console.WriteLine("Served");
     }

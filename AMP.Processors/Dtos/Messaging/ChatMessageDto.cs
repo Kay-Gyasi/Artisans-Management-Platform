@@ -18,4 +18,4 @@ public class ConversationDto
 }
 
 public record NotificationDto(string Id, string Message, string UserId, bool IsRead, UserDto User);
-public record ConnectRequestDto(string Id, string InviterId, string InviteeId, UserDto Inviter, UserDto Invitee);
+public record ConnectRequestDto(string Id, string InviterId, string InviteeId, UserDto Inviter);

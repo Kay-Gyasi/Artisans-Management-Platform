@@ -10,7 +10,7 @@ public static class SignalRInstaller
             .AddHubOptions<DataCountHub>(options =>
             {
                 options.ClientTimeoutInterval = TimeSpan.FromMinutes(20);
-                options.MaximumParallelInvocationsPerClient = 4;
+                options.MaximumParallelInvocationsPerClient = 10;
             });
         return services;
     }

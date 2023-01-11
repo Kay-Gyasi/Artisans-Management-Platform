@@ -10,6 +10,13 @@ public class ChatMessageRepository : RepositoryBase<ChatMessage>, IChatMessageRe
     {
     }
 
+    public async Task<int> GetUnreadMessageCount(string userId)
+    {
+        return await base.GetBaseQuery()
+            .Where(x => x.ReceiverId == userId && !x.IsSeen)
+            .CountAsync();
+    }
+    
     public override IQueryable<ChatMessage> GetBaseQuery()
     {
         return base.GetBaseQuery()

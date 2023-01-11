@@ -15,7 +15,8 @@ namespace AMP.Persistence
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("AmpDevDb"), opt =>
+                options.UseSqlServer(configuration.GetConnectionString("AmpDevDb"),
+                    opt =>
                 {
                     opt.EnableRetryOnFailure();
                     opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);

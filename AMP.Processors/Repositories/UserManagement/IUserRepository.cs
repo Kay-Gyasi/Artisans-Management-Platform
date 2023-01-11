@@ -25,5 +25,6 @@ namespace AMP.Processors.Repositories.UserManagement
         Task<bool> Exists(string phone);
         Task<User> GetByPhone(string phone);
         Task<User> GetByPhoneAndConfirmCode(string phone, string confirmCode);
+        Task<List<UserLookup>> GetLookupAsync(string term, string type);
     }
 }
