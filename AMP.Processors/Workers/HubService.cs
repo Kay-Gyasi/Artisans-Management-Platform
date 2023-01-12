@@ -1,5 +1,4 @@
-﻿using AMP.Processors.Dtos.Messaging;
-using AMP.Processors.Processors.BusinessManagement;
+﻿using AMP.Processors.Processors.BusinessManagement;
 using AMP.Processors.Processors.Messaging;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,31 +32,32 @@ public class HubService : BackgroundService
 
             try
             {
-                var eventUnderConsideration = _events.First();
-                if (!Connections.DataCount.ContainsKey(eventUnderConsideration.UserId)) return;
-
-                if (eventUnderConsideration.Type == DataCountType.RefreshChat)
+                foreach (var eventUnderConsideration in _events)
                 {
+                    if (!Connections.DataCount.ContainsKey(eventUnderConsideration.UserId)) continue;
+
+                    if (eventUnderConsideration.Type == DataCountType.RefreshChat)
+                    {
+                        await _countHubContext.Clients.Client(Connections.DataCount[eventUnderConsideration.UserId])
+                            .SendAsync(ClientMethods.RefreshChat, 
+                                new CountMessage(eventUnderConsideration.Type, 
+                                    0, eventUnderConsideration.ConversationId)
+                                , stoppingToken);
+                        _events.Remove(eventUnderConsideration);
+                        continue;
+                    }
+                
                     await _countHubContext.Clients.Client(Connections.DataCount[eventUnderConsideration.UserId])
-                        .SendAsync(ClientMethods.RefreshChat, 
+                        .SendAsync(ClientMethods.ReceiveCount, 
                             new CountMessage(eventUnderConsideration.Type, 
-                                0, eventUnderConsideration.ConversationId)
+                                await GetCount(eventUnderConsideration.Type, eventUnderConsideration.UserId))
                             , stoppingToken);
                     _events.Remove(eventUnderConsideration);
-                    return;
                 }
-                
-                await _countHubContext.Clients.Client(Connections.DataCount[eventUnderConsideration.UserId])
-                    .SendAsync(ClientMethods.ReceiveCount, 
-                        new CountMessage(eventUnderConsideration.Type, 
-                            await GetCount(eventUnderConsideration.Type, eventUnderConsideration.UserId))
-                        , stoppingToken);
-                _events.Remove(eventUnderConsideration);
             }
             catch (Exception e)
             {
                 _logger.LogError("Hub service request failed");
-                throw;
             }
         }
     }

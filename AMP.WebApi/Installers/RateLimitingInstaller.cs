@@ -12,8 +12,8 @@ public static class RateLimitingInstaller
                     factory: partition => new FixedWindowRateLimiterOptions
                     {
                         AutoReplenishment = true,
-                        PermitLimit = 50,
-                        QueueLimit = 0,
+                        PermitLimit = 30,
+                        QueueLimit = 30,
                         Window = TimeSpan.FromMinutes(1)
                     }));
             options.AddPolicy("Unauthorized", httpContext =>

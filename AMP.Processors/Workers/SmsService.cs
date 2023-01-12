@@ -33,7 +33,6 @@ public class SmsService : BackgroundService
             catch (Exception e)
             {
                 _logger.LogError("SMS send failed!");
-                throw;
             }
         }
     }
