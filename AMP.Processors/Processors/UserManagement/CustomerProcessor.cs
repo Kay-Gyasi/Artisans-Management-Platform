@@ -68,7 +68,7 @@ namespace AMP.Processors.Processors.UserManagement
         {
             try
             {
-                await Uow.Customers.DeleteAsync(id);
+                await Uow.Customers.SoftDeleteAsync(id);
                 Cache.Remove(LookupCacheKey);
                 return new Result<bool>(true);
             }
@@ -77,6 +77,8 @@ namespace AMP.Processors.Processors.UserManagement
                 return new Result<bool>(e);
             }
         }
+        
+        
 
     }
 }

@@ -86,11 +86,16 @@ namespace AMP.Processors.Processors.UserManagement
             return new Result<bool>(true);
         }
         
-        public async Task<Result<bool>> Delete(string id)
+        /// <summary>
+        /// Deletes user and all related info
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public async Task<Result<bool>> Delete(string phone)
         {
-            var user = await Uow.Users.GetAsync(id);
+            var user = await Uow.Users.GetByPhone(phone);
             if (user is null) return new Result<bool>(
-                new InvalidIdException($"User with id: {id} does not exist."));
+                new InvalidIdException($"User with phone: {phone} does not exist."));
             Cache.Remove(LookupCacheKey);
             await Uow.Users.DeleteAsync(user, new CancellationToken());
             await Uow.SaveChangesAsync();

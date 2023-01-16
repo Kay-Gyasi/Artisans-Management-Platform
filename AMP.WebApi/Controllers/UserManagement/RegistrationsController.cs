@@ -50,4 +50,18 @@ public class RegistrationsController : BaseControllerv1
         var result = await Mediator.Send(new SendVerificationCode.Command(phone)).ConfigureAwait(false);
         return await OkResult(result);
     }
+    
+    /// <summary>
+    /// Removes a registration from the system
+    /// </summary>
+    /// <response code="204">Registration has been deleted successfully</response>
+    /// <response code="404">Registration with id provided does not exist</response>
+    [HttpDelete("{phone}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> HardDelete(string phone)
+    {
+        var result = await Mediator.Send(new DeleteRegistration.Command(phone)).ConfigureAwait(false);
+        return await NoContentResult(result);
+    }
 }

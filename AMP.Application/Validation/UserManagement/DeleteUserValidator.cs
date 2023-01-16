@@ -18,7 +18,7 @@ public class DeleteUserValidator : AbstractValidator<DeleteUser.Command>
 {
     public DeleteUserValidator()
     {
-        RuleFor(x => x.Id)
+        RuleFor(x => x.Phone)
             .NotNull()
             .NotEmpty()
             .Must(x => x != "string");

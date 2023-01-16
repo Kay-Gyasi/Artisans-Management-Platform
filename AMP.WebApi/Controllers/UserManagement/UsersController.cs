@@ -70,12 +70,12 @@ public class UsersController : BaseControllerv1
     /// </summary>
     /// <response code="204">User has been deleted successfully</response>
     /// <response code="404">User with id provided does not exist</response>
-    [HttpDelete("{id}")]
+    [HttpDelete("{phone}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> HardDelete(string id)
+    public async Task<IActionResult> HardDelete(string phone)
     {
-        var result = await Mediator.Send(new DeleteUser.Command(id)).ConfigureAwait(false);
+        var result = await Mediator.Send(new DeleteUser.Command(phone)).ConfigureAwait(false);
         return await NoContentResult(result);
     }
 

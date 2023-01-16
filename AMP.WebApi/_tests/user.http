@@ -1,6 +1,24 @@
 ﻿GET {{baseUrl}}users/get/7
 
 ###
+POST {{baseUrl}}users/GetPage
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "pageSize": 10,
+  "pageNumber": 0
+}
+
+###
+GET {{baseUrl}}users/SendPasswordResetLink/0557833216
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}users/ResetPassword/0207733247/hfkauksyejdhjahsduey/newPassword
+Authorization: Bearer {{token}}
+
+###
 POST {{baseUrl}}users/save
 Content-Type: application/json
 
@@ -51,3 +69,6 @@ Content-Type: application/json
     "phone": "0557833216",
     "password": "kofi"
 }
+
+###
+DELETE {{baseUrl}}users/delete/

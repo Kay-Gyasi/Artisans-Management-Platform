@@ -15,7 +15,7 @@ namespace AMP.Persistence.Repositories.UserManagement
             _dapperContext = dapperContext;
         }
         
-        public async Task DeleteAsync(string id)
+        public async Task SoftDeleteAsync(string id)
         {
             var rows = await _dapperContext.Execute(
                 "UPDATE Customers SET EntityStatus = 'Deleted', DateModified = GETDATE() " +

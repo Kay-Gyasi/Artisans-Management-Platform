@@ -108,7 +108,7 @@ namespace AMP.Processors.Processors.UserManagement
         {
             try
             {
-                await Uow.Artisans.DeleteAsync(id);
+                await Uow.Artisans.SoftDeleteAsync(id);
                 Cache.Remove(LookupCacheKey);
                 return new Result<bool>(true);
             }

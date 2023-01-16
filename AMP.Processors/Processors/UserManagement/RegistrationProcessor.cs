@@ -74,6 +74,7 @@ public class RegistrationProcessor : ProcessorBase
             registration.HasVerificationCode(code);
             await Uow.SaveChangesAsync();
         }
+        
         var message = MessageGenerator.SendVerificationLink(phone, code);
         await _smsMessaging.Send(new SmsCommand {Message = message.Item1, Recipients = new [] {message.Item2}});
         return new Result<bool>(true);
@@ -136,6 +137,15 @@ public class RegistrationProcessor : ProcessorBase
         await Uow.SaveChangesAsync();
     }
     
+    public async Task<Result<bool>> HardDelete(string phone)
+    {
+        var registration = await Uow.Registrations.GetByPhone(phone);
+        if (registration is null) return new Result<bool>(new InvalidIdException($"Registration with phone: {phone} does not exist"));
+        await Uow.Registrations.DeleteAsync(registration, new CancellationToken());
+        await Uow.SaveChangesAsync();
+        return true;
+    }
+
     private async Task AssignFields(User user, UserCommand command)
     {
         command.Languages ??= new List<LanguagesCommand>();

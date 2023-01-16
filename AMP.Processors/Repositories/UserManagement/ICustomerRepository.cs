@@ -5,7 +5,7 @@ namespace AMP.Processors.Repositories.UserManagement
 {
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {
-        Task DeleteAsync(string id);
+        Task SoftDeleteAsync(string id);
         Task<Customer> GetByUserIdAsync(string userId);
         Task<string> GetCustomerId(string userId);
     }
