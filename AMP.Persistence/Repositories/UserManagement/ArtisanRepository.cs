@@ -39,13 +39,24 @@ namespace AMP.Persistence.Repositories.UserManagement
         public async Task<Artisan> GetArtisanByUserId(string userId) 
             => await GetBaseQuery().FirstOrDefaultAsync(x => x.UserId == userId);
 
+        /// <summary>
+        /// Returns a page of artisans available to work on a particular service
+        /// </summary>
+        /// <param name="paginated">Command holding paging options</param>
+        /// <param name="paginated.search">Holds the service name for which artisans are being paged on</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<PaginatedList<Artisan>> GetArtisanPage(PaginatedCommand paginated, CancellationToken cancellationToken)
         {
             var whereQueryable = GetBaseQuery()
                 .WhereIf(!string.IsNullOrEmpty(paginated.Search), GetSearchCondition(paginated.Search))
                 .WhereIf(!string.IsNullOrEmpty(paginated.OtherJson), 
                     x => x.User.DisplayName.Contains(paginated.OtherJson) 
-                         || x.BusinessName.Contains(paginated.OtherJson))
+                         || x.BusinessName.Contains(paginated.OtherJson) 
+                         || x.User.Address.City.Contains(paginated.OtherJson)
+                         || x.User.Address.Town.Contains(paginated.OtherJson)
+                         || x.User.Address.StreetAddress.Contains(paginated.OtherJson)
+                         || x.User.Address.StreetAddress2.Contains(paginated.OtherJson))
                 .OrderByDescending(x => x.Ratings.Sum(a => a.Votes));
             
             return await whereQueryable.BuildPage(paginated, cancellationToken);

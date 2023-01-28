@@ -24,7 +24,7 @@ try
 }
 catch (Exception e)
 {
-    logger.Fatal(e.Message);
+    logger.Fatal("{Message}",e.Message);
     throw;
 }
 finally
