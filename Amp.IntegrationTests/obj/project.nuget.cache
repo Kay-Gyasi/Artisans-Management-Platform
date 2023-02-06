@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "g0a7D5y9dSYazC9/wSS6NmR6Ym0dt6pmfEKF35j/mzvyatu/GOyTHTeRXRlGZCq3lh0VzcyJ4/oKLueuVqJqmg==",
+  "dgSpecHash": "TdiLLctNdMps9xJWiXaAJ8T58HdQIkIgYrR+diW49HlBauH4wbOVMs0m++Cs/8WiljdB6u6WTbekXkPTL0N4Zg==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\Amp.IntegrationTests\\Amp.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -159,6 +159,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\nuget.frameworks\\5.11.0\\nuget.frameworks.5.11.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\oneof\\3.0.223\\oneof.3.0.223.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\owin\\1.0.0\\owin.1.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\restclient\\3.1024.23771\\restclient.3.1024.23771.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

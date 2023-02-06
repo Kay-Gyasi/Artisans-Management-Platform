@@ -4,7 +4,7 @@ using AMP.Processors.Commands.BusinessManagement;
 using AMP.Processors.Dtos.BusinessManagement;
 using AMP.Processors.PageDtos.BusinessManagement;
 
-namespace AMP.WebApi.Controllers.v1;
+namespace AMP.WebApi.Controllers.BusinessManagement;
 
 [Authorize]
 public class PaymentsController : BaseControllerv1
@@ -16,9 +16,11 @@ public class PaymentsController : BaseControllerv1
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command)
+    public async Task<IActionResult> GetPage(PaginatedCommand command)
     {
-        return await Mediator.Send(new GetPaymentPage.Query(command, UserId, Role));
+        var result = await Mediator
+            .Send(new GetPaymentPage.Query(command, UserId, Role));
+        return Role == "Artisan" ? Ok(result.AsT1) : Ok(result.AsT0);
     }
 
     /// <summary>

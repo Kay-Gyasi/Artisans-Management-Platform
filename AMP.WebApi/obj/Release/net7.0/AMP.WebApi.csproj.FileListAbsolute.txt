@@ -138,3 +138,4 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Microsoft.Owin.Security.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\Owin.dll
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\OneOf.dll

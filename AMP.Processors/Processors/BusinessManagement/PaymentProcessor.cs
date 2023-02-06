@@ -3,6 +3,8 @@ using AMP.Processors.Commands.BusinessManagement;
 using AMP.Processors.Dtos.BusinessManagement;
 using AMP.Processors.PageDtos.BusinessManagement;
 using AMP.Processors.Workers.BackgroundWorker;
+using Microsoft.AspNetCore.Http;
+using OneOf;
 
 namespace AMP.Processors.Processors.BusinessManagement
 {
@@ -10,13 +12,16 @@ namespace AMP.Processors.Processors.BusinessManagement
     public class PaymentProcessor : ProcessorBase
     {
         private readonly IBackgroundWorker _worker;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private const string LookupCacheKey = "Paymentlookup";
 
         public PaymentProcessor(IUnitOfWork uow, IMapper mapper, 
             IMemoryCache cache,
-            IBackgroundWorker worker) : base(uow, mapper, cache)
+            IBackgroundWorker worker,
+            IHttpContextAccessor httpContextAccessor) : base(uow, mapper, cache)
         {
             _worker = worker;
+            _httpContextAccessor = httpContextAccessor;
         }
         
         public async Task<int> GetArtisanPaymentsCount(string userId)
@@ -46,10 +51,22 @@ namespace AMP.Processors.Processors.BusinessManagement
             }
         }
 
-        public async Task<PaginatedList<PaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)
+        public async Task<OneOf<PaginatedList<PaymentPageDto>, ArtisanPaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)
         {
             var page = await Uow.Payments.GetUserPage(command, userId, role, new CancellationToken());
-            return Mapper.Map<PaginatedList<PaymentPageDto>>(page);
+            
+            if(role is not "Artisan")
+                return Mapper.Map<PaginatedList<PaymentPageDto>>(page);
+
+            var overview = await Uow.Payments.GetArtisanPaymentOverview(userId);
+
+            return new ArtisanPaymentPageDto
+            {
+                PaymentPage = Mapper.Map<PaginatedList<PaymentPageDto>>(page),
+                AmountInWithholding = overview.Item1,
+                TotalAmountReceived = overview.Item2,
+                NoOfOrdersCompleted = overview.Item3
+            };
         }
 
         public async Task<PaymentDto> Get(string id)

@@ -181,31 +181,6 @@
             <response code="404">Order with id provided does not exist</response>
             <response code="403">You do not have permission to access this resource</response>
         </member>
-        <member name="M:AMP.WebApi.Controllers.v1.PaymentsController.GetPage(AMP.Shared.Domain.Models.PaginatedCommand)">
-            <summary>
-            Returns a page of payments made or received by requesting user
-            </summary>
-        </member>
-        <member name="M:AMP.WebApi.Controllers.v1.PaymentsController.Get(System.String)">
-            <summary>
-            Gets details about a payment
-            </summary>
-        </member>
-        <member name="M:AMP.WebApi.Controllers.v1.PaymentsController.Save(AMP.Processors.Commands.BusinessManagement.PaymentCommand)">
-            <summary>
-            Adds a new payment on an order
-            </summary>
-        </member>
-        <member name="M:AMP.WebApi.Controllers.v1.PaymentsController.Verify(AMP.Processors.Commands.BusinessManagement.VerifyPaymentCommand)">
-            <summary>
-            Sets transaction reference of a payment made on an order
-            </summary>
-        </member>
-        <member name="M:AMP.WebApi.Controllers.v1.PaymentsController.Delete(System.String)">
-            <summary>
-            Deletes a payment made on an order
-            </summary>
-        </member>
         <member name="M:AMP.WebApi.Controllers.v1.RatingsController.GetCustomerPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
             Returns a page of reviews made by requesting customer
@@ -449,6 +424,31 @@
             </summary>
             <response code="200">Password has been reset successfully</response>
             <response code="404">Invalid phone/code</response>
+        </member>
+        <member name="M:AMP.WebApi.Controllers.BusinessManagement.PaymentsController.GetPage(AMP.Shared.Domain.Models.PaginatedCommand)">
+            <summary>
+            Returns a page of payments made or received by requesting user
+            </summary>
+        </member>
+        <member name="M:AMP.WebApi.Controllers.BusinessManagement.PaymentsController.Get(System.String)">
+            <summary>
+            Gets details about a payment
+            </summary>
+        </member>
+        <member name="M:AMP.WebApi.Controllers.BusinessManagement.PaymentsController.Save(AMP.Processors.Commands.BusinessManagement.PaymentCommand)">
+            <summary>
+            Adds a new payment on an order
+            </summary>
+        </member>
+        <member name="M:AMP.WebApi.Controllers.BusinessManagement.PaymentsController.Verify(AMP.Processors.Commands.BusinessManagement.VerifyPaymentCommand)">
+            <summary>
+            Sets transaction reference of a payment made on an order
+            </summary>
+        </member>
+        <member name="M:AMP.WebApi.Controllers.BusinessManagement.PaymentsController.Delete(System.String)">
+            <summary>
+            Deletes a payment made on an order
+            </summary>
         </member>
         <member name="M:AMP.WebApi.Controllers.Messaging.ChatMessageController.Save(AMP.Processors.Commands.Messaging.ChatMessageCommand)">
             <summary>

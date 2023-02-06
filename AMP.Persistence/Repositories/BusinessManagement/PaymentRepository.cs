@@ -14,6 +14,20 @@ namespace AMP.Persistence.Repositories.BusinessManagement
             _logger = logger;
         }
 
+        public async Task<(double, double, int)> GetArtisanPaymentOverview(string userId)
+        {
+            var payments = await Task.Run(() => GetBaseQuery()
+                .Where(x => x.Order.Artisan.User.Id == userId));
+            var amtInWithholding = await Task.Run(() 
+                => payments.Where(x => !x.IsForwarded && x.IsVerified)
+                    .Sum(x => x.AmountPaid));
+            var totalAmtReceived = await Task.Run(() => payments
+                .Where(x => x.IsVerified)
+                .Sum(x => x.AmountPaid));
+            var noOfOrdersCompleted = await Context.Orders.CountAsync(x => x.IsComplete);
+            return ((double) amtInWithholding, (double) totalAmtReceived, noOfOrdersCompleted);
+        }
+
         public async Task<decimal> AmountPaid(string orderId) =>
             await Task.Run(() => GetBaseQuery().Where(x => x.OrderId == orderId && x.IsVerified)
                 .Sum(x => x.AmountPaid));
@@ -81,12 +95,12 @@ namespace AMP.Persistence.Repositories.BusinessManagement
             }
             catch (UserTypeIdNotFoundException ex)
             {
-                _logger.LogError($"User with id {userId} not found in types \n {ex.Message}");
+                _logger.LogError("User with id {UserId} not found in types \n {Message}", userId, ex.Message);
                 throw;
             }
             catch (Exception e)
             {
-                _logger.LogError($"{e.Message}");
+                _logger.LogError("{Message}", e.Message);
                 throw;
             }
         }

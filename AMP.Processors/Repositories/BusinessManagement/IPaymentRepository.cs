@@ -13,5 +13,6 @@ namespace AMP.Processors.Repositories.BusinessManagement
 
         Task<Payment> GetByTrxRef(string trxRef);
         Task<int> GetArtisanPaymentCount(string userId);
+        Task<(double, double, int)> GetArtisanPaymentOverview(string userId);
     }
 }

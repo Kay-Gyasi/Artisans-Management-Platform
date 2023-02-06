@@ -11,4 +11,12 @@
         public string Reference { get; set; }
         public OrderPageDto Order { get; set; }
     }
+    
+    public class ArtisanPaymentPageDto
+    {
+        public PaginatedList<PaymentPageDto> PaymentPage { get; set; }
+        public double AmountInWithholding { get; set; }
+        public double TotalAmountReceived { get; set; }
+        public int NoOfOrdersCompleted { get; set; }
+    }
 }

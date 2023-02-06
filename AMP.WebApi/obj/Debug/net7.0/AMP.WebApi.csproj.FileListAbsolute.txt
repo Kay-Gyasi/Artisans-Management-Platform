@@ -138,3 +138,4 @@ C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\ne
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net7.0\AMP.WebApi.pdb
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net7.0\AMP.WebApi.genruntimeconfig.cache
 C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Debug\net7.0\ref\AMP.WebApi.dll
+C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Debug\net7.0\OneOf.dll

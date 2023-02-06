@@ -11,7 +11,7 @@ try
     builder.Services.AddAmp(builder.Configuration, logger);
     app = builder.AddApplicationBuilder(logger);
 
-    // create as middleware
+    // TODO:: create as middleware
     //logger.Information("Applying migrations...");
     //using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
     //{
