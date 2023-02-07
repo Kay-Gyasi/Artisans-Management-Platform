@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 namespace AMP.Processors.Processors.UserManagement
 {
     [Processor]
-    public class ArtisanProcessor : ProcessorBase
+    public class ArtisanProcessor : Processor
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private const string LookupCacheKey = "Artisanlookup";

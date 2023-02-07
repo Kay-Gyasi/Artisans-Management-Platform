@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 namespace AMP.Processors.Processors.Messaging;
 
 [Processor]
-public class ChatMessageProcessor : ProcessorBase
+public class ChatMessageProcessor : Processor
 {
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;

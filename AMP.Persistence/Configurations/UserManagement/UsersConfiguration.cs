@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations.UserManagement
 {
-    public sealed class UsersConfiguration : DatabaseConfigurationBase<User>
+    public sealed class UsersConfiguration : DatabaseConfiguration<User>
     {
         public override void Configure(EntityTypeBuilder<User> builder)
         {
@@ -63,6 +63,7 @@ namespace AMP.Persistence.Configurations.UserManagement
                     .HasColumnType("varchar")
                     .HasMaxLength(80);
             });
+            builder.OwnsOne(x => x.FundsTransferDetails);
             builder.HasOne(a => a.Image)
                 .WithOne(a => a.User)
                 .HasForeignKey<Image>(a => a.UserId);

@@ -16,6 +16,7 @@
           "Microsoft.Extensions.Configuration.Binder": "7.0.0",
           "Microsoft.Extensions.Http": "7.0.0",
           "Microsoft.IdentityModel.Tokens": "6.25.0",
+          "Paystack.Net": "1.1.0",
           "System.IdentityModel.Tokens.Jwt": "6.25.0"
         },
         "runtime": {
@@ -1576,6 +1577,17 @@
           "lib/net40/Owin.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Paystack.Net/1.1.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/PayStack.Net.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
@@ -3349,6 +3361,13 @@
       "sha512": "sha512-OseTFniKmyp76mEzOBwIKGBRS5eMoYNkMKaMXOpxx9jv88+b6mh1rSaw43vjBOItNhaLFG3d0a20PfHyibH5sw==",
       "path": "owin/1.0.0",
       "hashPath": "owin.1.0.0.nupkg.sha512"
+    },
+    "Paystack.Net/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-13UXyxPUjtxcEquPYT8ltqn3BqRZdvdQUmmeN92YrcUo5jj0NVzYhZKgW8RxVkhB1zoiUgaZMpt7xZz//1720Q==",
+      "path": "paystack.net/1.1.0",
+      "hashPath": "paystack.net.1.1.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

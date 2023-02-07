@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.UserManagement;
 
-public class InvitationsConfiguration : DatabaseConfigurationBase<Invitation>
+public class InvitationsConfiguration : DatabaseConfiguration<Invitation>
 {
     public override void Configure(EntityTypeBuilder<Invitation> builder)
     {

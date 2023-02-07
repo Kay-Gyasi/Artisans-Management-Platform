@@ -3,7 +3,7 @@ using AMP.Domain.Entities.Base;
 
 namespace AMP.Domain.Entities.UserManagement
 {
-    public sealed class Language : EntityBase
+    public sealed class Language : Entity
     {
         private Language(string name)
         {

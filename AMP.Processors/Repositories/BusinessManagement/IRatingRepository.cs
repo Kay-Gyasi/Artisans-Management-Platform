@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.BusinessManagement
 {
-    public interface IRatingRepository : IRepositoryBase<Rating>
+    public interface IRatingRepository : IRepository<Rating>
     {
         double GetRating(string artisanId);
         int GetCount(string artisanId);

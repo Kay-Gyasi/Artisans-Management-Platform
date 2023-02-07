@@ -1,4 +1,6 @@
-﻿namespace AMP.Processors.Exceptions
+﻿using System;
+
+namespace AMP.Processors.Exceptions
 {
     public class InvalidIdException : Exception
     {

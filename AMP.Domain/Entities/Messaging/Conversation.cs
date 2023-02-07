@@ -6,7 +6,7 @@ using AMP.Domain.Entities.UserManagement;
 
 namespace AMP.Domain.Entities.Messaging;
 
-public class Conversation : EntityBase
+public class Conversation : Entity
 {
     private Conversation(string firstParticipantId, string secondParticipantId)
     {

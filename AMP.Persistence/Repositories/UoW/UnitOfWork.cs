@@ -28,6 +28,7 @@ namespace AMP.Persistence.Repositories.Uow
             IChatMessageRepository chatMessageRepository,
             IConversationRepository conversationRepository,
             IConnectRequestRepository connectRequestRepository,
+            IPaymentWithdrawalRepository paymentWithdrawalRepository,
             INotificationRepository notificationRepository)
         {
             _dbContext = dbContext;
@@ -48,6 +49,7 @@ namespace AMP.Persistence.Repositories.Uow
             Conversations = conversationRepository;
             ConnectRequests = connectRequestRepository;
             Notifications = notificationRepository;
+            PaymentWithdrawals = paymentWithdrawalRepository;
         }
         
         public IArtisanRepository Artisans { get; }
@@ -77,6 +79,7 @@ namespace AMP.Persistence.Repositories.Uow
         public IConnectRequestRepository ConnectRequests { get; }
         public INotificationRepository Notifications { get; }
         public IConversationRepository Conversations { get; }
+        public IPaymentWithdrawalRepository PaymentWithdrawals { get; }
 
         public IDbContextTransaction BeginTransaction() => _dbContext.Database.BeginTransaction();
         public IExecutionStrategy GetExecutionStrategy() => _dbContext.Database.CreateExecutionStrategy();

@@ -8,7 +8,7 @@ using AMP.Processors.Workers.BackgroundWorker;
 namespace AMP.Processors.Processors.BusinessManagement
 {
     [Processor]
-    public class OrderProcessor : ProcessorBase
+    public class OrderProcessor : Processor
     {
         private readonly IBackgroundWorker _worker;
         private const string LookupCacheKey = "Orderlookup";

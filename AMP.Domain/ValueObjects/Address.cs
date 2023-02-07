@@ -64,7 +64,11 @@ namespace AMP.Domain.ValueObjects
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new System.NotImplementedException();
+            yield return Country;
+            yield return City;
+            yield return Town;
+            yield return StreetAddress;
+            yield return StreetAddress2;
         }
     }
 }

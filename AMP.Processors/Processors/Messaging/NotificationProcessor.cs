@@ -4,7 +4,7 @@ using AMP.Processors.PageDtos.Messaging;
 namespace AMP.Processors.Processors.Messaging;
 
 [Processor]
-public class NotificationProcessor : ProcessorBase
+public class NotificationProcessor : Processor
 {
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;

@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.BusinessManagement
 {
-    public interface IRequestRepository : IRepositoryBase<Request>
+    public interface IRequestRepository : IRepository<Request>
     {
         
     }

@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.Messaging;
 
-public interface IConversationRepository : IRepositoryBase<Conversation>
+public interface IConversationRepository : IRepository<Conversation>
 {
     Task<PaginatedList<Conversation>> GetConversationPage(PaginatedCommand paginated,
         string userId, CancellationToken cancellationToken);

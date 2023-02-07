@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.Messaging;
 namespace AMP.Persistence.Repositories.Messaging;
 
 [Repository]
-public class ConversationRepository : RepositoryBase<Conversation>, IConversationRepository
+public class ConversationRepository : Repository<Conversation>, IConversationRepository
 {
     public ConversationRepository(AmpDbContext context, ILogger<Conversation> logger) : base(context, logger)
     {

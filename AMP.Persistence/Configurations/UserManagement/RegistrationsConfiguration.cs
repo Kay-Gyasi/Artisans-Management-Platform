@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.UserManagement;
 
-public class RegistrationsConfiguration : DatabaseConfigurationBase<Registration>
+public class RegistrationsConfiguration : DatabaseConfiguration<Registration>
 {
     public override void Configure(EntityTypeBuilder<Registration> builder)
     {

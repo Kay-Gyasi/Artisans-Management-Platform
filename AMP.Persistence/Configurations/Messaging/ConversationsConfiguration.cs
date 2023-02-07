@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.Messaging;
 
-public class ConversationsConfiguration : DatabaseConfigurationBase<Conversation>
+public class ConversationsConfiguration : DatabaseConfiguration<Conversation>
 {
     public override void Configure(EntityTypeBuilder<Conversation> builder)
     {

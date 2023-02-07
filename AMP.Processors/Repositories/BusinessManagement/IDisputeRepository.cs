@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.BusinessManagement
 {
-    public interface IDisputeRepository : IRepositoryBase<Dispute>
+    public interface IDisputeRepository : IRepository<Dispute>
     {
         DbContext GetDbContext();
         Task DeleteAsync(string id);

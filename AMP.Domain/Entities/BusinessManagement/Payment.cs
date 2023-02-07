@@ -2,7 +2,7 @@
 
 namespace AMP.Domain.Entities.BusinessManagement
 {
-    public sealed class Payment : EntityBase
+    public sealed class Payment : Entity
     {
         public string OrderId { get; private set; }
         public decimal AmountPaid { get; private set; }

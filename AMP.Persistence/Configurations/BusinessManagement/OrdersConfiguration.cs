@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations.BusinessManagement
 {
-    public sealed class OrdersConfiguration : DatabaseConfigurationBase<Order>
+    public sealed class OrdersConfiguration : DatabaseConfiguration<Order>
     {
         public override void Configure(EntityTypeBuilder<Order> builder)
         {

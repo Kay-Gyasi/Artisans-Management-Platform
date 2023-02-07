@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.UserManagement;
 namespace AMP.Persistence.Repositories.UserManagement;
 
 [Repository]
-public class InvitationRepository : RepositoryBase<Invitation>, IInvitationRepository
+public class InvitationRepository : Repository<Invitation>, IInvitationRepository
 {
     public InvitationRepository(AmpDbContext context, ILogger<Invitation> logger) : base(context, logger)
     {

@@ -7,7 +7,7 @@ namespace AMP.Processors.Processors.UserManagement
 {
 
     [Processor]
-    public class CustomerProcessor : ProcessorBase
+    public class CustomerProcessor : Processor
     {
         private const string LookupCacheKey = "Customerlookup";
 

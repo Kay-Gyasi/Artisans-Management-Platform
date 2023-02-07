@@ -2,7 +2,7 @@
 
 namespace AMP.Domain.Entities.UserManagement
 {
-    public sealed class Image : EntityBase
+    public sealed class Image : Entity
     {
         public string? UserId { get; private set; }
         public string PublicId { get; private set; }

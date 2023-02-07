@@ -3,7 +3,7 @@ using AMP.Domain.Entities.UserManagement;
 
 namespace AMP.Domain.Entities.Messaging;
 
-public class ConnectRequest : EntityBase
+public class ConnectRequest : Entity
 {
     private ConnectRequest(string inviterId, string inviteeId)
     {

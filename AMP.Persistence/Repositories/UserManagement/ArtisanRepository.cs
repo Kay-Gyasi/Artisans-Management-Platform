@@ -5,7 +5,7 @@ using AMP.Processors.Repositories.UserManagement;
 namespace AMP.Persistence.Repositories.UserManagement
 {
     [Repository]
-    public class ArtisanRepository : RepositoryBase<Artisan>, IArtisanRepository
+    public class ArtisanRepository : Repository<Artisan>, IArtisanRepository
     {
         private readonly IDapperContext _dapperContext;
 

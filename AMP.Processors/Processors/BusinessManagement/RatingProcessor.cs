@@ -6,7 +6,7 @@ using AMP.Processors.PageDtos.BusinessManagement;
 namespace AMP.Processors.Processors.BusinessManagement
 {
     [Processor]
-    public class RatingProcessor : ProcessorBase
+    public class RatingProcessor : Processor
     {
         private const string LookupCacheKey = "Ratinglookup";
 

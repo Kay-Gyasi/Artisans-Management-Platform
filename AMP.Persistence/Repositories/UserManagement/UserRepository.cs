@@ -7,7 +7,7 @@ using AMP.Processors.Repositories.UserManagement;
 namespace AMP.Persistence.Repositories.UserManagement
 {
     [Repository]
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         private readonly IDapperContext _dapperContext;
 
@@ -100,6 +100,12 @@ namespace AMP.Persistence.Repositories.UserManagement
                     Pic = _dapperContext.GetAsync<string>($"SELECT ImageUrl FROM Images WHERE Id = '{x.User.ImageId}'", 
                         null, CommandType.Text).GetAwaiter().GetResult()
                 }).ToList());
+        }
+
+        public async Task<IEnumerable<User>> GetAllNotPaymentCustomers()
+        {
+            return await GetBaseQuery().Where(x => string.IsNullOrEmpty(x.FundsTransferDetails.RecipientCode)
+                || x.FundsTransferDetails.RecipientId == null).ToListAsync();
         }
 
         public async Task<LoginQueryObject> GetUserInfoForRefreshToken(string id)

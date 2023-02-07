@@ -48,7 +48,10 @@ namespace AMP.Domain.ValueObjects
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new System.NotImplementedException();
+            yield return EmailAddress;
+            yield return PrimaryContact;
+            yield return PrimaryContact2;
+            yield return PrimaryContact3;
         }
     }
 }

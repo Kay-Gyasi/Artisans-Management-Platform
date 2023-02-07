@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations.UserManagement
 {
-    public sealed class ArtisansConfiguration : DatabaseConfigurationBase<Artisan>
+    public sealed class ArtisansConfiguration : DatabaseConfiguration<Artisan>
     {
         public override void Configure(EntityTypeBuilder<Artisan> builder)
         {

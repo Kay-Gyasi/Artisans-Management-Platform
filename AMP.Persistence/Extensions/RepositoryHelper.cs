@@ -4,7 +4,7 @@ namespace AMP.Persistence.Extensions
     public static class RepositoryHelper
     {
         public static async Task<PaginatedList<T>> BuildPage<T>(this IQueryable<T> whereQueryable, PaginatedCommand paginated,
-            CancellationToken cancellationToken) where T : EntityBase
+            CancellationToken cancellationToken) where T : Entity
         {
             var pagedModel = whereQueryable.PageBy(x => paginated.Take, paginated);
             var totalRecords = await whereQueryable.CountAsync(cancellationToken: cancellationToken);

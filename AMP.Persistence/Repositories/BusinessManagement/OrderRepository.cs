@@ -6,7 +6,7 @@ using AMP.Processors.Repositories.BusinessManagement;
 namespace AMP.Persistence.Repositories.BusinessManagement
 {
     [Repository]
-    public class OrderRepository : RepositoryBase<Order>, IOrderRepository
+    public class OrderRepository : Repository<Order>, IOrderRepository
     {
         private readonly IDapperContext _dapperContext;
 

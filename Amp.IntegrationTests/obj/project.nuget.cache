@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TdiLLctNdMps9xJWiXaAJ8T58HdQIkIgYrR+diW49HlBauH4wbOVMs0m++Cs/8WiljdB6u6WTbekXkPTL0N4Zg==",
+  "dgSpecHash": "zGhyqGW2FeB/4Vu1u8RBDe3glYXsReEtnsnz7Q6XGySPc+UJN7EKtPM25+NM04/ewdyQJisEJtP5QF4DNYsGiQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\Amp.IntegrationTests\\Amp.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -161,6 +161,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\nuget.frameworks\\5.11.0\\nuget.frameworks.5.11.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\oneof\\3.0.223\\oneof.3.0.223.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\owin\\1.0.0\\owin.1.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\paystack.net\\1.1.0\\paystack.net.1.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\restclient\\3.1024.23771\\restclient.3.1024.23771.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

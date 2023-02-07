@@ -3,7 +3,7 @@ using AMP.Domain.Entities.UserManagement;
 
 namespace AMP.Domain.Entities.BusinessManagement
 {
-    public sealed class Request : EntityBase
+    public sealed class Request : Entity
     {
         public string CustomerId { get; }
         public string ArtisanId { get; }

@@ -1,20 +1,24 @@
 ﻿using System.Data.Common;
 using AMP.Domain.Entities.UserManagement;
 using AMP.Processors.Commands.UserManagement;
+using AMP.Processors.Services.Payments;
 
 namespace AMP.Processors.Processors.UserManagement;
 
 [Processor]
-public class RegistrationProcessor : ProcessorBase
+public class RegistrationProcessor : Processor
 {
     private readonly ISmsMessaging _smsMessaging;
+    private readonly IPaymentService _paymentService;
     private const string LookupCacheKey = "Userlookup";
 
     public RegistrationProcessor(IUnitOfWork uow, IMapper mapper, 
         IMemoryCache cache,
-        ISmsMessaging smsMessaging) : base(uow, mapper, cache)
+        ISmsMessaging smsMessaging,
+        IPaymentService paymentService) : base(uow, mapper, cache)
     {
         _smsMessaging = smsMessaging;
+        _paymentService = paymentService;
     }
 
     public async Task<Result<string>> Save(UserCommand command)
@@ -102,8 +106,10 @@ public class RegistrationProcessor : ProcessorBase
     private async Task<User> SaveUser(UserCommand command)
     {
         var user = User.Create();
-        var passes = await Task.Run(() => Uow.Users.Register(command));
-        await AssignFields(user, command);
+        var passKeysTask = Task.Run(() => Uow.Users.Register(command));
+        await Task.WhenAll(AssignFields(user, command), passKeysTask);
+        var passes = await passKeysTask;
+
         user.HasPassword(passes.Item1)
             .HasPasswordKey(passes.Item2);
         await Uow.Users.InsertAsync(user);

@@ -17,7 +17,7 @@ namespace AMP.Processors.Processors.Administration
     }
 
     [Processor]
-    public class InitializeDbProcessor : ProcessorBase
+    public class InitializeDbProcessor : Processor
     {
         public InitializeDbProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) 
             : base(uow, mapper, cache)

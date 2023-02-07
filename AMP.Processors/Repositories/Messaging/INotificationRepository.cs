@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.Messaging;
 
-public interface INotificationRepository : IRepositoryBase<Notification>
+public interface INotificationRepository : IRepository<Notification>
 {
     
 }

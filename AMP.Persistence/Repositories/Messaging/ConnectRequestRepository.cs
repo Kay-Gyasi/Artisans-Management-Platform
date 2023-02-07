@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.Messaging;
 namespace AMP.Persistence.Repositories.Messaging;
 
 [Repository]
-public class ConnectRequestRepository : RepositoryBase<ConnectRequest>, IConnectRequestRepository
+public class ConnectRequestRepository : Repository<ConnectRequest>, IConnectRequestRepository
 {
     public ConnectRequestRepository(AmpDbContext context, ILogger<ConnectRequest> logger) : base(context, logger)
     {

@@ -7,7 +7,7 @@ using AMP.Domain.ValueObjects;
 
 namespace AMP.Domain.Entities.BusinessManagement
 {
-    public sealed class Order : EntityBase
+    public sealed class Order : Entity
     {
         public string ReferenceNo { get; private set; }
         public string CustomerId { get; private set; }

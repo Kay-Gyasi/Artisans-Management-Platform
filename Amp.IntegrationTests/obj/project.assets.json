@@ -3021,6 +3021,18 @@
           "lib/net40/Owin.dll": {}
         }
       },
+      "Paystack.Net/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/PayStack.Net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PayStack.Net.dll": {}
+        }
+      },
       "RestClient/3.1024.23771": {
         "type": "package",
         "dependencies": {
@@ -5387,6 +5399,7 @@
           "Microsoft.Extensions.Configuration.Binder": "7.0.0",
           "Microsoft.Extensions.Http": "7.0.0",
           "Microsoft.IdentityModel.Tokens": "6.25.0",
+          "Paystack.Net": "1.1.0",
           "System.IdentityModel.Tokens.Jwt": "6.25.0"
         },
         "compile": {
@@ -9207,6 +9220,20 @@
         "lib/net40/Owin.dll",
         "owin.1.0.0.nupkg.sha512",
         "owin.nuspec"
+      ]
+    },
+    "Paystack.Net/1.1.0": {
+      "sha512": "13UXyxPUjtxcEquPYT8ltqn3BqRZdvdQUmmeN92YrcUo5jj0NVzYhZKgW8RxVkhB1zoiUgaZMpt7xZz//1720Q==",
+      "type": "package",
+      "path": "paystack.net/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/PayStack.Net.dll",
+        "paystack-logo.png",
+        "paystack.net.1.1.0.nupkg.sha512",
+        "paystack.net.nuspec"
       ]
     },
     "RestClient/3.1024.23771": {

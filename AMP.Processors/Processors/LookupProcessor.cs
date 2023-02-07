@@ -14,7 +14,7 @@
     }
 
     [Processor]
-    public class LookupProcessor : ProcessorBase
+    public class LookupProcessor : Processor
     {
         public LookupProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache) : base(uow, mapper, cache)
         {

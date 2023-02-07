@@ -6,7 +6,7 @@ using AMP.Processors.PageDtos.BusinessManagement;
 namespace AMP.Processors.Processors.BusinessManagement
 {
     [Processor]
-    public class DisputeProcessor : ProcessorBase
+    public class DisputeProcessor : Processor
     {
         private const string LookupCacheKey = "Disputelookup";
 

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using AMP.Domain.Entities.Base;
+using AMP.Domain.Entities.BusinessManagement;
 using AMP.Domain.Entities.Messaging;
 using AMP.Domain.Enums;
 using AMP.Domain.ValueObjects;
 
 namespace AMP.Domain.Entities.UserManagement
 {
-    public sealed class User : EntityBase
+    public sealed class User : Entity
     {
         public string? ImageId { get; private set; }
         public string FirstName { get; private set; }
@@ -23,6 +24,7 @@ namespace AMP.Domain.Entities.UserManagement
         public byte[] PasswordKey { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
+        public FundsTransfer FundsTransferDetails { get; private set; }
         public Image Image { get; private set; }
 
         private readonly List<Language> _languages = new();
@@ -54,6 +56,9 @@ namespace AMP.Domain.Entities.UserManagement
 
         private readonly List<Conversation> _secondParticipantConvos = new();
         public IEnumerable<Conversation> SecondParticipantConvos => _secondParticipantConvos.AsReadOnly();
+
+        private readonly List<PaymentWithdrawal> _paymentWithdrawals = new();
+        public IEnumerable<PaymentWithdrawal> PaymentWithdrawals => _paymentWithdrawals.AsReadOnly();
 
         private User() {}
 
@@ -112,6 +117,12 @@ namespace AMP.Domain.Entities.UserManagement
         public User WithContact(Contact contact)
         {
             Contact = contact;
+            return this;
+        }
+        
+        public User WithFundsTransferDetails(FundsTransfer details)
+        {
+            FundsTransferDetails = details;
             return this;
         }
 

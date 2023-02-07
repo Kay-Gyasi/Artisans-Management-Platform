@@ -31,7 +31,7 @@ namespace AMP.Services.Images
             {
                 File = new FileDescription(photo.FileName, stream),
                 Transformation = new Transformation()
-                    .Height(500) //check
+                    .Height(500) //TODO:: confirm
                     .Width(800)
             };
             uploadResult = await _cloudinary.UploadAsync(uploadParams);

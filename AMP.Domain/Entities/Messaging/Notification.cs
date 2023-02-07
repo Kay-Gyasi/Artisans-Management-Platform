@@ -3,7 +3,7 @@ using AMP.Domain.Entities.UserManagement;
 
 namespace AMP.Domain.Entities.Messaging;
 
-public class Notification : EntityBase
+public class Notification : Entity
 {
     private Notification(string message, string userId, bool isRead)
     {

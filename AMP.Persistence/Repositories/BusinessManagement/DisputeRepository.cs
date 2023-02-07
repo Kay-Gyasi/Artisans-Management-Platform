@@ -5,7 +5,7 @@ using AMP.Processors.Repositories.BusinessManagement;
 namespace AMP.Persistence.Repositories.BusinessManagement
 {
     [Repository]
-    public class DisputeRepository : RepositoryBase<Dispute>, IDisputeRepository
+    public class DisputeRepository : Repository<Dispute>, IDisputeRepository
     {
         private readonly IDapperContext _dapperContext;
 

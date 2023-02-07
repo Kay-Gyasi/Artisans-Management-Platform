@@ -2,7 +2,7 @@
 
 namespace AMP.Domain.Entities.UserManagement;
 
-public class Registration : EntityBase
+public class Registration : Entity
 {
     private Registration(string phone, string verificationCode)
     {

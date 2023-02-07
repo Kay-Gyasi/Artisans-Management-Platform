@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.UserManagement;
 
-public interface IInvitationRepository : IRepositoryBase<Invitation>
+public interface IInvitationRepository : IRepository<Invitation>
 {
     Task<IEnumerable<Invitation>> GetUserInvites(string userId);
 }

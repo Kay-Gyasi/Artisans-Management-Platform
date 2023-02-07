@@ -5,7 +5,7 @@ using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities.BusinessManagement
 {
-    public sealed class Dispute : EntityBase
+    public sealed class Dispute : Entity
     {
         public string CustomerId { get; private set; }
         public string OrderId { get; private set; }

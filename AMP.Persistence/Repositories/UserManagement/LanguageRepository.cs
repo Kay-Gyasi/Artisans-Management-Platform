@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.UserManagement;
 namespace AMP.Persistence.Repositories.UserManagement
 {
     [Repository]
-    public class LanguageRepository : RepositoryBase<Language>, ILanguageRepository
+    public class LanguageRepository : Repository<Language>, ILanguageRepository
     {
         public LanguageRepository(AmpDbContext context, ILogger<Language> logger) : base(context, logger)
         {

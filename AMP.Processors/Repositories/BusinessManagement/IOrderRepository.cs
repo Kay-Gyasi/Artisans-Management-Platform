@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.BusinessManagement
 {
-    public interface IOrderRepository : IRepositoryBase<Order>
+    public interface IOrderRepository : IRepository<Order>
     {
         Task<int> GetScheduleCount(string userId);
         Task<int> GetJobRequestsCount(string userId);

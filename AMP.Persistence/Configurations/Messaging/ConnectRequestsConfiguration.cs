@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.Messaging;
 
-public class ConnectRequestsConfiguration : DatabaseConfigurationBase<ConnectRequest>
+public class ConnectRequestsConfiguration : DatabaseConfiguration<ConnectRequest>
 {
     public override void Configure(EntityTypeBuilder<ConnectRequest> builder)
     {

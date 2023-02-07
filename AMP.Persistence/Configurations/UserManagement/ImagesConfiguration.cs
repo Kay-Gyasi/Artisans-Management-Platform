@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.UserManagement
 {
-    public sealed class ImagesConfiguration : DatabaseConfigurationBase<Image>
+    public sealed class ImagesConfiguration : DatabaseConfiguration<Image>
     {
         public override void Configure(EntityTypeBuilder<Image> builder)
         {

@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.Messaging;
 
-public interface IConnectRequestRepository : IRepositoryBase<ConnectRequest>
+public interface IConnectRequestRepository : IRepository<ConnectRequest>
 {
     Task<PaginatedList<ConnectRequest>> GetChatInvitesPage(PaginatedCommand paginated,
         string userId, CancellationToken cancellationToken);

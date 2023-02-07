@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.UserManagement
 {
-    public interface ICustomerRepository : IRepositoryBase<Customer>
+    public interface ICustomerRepository : IRepository<Customer>
     {
         Task SoftDeleteAsync(string id);
         Task<Customer> GetByUserIdAsync(string userId);

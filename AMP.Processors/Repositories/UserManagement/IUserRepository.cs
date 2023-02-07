@@ -6,7 +6,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.UserManagement
 {
-    public interface IUserRepository : IRepositoryBase<User>
+    public interface IUserRepository : IRepository<User>
     {
         /// <summary>
         /// Returns user id.
@@ -26,5 +26,6 @@ namespace AMP.Processors.Repositories.UserManagement
         Task<User> GetByPhone(string phone);
         Task<User> GetByPhoneAndConfirmCode(string phone, string confirmCode);
         Task<List<UserLookup>> GetLookupAsync(string term, string type);
+        Task<IEnumerable<User>> GetAllNotPaymentCustomers();
     }
 }

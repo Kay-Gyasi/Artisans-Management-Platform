@@ -9,7 +9,7 @@ using OneOf;
 namespace AMP.Processors.Processors.BusinessManagement
 {
     [Processor]
-    public class PaymentProcessor : ProcessorBase
+    public class PaymentProcessor : Processor
     {
         private readonly IBackgroundWorker _worker;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -42,7 +42,8 @@ namespace AMP.Processors.Processors.BusinessManagement
 
         public async Task Verify(VerifyPaymentCommand command)
         {
-            var artisanUserId = await Uow.Payments.Verify(command.Reference, command.TransactionReference);
+            var artisanUserId = await Uow.Payments
+                .Verify(command.Reference, command.TransactionReference);
             var success = await Uow.SaveChangesAsync();
             if (success)
             {
@@ -51,9 +52,11 @@ namespace AMP.Processors.Processors.BusinessManagement
             }
         }
 
-        public async Task<OneOf<PaginatedList<PaymentPageDto>, ArtisanPaymentPageDto>> GetPage(PaginatedCommand command, string userId, string role)
+        public async Task<OneOf<PaginatedList<PaymentPageDto>, ArtisanPaymentPageDto>> 
+            GetPage(PaginatedCommand command, string userId, string role)
         {
-            var page = await Uow.Payments.GetUserPage(command, userId, role, new CancellationToken());
+            var page = await Uow.Payments
+                .GetUserPage(command, userId, role, new CancellationToken());
             
             if(role is not "Artisan")
                 return Mapper.Map<PaginatedList<PaymentPageDto>>(page);

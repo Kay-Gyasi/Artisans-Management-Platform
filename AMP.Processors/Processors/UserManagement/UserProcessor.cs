@@ -2,23 +2,27 @@
 using AMP.Processors.Commands.UserManagement;
 using AMP.Processors.Dtos.UserManagement;
 using AMP.Processors.PageDtos.UserManagement;
+using AMP.Processors.Services.Payments;
 
 namespace AMP.Processors.Processors.UserManagement
 {
     [Processor]
-    public class UserProcessor : ProcessorBase
+    public class UserProcessor : Processor
     {
         private const string LookupCacheKey = "Userlookup";
 
         private readonly IAuthService _authService;
         private readonly ISmsMessaging _smsMessaging;
+        private readonly IPaymentService _paymentService;
 
         public UserProcessor(IUnitOfWork uow, IMapper mapper, IMemoryCache cache,
             IAuthService authService,
-            ISmsMessaging smsMessaging) : base(uow, mapper, cache)
+            ISmsMessaging smsMessaging,
+            IPaymentService paymentService) : base(uow, mapper, cache)
         {
             _authService = authService;
             _smsMessaging = smsMessaging;
+            _paymentService = paymentService;
         }
 
         public async Task<Option<SigninResponse>> Login(SigninCommand command)
@@ -100,6 +104,30 @@ namespace AMP.Processors.Processors.UserManagement
             await Uow.Users.DeleteAsync(user, new CancellationToken());
             await Uow.SaveChangesAsync();
             return new Result<bool>(true);
+        }
+
+        public async Task<Result<bool>> CreatePaymentCustomers()
+        {
+            try
+            {
+                var users = await Uow.Users.GetAllNotPaymentCustomers();
+                foreach (var user in users)
+                {
+                    var response = await _paymentService.CreateCustomer(user.FirstName, 
+                        user.FamilyName, user.Contact.PrimaryContact);
+                    user.WithFundsTransferDetails(FundsTransfer.Create(response.Item1,
+                        response.Item2, response.Item3, response.Item4));
+                    await Uow.Users.UpdateAsync(user);
+                }
+
+                await Uow.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return new Result<bool>(e);
+            }
+
+            return true;
         }
 
         private async Task<bool> RegisterUser(User user, ResetPasswordCommand command)

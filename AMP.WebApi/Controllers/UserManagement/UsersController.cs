@@ -129,4 +129,18 @@ public class UsersController : BaseControllerv1
         })).ConfigureAwait(false);
         return await OkResult(result);
     }
+
+    /// <summary>
+    /// Creates users as customers for payments.
+    /// </summary>
+    /// <response code="204">Operation successful</response>
+    /// <response code="404">Error occurred</response>
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreatePaymentCustomers()
+    {
+        var result = await Mediator.Send(new CreatePaymentCustomers.Command());
+        return await NoContentResult(result);
+    }
 }

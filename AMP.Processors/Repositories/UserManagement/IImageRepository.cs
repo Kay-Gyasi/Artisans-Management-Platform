@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.UserManagement
 {
-    public interface IImageRepository : IRepositoryBase<Image>
+    public interface IImageRepository : IRepository<Image>
     {
         Task RemoveCurrentDetails(string userId);
     }

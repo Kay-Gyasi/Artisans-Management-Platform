@@ -4,7 +4,7 @@ using AMP.Domain.Entities.UserManagement;
 
 namespace AMP.Domain.Entities.BusinessManagement
 {
-    public sealed class Service : EntityBase
+    public sealed class Service : Entity
     {
         public string Name { get; private set; }
         public string Description { get; private set; }

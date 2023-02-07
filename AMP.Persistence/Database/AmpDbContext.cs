@@ -31,6 +31,7 @@ namespace AMP.Persistence.Database
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<ConnectRequest> ConnectRequests { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<PaymentWithdrawal> PaymentWithdrawals { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,9 +54,9 @@ namespace AMP.Persistence.Database
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             var modified = ChangeTracker.Entries()
-                .Where(e => e.Entity is EntityBase
+                .Where(e => e.Entity is Entity
                             && e.State is EntityState.Added or EntityState.Modified)
-                .Select(e => e.Entity as EntityBase);
+                .Select(e => e.Entity as Entity);
             foreach (var entity in modified)
             {
                 if (entity == null) continue;
@@ -64,9 +65,9 @@ namespace AMP.Persistence.Database
             }
 
             var added = ChangeTracker.Entries()
-                .Where(e => e.Entity is EntityBase
+                .Where(e => e.Entity is Entity
                             && e.State is EntityState.Added)
-                .Select(e => e.Entity as EntityBase);
+                .Select(e => e.Entity as Entity);
             foreach (var entity in added)
             {
                 if (entity == null) continue;

@@ -5,7 +5,7 @@ using AMP.Processors.QueryObjects;
 namespace AMP.Processors.Processors.UserManagement
 {
     [Processor]
-    public class ImageProcessor : ProcessorBase
+    public class ImageProcessor : Processor
     {
         private readonly IAuthService _authService;
         private readonly ICloudStorageService _cloudinary;

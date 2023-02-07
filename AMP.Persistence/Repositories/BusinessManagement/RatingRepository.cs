@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.BusinessManagement;
 namespace AMP.Persistence.Repositories.BusinessManagement
 {
     [Repository]
-    public class RatingRepository : RepositoryBase<Rating>, IRatingRepository
+    public class RatingRepository : Repository<Rating>, IRatingRepository
     {
         public RatingRepository(AmpDbContext context, ILogger<Rating> logger) : base(context, logger)
         {

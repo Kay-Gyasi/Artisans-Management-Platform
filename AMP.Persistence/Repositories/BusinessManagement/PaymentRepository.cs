@@ -5,13 +5,23 @@ using AMP.Processors.Repositories.BusinessManagement;
 namespace AMP.Persistence.Repositories.BusinessManagement
 {
     [Repository]
-    public class PaymentRepository : RepositoryBase<Payment>, IPaymentRepository
+    public class PaymentRepository : Repository<Payment>, IPaymentRepository
     {
         private readonly ILogger<Payment> _logger;
 
         public PaymentRepository(AmpDbContext context, ILogger<Payment> logger) : base(context, logger)
         {
             _logger = logger;
+        }
+
+        public async Task<(decimal, string)> GetWithdrawalDetails(string userId)
+        {
+            var payments = await Task.Run(() => GetBaseQuery()
+                .Where(x => x.Order.Artisan.User.Id == userId));
+            return (await Task.Run(() 
+                => payments.Where(x => !x.IsForwarded && x.IsVerified)
+                    .Sum(x => x.AmountPaid)), 
+                    (await Context.Users.FirstOrDefaultAsync(x => x.Id == userId))?.Contact.PrimaryContact);
         }
 
         public async Task<(double, double, int)> GetArtisanPaymentOverview(string userId)

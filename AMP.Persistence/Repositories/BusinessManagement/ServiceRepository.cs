@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.BusinessManagement;
 namespace AMP.Persistence.Repositories.BusinessManagement
 {
     [Repository]
-    public class ServiceRepository : RepositoryBase<Service>, IServiceRepository
+    public class ServiceRepository : Repository<Service>, IServiceRepository
     {
         public ServiceRepository(AmpDbContext context, ILogger<Service> logger) : base(context, logger)
         {

@@ -3,7 +3,7 @@ using AMP.Processors.Repositories.Base;
 
 namespace AMP.Processors.Repositories.BusinessManagement
 {
-    public interface IPaymentRepository : IRepositoryBase<Payment>
+    public interface IPaymentRepository : IRepository<Payment>
     {
         Task<string> Verify(string reference, string trxRef);
         Task<decimal> AmountPaid(string orderId);
@@ -14,5 +14,6 @@ namespace AMP.Processors.Repositories.BusinessManagement
         Task<Payment> GetByTrxRef(string trxRef);
         Task<int> GetArtisanPaymentCount(string userId);
         Task<(double, double, int)> GetArtisanPaymentOverview(string userId);
+        Task<(decimal, string)> GetWithdrawalDetails(string userId);
     }
 }

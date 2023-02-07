@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 namespace AMP.Processors.Processors.Messaging;
 
 [Processor]
-public class ConnectRequestProcessor : ProcessorBase
+public class ConnectRequestProcessor : Processor
 {
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;

@@ -3,7 +3,7 @@ using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities.UserManagement;
 
-public class Invitation : EntityBase
+public class Invitation : Entity
 {
     public string UserId { get; private set; }
     public string InvitedPhone { get; private set; }

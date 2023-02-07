@@ -3,7 +3,7 @@ using AMP.Domain.Entities.UserManagement;
 
 namespace AMP.Domain.Entities.Messaging;
 
-public class ChatMessage : EntityBase
+public class ChatMessage : Entity
 {
     private ChatMessage(string conversationId, string message)
     {

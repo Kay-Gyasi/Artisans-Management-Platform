@@ -9,13 +9,15 @@ namespace AMP.Persistence
 {
     public static class DependencyInjection
     {
+        private const string ProductionKey = "AmpProdDb";
+        private const string DevelopmentKey = "AmpDevDb";
         public static IServiceCollection AddPersistence(this IServiceCollection services,
             IConfiguration configuration,
             ILogger logger)
         {
             services.AddDbContext<AmpDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("AmpProdDb"),
+                options.UseSqlServer(configuration.GetConnectionString(DevelopmentKey),
                     opt =>
                 {
                     opt.EnableRetryOnFailure();

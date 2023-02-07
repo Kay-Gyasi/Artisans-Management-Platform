@@ -52,7 +52,7 @@ namespace AMP.Shared.Persistence
 		}
 
 		public static IQueryable<T> PageBy<T, TKey>(this IQueryable<T> query, Expression<Func<T, TKey>> orderBy,
-			PaginatedCommand paginated) where T : EntityBase
+			PaginatedCommand paginated) where T : Entity
 		{
 			const int defaultPageNumber = 1;
 

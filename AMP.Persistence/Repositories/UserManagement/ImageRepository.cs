@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.UserManagement;
 namespace AMP.Persistence.Repositories.UserManagement
 {
     [Repository]
-    public class ImageRepository : RepositoryBase<Image>, IImageRepository
+    public class ImageRepository : Repository<Image>, IImageRepository
     {
         public ImageRepository(AmpDbContext context, ILogger<Image> logger) : base(context, logger)
         {

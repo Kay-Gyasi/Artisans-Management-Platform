@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.Messaging;
 
-public class ChatMessagesConfiguration : DatabaseConfigurationBase<ChatMessage>
+public class ChatMessagesConfiguration : DatabaseConfiguration<ChatMessage>
 {
     public override void Configure(EntityTypeBuilder<ChatMessage> builder)
     {

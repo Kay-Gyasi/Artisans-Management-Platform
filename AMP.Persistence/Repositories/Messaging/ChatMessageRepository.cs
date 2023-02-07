@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.Messaging;
 namespace AMP.Persistence.Repositories.Messaging;
 
 [Repository]
-public class ChatMessageRepository : RepositoryBase<ChatMessage>, IChatMessageRepository
+public class ChatMessageRepository : Repository<ChatMessage>, IChatMessageRepository
 {
     public ChatMessageRepository(AmpDbContext context, ILogger<ChatMessage> logger) : base(context, logger)
     {

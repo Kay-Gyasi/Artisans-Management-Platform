@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.BusinessManagement
 {
-    public sealed class ServicesConfiguration : DatabaseConfigurationBase<Service>
+    public sealed class ServicesConfiguration : DatabaseConfiguration<Service>
     {
         public override void Configure(EntityTypeBuilder<Service> builder)
         {

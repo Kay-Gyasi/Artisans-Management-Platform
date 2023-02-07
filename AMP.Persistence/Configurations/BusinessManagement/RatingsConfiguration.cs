@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.BusinessManagement
 {
-    public sealed class RatingsConfiguration : DatabaseConfigurationBase<Rating>
+    public sealed class RatingsConfiguration : DatabaseConfiguration<Rating>
     {
         public override void Configure(EntityTypeBuilder<Rating> builder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.UserManagement
 {
-    public sealed class LanguagesConfiguration : DatabaseConfigurationBase<Language>
+    public sealed class LanguagesConfiguration : DatabaseConfiguration<Language>
     {
         public override void Configure(EntityTypeBuilder<Language> builder)
         {

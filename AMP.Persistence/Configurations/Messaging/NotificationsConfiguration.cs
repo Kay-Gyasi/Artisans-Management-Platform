@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.Messaging;
 
-public class NotificationsConfiguration : DatabaseConfigurationBase<Notification>
+public class NotificationsConfiguration : DatabaseConfiguration<Notification>
 {
     public override void Configure(EntityTypeBuilder<Notification> builder)
     {

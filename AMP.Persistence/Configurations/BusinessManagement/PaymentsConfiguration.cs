@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AMP.Persistence.Configurations.BusinessManagement
 {
-    public sealed class PaymentsConfiguration : DatabaseConfigurationBase<Payment>
+    public sealed class PaymentsConfiguration : DatabaseConfiguration<Payment>
     {
         public override void Configure(EntityTypeBuilder<Payment> builder)
         {

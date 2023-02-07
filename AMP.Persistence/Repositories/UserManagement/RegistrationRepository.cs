@@ -4,7 +4,7 @@ using AMP.Processors.Repositories.UserManagement;
 namespace AMP.Persistence.Repositories.UserManagement;
 
 [Repository]
-public class RegistrationRepository : RepositoryBase<Registration>, IRegistrationRepository
+public class RegistrationRepository : Repository<Registration>, IRegistrationRepository
 {
     public RegistrationRepository(AmpDbContext context, ILogger<Registration> logger) : base(context, logger)
     {

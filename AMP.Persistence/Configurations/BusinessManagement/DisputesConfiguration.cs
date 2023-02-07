@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AMP.Persistence.Configurations.BusinessManagement
 {
-    public sealed class DisputesConfiguration : DatabaseConfigurationBase<Dispute>
+    public sealed class DisputesConfiguration : DatabaseConfiguration<Dispute>
     {
         public override void Configure(EntityTypeBuilder<Dispute> builder)
         {

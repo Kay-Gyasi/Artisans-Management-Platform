@@ -7,7 +7,7 @@ using AMP.Domain.Enums;
 
 namespace AMP.Domain.Entities.UserManagement
 {
-    public sealed class Artisan : EntityBase
+    public sealed class Artisan : Entity
     {
         public string UserId { get; private set; }
         public string BusinessName { get; private set; }

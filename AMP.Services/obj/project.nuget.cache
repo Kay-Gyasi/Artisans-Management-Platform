@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "J4ERSE0XIHhMnGdVX3pQL6av6Edko27kEtx9QXIh9omk0vwP7xt9P5yOU8MvuTQ/fgk2a56z8wG93gy6kWONnA==",
+  "dgSpecHash": "/7ZVTklMZ7Tm5eddwYtaR3O1kUW5g5VKvhyBz5BcJsULacgx57WEaF2cdLaZNXjwWgfEWg9I1x/mikvPFltXig==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\Artisans Management Platform\\AMP.Services\\AMP.Services.csproj",
   "expectedPackageFiles": [
@@ -130,6 +130,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\oneof\\3.0.223\\oneof.3.0.223.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\owin\\1.0.0\\owin.1.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\paystack.net\\1.1.0\\paystack.net.1.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

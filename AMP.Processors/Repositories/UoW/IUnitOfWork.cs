@@ -24,6 +24,7 @@ namespace AMP.Processors.Repositories.UoW
         public IConnectRequestRepository ConnectRequests { get; }
         public INotificationRepository Notifications { get; }
         public IConversationRepository Conversations { get; }
+        public IPaymentWithdrawalRepository PaymentWithdrawals { get; }
 
         Task<bool> SaveChangesAsync();
         IDbContextTransaction BeginTransaction();

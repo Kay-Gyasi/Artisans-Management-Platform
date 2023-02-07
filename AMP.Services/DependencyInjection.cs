@@ -1,8 +1,10 @@
 ﻿using AMP.Processors.Messaging;
 using AMP.Processors.Repositories;
+using AMP.Processors.Services.Payments;
 using AMP.Services.Authentication;
 using AMP.Services.Images;
 using AMP.Services.Messaging;
+using AMP.Services.Payments;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AMP.Services
@@ -12,11 +14,13 @@ namespace AMP.Services
         public static IServiceCollection RegisterServices(this IServiceCollection services, 
             IConfiguration configuration)
         {
-            services.AddSingleton<IAuthService, AuthService>();
-            services.Configure<CloudinaryOptions>(options 
-                => configuration.GetSection("CloudinaryOptions").Bind(options));
-            services.AddSingleton<ICloudStorageService, CloudinaryService>()
-                .AddSmsMessaging();
+            services.AddSingleton<IAuthService, AuthService>()
+                .AddScoped<IPaymentService, PaymentService>()
+                .AddScoped<ICloudStorageService, CloudinaryService>()
+                .AddSmsMessaging()
+                .Configure<CloudinaryOptions>(options 
+                    => configuration.GetSection("CloudinaryOptions").Bind(options));
+            
             return services;
         }
         

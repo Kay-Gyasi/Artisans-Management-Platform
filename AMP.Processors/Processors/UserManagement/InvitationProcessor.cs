@@ -5,7 +5,7 @@ using AMP.Processors.Dtos.UserManagement;
 namespace AMP.Processors.Processors.UserManagement;
 
 [Processor]
-public class InvitationProcessor : ProcessorBase
+public class InvitationProcessor : Processor
 {
     private readonly ISmsMessaging _smsMessaging;
 
