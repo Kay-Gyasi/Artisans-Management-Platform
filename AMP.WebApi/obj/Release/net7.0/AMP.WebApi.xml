@@ -425,6 +425,13 @@
             <response code="200">Password has been reset successfully</response>
             <response code="404">Invalid phone/code</response>
         </member>
+        <member name="M:AMP.WebApi.Controllers.v1.UsersController.CreatePaymentCustomers">
+            <summary>
+            Creates users as customers for payments.
+            </summary>
+            <response code="204">Operation successful</response>
+            <response code="404">Error occurred</response>
+        </member>
         <member name="M:AMP.WebApi.Controllers.BusinessManagement.PaymentsController.GetPage(AMP.Shared.Domain.Models.PaginatedCommand)">
             <summary>
             Returns a page of payments made or received by requesting user

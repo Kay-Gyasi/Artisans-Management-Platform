@@ -1,3 +1,4 @@
 AMP.WebApi/Properties/launchSettings.json
 AMP.WebApi/appsettings.Development.json
 .idea
+.vs

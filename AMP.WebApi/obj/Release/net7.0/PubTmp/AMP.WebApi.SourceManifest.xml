@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\bin\Release\net7.0\publish\" />
+  <IisApp path="C:\Users\admin\source\repos\Artisans Management Platform\AMP.WebApi\obj\Release\net7.0\PubTmp\Out\" />
 </sitemanifest>
